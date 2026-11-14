@@ -1,0 +1,435 @@
+{
+  "the_che": {
+    "nguoi_cai_tri_toi_cao": {
+      "nam": "Vương",
+      "nu": "Nữ Vương"
+    },
+    "lanh_chua_vung": "Chủ Ấp",
+    "quan_lai": {
+      "chung": "Chức Sự",
+      "huyen": "Tri Ấp"
+    },
+    "ky_si_quan_nhan": "Kiếm Điền",
+    "giao_hoi": {
+      "to_chuc": "Hỏa Đường",
+      "linh_muc_lang": "Cha Đường",
+      "tham_van": "Soi Lửa"
+    },
+    "phuong_hoi_nghe": "Hội Phường",
+    "thuong_doan": {
+      "tich_hai": "Đoàn Thuyền",
+      "hoai_duong": "Bang Hàng"
+    },
+    "nong_no_ruong_dat": "Dân Gắn Ruộng",
+    "ke_ngoai_le": "Kẻ Không Tên"
+  },
+  "actions": [
+    {
+      "mau": "khoc_goi_me",
+      "ten_vi": "Khóc gọi mẹ",
+      "thoi_luong_mo": "chừng một chốc",
+      "nguon_goi_y": [
+        "ban_than:so_sinh"
+      ],
+      "giai_doan": [
+        "so_sinh"
+      ],
+      "nang_luc_yeu_cau": {
+        "noi": 0
+      },
+      "chi_phi": {
+        "the_luc": -1,
+        "chan": 0,
+        "doi": 2
+      },
+      "ket_qua": {},
+      "mo_ta": "Cổ họng bạn bật ra tiếng khóc khàn đặc trong gian nhà lạnh ở Tam Giang."
+    },
+    {
+      "mau": "bu_me",
+      "ten_vi": "Bú mẹ",
+      "thoi_luong_mo": "chừng một chốc",
+      "nguon_goi_y": [
+        "nguoi_xung_quanh:me"
+      ],
+      "giai_doan": [
+        "so_sinh"
+      ],
+      "nang_luc_yeu_cau": {},
+      "chi_phi": {
+        "the_luc": 2,
+        "chan": -5,
+        "doi": -25
+      },
+      "ket_qua": {},
+      "mo_ta": "Hơi ấm từ lòng mẹ và dòng sữa làm cơn đói dịu xuống."
+    },
+    {
+      "mau": "nhat_cui_nho",
+      "ten_vi": "Nhặt cành củi khô quanh rào",
+      "thoi_luong_mo": "chừng nửa buổi",
+      "nguon_goi_y": [
+        "noi_chon:lang_ngheo",
+        "noi_chon:nha"
+      ],
+      "giai_doan": [
+        "thieu_nhi",
+        "thieu_nien",
+        "truong_thanh",
+        "trung_nien",
+        "gia"
+      ],
+      "nang_luc_yeu_cau": {
+        "van_dong": 1
+      },
+      "chi_phi": {
+        "the_luc": -2,
+        "chan": 1.5,
+        "doi": 1.5
+      },
+      "ket_qua": {
+        "cui": 0.5
+      },
+      "mo_ta": "Bạn cúi nhặt từng nhánh củi khô rơi vãi quanh hàng rào trước khi sương xuống."
+    },
+    {
+      "mau": "xin_an_hang_xom",
+      "ten_vi": "Xin ăn nhà hàng xóm",
+      "thoi_luong_mo": "chừng một chốc",
+      "nguon_goi_y": [
+        "noi_chon:lang_ngheo"
+      ],
+      "giai_doan": [
+        "thieu_nhi",
+        "gia"
+      ],
+      "nang_luc_yeu_cau": {
+        "van_dong": 1,
+        "noi": 1
+      },
+      "chi_phi": {
+        "the_luc": -1,
+        "chan": 2,
+        "doi": -12
+      },
+      "ket_qua": {},
+      "mo_ta": "Bạn đứng nép bên bậc cửa nhà hàng xóm, lí nhí xin một vắt cơm nguội."
+    },
+    {
+      "mau": "bo_cui",
+      "ten_vi": "Bổ củi sau sân",
+      "thoi_luong_mo": "chừng nửa buổi",
+      "nguon_goi_y": [
+        "do_vat:riu"
+      ],
+      "giai_doan": [
+        "thieu_nien",
+        "truong_thanh",
+        "trung_nien",
+        "gia"
+      ],
+      "nang_luc_yeu_cau": {
+        "suc_manh": 1,
+        "tay_kheo": 1
+      },
+      "vat_pham_yeu_cau": [
+        "riu"
+      ],
+      "chi_phi": {
+        "the_luc": -3.5,
+        "chan": 1.2,
+        "doi": 2
+      },
+      "ket_qua": {
+        "cui": 1
+      },
+      "mo_ta": "Lưỡi rìu bổ xuống thớ gỗ khô vang lên tiếng chát chúa giữa sân."
+    },
+    {
+      "mau": "gat_lua_lao_dich",
+      "ten_vi": "[Nghĩa vụ] Gặt lúa lao dịch cho Chủ Ấp",
+      "thoi_luong_mo": "khá lâu",
+      "nguon_goi_y": [
+        "nghia_vu:lao_dich"
+      ],
+      "giai_doan": [
+        "thieu_nien",
+        "truong_thanh",
+        "trung_nien"
+      ],
+      "nang_luc_yeu_cau": {
+        "suc_manh": 2,
+        "van_dong": 2
+      },
+      "chi_phi": {
+        "the_luc": -4,
+        "chan": 2.2,
+        "doi": 2.5
+      },
+      "ket_qua": {},
+      "mo_ta": "Dưới nắng gắt đồng Tam Giang, lưng bạn còng xuống cắt từng lượm lúa nộp thuế Khế."
+    },
+    {
+      "mau": "ke_chuyen_cho_chau",
+      "ten_vi": "Kể chuyện xưa bên bếp lửa",
+      "thoi_luong_mo": "chừng một chốc",
+      "nguon_goi_y": [
+        "nguoi_xung_quanh:con_chau"
+      ],
+      "giai_doan": [
+        "trung_nien",
+        "gia"
+      ],
+      "nang_luc_yeu_cau": {
+        "noi": 1,
+        "tri_nho": 1
+      },
+      "chi_phi": {
+        "the_luc": -0.5,
+        "chan": -3,
+        "doi": 1
+      },
+      "ket_qua": {},
+      "mo_ta": "Bạn ngồi sưởi bên bếp than, chậm rãi kể chuyện Ngày Bát Cháo cho lũ trẻ nghe."
+    },
+    {
+      "mau": "doc_so_sach",
+      "ten_vi": "Đọc sổ sách và đối chiếu phiếu thuyền",
+      "thoi_luong_mo": "chừng nửa buổi",
+      "nguon_goi_y": [
+        "do_vat:sach"
+      ],
+      "giai_doan": [
+        "thieu_nhi",
+        "thieu_nien",
+        "truong_thanh",
+        "trung_nien",
+        "gia"
+      ],
+      "nang_luc_yeu_cau": {
+        "thi_giac": 2
+      },
+      "kien_thuc_yeu_cau": [
+        "biet_chu"
+      ],
+      "vat_pham_yeu_cau": [
+        "sach"
+      ],
+      "chi_phi": {
+        "the_luc": -0.8,
+        "chan": 1.5,
+        "doi": 1
+      },
+      "ket_qua": {},
+      "mo_ta": "Bạn lần từng dòng chữ mực tàu trên cuốn sổ, kiểm lại các khoản nợ muối và bạc."
+    },
+    {
+      "mau": "nghe_ngong_quan_ruou",
+      "ten_vi": "Nghe ngóng lời đồn trong Quán Bốn Ngả",
+      "thoi_luong_mo": "chừng nửa buổi",
+      "nguon_goi_y": [
+        "noi_chon:quan_ruou"
+      ],
+      "giai_doan": [
+        "thieu_nien",
+        "truong_thanh",
+        "trung_nien",
+        "gia"
+      ],
+      "nang_luc_yeu_cau": {
+        "thinh_giac": 2
+      },
+      "chi_phi": {
+        "the_luc": -0.5,
+        "chan": -1,
+        "doi": 1
+      },
+      "ket_qua": {},
+      "mo_ta": "Giữa tiếng bát đĩa lạch cạch, bạn lắng tai nghe khách qua đường bàn về thuế Khế và mỏ Bạch Lĩnh."
+    },
+    {
+      "mau": "nam_nghi",
+      "ten_vi": "Nằm nghỉ lấy sức (Bản năng)",
+      "thoi_luong_mo": "chừng một chốc",
+      "nguon_goi_y": [
+        "ban_than:moi_trang_thai"
+      ],
+      "giai_doan": [
+        "so_sinh",
+        "au_nhi",
+        "thieu_nhi",
+        "thieu_nien",
+        "truong_thanh",
+        "trung_nien",
+        "gia"
+      ],
+      "nang_luc_yeu_cau": {},
+      "chi_phi": {
+        "the_luc": 5,
+        "chan": 0.5,
+        "doi": 1
+      },
+      "ket_qua": {},
+      "mo_ta": "Bạn nằm co mình trên phản gỗ, hít thở sâu để cơ thể dịu bớt cơn mỏi."
+    }
+  ],
+  "personas": [
+    {
+      "id": "P1",
+      "title": "1. Sơ sinh (1 tuổi)",
+      "ten": "Đứa trẻ nông nô mùa gầy (K001)",
+      "tuoi": 1,
+      "giai_doan": "so_sinh",
+      "than_phan": "Dân Gắn Ruộng · Làng Sậy Đỏ (Tam Giang)",
+      "boi_canh_mo_ta": "Bạn mới 1 tuổi, nằm trong lòng mẹ giữa mùa Giá lạnh buốt. Nhà nợ chủ ruộng nửa vụ lúa.",
+      "noi_chon": [
+        "nha",
+        "lang_ngheo"
+      ],
+      "do_vat": [
+        "riu"
+      ],
+      "nguoi_xung_quanh": [
+        "me"
+      ],
+      "nghia_vu": [],
+      "kien_thuc": [],
+      "luoi": 30,
+      "kien_nhan": 50,
+      "y_chi": 40,
+      "trach_nhiem": 20,
+      "hao_mon_suc_manh": 0,
+      "mu": false
+    },
+    {
+      "id": "P2",
+      "title": "2. Mồ côi (8 tuổi)",
+      "ten": "Bé Sậy mồ côi (A60)",
+      "tuoi": 8,
+      "giai_doan": "thieu_nhi",
+      "than_phan": "Kẻ Không Tên · Bến Sậy (Hạ Giang)",
+      "boi_canh_mo_ta": "Bạn 8 tuổi, mồ côi sau mùa dịch. Tay còn yếu (sức mạnh bậc 0) chưa cầm nổi rìu lớn, chỉ nhặt củi vụn hoặc xin ăn.",
+      "noi_chon": [
+        "lang_ngheo",
+        "nha"
+      ],
+      "do_vat": [
+        "riu"
+      ],
+      "nguoi_xung_quanh": [],
+      "nghia_vu": [],
+      "kien_thuc": [],
+      "luoi": 25,
+      "kien_nhan": 65,
+      "y_chi": 70,
+      "trach_nhiem": 50,
+      "hao_mon_suc_manh": 0,
+      "mu": false
+    },
+    {
+      "id": "P3",
+      "title": "3. Nông nô (17 tuổi)",
+      "ten": "Khổng Thạch (A13)",
+      "tuoi": 17,
+      "giai_doan": "thieu_nien",
+      "than_phan": "Dân Gắn Ruộng · Tam Giang",
+      "boi_canh_mo_ta": "Bạn 17 tuổi, sức vóc đang lên. Trong sân có cây rìu sắt cũ, trên lưng nặng nghĩa vụ gặt lúa lao dịch.",
+      "noi_chon": [
+        "nha",
+        "lang_ngheo"
+      ],
+      "do_vat": [
+        "riu"
+      ],
+      "nguoi_xung_quanh": [],
+      "nghia_vu": [
+        "lao_dich"
+      ],
+      "kien_thuc": [],
+      "luoi": 20,
+      "kien_nhan": 80,
+      "y_chi": 75,
+      "trach_nhiem": 75,
+      "hao_mon_suc_manh": 0,
+      "mu": false
+    },
+    {
+      "id": "P4",
+      "title": "4. Ông lão (68 tuổi)",
+      "ten": "Lão nông Ngô Tam (A14)",
+      "tuoi": 68,
+      "giai_doan": "gia",
+      "than_phan": "Trưởng làng già · Làng Sậy Đỏ",
+      "boi_canh_mo_ta": "Bạn 68 tuổi, lưng và khớp đã hao mòn sau cả đời cày cấy. Quanh bếp lửa có con cháu quây quần.",
+      "noi_chon": [
+        "nha",
+        "lang_ngheo"
+      ],
+      "do_vat": [],
+      "nguoi_xung_quanh": [
+        "con_chau"
+      ],
+      "nghia_vu": [],
+      "kien_thuc": [],
+      "luoi": 40,
+      "kien_nhan": 85,
+      "y_chi": 70,
+      "trach_nhiem": 80,
+      "hao_mon_suc_manh": 0.45,
+      "mu": false
+    },
+    {
+      "id": "P5",
+      "title": "5. Con nhà buôn (15 tuổi)",
+      "ten": "Điền Cẩm Tú (A53)",
+      "tuoi": 15,
+      "giai_doan": "thieu_nien",
+      "than_phan": "Thương nhân nhỏ · Cửa hiệu Hạ Giang",
+      "boi_canh_mo_ta": "Bạn 15 tuổi, được học chữ từ nhỏ. Trên bàn có cuốn sổ muối và tập sách ghi chép lãi chìm.",
+      "noi_chon": [
+        "cua_hieu",
+        "quan_ruou"
+      ],
+      "do_vat": [
+        "sach"
+      ],
+      "nguoi_xung_quanh": [],
+      "nghia_vu": [],
+      "kien_thuc": [
+        "biet_chu"
+      ],
+      "luoi": 35,
+      "kien_nhan": 75,
+      "y_chi": 65,
+      "trach_nhiem": 70,
+      "hao_mon_suc_manh": 0,
+      "mu": false
+    },
+    {
+      "id": "P6",
+      "title": "6. Khách mù (30 tuổi)",
+      "ten": "Người hát rong mù (K117)",
+      "tuoi": 30,
+      "giai_doan": "truong_thanh",
+      "than_phan": "Kẻ Không Tên · Quán Bốn Ngả (Bến Bắc)",
+      "boi_canh_mo_ta": "Đôi mắt bạn mù hoàn toàn nên bị chặn việc đọc sách, nhưng đôi tai cực nhạy với mọi lời đồn trong quán rượu.",
+      "noi_chon": [
+        "quan_ruou"
+      ],
+      "do_vat": [
+        "sach"
+      ],
+      "nguoi_xung_quanh": [],
+      "nghia_vu": [],
+      "kien_thuc": [
+        "biet_chu"
+      ],
+      "luoi": 30,
+      "kien_nhan": 80,
+      "y_chi": 80,
+      "trach_nhiem": 60,
+      "hao_mon_suc_manh": 0,
+      "mu": true
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "time": {
+    "tick_minutes": 1,
+    "micro_step_minutes": 6
+  },
+  "f_tuoi": {
+    "van_dong": {
+      "tuoi_dinh": 22,
+      "q": 1,
+      "tuoi_suy": 35,
+      "tuoi_nua": 75,
+      "p": 2,
+      "san_gia": 0.15
+    },
+    "suc_manh": {
+      "tuoi_dinh": 27,
+      "q": 1,
+      "tuoi_suy": 35,
+      "tuoi_nua": 70,
+      "p": 2,
+      "san_gia": 0.2
+    },
+    "chiu_dung": {
+      "tuoi_dinh": 25,
+      "q": 1,
+      "tuoi_suy": 33,
+      "tuoi_nua": 65,
+      "p": 2,
+      "san_gia": 0.15
+    },
+    "tay_kheo": {
+      "tuoi_dinh": 26,
+      "q": 0.8,
+      "tuoi_suy": 45,
+      "tuoi_nua": 80,
+      "p": 2,
+      "san_gia": 0.3
+    },
+    "thi_giac": {
+      "tuoi_dinh": 20,
+      "q": 0.7,
+      "tuoi_suy": 40,
+      "tuoi_nua": 75,
+      "p": 2,
+      "san_gia": 0.3
+    },
+    "thinh_giac": {
+      "tuoi_dinh": 20,
+      "q": 0.7,
+      "tuoi_suy": 45,
+      "tuoi_nua": 80,
+      "p": 2,
+      "san_gia": 0.3
+    },
+    "noi": {
+      "tuoi_dinh": 8,
+      "q": 0.5,
+      "tuoi_suy": 70,
+      "tuoi_nua": 95,
+      "p": 2,
+      "san_gia": 0.5
+    },
+    "tri_nho": {
+      "tuoi_dinh": 25,
+      "q": 0.8,
+      "tuoi_suy": 50,
+      "tuoi_nua": 85,
+      "p": 2,
+      "san_gia": 0.3
+    }
+  },
+  "stopping_rule": {
+    "base_threshold": 55,
+    "weight_luoi": -0.45,
+    "weight_kien_nhan": 0.5,
+    "weight_y_chi": 0.35,
+    "weight_trach_nhiem": 0.25,
+    "push_through_boost": 25
+  },
+  "reincarnation": {
+    "he_so_luan_chuyen": 2,
+    "he_so_hiem": {
+      "nong_no_ruong_dat": 1,
+      "nong_dan_tu_do": 1,
+      "ke_ngoai_le": 1,
+      "tho_thu_cong": 0.8,
+      "thuong_nhan_thi_dan": 0.6,
+      "giao_si": 0.5,
+      "ky_si_quan_nhan": 0.4,
+      "lanh_chua_vung": 0.2,
+      "thien_menh_chi_tu": 0.1
+    }
+  }
+}

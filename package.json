@@ -1,0 +1,12 @@
+{
+  "name": "thien-menh-kha-bien",
+  "version": "0.1.0",
+  "description": "Fate Unfixed - Cocos Creator 3.8 TypeScript Project",
+  "creator": {
+    "name": "CocosCreator",
+    "version": "3.8.2"
+  },
+  "scripts": {
+    "test": "node tests/run_reality_tests.js"
+  }
+}
