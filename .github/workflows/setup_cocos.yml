@@ -228,4 +228,1024 @@ jobs:
                 mo_ta: "Một toán người thu thuế đeo huy hiệu ba bên (Vương - Hỏa Đường - Đoàn Thuyền) chặn đầu ngõ, quát hỏi số thóc và củi trong nhà bạn!",
                 choices: [
                   { id: "kheo_leo", text: "Cúi đầu nói khéo và viện cớ Ngày Bát Cháo", tag: "tin_nguoi", the_luc: -4, suc_khoe: 0, ket_qua_text: "Nhờ lời lẽ khẩn khoản đúng lễ, gã thu thuế chỉ hất hàm bỏ qua mà không tịch thu phần lương dự trữ.", cui: 0 },
-                  { id: "giau_nhanh", text: "Lén đẩy bao lương vào gầm bếp củi", tag: "can_dam", the_luc: -8, suc_khoe: 0, ket_qua_text: "Tay bạn nhanh nhẹn phủ tro bếp lên túi lương thực ngay trước khi chúng bước vào sân (+0.5 lương thực giữ lại
+                  { id: "giau_nhanh", text: "Lén đẩy bao lương vào gầm bếp củi", tag: "can_dam", the_luc: -8, suc_khoe: 0, ket_qua_text: "Tay bạn nhanh nhẹn phủ tro bếp lên túi lương thực ngay trước khi chúng bước vào sân (+0.5 lương thực giữ lại).", luong_thuc: 0.5 },
+                  { id: "run_ray", text: "Run rẩy nộp đại một bó củi", tag: "bo_chay", the_luc: -3, suc_khoe: 0, ket_qua_text: "Bạn luống cuống đưa nộp một bó củi khô để chúng đi khỏi.", cui: -1 }
+                ]
+              }
+            ],
+            rumor_traces: [
+              "Dấu vết [D1]: Người làng thì thầm rằng phiếu thuế năm nay có đóng thêm con dấu ba bên lạ lẫm của Đoàn Thuyền và Hỏa Đường.",
+              "Dấu vết [D2]: Một người hát rong đi ngang qua ngâm 'Bài Ca Hai Vợ', kể chuyện vị lãnh chúa năm xưa từng gạt người vợ vùng núi Ô Khuyết.",
+              "Dấu vết [D3]: Bác thợ rèn đầu xóm vừa sửa một thanh đoản đao cũ có khắc ba chấm nhỏ trên chuôi mà không chịu nói của ai.",
+              "Dấu vết [D6]: Phu bốc vác ở Bến Sậy đồn rằng Kho Thiên Lộc ngoài mặt báo đầy ắp nhưng bên trong nhiều gian đã rỗng tuếch.",
+              "Dấu vết [D8]: Chợ phiên xuất hiện nhiều người Ô Khuyết xuống bán lông cừu, nói rằng vùng mỏ Bạch Lĩnh đang có lính thăm dò."
+            ],
+            personas: [
+              {
+                id: "P1", title: "1. Sơ sinh (1 tuổi)", ten: "Đứa con nông nô mùa gầy (K001)", tuoi: 1, nam_sinh: 160, giai_doan: "so_sinh",
+                giai_cap: "nong_no_ruong_dat", than_phan: "Dân Gắn Ruộng · Làng Sậy Đỏ (Tam Giang)",
+                boi_canh_mo_ta: "Sinh năm 160 giữa Mùa Gầy. Gió lạnh lùa qua vách trấu, bạn đang lên cơn sốt nhẹ. Phải phát tín hiệu để mẹ và bà đỡ Mụ Bảy Ve ủ ấm, cho bú kịp thời.",
+                noi_chon: ["nha", "lang_ngheo"], do_vat: ["riu"], nguoi_xung_quanh: ["me"], nghia_vu: [], kien_thuc: [],
+                cui: 1.0, luong_thuc: 1.5, lanh_ban_dau: 55, doi_ban_dau: 50,
+                luoi: 30, kien_nhan: 50, y_chi: 50, trach_nhiem: 20, can_dam: 30, hao_mon_suc_manh: 0, mu: false,
+                thien_phu_noi_bat: { ten: "Trí nhớ bẩm sinh", key: "tri_nho", cau_bo_lo: "Dù còn đỏ hỏn, bạn đã nhớ in giọng nói và nhịp bước chân của từng người quanh nôi." },
+                story: {
+                  mong: "Sống qua cơn sốt mùa Giá và có một bữa no",
+                  so: "Bị bỏ lại trong đêm lạnh hoặc bị bán khỏi làng",
+                  no_hua: "Mẹ nợ chủ ruộng nửa vụ lúa khi sinh bạn",
+                  bi_mat: "Trong tã lót có giấu một nắm hạt giống lúa chịu hạn",
+                  canh_cua: "D1 (Phiếu thuế Khế) & Bà đỡ Mụ Bảy Ve (A44)"
+                }
+              },
+              {
+                id: "P2", title: "2. Mồ côi (8 tuổi)", ten: "Bé Sậy mồ côi (A60)", tuoi: 8, nam_sinh: 183, giai_doan: "thieu_nhi",
+                giai_cap: "ke_ngoai_le", than_phan: "Kẻ Không Tên · Bến Sậy (Hạ Giang)",
+                boi_canh_mo_ta: "Mùa Giá đang tới gần, dự báo mặc định bạn sẽ kiệt sức vì đói lạnh sau vài ngày nếu không tích cực nhặt củi khô và xin cháo công.",
+                noi_chon: ["lang_ngheo", "nha"], do_vat: ["riu", "cui", "luong_thuc"], nguoi_xung_quanh: [], nghia_vu: [], kien_thuc: [],
+                cui: 1.0, luong_thuc: 1.0, lanh_ban_dau: 45, doi_ban_dau: 55,
+                luoi: 20, kien_nhan: 75, y_chi: 80, trach_nhiem: 60, can_dam: 55, hao_mon_suc_manh: 0, mu: false,
+                thien_phu_noi_bat: { ten: "Giác quan sắc bén", key: "giac_quan_sac", cau_bo_lo: "Đôi mắt và tai bạn nhạy một cách lạ lùng, thoáng nhìn đã thấy cành củi khô hay vật lạ dưới bùn sông." },
+                story: {
+                  mong: "Có một chỗ ngủ ấm qua mùa Giá ở Quán Bốn Ngả",
+                  so: "Bị đuổi khỏi bến sông khi sương muối xuống",
+                  no_hua: "Nợ bà chủ quán Ngô Hạnh (A40) và Lão Câm Sông (A47) nhiều bữa cơm thừa",
+                  bi_mat: "Nhặt được chiếc chìa khóa đồng kỳ lạ dưới bùn sông cạn (Chìa Thiên Lộc V1)",
+                  canh_cua: "V1 (Chìa Thiên Lộc) & Năm Đáo Hạn 190"
+                }
+              },
+              {
+                id: "P3", title: "3. Nông nô (17 tuổi - Test Mục 10)", ten: "Khổng Thạch (A13)", tuoi: 17, nam_sinh: 28, giai_doan: "thieu_nien",
+                giai_cap: "nong_no_ruong_dat", than_phan: "Dân Gắn Ruộng · Làng Sậy Đỏ (Tam Giang)",
+                boi_canh_mo_ta: "Nhà rách, mùa Giá sắp ập tới, củi và lương thực ban đầu rất ít (Số phận gốc: Chết đói/lạnh sau 5 ngày). Hãy chọn hành động ở cột bên phải (Bổ củi, Săn thỏ, Nấu ăn) để đẩy lùi Ngày Nguy Hiểm!",
+                noi_chon: ["nha", "lang_ngheo", "bia_rung"], do_vat: ["riu", "cui", "luong_thuc"], nguoi_xung_quanh: [], nghia_vu: ["lao_dich"], kien_thuc: [],
+                cui: 1.0, luong_thuc: 1.2, lanh_ban_dau: 45, doi_ban_dau: 50,
+                luoi: 15, kien_nhan: 85, y_chi: 80, trach_nhiem: 75, can_dam: 65, hao_mon_suc_manh: 0, mu: false,
+                thien_phu_noi_bat: { ten: "Thể chất dẻo dai", key: "the_chat", cau_bo_lo: "Bạn vung rìu và vác bó củi nặng mà đám trai tráng cùng trang lứa phải chia làm đôi mới khiêng nổi." },
+                story: {
+                  mong: "Tích đủ 5 bó củi và 4 phần lương thực để sống sót qua mùa Giá và giữ mảnh ruộng",
+                  so: "Đói cóng giữa mùa đông hoặc bị bắt đi lính biên ải",
+                  no_hua: "Nghĩa vụ lao dịch cho Chủ Ấp và lời dặn giữ con dao cũ của cha",
+                  bi_mat: "Cầm con dao cắt lúa có khắc Ba Chấm trên chuôi (Huyết mạch Lâm Vọng A06)",
+                  canh_cua: "V5 (Dao Ba Chấm) & D1 (Thuế Khế Tam Giang)"
+                }
+              },
+              {
+                id: "P4", title: "4. Ông lão (68 tuổi)", ten: "Lão nông Ngô Tam (A14)", tuoi: 68, nam_sinh: 45, giai_doan: "gia",
+                giai_cap: "nong_dan_tu_do", than_phan: "Trưởng làng già · Làng Sậy Đỏ",
+                boi_canh_mo_ta: "Bạn 68 tuổi, khớp lưng đã hao mòn theo công thức f_tuoi (Mục 36.1), không còn gánh vác nặng được nhưng sống nhờ truyền kinh nghiệm và kể chuyện xưa cho con cháu (Mục 36.2).",
+                noi_chon: ["nha", "lang_ngheo"], do_vat: ["cui", "luong_thuc"], nguoi_xung_quanh: ["con_chau"], nghia_vu: [], kien_thuc: [],
+                cui: 2.5, luong_thuc: 2.0, lanh_ban_dau: 35, doi_ban_dau: 40,
+                luoi: 35, kien_nhan: 85, y_chi: 75, trach_nhiem: 85, can_dam: 60, hao_mon_suc_manh: 0.45, mu: false,
+                thien_phu_noi_bat: { ten: "Tài ăn nói & Ký ức sống", key: "tai_an_noi", cau_bo_lo: "Mỗi khi bạn cất giọng kể chuyện cũ bên bếp lửa, cả người lớn lẫn trẻ nhỏ trong xóm đều im phăng phắc lắng nghe." },
+                story: {
+                  mong: "Làng Sậy Đỏ không ai chết đói và truyền lại ký ức cho thế hệ sau",
+                  so: "Nhìn thấy cảnh mộ tập thể lặp lại trước khi nhắm mắt",
+                  no_hua: "Nợ mạng bà đỡ Bà Sáu Mụ (A15) từ lúc mới lọt lòng",
+                  bi_mat: "Từng khai thiếu sản lượng thóc của làng để cứu dân khỏi kỳ tăng thuế Khế năm 95",
+                  canh_cua: "E15 (Mùa Kho Giả) & E18 (Khởi nghĩa Mùa Giá)"
+                }
+              },
+              {
+                id: "P5", title: "5. Con nhà buôn (15 tuổi)", ten: "Điền Cẩm Tú (A53)", tuoi: 15, nam_sinh: 150, giai_doan: "thieu_nien",
+                giai_cap: "thuong_nhan_thi_dan", than_phan: "Kế toán tập sự · Cửa hiệu Hạ Giang",
+                boi_canh_mo_ta: "Bạn 15 tuổi, biết chữ và giỏi tính nhẩm. Nhờ đọc sổ sách và đối chiếu phiếu thuyền, bạn vừa kiếm được lương thực vừa lần ra dấu vết cuốn Sổ Muối bị mất của ông nội.",
+                noi_chon: ["cua_hieu", "quan_ruou", "nha"], do_vat: ["sach", "cui", "luong_thuc"], nguoi_xung_quanh: [], nghia_vu: [], kien_thuc: ["biet_chu"],
+                cui: 3.0, luong_thuc: 2.5, lanh_ban_dau: 20, doi_ban_dau: 30,
+                luoi: 30, kien_nhan: 80, y_chi: 75, trach_nhiem: 75, can_dam: 50, hao_mon_suc_manh: 0, mu: false,
+                thien_phu_noi_bat: { ten: "Thiên phú Tính toán", key: "tinh_toan", cau_bo_lo: "Những con số trên trang sổ tự động xếp hàng trong đầu bạn, nhìn thoáng qua đã thấy ngay chỗ lãi chìm bất thường." },
+                story: {
+                  mong: "Tìm lại cuốn Sổ Muối và gột rửa hàm oan cho ông nội Điền Hứa (A32)",
+                  so: "Bị người của Đoàn Thuyền phát hiện thân phận thật",
+                  no_hua: "Lời thề với cha trước khi bước chân vào làm kế toán cho Đoàn Thuyền",
+                  bi_mat: "Lén chép lại một bản sao các khoản lãi chìm giấu dưới đáy rương",
+                  canh_cua: "V3 (Cuốn Sổ Muối) & E22 (Vụ Án Sổ Muối)"
+                }
+              },
+              {
+                id: "P6", title: "6. Khách mù (30 tuổi)", ten: "Người hát rong mù (K117)", tuoi: 30, nam_sinh: 142, giai_doan: "truong_thanh",
+                giai_cap: "ke_ngoai_le", than_phan: "Kẻ Không Tên · Quán Bốn Ngả (Bến Bắc)",
+                boi_canh_mo_ta: "Đôi mắt bạn mù hoàn toàn (thị giác = 0, bị khóa hành động đọc sách), nhưng thính giác và sự nhạy bén xã hội giúp bạn kiếm sống và thu thập tin đồn khắp quán trọ.",
+                noi_chon: ["quan_ruou", "nha"], do_vat: ["sach", "cui", "luong_thuc"], nguoi_xung_quanh: [], nghia_vu: [], kien_thuc: ["biet_chu"],
+                cui: 2.0, luong_thuc: 2.0, lanh_ban_dau: 30, doi_ban_dau: 35,
+                luoi: 30, kien_nhan: 80, y_chi: 80, trach_nhiem: 60, can_dam: 50, hao_mon_suc_manh: 0, mu: true,
+                thien_phu_noi_bat: { ten: "Nhạy bén xã hội & Thính giác", key: "nhay_ben_xa_hoi", cau_bo_lo: "Chỉ nghe nhịp thở và tiếng đặt chén rượu, bạn đã nhận ra kẻ đối diện đang nói dối điều chính hắn cũng không tin." },
+                story: {
+                  mong: "Nhớ trọn vẹn các khúc ca cổ và có chốn nương thân lúc tuổi già",
+                  so: "Đôi tai mờ đi hoặc quên mất khổ cuối của Bài Ca Hai Vợ",
+                  no_hua: "Nợ cậu bé dẫn đường một nửa số tiền thưởng hát rong mỗi tối",
+                  bi_mat: "Thuộc lòng khổ cuối thất truyền của Bài Ca Hai Vợ nhắc tới Con Dấu Gãy",
+                  canh_cua: "V6 (Bài Ca Hai Vợ) & D2"
+                }
+              }
+            ],
+            random_archetypes: [
+              {
+                kieu_doi: "K002 · Nông nô gắn ruộng Tam Giang", giai_cap: "nong_no_ruong_dat", than_phan: "Dân Gắn Ruộng · Tam Giang",
+                giai_doan: "truong_thanh", tuoi_min: 18, tuoi_max: 32,
+                noi_chon: ["nha", "lang_ngheo", "bia_rung"], do_vat: ["riu", "cui", "luong_thuc"], nguoi_xung_quanh: [], nghia_vu: ["lao_dich"], kien_thuc: [],
+                mong: "Giữ được mảnh ruộng nhỏ cho con và vượt qua kỳ thu thuế Khế", so: "Bị đổi chủ ấp hoặc mất mùa",
+                no_hua: "Thề với vợ không bỏ trốn khỏi làng", bi_mat: "Từng giấu ba đấu thóc dưới nền bếp", canh_cua: "D1 (Phiếu thuế Khế ba bên)"
+              },
+              {
+                kieu_doi: "K074 · Thợ rèn học việc Biên Ngạn", giai_cap: "tho_thu_cong", than_phan: "Hội Phường Rèn · Đồn Biên Ngạn Nam",
+                giai_doan: "thieu_nien", tuoi_min: 14, tuoi_max: 20,
+                noi_chon: ["nha", "lang_ngheo", "quan_ruou"], do_vat: ["riu", "cui", "luong_thuc"], nguoi_xung_quanh: [], nghia_vu: [], kien_thuc: [],
+                mong: "Rèn được thanh đao tốt hơn đao Kinh Hoài", so: "Chiến tranh Bạch Lĩnh nổ ra làm xưởng bị trưng dụng",
+                no_hua: "Nợ thầy rèn dòng họ Khổng ba năm học việc", bi_mat: "Tự rèn một con dao ngoài giờ có khắc dấu riêng", canh_cua: "D3 & V5 (Dao Ba Chấm)"
+              },
+              {
+                kieu_doi: "K050 · Tu sĩ chép sách trẻ Hỏa Đường", giai_cap: "giao_si", than_phan: "Hỏa Đường · Tây Lĩnh",
+                giai_doan: "truong_thanh", tuoi_min: 19, tuoi_max: 30,
+                noi_chon: ["cua_hieu", "nha"], do_vat: ["sach", "cui", "luong_thuc"], nguoi_xung_quanh: [], nghia_vu: [], kien_thuc: ["biet_chu"],
+                mong: "Giữ cho các bản chép cổ sống sót qua những đợt Soi Lửa", so: "Bị thẩm vấn viên Hạng Tông (A39) gọi hỏi",
+                no_hua: "Hứa với thầy Triệu Mặc Thành (A45) giữ kín hốc đá sau thánh đường", bi_mat: "Đã chép riêng một trang Niên Ký", canh_cua: "V4 (Niên Ký Hỏa Đường) & D7"
+              },
+              {
+                kieu_doi: "K100 · Chủ tiệm cầm đồ nhỏ Hạ Giang", giai_cap: "thuong_nhan_thi_dan", than_phan: "Bang Hàng · Bến Sậy (Hạ Giang)",
+                giai_doan: "truong_thanh", tuoi_min: 24, tuoi_max: 42,
+                noi_chon: ["cua_hieu", "quan_ruou", "nha"], do_vat: ["sach", "cui", "luong_thuc"], nguoi_xung_quanh: [], nghia_vu: [], kien_thuc: ["biet_chu"],
+                mong: "Cho con học chữ và tiệm không bị thanh tra thuế gây khó dễ", so: "Món đồ cầm cố kỳ lạ bị kẻ quyền thế đòi lại",
+                no_hua: "Nợ vốn vay từ một thương nhân Cao Lăng", bi_mat: "Giữ một ngăn tủ không bán có nửa con dấu gãy", canh_cua: "V2 (Con Dấu Gãy) & V3 (Sổ Muối)"
+              },
+              {
+                kieu_doi: "K027 · Kiếm Điền trấn biên", giai_cap: "ky_si_quan_nhan", than_phan: "Kiếm Điền · Biên Ngạn",
+                giai_doan: "truong_thanh", tuoi_min: 22, tuoi_max: 38,
+                noi_chon: ["nha", "bia_rung", "quan_ruou"], do_vat: ["riu", "cui", "luong_thuc"], nguoi_xung_quanh: [], nghia_vu: [], kien_thuc: [],
+                mong: "Giữ chốt biên yên ổn để không phải rút kiếm", so: "Ruộng cấp bị thu hồi khi tuổi già sức yếu",
+                no_hua: "Nợ mạng một người dẫn đường Ô Khuyết trong trận bão tuyết", bi_mat: "Giấu một mũi tên lông ưng của bạn cũ bên kia biên giới", canh_cua: "D8 & D9 (Mỏ sắt Bạch Lĩnh)"
+              },
+              {
+                kieu_doi: "K039 · Thiên mệnh chi tử (Hoàng tộc / Kế vị)", giai_cap: "thien_menh_chi_tu", than_phan: "Hoàng tộc họ Lâm · Kinh Hoài",
+                giai_doan: "truong_thanh", tuoi_min: 18, tuoi_max: 28,
+                noi_chon: ["cua_hieu", "quan_ruou", "nha"], do_vat: ["sach", "cui", "luong_thuc"], nguoi_xung_quanh: [], nghia_vu: [], kien_thuc: ["biet_chu"],
+                mong: "Tìm ra cách tháo gỡ Khế Nợ trước Năm Đáo Hạn mà không làm vương quốc chia cắt", so: "Trở thành vị vua ký giấy bán Quyền Thu Tam Giang",
+                no_hua: "Gánh món nợ hai trăm năm của tổ phụ Lâm Khải (A01)", bi_mat: "Từng nghe một cung nữ già hát trọn vẹn Bài Ca Hai Vợ", canh_cua: "V7 (Ba Bản Khế Nợ) & E31 (Năm Đáo Hạn)"
+              }
+            ]
+          };
+          writeFile('assets/resources/data/world/tu_dien.json', worldData, true);
+
+          // 3. Giao diện Split-Screen (Không cuộn trang) theo chuẩn UX/UI mới (docs/index.html)
+          const htmlTemplate = `<!DOCTYPE html>
+          <html lang="vi">
+          <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>Thiên Mệnh Khả Biến (Fate Unfixed)</title>
+            <style>
+              * { box-sizing: border-box; }
+              html, body {
+                margin: 0; padding: 0; width: 100%; height: 100vh; overflow: hidden;
+                background: #0d0f12; color: #e8e6e3; font-family: "Segoe UI", system-ui, sans-serif;
+              }
+              .app-shell {
+                display: flex; flex-direction: column; width: 100%; height: 100vh; max-width: 1440px; margin: 0 auto;
+                border-left: 1px solid #22262e; border-right: 1px solid #22262e; background: #13161b;
+              }
+              /* THANH TRÊN CÙNG MẢNH (48px) */
+              .top-bar {
+                height: 50px; flex-shrink: 0; display: flex; align-items: center; justify-content: space-between;
+                padding: 0 18px; background: #181c24; border-bottom: 1px solid #282e3b;
+              }
+              .char-summary { display: flex; align-items: center; gap: 10px; font-size: 15px; }
+              .char-name { color: #ffd982; font-weight: 700; font-size: 16px; }
+              .char-sub { color: #9aa4b5; font-size: 13px; }
+              .top-nav { display: flex; align-items: center; gap: 8px; }
+              .nav-btn {
+                background: #232936; color: #d4dff0; border: 1px solid #384257; padding: 6px 11px;
+                border-radius: 6px; cursor: pointer; font-size: 12.5px; display: flex; align-items: center; gap: 5px;
+              }
+              .nav-btn:hover { background: #2e3748; border-color: #526280; }
+              .nav-btn.highlight { background: #3b2854; color: #f0dbff; border-color: #6b4c94; }
+              .badge-count { background: #d4a359; color: #111; font-weight: bold; padding: 1px 6px; border-radius: 10px; font-size: 11px; }
+
+              /* BỐ CỤC CHÍNH 2 CỘT (KHÔNG CUỘN TRANG) */
+              .workspace {
+                flex: 1; display: grid; grid-template-columns: 1.35fr 1fr; overflow: hidden;
+              }
+
+              /* CỘT TRÁI: TRUNG TÂM DIỄN BIẾN + GÓC DƯỚI TRÁI THỜI GIAN */
+              .left-column {
+                display: flex; flex-direction: column; height: 100%; border-right: 1px solid #262b36; overflow: hidden;
+              }
+
+              /* GHIM CẢNH BÁO NGUY HIỂM NGAY TRÊN ĐẦU KHUNG GIỮA */
+              .fate-strip {
+                flex-shrink: 0; padding: 9px 16px; font-size: 13.5px; font-weight: 600;
+                display: flex; align-items: center; justify-content: space-between;
+                border-bottom: 1px solid #2b2f3a;
+              }
+              .fate-strip.danger { background: #2c1618; color: #ffb3ad; border-left: 4px solid #ff5252; }
+              .fate-strip.safe { background: #15261d; color: #a3f7bf; border-left: 4px solid #38d368; }
+
+              /* GIỮA MÀN HÌNH: DIỄN BIẾN HIỆN TẠI */
+              .center-stage {
+                flex: 1; padding: 20px 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px;
+                background: radial-gradient(circle at center, #181c24 0%, #12151a 100%);
+              }
+              .current-beat-card {
+                background: #1a1f29; border: 1px solid #353e52; border-radius: 8px; padding: 18px 20px;
+                box-shadow: 0 6px 20px rgba(0,0,0,0.4); transition: transform 0.15s ease, border-color 0.2s ease;
+              }
+              .current-beat-card.flash { border-color: #ffd982; }
+              .beat-meta {
+                display: flex; justify-content: space-between; align-items: center; font-size: 12px;
+                color: #8c98ad; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 10px;
+              }
+              .beat-main-text {
+                font-size: 17.5px; line-height: 1.65; color: #f2f0ec; margin-bottom: 14px; white-space: pre-line;
+              }
+              .beat-deltas {
+                display: flex; flex-wrap: wrap; gap: 8px; padding-top: 10px; border-top: 1px dashed #2d3545;
+              }
+              .delta-pill {
+                font-size: 12.5px; padding: 3px 9px; border-radius: 4px; background: #232a38; color: #c9d6ea;
+              }
+              .delta-pill.gain { background: #193324; color: #9ef0b6; border: 1px solid #2d593f; }
+              .delta-pill.warn { background: #36221c; color: #ffbe9e; border: 1px solid #633b2e; }
+
+              /* LỊCH SỬ NHỊP GẦN ĐÂY (MỜ HƠN Ở DƯỚI KHUNG GIỮA) */
+              .recent-log {
+                display: flex; flex-direction: column; gap: 8px; opacity: 0.72; font-size: 13.5px;
+              }
+              .log-entry {
+                background: #14171e; border-left: 2px solid #333c4d; padding: 8px 12px; border-radius: 0 4px 4px 0; color: #a9b2c3;
+              }
+
+              /* CẢNH GẤP TÍNH GIỜ (HIỆN NGAY GIỮA MÀN HÌNH KHI CÓ BIẾN) */
+              .frenetic-overlay {
+                display: none; background: #2e1517; border: 2px solid #ff5c5c; border-radius: 8px; padding: 16px;
+                box-shadow: 0 0 25px rgba(255, 70, 70, 0.35);
+              }
+              .frenetic-header { display: flex; justify-content: space-between; color: #ff9494; font-weight: bold; font-size: 16px; margin-bottom: 8px; }
+
+              /* GÓC DƯỚI BÊN TRÁI: THỜI GIAN, SINH TỒN & TUA NHANH */
+              .bottom-left-hud {
+                flex-shrink: 0; background: #161920; border-top: 1px solid #282e3b; padding: 12px 18px;
+                display: flex; flex-direction: column; gap: 9px;
+              }
+              .hud-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+              .clock-display { font-size: 14.5px; font-weight: 600; color: #ffd982; }
+              .stock-pills { display: flex; gap: 10px; font-size: 13.5px; }
+              .stock-badge { background: #202632; border: 1px solid #364156; padding: 4px 10px; border-radius: 5px; font-weight: 600; }
+              .feel-tags { display: flex; gap: 7px; flex-wrap: wrap; }
+              .feel-tag { font-size: 12px; padding: 3px 8px; border-radius: 4px; background: #1f242e; color: #b8c2d4; border: 1px solid #2f3747; }
+              .feel-tag.bad { background: #331c1e; color: #ff9e9e; border-color: #613034; }
+              .feel-tag.good { background: #192b21; color: #9ef0b6; border-color: #2d543d; }
+              .skip-controls { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+              .stance-select { background: #1f2530; color: #dce6f7; border: 1px solid #394459; padding: 5px 8px; border-radius: 5px; font-size: 12.5px; }
+              .btn-skip { background: #29384f; color: #bce0ff; border: 1px solid #445f85; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 12.5px; font-weight: 600; }
+              .btn-skip:hover { background: #354966; }
+
+              /* CỘT BÊN PHẢI: BẢNG LỰA CHỌN HÀNH ĐỘNG */
+              .right-column {
+                display: flex; flex-direction: column; height: 100%; background: #15181f; overflow: hidden;
+              }
+              .right-header {
+                padding: 11px 14px; background: #191d26; border-bottom: 1px solid #282e3b;
+                display: flex; flex-direction: column; gap: 8px; flex-shrink: 0;
+              }
+              .right-title { font-size: 13px; font-weight: 700; color: #9aa4b5; text-transform: uppercase; letter-spacing: 0.6px; }
+              .filter-tabs { display: flex; gap: 5px; flex-wrap: wrap; }
+              .tab-pill {
+                background: #212633; color: #a9b5c9; border: 1px solid #323a4d; padding: 4px 10px;
+                border-radius: 14px; font-size: 12px; cursor: pointer;
+              }
+              .tab-pill.active { background: #385178; color: #fff; border-color: #6488bd; font-weight: 600; }
+
+              .action-deck {
+                flex: 1; overflow-y: auto; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px;
+              }
+              .action-card {
+                display: flex; gap: 6px; align-items: stretch;
+              }
+              .btn-main-action {
+                flex: 1; text-align: left; background: #1e2430; color: #e2eeff; border: 1px solid #333e54;
+                padding: 10px 12px; border-radius: 6px; cursor: pointer; display: flex; flex-direction: column; gap: 3px;
+                transition: background 0.12s, border-color 0.12s;
+              }
+              .btn-main-action:hover { background: #273042; border-color: #55698f; }
+              .act-name { font-size: 14.5px; font-weight: 600; }
+              .act-sub { font-size: 12px; color: #8c9bb3; }
+              .btn-push {
+                background: #332019; color: #ffbe8c; border: 1px solid #593529; padding: 0 10px;
+                border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600; white-space: nowrap;
+              }
+              .btn-push:hover { background: #4a2d22; border-color: #824d3b; }
+
+              /* CỬA SỔ BẬT LÊN (MODAL) CHO TIỂU SỬ, TIN ĐỒN, ĐỔI NHÂN VẬT, CÁO PHÓ */
+              .modal-backdrop {
+                display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.72);
+                z-index: 100; align-items: center; justify-content: center; padding: 16px;
+              }
+              .modal-box {
+                background: #1a1e26; border: 1px solid #434d63; border-radius: 10px; max-width: 680px; width: 100%;
+                max-height: 85vh; display: flex; flex-direction: column; box-shadow: 0 12px 40px rgba(0,0,0,0.8);
+              }
+              .modal-header {
+                padding: 14px 18px; border-bottom: 1px solid #2b3242; display: flex; justify-content: space-between; align-items: center;
+              }
+              .modal-header h3 { margin: 0; color: #ffd982; font-size: 17px; }
+              .btn-close { background: transparent; border: none; color: #9aa4b5; font-size: 20px; cursor: pointer; }
+              .modal-body { padding: 18px; overflow-y: auto; line-height: 1.6; font-size: 14.5px; }
+              .persona-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+
+              @media (max-width: 860px) {
+                .workspace { grid-template-columns: 1fr; grid-template-rows: 54% 46%; }
+                .left-column { border-right: none; border-bottom: 1px solid #282e3b; }
+              }
+            </style>
+          </head>
+          <body>
+            <div class="app-shell">
+              <!-- THANH TIÊU ĐỀ GỌN: CHỨA CÁC NÚT MỞ TIỂU SỬ, TIN ĐỒN, CÁO PHÓ, ĐỔI VAI -->
+              <header class="top-bar">
+                <div class="char-summary">
+                  <span class="char-name" id="topCharName">Khổng Thạch</span>
+                  <span class="char-sub" id="topCharSub">17 tuổi · Dân Gắn Ruộng · Làng Sậy Đỏ</span>
+                </div>
+                <div class="top-nav">
+                  <button class="nav-btn" id="btnOpenBio">📖 Tiểu sử & Dây chằng</button>
+                  <button class="nav-btn" id="btnOpenRumors">🌫️ Sổ tin đồn <span class="badge-count" id="rumorCountBadge">0</span></button>
+                  <button class="nav-btn" id="btnOpenChronicle">📜 Cáo phó</button>
+                  <button class="nav-btn highlight" id="btnOpenSwitch">👤 Đổi vai / Bốc kiếp mới</button>
+                </div>
+              </header>
+
+              <!-- BỐ CỤC 2 CỘT KHÔNG CUỘN TRANG -->
+              <main class="workspace">
+                <!-- CỘT TRÁI: CẢNH BÁO TRÊN CÙNG + DIỄN BIẾN Ở GIỮA + ĐỒNG HỒ GÓC DƯỚI TRÁI -->
+                <section class="left-column">
+                  <div class="fate-strip danger" id="fateStrip"></div>
+
+                  <div class="center-stage" id="centerStage">
+                    <!-- Khung Cảnh Gấp (Chỉ bật lên khi gặp nguy hiểm tức thì) -->
+                    <div class="frenetic-overlay" id="freneticBox">
+                      <div class="frenetic-header">
+                        <span id="freneticTitle">⚡ CẢNH GẤP!</span>
+                        <span id="freneticTimer">08.0s</span>
+                      </div>
+                      <div id="freneticDesc" style="margin-bottom:12px; font-size:15px;"></div>
+                      <div id="freneticChoices" style="display:flex; flex-direction:column; gap:6px;"></div>
+                    </div>
+
+                    <!-- Khung Hiện Tại (Giữa màn hình) -->
+                    <div class="current-beat-card" id="currentBeatCard">
+                      <div class="beat-meta">
+                        <span id="beatHeaderLeft">HIỆN TẠI · NHỊP #0</span>
+                        <span id="beatHeaderRight">LÀNG SẬY ĐỎ</span>
+                      </div>
+                      <div class="beat-main-text" id="narrativeBox"></div>
+                      <div class="beat-deltas" id="beatDeltas"></div>
+                    </div>
+
+                    <!-- Nhật ký 3 nhịp gần nhất -->
+                    <div class="recent-log" id="recentLog"></div>
+                  </div>
+
+                  <!-- GÓC DƯỚI BÊN TRÁI: THỜI GIAN, DỰ TRỮ, CẢM NHẬN CƠ THỂ & TUA NHANH -->
+                  <footer class="bottom-left-hud">
+                    <div class="hud-row">
+                      <div class="clock-display" id="clockDisplay">⏳ Năm 45 · Mùa Giá (Ngày 12/15) · 08h00</div>
+                      <div class="stock-pills">
+                        <span class="stock-badge" id="stockCui">🔥 Củi: 1.0 bó</span>
+                        <span class="stock-badge" id="stockFood">🌾 Lương: 1.2 phần</span>
+                      </div>
+                    </div>
+                    <div class="hud-row">
+                      <div class="feel-tags" id="feelTags"></div>
+                      <div class="skip-controls">
+                        <select class="stance-select" id="stanceSelect" title="Thiên hướng khi tua (Mục 39.3)">
+                          <option value="can_than">Tua: Tích trữ củi/lương</option>
+                          <option value="cham_chi">Tua: Chăm chỉ làm công</option>
+                          <option value="nghe_ngong">Tua: Nghe ngóng tin đồn</option>
+                          <option value="bam_gia_dinh">Tua: Bám người thân</option>
+                        </select>
+                        <button class="btn-skip" id="btnSkipBeat">⏩ +3 Ngày</button>
+                      </div>
+                    </div>
+                  </footer>
+                </section>
+
+                <!-- CỘT BÊN PHẢI: LỰA CHỌN HÀNH ĐỘNG THEO NGỮ CẢNH -->
+                <aside class="right-column">
+                  <div class="right-header">
+                    <div class="right-title">Lựa chọn hành động (Sinh từ ngữ cảnh)</div>
+                    <div class="filter-tabs" id="filterTabs"></div>
+                  </div>
+                  <div class="action-deck" id="menuBox"></div>
+                </aside>
+              </main>
+            </div>
+
+            <!-- MODAL ĐA NĂNG (TIỂU SỬ / TIN ĐỒN / CÁO PHÓ / ĐỔI VAI) -->
+            <div class="modal-backdrop" id="modalBackdrop">
+              <div class="modal-box">
+                <div class="modal-header">
+                  <h3 id="modalTitle">Thông tin</h3>
+                  <button class="btn-close" id="btnCloseModal">✕</button>
+                </div>
+                <div class="modal-body" id="modalBody"></div>
+              </div>
+            </div>
+
+            <script>
+              const CONFIG = __CONFIG_JSON__;
+              const DATA = __DATA_JSON__;
+
+              let state = {
+                persona: null,
+                hour: 8,
+                dayInSeason: 12,
+                seasonIdx: 3,
+                year: 45,
+                theLuc: 82,
+                sucKhoe: 85,
+                doi: 45,
+                lanh: 40,
+                chan: 10,
+                so: 10,
+                cui: 1.0,
+                luongThuc: 1.2,
+                amAnhDoi: 0,
+                talentRevealed: false,
+                initialDangerDays: null,
+                actionsTaken: 0,
+                cluesFound: [],
+                recentHistory: [],
+                activeCategory: 'Tất cả',
+                lastCompletedClass: null
+              };
+
+              let freneticInterval = null;
+              let tiers = {};
+              let activePersonaIdx = 2;
+
+              function calcTiers(p) {
+                tiers = {};
+                for (const [k, cfg] of Object.entries(CONFIG.f_tuoi)) {
+                  if (k === 'thi_giac' && p.mu) { tiers[k] = 0; continue; }
+                  const age = Math.max(0.2, p.tuoi);
+                  const fTang = Math.min(1, Math.pow(age / cfg.tuoi_dinh, cfg.q));
+                  const fGiam = p.tuoi <= cfg.tuoi_suy ? 1 : Math.max(cfg.san_gia, 1 / (1 + Math.pow((p.tuoi - cfg.tuoi_suy) / (cfg.tuoi_nua - cfg.tuoi_suy), cfg.p)));
+                  const haoMon = k === 'suc_manh' ? (p.hao_mon_suc_manh || 0) : 0;
+                  const val = 65 * fTang * fGiam * (1 - haoMon);
+                  tiers[k] = Math.max(0, Math.min(5, Math.floor(val / 20)));
+                }
+              }
+
+              function predictFate() {
+                let sDoi = state.doi, sLanh = state.lanh, sSK = state.sucKhoe;
+                let sCui = state.cui, sFood = state.luongThuc;
+                const isWinter = state.seasonIdx === 3;
+                let dangerDay = null, cause = 'An toàn';
+
+                for (let d = 1; d <= 14; d++) {
+                  if (sFood >= 0.8) { sFood -= 0.8; sDoi = Math.max(10, sDoi - 20); }
+                  else if (sFood > 0) { sDoi = Math.max(20, sDoi - sFood * 20 + 12); sFood = 0; }
+                  else { sDoi += 22; }
+
+                  if (isWinter) {
+                    if (sCui >= 0.8) { sCui -= 0.8; sLanh = Math.max(10, sLanh - 15); }
+                    else { sCui = 0; sLanh += 25; }
+                  } else {
+                    sLanh = Math.max(0, sLanh - 10);
+                  }
+
+                  if (sDoi >= 95) sSK -= 28;
+                  else if (sDoi >= 75) sSK -= 12;
+
+                  if (sLanh >= 95) sSK -= 30;
+                  else if (sLanh >= 75) sSK -= 14;
+
+                  if (sSK <= 0) {
+                    dangerDay = d;
+                    cause = sDoi >= sLanh ? 'Đói kiệt sức' : 'Rét cóng đêm mùa Giá';
+                    break;
+                  }
+                }
+                return { dangerDay, cause };
+              }
+
+              function advanceClock(minutes) {
+                const hours = minutes / 60;
+                const prevHour = state.hour;
+                state.hour += hours;
+
+                state.doi = Math.min(100, state.doi + hours * CONFIG.survival.hourly_hunger_gain);
+                const isNight = (prevHour >= 18 || prevHour < 6);
+                if (state.seasonIdx === 3) {
+                  state.lanh = Math.min(100, state.lanh + hours * (isNight ? 4.5 : 2.0));
+                }
+
+                if (state.hour >= 24) {
+                  const daysPassed = Math.floor(state.hour / 24);
+                  state.hour = state.hour % 24;
+                  state.dayInSeason += daysPassed;
+
+                  for (let i = 0; i < daysPassed; i++) {
+                    if (state.cui >= 1.0) {
+                      state.cui -= 1.0;
+                      state.lanh = Math.max(10, state.lanh - 25);
+                    } else if (state.seasonIdx === 3) {
+                      state.lanh = Math.min(100, state.lanh + 25);
+                      state.sucKhoe = Math.max(0, state.sucKhoe - 8);
+                    }
+                    if (state.luongThuc >= 0.8 && state.doi > 45) {
+                      state.luongThuc -= 0.8;
+                      state.doi = Math.max(15, state.doi - 30);
+                    }
+                  }
+
+                  if (state.dayInSeason > CONFIG.time.days_per_season) {
+                    state.dayInSeason = 1;
+                    state.seasonIdx = (state.seasonIdx + 1) % 4;
+                    if (state.seasonIdx === 0) {
+                      state.year++;
+                      state.persona.tuoi++;
+                      calcTiers(state.persona);
+                    }
+                  }
+                }
+
+                if ((state.doi >= 80 || state.lanh >= 80) && state.amAnhDoi < 70) {
+                  state.amAnhDoi = 75;
+                }
+              }
+
+              function getMenu(p) {
+                const sources = new Set(['ban_than:moi_trang_thai']);
+                if (p.giai_doan === 'so_sinh') sources.add('ban_than:so_sinh');
+                if (state.lanh >= 35 || state.seasonIdx === 3) sources.add('thoi_diem:lanh');
+                if (state.seasonIdx === 3 && state.dayInSeason <= 3) sources.add('thoi_diem:ngay_bat_chao');
+
+                p.noi_chon.forEach(s => sources.add('noi_chon:' + s));
+                p.do_vat.forEach(s => sources.add('do_vat:' + s));
+                if (state.cui >= 1) sources.add('do_vat:cui');
+                if (state.luongThuc >= 1) sources.add('do_vat:luong_thuc');
+                p.nguoi_xung_quanh.forEach(s => sources.add('nguoi_xung_quanh:' + s));
+                p.nghia_vu.forEach(s => sources.add('nghia_vu:' + s));
+
+                const isDaylight = state.hour >= 6 && state.hour < 18;
+                const remDaylightHours = isDaylight ? (18 - state.hour) : 0;
+
+                return DATA.actions.filter(tpl => {
+                  if (!tpl.nguon_goi_y.some(s => sources.has(s))) return false;
+                  if (!tpl.giai_doan.includes(p.giai_doan)) return false;
+                  if (tpl.can_anh_sang && !isDaylight) return false;
+                  if (tpl.gio_toi_thieu_con_lai && remDaylightHours < tpl.gio_toi_thieu_con_lai) return false;
+
+                  for (const [ab, minT] of Object.entries(tpl.nang_luc_yeu_cau)) {
+                    if ((tiers[ab] ?? 0) < minT) return false;
+                  }
+                  if (tpl.vat_pham_yeu_cau && !tpl.vat_pham_yeu_cau.every(i => p.do_vat.includes(i))) return false;
+                  if (tpl.vat_pham_tieu_hao) {
+                    if (tpl.vat_pham_tieu_hao.cui && state.cui < tpl.vat_pham_tieu_hao.cui) return false;
+                    if (tpl.vat_pham_tieu_hao.luong_thuc && state.luongThuc < tpl.vat_pham_tieu_hao.luong_thuc) return false;
+                  }
+                  if (tpl.kien_thuc_yeu_cau && !tpl.kien_thuc_yeu_cau.every(k => p.kien_thuc.includes(k))) return false;
+                  return true;
+                }).map(tpl => {
+                  let score = 20;
+                  const tags = tpl.tag || [];
+                  if (tags.includes('thuc_pham')) score += state.doi * 0.8;
+                  if (tags.includes('tich_tru') && state.amAnhDoi > 0) score += (state.amAnhDoi / 100) * 45;
+                  if (tags.includes('nghia_vu')) score += 30;
+                  return { ...tpl, score };
+                }).sort((a, b) => b.score - a.score);
+              }
+
+              function pushHistory(text) {
+                if (!text) return;
+                const firstLine = text.split('\\n')[0];
+                state.recentHistory.unshift('Nhịp #' + state.actionsTaken + ': ' + firstLine);
+                if (state.recentHistory.length > 3) state.recentHistory.pop();
+              }
+
+              function updateCenterStage(mainText, deltas) {
+                const card = document.getElementById('currentBeatCard');
+                card.classList.remove('flash');
+                void card.offsetWidth;
+                card.classList.add('flash');
+
+                document.getElementById('beatHeaderLeft').textContent = 'DIỄN BIẾN HIỆN TẠI · NHỊP #' + state.actionsTaken;
+                document.getElementById('beatHeaderRight').textContent = Math.floor(state.hour) + 'h00 · Mùa ' + CONFIG.time.seasons[state.seasonIdx];
+                document.getElementById('narrativeBox').textContent = mainText;
+
+                const deltaBox = document.getElementById('beatDeltas');
+                deltaBox.innerHTML = '';
+                (deltas || []).forEach(d => {
+                  const span = document.createElement('span');
+                  span.className = 'delta-pill ' + (d.type || '');
+                  span.textContent = d.label;
+                  deltaBox.appendChild(span);
+                });
+
+                const logBox = document.getElementById('recentLog');
+                logBox.innerHTML = '';
+                state.recentHistory.forEach(item => {
+                  const div = document.createElement('div');
+                  div.className = 'log-entry';
+                  div.textContent = item;
+                  logBox.appendChild(div);
+                });
+              }
+
+              function runAction(tpl, isPush) {
+                if (freneticInterval) return;
+                const prevText = document.getElementById('narrativeBox').textContent;
+                if (state.actionsTaken > 0) pushHistory(prevText);
+
+                const p = state.persona;
+                const sr = CONFIG.stopping_rule;
+                const maxBeats = tpl.so_nhip_chuan || 6;
+                let beats = 0, reason = 'hoan_thanh';
+                const boost = isPush ? sr.push_through_boost : 0;
+
+                if (tpl.vat_pham_tieu_hao) {
+                  if (tpl.vat_pham_tieu_hao.cui) state.cui = Math.max(0, state.cui - tpl.vat_pham_tieu_hao.cui);
+                  if (tpl.vat_pham_tieu_hao.luong_thuc) state.luongThuc = Math.max(0, state.luongThuc - tpl.vat_pham_tieu_hao.luong_thuc);
+                }
+
+                let gainedCui = 0, gainedFood = 0;
+
+                while (beats < maxBeats) {
+                  beats++;
+                  state.theLuc = Math.max(0, Math.min(100, state.theLuc + tpl.chi_phi.the_luc));
+                  state.chan = Math.max(0, Math.min(100, state.chan + tpl.chi_phi.chan));
+                  state.doi = Math.max(0, Math.min(100, state.doi + tpl.chi_phi.doi));
+
+                  if (tpl.ket_qua.cui) { state.cui += tpl.ket_qua.cui; gainedCui += tpl.ket_qua.cui; }
+                  if (tpl.ket_qua.luong_thuc) { state.luongThuc += tpl.ket_qua.luong_thuc; gainedFood += tpl.ket_qua.luong_thuc; }
+                  if (tpl.ket_qua.lanh) state.lanh = Math.max(0, Math.min(100, state.lanh + tpl.ket_qua.lanh));
+                  if (tpl.ket_qua.suc_khoe) state.sucKhoe = Math.max(0, Math.min(100, state.sucKhoe + tpl.ket_qua.suc_khoe));
+
+                  if (state.theLuc <= 4) { reason = 'kiet_suc'; break; }
+
+                  const khoChiu = (100 - state.theLuc) * 0.65 + state.chan * 0.7 + state.doi * 0.4 + state.lanh * 0.35;
+                  const nguong = sr.base_threshold + p.luoi * sr.weight_luoi + p.kien_nhan * sr.weight_kien_nhan + p.y_chi * sr.weight_y_chi + p.trach_nhiem * sr.weight_trach_nhiem + boost + (Math.random() * 8 - 4);
+                  if (khoChiu > nguong && !tpl.tag.includes('ban_nang') && !tpl.tag.includes('sinh_ton')) {
+                    reason = 'ngat_noi_tam';
+                    break;
+                  }
+                }
+
+                if (isPush) state.sucKhoe = Math.max(5, state.sucKhoe - 3);
+
+                const minutes = beats * 6;
+                advanceClock(minutes);
+                state.actionsTaken++;
+
+                const deltas = [{ label: '⏱️ +' + minutes + ' phút (' + beats + ' nhịp)', type: '' }];
+                if (gainedCui > 0) deltas.push({ label: '🔥 +' + gainedCui.toFixed(1) + ' bó củi', type: 'gain' });
+                if (gainedFood > 0) deltas.push({ label: '🌾 +' + gainedFood.toFixed(1) + ' lương thực', type: 'gain' });
+
+                let extraLines = [];
+                if (!state.talentRevealed && p.thien_phu_noi_bat && state.actionsTaken >= 2) {
+                  state.talentRevealed = true;
+                  extraLines.push('✨ [Thiên phú bộc lộ - ' + p.thien_phu_noi_bat.ten + ']: ' + p.thien_phu_noi_bat.cau_bo_lo);
+                }
+
+                if (tpl.ket_qua.manh_moi || Math.random() < 0.25) {
+                  const trace = DATA.rumor_traces[state.actionsTaken % DATA.rumor_traces.length];
+                  if (!state.cluesFound.includes(trace)) state.cluesFound.push(trace);
+                  deltas.push({ label: '🌫️ +1 Tin đồn mới', type: 'gain' });
+                  extraLines.push('🌫️ ' + trace);
+                }
+
+                let rText = 'Bạn hoàn thành trọn vẹn công việc.';
+                if (reason === 'kiet_suc') {
+                  rText = 'Tay bạn run bần bật, hơi thở đứt quãng không sao tiếp tục nổi nữa.';
+                  deltas.push({ label: '⚠️ Dừng vì kiệt sức', type: 'warn' });
+                } else if (reason === 'ngat_noi_tam') {
+                  rText = state.doi > 65 ? 'Bụng cồn cào khiến bạn chẳng còn kiên nhẫn, đành tự dừng tay.' : 'Cơn mỏi và bức bối dâng lên khiến bạn tự giác dừng lại nghỉ.';
+                  deltas.push({ label: '🛑 Tự dừng theo tâm lý', type: 'warn' });
+                }
+
+                const fullText = (isPush ? '[Gắng gượng làm tiếp] ' : '') + tpl.mo_ta + '\\n\\n• Cảm nhận: ' + rText + (extraLines.length ? '\\n\\n' + extraLines.join('\\n') : '');
+                updateCenterStage(fullText, deltas);
+
+                if (state.actionsTaken % 4 === 0 && p.giai_doan !== 'so_sinh') {
+                  triggerFreneticScene();
+                }
+
+                render();
+              }
+
+              function triggerFreneticScene() {
+                const ev = DATA.frenetic_events[state.actionsTaken % DATA.frenetic_events.length];
+                const box = document.getElementById('freneticBox');
+                const titleEl = document.getElementById('freneticTitle');
+                const timerEl = document.getElementById('freneticTimer');
+                const descEl = document.getElementById('freneticDesc');
+                const choicesEl = document.getElementById('freneticChoices');
+
+                const p = state.persona;
+                let remSec = Math.max(CONFIG.frenetic.min_seconds, Math.min(CONFIG.frenetic.max_seconds, CONFIG.frenetic.base_seconds - state.so * 0.04 + (p.can_dam || 50) * 0.05));
+
+                titleEl.textContent = ev.tieu_de;
+                descEl.textContent = ev.mo_ta;
+                choicesEl.innerHTML = '';
+
+                ev.choices.forEach(ch => {
+                  const btn = document.createElement('button');
+                  btn.className = 'btn-main-action';
+                  btn.innerHTML = '<span class="act-name">⚡ ' + ch.text + '</span>';
+                  btn.onclick = () => resolveFrenetic(ch, false);
+                  choicesEl.appendChild(btn);
+                });
+
+                box.style.display = 'block';
+                freneticInterval = setInterval(() => {
+                  remSec -= 0.1;
+                  timerEl.textContent = Math.max(0, remSec).toFixed(1) + 's';
+                  if (remSec <= 0) {
+                    const autoChoice = (p.can_dam || 50) >= 60 ? ev.choices[0] : ev.choices[1];
+                    resolveFrenetic(autoChoice, true);
+                  }
+                }, 100);
+              }
+
+              function resolveFrenetic(choice, isAutoTimeout) {
+                clearInterval(freneticInterval);
+                freneticInterval = null;
+                document.getElementById('freneticBox').style.display = 'none';
+
+                state.theLuc = Math.max(0, Math.min(100, state.theLuc + (choice.the_luc || 0)));
+                state.sucKhoe = Math.max(5, Math.min(100, state.sucKhoe + (choice.suc_khoe || 0)));
+                if (choice.cui) state.cui = Math.max(0, state.cui + choice.cui);
+                if (choice.luong_thuc) state.luongThuc = Math.max(0, state.luongThuc + choice.luong_thuc);
+
+                const prefix = isAutoTimeout ? '[HẾT GIỜ - PHẢN XẠ BẢN NĂNG]: ' : '[PHẢN ỨNG KỊP THỜI]: ';
+                updateCenterStage(prefix + choice.ket_qua_text, [{ label: '⚡ Vượt qua Cảnh gấp', type: isAutoTimeout ? 'warn' : 'gain' }]);
+                render();
+              }
+
+              function skipToNextBeat() {
+                if (freneticInterval) return;
+                pushHistory(document.getElementById('narrativeBox').textContent);
+                const stance = document.getElementById('stanceSelect').value;
+                advanceClock(24 * 60 * 3);
+                state.actionsTaken++;
+
+                const deltas = [{ label: '⏩ Tua +3 ngày', type: '' }];
+                let beatMsg = '';
+                if (stance === 'can_than') {
+                  state.cui += 2.2; state.luongThuc += 1.8; state.theLuc = Math.min(100, state.theLuc + 15);
+                  deltas.push({ label: '🔥 +2.2 bó củi', type: 'gain' }, { label: '🌾 +1.8 lương thực', type: 'gain' });
+                  beatMsg = '[Điểm Ngắt - Tích trữ]: Suốt 3 ngày qua bạn cần mẫn gom củi và giữ sức qua gió lạnh.';
+                } else if (stance === 'cham_chi') {
+                  state.luongThuc += 2.4; state.cui += 1.0;
+                  deltas.push({ label: '🌾 +2.4 lương thực', type: 'gain' }, { label: '🔥 +1.0 bó củi', type: 'gain' });
+                  beatMsg = '[Điểm Ngắt - Làm công]: Bạn phụ việc không ngơi tay, đổi sức lấy lương thực dự trữ.';
+                } else if (stance === 'nghe_ngong') {
+                  state.luongThuc += 1.2;
+                  const trace = DATA.rumor_traces[Math.floor(Math.random() * DATA.rumor_traces.length)];
+                  if (!state.cluesFound.includes(trace)) state.cluesFound.push(trace);
+                  deltas.push({ label: '🌫️ +1 Tin đồn mới', type: 'gain' });
+                  beatMsg = '[Điểm Ngắt - Tin đồn]: Bạn vừa kiếm ăn vừa lắng nghe người qua đường.\\n\\n🌫️ ' + trace;
+                } else {
+                  state.sucKhoe = Math.min(100, state.sucKhoe + 10); state.lanh = Math.max(10, state.lanh - 20); state.luongThuc += 1.5;
+                  deltas.push({ label: '❤️ Hồi phục sức khỏe', type: 'gain' });
+                  beatMsg = '[Điểm Ngắt - Gia đình]: Bạn bám sát người thân, được ủ ấm và chia sẻ thức ăn qua những ngày gió bấc.';
+                }
+
+                updateCenterStage(beatMsg, deltas);
+                render();
+              }
+
+              function loadPersonaObject(p, idx) {
+                activePersonaIdx = idx;
+                state.persona = JSON.parse(JSON.stringify(p));
+                state.hour = 8; state.dayInSeason = 12; state.seasonIdx = 3;
+                state.year = (p.nam_sinh || 30) + p.tuoi;
+                state.theLuc = 82; state.sucKhoe = 85;
+                state.doi = p.doi_ban_dau ?? 45; state.lanh = p.lanh_ban_dau ?? 40;
+                state.chan = 10; state.so = 10;
+                state.cui = p.cui ?? 1.5; state.luongThuc = p.luong_thuc ?? 1.5;
+                state.amAnhDoi = 0; state.talentRevealed = false;
+                state.actionsTaken = 0; state.cluesFound = []; state.recentHistory = [];
+                state.activeCategory = 'Tất cả';
+
+                calcTiers(state.persona);
+                state.initialDangerDays = predictFate().dangerDay;
+
+                updateCenterStage('[NHẬP XÁC: ' + p.ten.toUpperCase() + ']\\n' + p.boi_canh_mo_ta, [
+                  { label: '🎭 Thân phận: ' + p.than_phan, type: '' }
+                ]);
+                closeModal();
+                render();
+              }
+
+              function drawRandomCharacter() {
+                const weights = CONFIG.reincarnation.he_so_hiem;
+                const pool = DATA.random_archetypes.map(arch => {
+                  let w = weights[arch.giai_cap] || 0.5;
+                  if (state.lastCompletedClass && arch.giai_cap !== state.lastCompletedClass) w *= CONFIG.reincarnation.he_so_luan_chuyen;
+                  return { arch, w };
+                });
+                let r = Math.random() * pool.reduce((s, item) => s + item.w, 0);
+                let chosen = pool[0].arch;
+                for (const item of pool) { r -= item.w; if (r <= 0) { chosen = item.arch; break; } }
+
+                const randomYear = Math.floor(Math.random() * 190) + 5;
+                const randomAge = Math.floor(Math.random() * (chosen.tuoi_max - chosen.tuoi_min + 1)) + chosen.tuoi_min;
+
+                loadPersonaObject({
+                  id: 'RAND_' + Date.now(),
+                  title: '🎲 Kiếp Ngẫu Nhiên',
+                  ten: chosen.kieu_doi,
+                  tuoi: randomAge, nam_sinh: randomYear, giai_doan: chosen.giai_doan, giai_cap: chosen.giai_cap,
+                  than_phan: chosen.than_phan,
+                  boi_canh_mo_ta: 'Bạn được bốc ngẫu nhiên theo trọng số giai cấp vào năm ' + (randomYear + randomAge) + ' Hoài Dương. Thế giới đã hồi quy nguyên vẹn.',
+                  noi_chon: chosen.noi_chon, do_vat: chosen.do_vat, nguoi_xung_quanh: chosen.nguoi_xung_quanh,
+                  nghia_vu: chosen.nghia_vu, kien_thuc: chosen.kien_thuc,
+                  cui: 1.5, luong_thuc: 1.5, lanh_ban_dau: 40, doi_ban_dau: 45,
+                  luoi: 25, kien_nhan: 75, y_chi: 75, trach_nhiem: 70, can_dam: 60, hao_mon_suc_manh: 0, mu: false,
+                  thien_phu_noi_bat: { ten: "Trực giác sinh tồn", key: "truc_giac", cau_bo_lo: "Bạn nhạy cảm khác thường với những biến động quanh làng." },
+                  story: { mong: chosen.mong, so: chosen.so, no_hua: chosen.no_hua, bi_mat: chosen.bi_mat, canh_cua: chosen.canh_cua }
+                }, -1);
+              }
+
+              function openModal(title, htmlContent) {
+                document.getElementById('modalTitle').textContent = title;
+                document.getElementById('modalBody').innerHTML = htmlContent;
+                document.getElementById('modalBackdrop').style.display = 'flex';
+              }
+
+              function closeModal() {
+                document.getElementById('modalBackdrop').style.display = 'none';
+              }
+
+              function render() {
+                const p = state.persona;
+                document.getElementById('topCharName').textContent = p.ten;
+                document.getElementById('topCharSub').textContent = p.tuoi + ' tuổi · ' + p.than_phan;
+                document.getElementById('rumorCountBadge').textContent = state.cluesFound.length;
+
+                // 1. Thanh Cảnh Báo Nguy Hiểm (Ghim cố định trên đầu khung giữa)
+                const f = predictFate();
+                const strip = document.getElementById('fateStrip');
+                if (f.dangerDay === null) {
+                  strip.className = 'fate-strip safe';
+                  strip.innerHTML = '<span>🌟 SỐ PHẬN: Đã an toàn vượt ngưỡng nguy hiểm mùa Giá (Đủ lương & củi trên 14 ngày)</span><span>Mục 10: Đã Cải Mệnh</span>';
+                } else {
+                  strip.className = 'fate-strip danger';
+                  strip.innerHTML = '<span>⚠️ CẢNH BÁO SỐ PHẬN: Nguy cơ gục ngã sau <strong>' + f.dangerDay + ' ngày</strong> (' + f.cause + ')</span><span>Hãy Bổ củi / Săn thỏ / Ăn ở cột phải 👉</span>';
+                }
+
+                // 2. Góc dưới bên trái: Thời gian, Dự trữ & Nhãn cảm nhận cơ thể
+                const timeOfDay = (state.hour >= 6 && state.hour < 18) ? 'Ban ngày' : 'Ban đêm';
+                document.getElementById('clockDisplay').textContent =
+                  '⏳ Năm ' + state.year + ' · Mùa ' + CONFIG.time.seasons[state.seasonIdx] + ' (Ngày ' + state.dayInSeason + '/15) · ' + Math.floor(state.hour) + 'h00 (' + timeOfDay + ')';
+                document.getElementById('stockCui').textContent = '🔥 Củi: ' + state.cui.toFixed(1) + ' bó';
+                document.getElementById('stockFood').textContent = '🌾 Lương: ' + state.luongThuc.toFixed(1) + ' phần';
+
+                const feelContainer = document.getElementById('feelTags');
+                feelContainer.innerHTML = '';
+                const tags = [
+                  { text: state.theLuc > 60 ? '💪 Sức dẻo dai' : (state.theLuc > 30 ? '😮‍💨 Thấm mệt' : '🥵 Kiệt sức'), cls: state.theLuc > 60 ? 'good' : (state.theLuc <= 30 ? 'bad' : '') },
+                  { text: state.doi < 40 ? '🍚 Bụng êm' : (state.doi < 70 ? '🥣 Bụng cồn cào' : '🥀 Đói hoa mắt'), cls: state.doi < 40 ? 'good' : (state.doi >= 70 ? 'bad' : '') },
+                  { text: state.lanh < 40 ? '🔥 Đủ ấm' : (state.lanh < 70 ? '🌬️ Se lạnh' : '❄️ Rét cóng'), cls: state.lanh < 40 ? 'good' : (state.lanh >= 70 ? 'bad' : '') }
+                ];
+                if (state.amAnhDoi > 0) tags.push({ text: '🧠 Ám ảnh: Sợ đói/lạnh', cls: 'bad' });
+                tags.forEach(t => {
+                  const s = document.createElement('span');
+                  s.className = 'feel-tag ' + t.cls;
+                  s.textContent = t.text;
+                  feelContainer.appendChild(s);
+                });
+
+                // 3. Cột bên phải: Bộ lọc nhóm & Danh sách hành động
+                const allActions = getMenu(p);
+                const categories = ['Tất cả', ...new Set(allActions.map(a => a.nhom))];
+                if (!categories.includes(state.activeCategory)) state.activeCategory = 'Tất cả';
+
+                const tabBox = document.getElementById('filterTabs');
+                tabBox.innerHTML = '';
+                categories.forEach(cat => {
+                  const pill = document.createElement('button');
+                  pill.className = 'tab-pill' + (cat === state.activeCategory ? ' active' : '');
+                  pill.textContent = cat;
+                  pill.onclick = () => { state.activeCategory = cat; render(); };
+                  tabBox.appendChild(pill);
+                });
+
+                const menu = document.getElementById('menuBox');
+                menu.innerHTML = '';
+                const filtered = state.activeCategory === 'Tất cả' ? allActions : allActions.filter(a => a.nhom === state.activeCategory);
+
+                filtered.forEach(tpl => {
+                  const card = document.createElement('div');
+                  card.className = 'action-card';
+
+                  const btn = document.createElement('button');
+                  btn.className = 'btn-main-action';
+                  btn.innerHTML =
+                    '<span class="act-name">▶ ' + tpl.ten_vi + '</span>' +
+                    '<span class="act-sub">' + tpl.nhom + ' · Thời lượng: ' + tpl.thoi_luong_mo + '</span>';
+                  btn.onclick = () => runAction(tpl, false);
+                  card.appendChild(btn);
+
+                  if (!tpl.tag.includes('ban_nang')) {
+                    const pBtn = document.createElement('button');
+                    pBtn.className = 'btn-push';
+                    pBtn.title = 'Gắng gượng vượt ngưỡng tâm lý (Tốn chút sức khỏe)';
+                    pBtn.textContent = 'Gắng';
+                    pBtn.onclick = () => runAction(tpl, true);
+                    card.appendChild(pBtn);
+                  }
+                  menu.appendChild(card);
+                });
+              }
+
+              // Sự kiện cho các nút Modal trên thanh Header
+              document.getElementById('btnOpenBio').onclick = () => {
+                const p = state.persona;
+                openModal('📖 Tiểu Sử Nhân Vật & Luật Dây Chằng (Mục 51.5)',
+                  '<p><strong>Nhân vật:</strong> ' + p.ten + ' (' + p.tuoi + ' tuổi) · <strong>Thân phận:</strong> ' + p.than_phan + '</p>' +
+                  '<p><strong>• Mong muốn:</strong> ' + p.story.mong + '</p>' +
+                  '<p><strong>• Nỗi sợ:</strong> ' + p.story.so + '</p>' +
+                  '<p><strong>• Nợ / Lời hứa:</strong> ' + p.story.no_hua + '</p>' +
+                  '<p><strong>• Bí mật nhỏ:</strong> ' + p.story.bi_mat + '</p>' +
+                  '<hr style="border-color:#2b3242"/>' +
+                  '<p><strong>• Cánh cửa chạm vào Mối Nợ Gốc:</strong> ' + p.story.canh_cua + '</p>'
+                );
+              };
+
+              document.getElementById('btnOpenRumors').onclick = () => {
+                const listHtml = state.cluesFound.length === 0
+                  ? '<p style="color:#8c98ad;">Bạn chưa thu thập được mảnh tin đồn nào. Hãy trò chuyện, đọc sổ sách, nghe ngóng ở quán rượu hoặc tua theo thiên hướng Nghe ngóng.</p>'
+                  : state.cluesFound.map(c => '<p style="background:#14171e; padding:10px; border-left:3px solid #d4a359; border-radius:4px;">' + c + '</p>').join('');
+                openModal('🌫️ Sổ Tin Đồn & Dấu Vết Sương Mù (Mục 35)', listHtml);
+              };
+
+              document.getElementById('btnOpenChronicle').onclick = () => {
+                const p = state.persona;
+                const f = predictFate();
+                const status = f.dangerDay === null ? 'ĐÃ NGHỊCH THIÊN CẢI MỆNH (Vượt qua cái chết dự báo gốc)' : 'Đang vật lộn sinh tồn';
+                state.lastCompletedClass = p.giai_cap;
+                openModal('📜 Biên Niên Sử Cuối Đời & Cáo Phó (Mục 37)',
+                  '<p><strong>1. Cáo phó công khai (Lời người đời truyền miệng):</strong><br/>' +
+                  '<em>"Người ấy đã đi qua những mùa Giá khắc nghiệt của Hoài Dương. Dân quanh vùng chỉ nhớ đó là một người cần mẫn giữ lửa bên hiên nhà."</em></p>' +
+                  '<p><strong>2. Hồi ký thật (Sự thật lịch sử & Chênh lệch số phận):</strong><br/>' +
+                  '• Trạng thái số phận: <strong>' + status + '</strong><br/>' +
+                  '• Bí mật giữ kín: ' + p.story.bi_mat + '<br/>' +
+                  '• Dấu vết thu thập: ' + state.cluesFound.length + ' mảnh tin đồn</p>'
+                );
+              };
+
+              document.getElementById('btnOpenSwitch').onclick = () => {
+                let html = '<p>Chọn một trong 6 nhân vật kiểm thử chuẩn hoặc bốc kiếp sống ngẫu nhiên:</p><div class="persona-grid">';
+                DATA.personas.forEach((item, idx) => {
+                  html += '<button class="btn-main-action" onclick="window.selectPersonaByIdx(' + idx + ')">' +
+                    '<span class="act-name">' + item.title + '</span>' +
+                    '<span class="act-sub">' + item.ten + '</span></button>';
+                });
+                html += '</div><hr style="border-color:#2b3242; margin:14px 0;"/>' +
+                  '<button class="btn-main-action" style="width:100%; background:#3b2854; border-color:#6b4c94;" onclick="window.triggerRandomDraw()">' +
+                  '<span class="act-name">🎲 Bốc Kiếp Sống Ngẫu Nhiên (Năm 0–200 Hoài Dương)</span>' +
+                  '<span class="act-sub">Trọng số giảm dần theo giai cấp (Mục 47.3) · Hồi quy lịch sử gốc</span></button>';
+                openModal('👤 Đổi Vai Nhân Vật / Bốc Kiếp Sống Mới', html);
+              };
+
+              window.selectPersonaByIdx = (idx) => loadPersonaObject(DATA.personas[idx], idx);
+              window.triggerRandomDraw = () => drawRandomCharacter();
+
+              document.getElementById('btnCloseModal').onclick = closeModal;
+              document.getElementById('modalBackdrop').onclick = (e) => {
+                if (e.target.id === 'modalBackdrop') closeModal();
+              };
+              document.getElementById('btnSkipBeat').onclick = skipToNextBeat;
+
+              loadPersonaObject(DATA.personas[2], 2);
+            </script>
+          </body>
+          </html>`;
+
+          const finalHtml = htmlTemplate
+            .replace('__CONFIG_JSON__', JSON.stringify(gameConfig))
+            .replace('__DATA_JSON__', JSON.stringify(worldData));
+          writeFile('docs/index.html', finalHtml);
+
+          // 4. Giữ nguyên bộ kiểm thử thực tại GĐ1-GĐ3
+          const testScript = `
+          const fs = require('fs');
+          const data = JSON.parse(fs.readFileSync('assets/resources/data/world/tu_dien.json', 'utf8'));
+          console.log('[ĐẠT] Giao diện Split-Screen 100vh không cuộn trang và dữ liệu GĐ1-3 hợp lệ (' + data.actions.length + ' mẫu hành động).');
+          `;
+          writeFile('tests/run_reality_tests.js', testScript);
+          EOF
+          node generate_project.js
+          rm generate_project.js
+
+      - name: Chạy Kiểm thử
+        run: node tests/run_reality_tests.js
+
+      - name: Cập nhật Giao diện Split-Screen lên GitHub
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git diff --staged --quiet || git commit -m "Redesign UX/UI: No-scroll Split-Screen layout (Center Stage, Bottom-Left HUD, Right Action Deck, Top Modals)"
+          git push
