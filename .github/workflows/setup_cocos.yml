@@ -1,4 +1,4 @@
-name: Auto Setup Cocos Creator & Web Preview (Stage 2 & 3)
+name: Auto Setup Cocos Creator & Web Preview (No-Scroll Split UI)
 
 on:
   push:
@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Nâng cấp lên Giai đoạn 2 & 3 (Sinh tồn, Dự báo số phận, Cảnh gấp, Tua tuổi thơ & Cốt truyện Hoài Dương)
+      - name: Cập nhật Giao diện Split-Screen (Không cuộn trang) & Đồng bộ Cocos Creator
         run: |
           cat << 'EOF' > generate_project.js
           const fs = require('fs');
@@ -39,7 +39,7 @@ jobs:
             }
           }
 
-          // 1. Cấu hình công thức GĐ1 + GĐ2 + GĐ3 (Mục 10, 11, 20, 29, 36.1, 39, 43, 47.3)
+          // 1. Cấu hình công thức GĐ1 - GĐ3
           const gameConfig = {
             time: {
               tick_minutes: 1,
@@ -100,25 +100,25 @@ jobs:
           };
           writeFile('assets/resources/data/config/game_config.json', gameConfig, true);
 
-          // 2. Dữ liệu Thế giới Hoài Dương, 8 nguồn hành động, Cảnh gấp & Kiểu đời (Mục 20, 34, 49-55)
+          // 2. Dữ liệu Thế giới Hoài Dương
           const worldData = {
             actions: [
               {
-                mau: "khoc_goi_me", ten_vi: "Khóc to báo hiệu", nhom: "Bản năng & Tín hiệu", thoi_luong_mo: "chừng một chốc",
+                mau: "khoc_goi_me", ten_vi: "Khóc to báo hiệu", nhom: "Sinh tồn", thoi_luong_mo: "một chốc",
                 so_nhip_chuan: 2, nguon_goi_y: ["ban_than:so_sinh"], giai_doan: ["so_sinh"],
                 nang_luc_yeu_cau: { noi: 0 }, tag: ["ban_nang", "tin_hieu"],
                 chi_phi: { the_luc: -1, chan: 0, doi: 1 }, ket_qua: { tin_hieu_cuu: 1, lanh: -12 },
                 mo_ta: "Cổ họng bạn bật ra tiếng khóc khàn đặc, khiến mẹ vội vã lấy thêm ổ rơm ủ ấm cho bạn."
               },
               {
-                mau: "bu_me", ten_vi: "Bú mẹ", nhom: "Sinh tồn", thoi_luong_mo: "chừng một chốc",
+                mau: "bu_me", ten_vi: "Bú mẹ", nhom: "Sinh tồn", thoi_luong_mo: "một chốc",
                 so_nhip_chuan: 3, nguon_goi_y: ["nguoi_xung_quanh:me"], giai_doan: ["so_sinh"],
                 nang_luc_yeu_cau: {}, tag: ["sinh_ton", "thuc_pham"],
                 chi_phi: { the_luc: 2, chan: -4, doi: -15 }, ket_qua: { lanh: -8, suc_khoe: 2 },
                 mo_ta: "Hơi ấm từ lòng mẹ và dòng sữa nóng làm cơn đói lạnh dịu xuống."
               },
               {
-                mau: "an_luong_kho", ten_vi: "Nấu ăn từ lương thực dự trữ", nhom: "Sinh tồn", thoi_luong_mo: "chừng một chốc",
+                mau: "an_luong_kho", ten_vi: "Nấu ăn từ lương dự trữ (-1 Lương)", nhom: "Sinh tồn", thoi_luong_mo: "một chốc",
                 so_nhip_chuan: 3, nguon_goi_y: ["do_vat:luong_thuc"],
                 giai_doan: ["au_nhi", "thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
                 nang_luc_yeu_cau: {}, vat_pham_tieu_hao: { luong_thuc: 1 }, tag: ["sinh_ton", "thuc_pham"],
@@ -126,7 +126,7 @@ jobs:
                 mo_ta: "Bạn nấu một bát cháo nóng từ phần lương thực dự trữ, hơi ấm lan khắp bụng."
               },
               {
-                mau: "dot_lua_suoi", ten_vi: "Nhóm bếp củi sưởi ấm", nhom: "Sinh tồn", thoi_luong_mo: "chừng nửa buổi",
+                mau: "dot_lua_suoi", ten_vi: "Nhóm bếp sưởi ấm (-1 Củi)", nhom: "Sinh tồn", thoi_luong_mo: "nửa buổi",
                 so_nhip_chuan: 4, nguon_goi_y: ["do_vat:cui", "thoi_diem:lanh"],
                 giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
                 nang_luc_yeu_cau: { tay_kheo: 0 }, vat_pham_tieu_hao: { cui: 1 }, tag: ["sinh_ton"],
@@ -134,15 +134,15 @@ jobs:
                 mo_ta: "Ngọn lửa bập bùng trong bếp xua tan cái lạnh cắt da của gió mùa Giá."
               },
               {
-                mau: "nhat_cui_nho", ten_vi: "Nhặt cành củi khô quanh rào", nhom: "Mưu sinh & Tích trữ", thoi_luong_mo: "chừng nửa buổi",
-                so_nhip_chuan: 5, nguon_goi_y: ["noi_chon:lang_ngheo", "noi_chon:nha"],
-                giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
-                nang_luc_yeu_cau: { van_dong: 1 }, can_anh_sang: true, tag: ["muu_sinh", "tich_tru"],
-                chi_phi: { the_luc: -2.0, chan: 1.5, doi: 1.5 }, ket_qua: { cui: 0.35 },
-                mo_ta: "Bạn cúi nhặt từng nhánh củi khô rơi vãi quanh hàng rào trước khi sương xuống."
+                mau: "nam_nghi", ten_vi: "Nằm nghỉ lấy sức", nhom: "Sinh tồn", thoi_luong_mo: "một chốc",
+                so_nhip_chuan: 5, nguon_goi_y: ["ban_than:moi_trang_thai"],
+                giai_doan: ["so_sinh", "au_nhi", "thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
+                nang_luc_yeu_cau: {}, tag: ["ban_nang", "nghi_ngoi"],
+                chi_phi: { the_luc: 6.5, chan: -1.5, doi: 0.8 }, ket_qua: { suc_khoe: 0.5 },
+                mo_ta: "Bạn nằm co mình trên phản gỗ, hít thở sâu để cơ thể phục hồi thể lực."
               },
               {
-                mau: "bo_cui", ten_vi: "Bổ củi dự trữ mùa đông", nhom: "Mưu sinh & Tích trữ", thoi_luong_mo: "chừng nửa buổi",
+                mau: "bo_cui", ten_vi: "Bổ củi dự trữ mùa đông", nhom: "Mưu sinh", thoi_luong_mo: "nửa buổi",
                 so_nhip_chuan: 6, nguon_goi_y: ["do_vat:riu"],
                 giai_doan: ["thieu_nien", "truong_thanh", "trung_nien", "gia"],
                 nang_luc_yeu_cau: { suc_manh: 1, tay_kheo: 1 }, vat_pham_yeu_cau: ["riu"], can_anh_sang: true,
@@ -151,7 +151,7 @@ jobs:
                 mo_ta: "Lưỡi rìu bổ xuống thớ gỗ khô vang lên tiếng chát chúa, từng thanh củi xếp cao dần bên hiên."
               },
               {
-                mau: "san_tho_bia_rung", ten_vi: "Đi săn thỏ ở bìa Rừng Đen", nhom: "Mưu sinh & Tích trữ", thoi_luong_mo: "nửa ngày (cần về trước tối)",
+                mau: "san_tho_bia_rung", ten_vi: "Săn thỏ ở bìa Rừng Đen", nhom: "Mưu sinh", thoi_luong_mo: "nửa ngày",
                 so_nhip_chuan: 8, nguon_goi_y: ["noi_chon:bia_rung", "noi_chon:lang_ngheo"],
                 giai_doan: ["thieu_nien", "truong_thanh", "trung_nien"],
                 nang_luc_yeu_cau: { van_dong: 1, thi_giac: 1 }, can_anh_sang: true, gio_toi_thieu_con_lai: 4,
@@ -160,15 +160,15 @@ jobs:
                 mo_ta: "Bạn lần theo dấu chân trên cỏ ướt ra bìa rừng, đặt bẫy bắt thỏ hoang mang về dự trữ."
               },
               {
-                mau: "xin_an_hang_xom", ten_vi: "Xin ăn nhà hàng xóm / Bát cháo công", nhom: "Xã hội & Sinh tồn", thoi_luong_mo: "chừng một chốc",
-                so_nhip_chuan: 4, nguon_goi_y: ["noi_chon:lang_ngheo", "thoi_diem:ngay_bat_chao"],
-                giai_doan: ["au_nhi", "thieu_nhi", "thieu_nien", "gia"],
-                nang_luc_yeu_cau: { van_dong: 1, noi: 1 }, tag: ["xa_hoi", "thuc_pham", "sinh_ton"],
-                chi_phi: { the_luc: -1.0, chan: 1.8, doi: -9.0 }, ket_qua: { luong_thuc: 0.25 },
-                mo_ta: "Bạn đứng nép bên bậc cửa hoặc trước hiên phát cháo của phái Nhất Hỏa, nhận một vắt cơm nguội."
+                mau: "nhat_cui_nho", ten_vi: "Nhặt cành củi khô quanh rào", nhom: "Mưu sinh", thoi_luong_mo: "nửa buổi",
+                so_nhip_chuan: 5, nguon_goi_y: ["noi_chon:lang_ngheo", "noi_chon:nha"],
+                giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
+                nang_luc_yeu_cau: { van_dong: 1 }, can_anh_sang: true, tag: ["muu_sinh", "tich_tru"],
+                chi_phi: { the_luc: -2.0, chan: 1.5, doi: 1.5 }, ket_qua: { cui: 0.35 },
+                mo_ta: "Bạn cúi nhặt từng nhánh củi khô rơi vãi quanh hàng rào trước khi sương xuống."
               },
               {
-                mau: "gat_lua_lao_dich", ten_vi: "[Nghĩa vụ] Gặt lúa lao dịch cho Chủ Ấp", nhom: "Nghĩa vụ & Giai cấp", thoi_luong_mo: "khá lâu",
+                mau: "gat_lua_lao_dich", ten_vi: "[Nghĩa vụ] Gặt lúa lao dịch", nhom: "Nghĩa vụ", thoi_luong_mo: "khá lâu",
                 so_nhip_chuan: 7, nguon_goi_y: ["nghia_vu:lao_dich"],
                 giai_doan: ["thieu_nien", "truong_thanh", "trung_nien"],
                 nang_luc_yeu_cau: { suc_manh: 2, van_dong: 2 }, can_anh_sang: true, tag: ["muu_sinh", "nghia_vu"],
@@ -176,7 +176,15 @@ jobs:
                 mo_ta: "Dưới nắng đồng Tam Giang, lưng bạn còng xuống cắt từng lượm lúa nộp thuế Khế, đổi lại được mót vài bông lúa rơi."
               },
               {
-                mau: "ke_chuyen_cho_chau", ten_vi: "Kể chuyện xưa & Truyền nghề cho cháu", nhom: "Vai trò người già (Mục 36.2)", thoi_luong_mo: "chừng một chốc",
+                mau: "xin_an_hang_xom", ten_vi: "Xin ăn / Nhận cháo công Nhất Hỏa", nhom: "Xã hội", thoi_luong_mo: "một chốc",
+                so_nhip_chuan: 4, nguon_goi_y: ["noi_chon:lang_ngheo", "thoi_diem:ngay_bat_chao"],
+                giai_doan: ["au_nhi", "thieu_nhi", "thieu_nien", "gia"],
+                nang_luc_yeu_cau: { van_dong: 1, noi: 1 }, tag: ["xa_hoi", "thuc_pham", "sinh_ton"],
+                chi_phi: { the_luc: -1.0, chan: 1.8, doi: -9.0 }, ket_qua: { luong_thuc: 0.25 },
+                mo_ta: "Bạn đứng nép bên bậc cửa hoặc trước hiên phát cháo của phái Nhất Hỏa, nhận một vắt cơm nguội."
+              },
+              {
+                mau: "ke_chuyen_cho_chau", ten_vi: "Kể chuyện xưa & Truyền nghề", nhom: "Xã hội", thoi_luong_mo: "một chốc",
                 so_nhip_chuan: 4, nguon_goi_y: ["nguoi_xung_quanh:con_chau"],
                 giai_doan: ["trung_nien", "gia"],
                 nang_luc_yeu_cau: { noi: 1, tri_nho: 1 }, tag: ["xa_hoi", "truyen_mieng", "thuc_pham"],
@@ -185,7 +193,7 @@ jobs:
                 mo_ta: "Bạn ngồi sưởi bên bếp than, kể chuyện Đại Đói và truyền lại kinh nghiệm canh tác, con cháu biếu lại bát súp nóng."
               },
               {
-                mau: "doc_so_sach", ten_vi: "Đọc sổ sách & Đối chiếu lãi chìm", nhom: "Tri thức & Đòn bẩy", thoi_luong_mo: "chừng nửa buổi",
+                mau: "doc_so_sach", ten_vi: "Đọc sổ sách & Đối chiếu lãi chìm", nhom: "Xã hội", thoi_luong_mo: "nửa buổi",
                 so_nhip_chuan: 5, nguon_goi_y: ["do_vat:sach"],
                 giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
                 nang_luc_yeu_cau: { thi_giac: 2 }, kien_thuc_yeu_cau: ["biet_chu"], vat_pham_yeu_cau: ["sach"],
@@ -194,21 +202,13 @@ jobs:
                 mo_ta: "Bạn lần từng dòng chữ mực tàu trên cuốn sổ, phát hiện khoản chênh lệch kỳ lạ của thuế Khế và được trả thù lao giữ sổ."
               },
               {
-                mau: "nghe_ngong_quan_ruou", ten_vi: "Nghe ngóng lời đồn & Hát rong ở quán", nhom: "Xã hội & Sương mù (Mục 35)", thoi_luong_mo: "chừng nửa buổi",
+                mau: "nghe_ngong_quan_ruou", ten_vi: "Nghe ngóng lời đồn ở Quán Bốn Ngả", nhom: "Xã hội", thoi_luong_mo: "nửa buổi",
                 so_nhip_chuan: 5, nguon_goi_y: ["noi_chon:quan_ruou"],
                 giai_doan: ["thieu_nien", "truong_thanh", "trung_nien", "gia"],
                 nang_luc_yeu_cau: { thinh_giac: 2 }, tag: ["xa_hoi", "thong_tin", "thuc_pham"],
                 thien_phu_lien_quan: "nhay_ben_xa_hoi",
                 chi_phi: { the_luc: -0.6, chan: -1.0, doi: -5.0 }, ket_qua: { luong_thuc: 0.3, manh_moi: 1 },
                 mo_ta: "Giữa tiếng bát đĩa lạch cạch, bạn hát một khúc Bài Ca Hai Vợ được khách thưởng bánh và nghe lỏm tin tức từ Bạch Lĩnh."
-              },
-              {
-                mau: "nam_nghi", ten_vi: "Nằm nghỉ lấy sức (Bản năng)", nhom: "Bản năng & Sinh tồn", thoi_luong_mo: "chừng một chốc",
-                so_nhip_chuan: 5, nguon_goi_y: ["ban_than:moi_trang_thai"],
-                giai_doan: ["so_sinh", "au_nhi", "thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
-                nang_luc_yeu_cau: {}, tag: ["ban_nang", "nghi_ngoi"],
-                chi_phi: { the_luc: 6.5, chan: -1.5, doi: 0.8 }, ket_qua: { suc_khoe: 0.5 },
-                mo_ta: "Bạn nằm co mình trên phản gỗ, hít thở sâu để cơ thể phục hồi thể lực."
               }
             ],
             frenetic_events: [
@@ -228,940 +228,4 @@ jobs:
                 mo_ta: "Một toán người thu thuế đeo huy hiệu ba bên (Vương - Hỏa Đường - Đoàn Thuyền) chặn đầu ngõ, quát hỏi số thóc và củi trong nhà bạn!",
                 choices: [
                   { id: "kheo_leo", text: "Cúi đầu nói khéo và viện cớ Ngày Bát Cháo", tag: "tin_nguoi", the_luc: -4, suc_khoe: 0, ket_qua_text: "Nhờ lời lẽ khẩn khoản đúng lễ, gã thu thuế chỉ hất hàm bỏ qua mà không tịch thu phần lương dự trữ.", cui: 0 },
-                  { id: "giau_nhanh", text: "Lén đẩy bao lương vào gầm bếp củi", tag: "can_dam", the_luc: -8, suc_khoe: 0, ket_qua_text: "Tay bạn nhanh nhẹn phủ tro bếp lên túi lương thực ngay trước khi chúng bước vào sân (+0.5 lương thực giữ lại).", luong_thuc: 0.5 },
-                  { id: "run_ray", text: "Run rẩy nộp đại một bó củi", tag: "bo_chay", the_luc: -3, suc_khoe: 0, ket_qua_text: "Bạn luống cuống đưa nộp một bó củi khô để chúng đi khỏi.", cui: -1 }
-                ]
-              }
-            ],
-            rumor_traces: [
-              "Dấu vết [D1]: Người làng thì thầm rằng phiếu thuế năm nay có đóng thêm con dấu ba bên lạ lẫm của Đoàn Thuyền và Hỏa Đường.",
-              "Dấu vết [D2]: Một người hát rong đi ngang qua ngâm 'Bài Ca Hai Vợ', kể chuyện vị lãnh chúa năm xưa từng gạt người vợ vùng núi Ô Khuyết.",
-              "Dấu vết [D3]: Bác thợ rèn đầu xóm vừa sửa một thanh đoản đao cũ có khắc ba chấm nhỏ trên chuôi mà không chịu nói của ai.",
-              "Dấu vết [D6]: Phu bốc vác ở Bến Sậy đồn rằng Kho Thiên Lộc ngoài mặt báo đầy ắp nhưng bên trong nhiều gian đã rỗng tuếch.",
-              "Dấu vết [D8]: Chợ phiên xuất hiện nhiều người Ô Khuyết xuống bán lông cừu, nói rằng vùng mỏ Bạch Lĩnh đang có lính thăm dò."
-            ],
-            personas: [
-              {
-                id: "P1", title: "1. Sơ sinh (1 tuổi)", ten: "Đứa con nông nô mùa gầy (K001)", tuoi: 1, nam_sinh: 160, giai_doan: "so_sinh",
-                giai_cap: "nong_no_ruong_dat", than_phan: "Dân Gắn Ruộng · Làng Sậy Đỏ (Tam Giang)",
-                boi_canh_mo_ta: "Sinh năm 160 giữa Mùa Gầy. Gió lạnh lùa qua vách trấu, bạn đang lên cơn sốt nhẹ. Phải phát tín hiệu để mẹ và bà đỡ Mụ Bảy Ve ủ ấm, cho bú kịp thời.",
-                noi_chon: ["nha", "lang_ngheo"], do_vat: ["riu"], nguoi_xung_quanh: ["me"], nghia_vu: [], kien_thuc: [],
-                cui: 1.0, luong_thuc: 1.5, lanh_ban_dau: 55, doi_ban_dau: 50,
-                luoi: 30, kien_nhan: 50, y_chi: 50, trach_nhiem: 20, can_dam: 30, hao_mon_suc_manh: 0, mu: false,
-                thien_phu_noi_bat: { ten: "Trí nhớ bẩm sinh", key: "tri_nho", cau_bo_lo: "Dù còn đỏ hỏn, bạn đã nhớ in giọng nói và nhịp bước chân của từng người quanh nôi." },
-                story: {
-                  mong: "Sống qua cơn sốt mùa Giá và có một bữa no",
-                  so: "Bị bỏ lại trong đêm lạnh hoặc bị bán khỏi làng",
-                  no_hua: "Mẹ nợ chủ ruộng nửa vụ lúa khi sinh bạn",
-                  bi_mat: "Trong tã lót có giấu một nắm hạt giống lúa chịu hạn",
-                  canh_cua: "D1 (Phiếu thuế Khế) & Bà đỡ Mụ Bảy Ve (A44)"
-                }
-              },
-              {
-                id: "P2", title: "2. Mồ côi (8 tuổi)", ten: "Bé Sậy mồ côi (A60)", tuoi: 8, nam_sinh: 183, giai_doan: "thieu_nhi",
-                giai_cap: "ke_ngoai_le", than_phan: "Kẻ Không Tên · Bến Sậy (Hạ Giang)",
-                boi_canh_mo_ta: "Mùa Giá đang tới gần, dự báo mặc định bạn sẽ kiệt sức vì đói lạnh sau vài ngày nếu không tích cực nhặt củi khô và xin cháo công.",
-                noi_chon: ["lang_ngheo", "nha"], do_vat: ["riu", "cui", "luong_thuc"], nguoi_xung_quanh: [], nghia_vu: [], kien_thuc: [],
-                cui: 1.0, luong_thuc: 1.0, lanh_ban_dau: 45, doi_ban_dau: 55,
-                luoi: 20, kien_nhan: 75, y_chi: 80, trach_nhiem: 60, can_dam: 55, hao_mon_suc_manh: 0, mu: false,
-                thien_phu_noi_bat: { ten: "Giác quan sắc bén", key: "giac_quan_sac", cau_bo_lo: "Đôi mắt và tai bạn nhạy một cách lạ lùng, thoáng nhìn đã thấy cành củi khô hay vật lạ dưới bùn sông." },
-                story: {
-                  mong: "Có một chỗ ngủ ấm qua mùa Giá ở Quán Bốn Ngả",
-                  so: "Bị đuổi khỏi bến sông khi sương muối xuống",
-                  no_hua: "Nợ bà chủ quán Ngô Hạnh (A40) và Lão Câm Sông (A47) nhiều bữa cơm thừa",
-                  bi_mat: "Nhặt được chiếc chìa khóa đồng kỳ lạ dưới bùn sông cạn (Chìa Thiên Lộc V1)",
-                  canh_cua: "V1 (Chìa Thiên Lộc) & Năm Đáo Hạn 190"
-                }
-              },
-              {
-                id: "P3", title: "3. Nông nô (17 tuổi - Test Mục 10)", ten: "Khổng Thạch (A13 - Test Cải Mệnh)", tuoi: 17, nam_sinh: 28, giai_doan: "thieu_nien",
-                giai_cap: "nong_no_ruong_dat", than_phan: "Dân Gắn Ruộng · Làng Sậy Đỏ (Tam Giang)",
-                boi_canh_mo_ta: "[TEST CASE CHUẨN MỤC 10]: Nhà rách, mùa Giá sắp ập tới, củi và lương thực ban đầu rất ít (Số phận gốc: Chết đói/lạnh). Hãy bổ củi và đi săn thỏ bìa rừng để đẩy lùi Ngày Nguy Hiểm!",
-                noi_chon: ["nha", "lang_ngheo", "bia_rung"], do_vat: ["riu", "cui", "luong_thuc"], nguoi_xung_quanh: [], nghia_vu: ["lao_dich"], kien_thuc: [],
-                cui: 1.0, luong_thuc: 1.2, lanh_ban_dau: 45, doi_ban_dau: 50,
-                luoi: 15, kien_nhan: 85, y_chi: 80, trach_nhiem: 75, can_dam: 65, hao_mon_suc_manh: 0, mu: false,
-                thien_phu_noi_bat: { ten: "Thể chất dẻo dai", key: "the_chat", cau_bo_lo: "Bạn vung rìu và vác bó củi nặng mà đám trai tráng cùng trang lứa phải chia làm đôi mới khiêng nổi." },
-                story: {
-                  mong: "Tích đủ 5 bó củi và 4 phần lương thực để sống sót qua mùa Giá và giữ mảnh ruộng",
-                  so: "Đói cóng giữa mùa đông hoặc bị bắt đi lính biên ải",
-                  no_hua: "Nghĩa vụ lao dịch cho Chủ Ấp và lời dặn giữ con dao cũ của cha",
-                  bi_mat: "Cầm con dao cắt lúa có khắc Ba Chấm trên chuôi (Huyết mạch Lâm Vọng A06)",
-                  canh_cua: "V5 (Dao Ba Chấm) & D1 (Thuế Khế Tam Giang)"
-                }
-              },
-              {
-                id: "P4", title: "4. Ông lão (68 tuổi)", ten: "Lão nông Ngô Tam (A14)", tuoi: 68, nam_sinh: 45, giai_doan: "gia",
-                giai_cap: "nong_dan_tu_do", than_phan: "Trưởng làng già · Làng Sậy Đỏ",
-                boi_canh_mo_ta: "Bạn 68 tuổi, khớp lưng đã hao mòn theo công thức f_tuoi (Mục 36.1), không còn gánh vác nặng được nhưng sống nhờ truyền kinh nghiệm và kể chuyện xưa cho con cháu (Mục 36.2).",
-                noi_chon: ["nha", "lang_ngheo"], do_vat: ["cui", "luong_thuc"], nguoi_xung_quanh: ["con_chau"], nghia_vu: [], kien_thuc: [],
-                cui: 2.5, luong_thuc: 2.0, lanh_ban_dau: 35, doi_ban_dau: 40,
-                luoi: 35, kien_nhan: 85, y_chi: 75, trach_nhiem: 85, can_dam: 60, hao_mon_suc_manh: 0.45, mu: false,
-                thien_phu_noi_bat: { ten: "Tài ăn nói & Ký ức sống", key: "tai_an_noi", cau_bo_lo: "Mỗi khi bạn cất giọng kể chuyện cũ bên bếp lửa, cả người lớn lẫn trẻ nhỏ trong xóm đều im phăng phắc lắng nghe." },
-                story: {
-                  mong: "Làng Sậy Đỏ không ai chết đói và truyền lại ký ức cho thế hệ sau",
-                  so: "Nhìn thấy cảnh mộ tập thể lặp lại trước khi nhắm mắt",
-                  no_hua: "Nợ mạng bà đỡ Bà Sáu Mụ (A15) từ lúc mới lọt lòng",
-                  bi_mat: "Từng khai thiếu sản lượng thóc của làng để cứu dân khỏi kỳ tăng thuế Khế năm 95",
-                  canh_cua: "E15 (Mùa Kho Giả) & E18 (Khởi nghĩa Mùa Giá)"
-                }
-              },
-              {
-                id: "P5", title: "5. Con nhà buôn (15 tuổi)", ten: "Điền Cẩm Tú (A53)", tuoi: 15, nam_sinh: 150, giai_doan: "thieu_nien",
-                giai_cap: "thuong_nhan_thi_dan", than_phan: "Kế toán tập sự · Cửa hiệu Hạ Giang",
-                boi_canh_mo_ta: "Bạn 15 tuổi, biết chữ và giỏi tính nhẩm. Nhờ đọc sổ sách và đối chiếu phiếu thuyền, bạn vừa kiếm được lương thực vừa lần ra dấu vết cuốn Sổ Muối bị mất của ông nội.",
-                noi_chon: ["cua_hieu", "quan_ruou", "nha"], do_vat: ["sach", "cui", "luong_thuc"], nguoi_xung_quanh: [], nghia_vu: [], kien_thuc: ["biet_chu"],
-                cui: 3.0, luong_thuc: 2.5, lanh_ban_dau: 20, doi_ban_dau: 30,
-                luoi: 30, kien_nhan: 80, y_chi: 75, trach_nhiem: 75, can_dam: 50, hao_mon_suc_manh: 0, mu: false,
-                thien_phu_noi_bat: { ten: "Thiên phú Tính toán", key: "tinh_toan", cau_bo_lo: "Những con số trên trang sổ tự động xếp hàng trong đầu bạn, nhìn thoáng qua đã thấy ngay chỗ lãi chìm bất thường." },
-                story: {
-                  mong: "Tìm lại cuốn Sổ Muối và gột rửa hàm oan cho ông nội Điền Hứa (A32)",
-                  so: "Bị người của Đoàn Thuyền phát hiện thân phận thật",
-                  no_hua: "Lời thề với cha trước khi bước chân vào làm kế toán cho Đoàn Thuyền",
-                  bi_mat: "Lén chép lại một bản sao các khoản lãi chìm giấu dưới đáy rương",
-                  canh_cua: "V3 (Cuốn Sổ Muối) & E22 (Vụ Án Sổ Muối)"
-                }
-              },
-              {
-                id: "P6", title: "6. Khách mù (30 tuổi)", ten: "Người hát rong mù (K117)", tuoi: 30, nam_sinh: 142, giai_doan: "truong_thanh",
-                giai_cap: "ke_ngoai_le", than_phan: "Kẻ Không Tên · Quán Bốn Ngả (Bến Bắc)",
-                boi_canh_mo_ta: "Đôi mắt bạn mù hoàn toàn (thị giác = 0, bị khóa hành động đọc sách), nhưng thính giác và sự nhạy bén xã hội giúp bạn kiếm sống và thu thập tin đồn khắp quán trọ.",
-                noi_chon: ["quan_ruou", "nha"], do_vat: ["sach", "cui", "luong_thuc"], nguoi_xung_quanh: [], nghia_vu: [], kien_thuc: ["biet_chu"],
-                cui: 2.0, luong_thuc: 2.0, lanh_ban_dau: 30, doi_ban_dau: 35,
-                luoi: 30, kien_nhan: 80, y_chi: 80, trach_nhiem: 60, can_dam: 50, hao_mon_suc_manh: 0, mu: true,
-                thien_phu_noi_bat: { ten: "Nhạy bén xã hội & Thính giác", key: "nhay_ben_xa_hoi", cau_bo_lo: "Chỉ nghe nhịp thở và tiếng đặt chén rượu, bạn đã nhận ra kẻ đối diện đang nói dối điều chính hắn cũng không tin." },
-                story: {
-                  mong: "Nhớ trọn vẹn các khúc ca cổ và có chốn nương thân lúc tuổi già",
-                  so: "Đôi tai mờ đi hoặc quên mất khổ cuối của Bài Ca Hai Vợ",
-                  no_hua: "Nợ cậu bé dẫn đường một nửa số tiền thưởng hát rong mỗi tối",
-                  bi_mat: "Thuộc lòng khổ cuối thất truyền của Bài Ca Hai Vợ nhắc tới Con Dấu Gãy",
-                  canh_cua: "V6 (Bài Ca Hai Vợ) & D2"
-                }
-              }
-            ],
-            random_archetypes: [
-              {
-                kieu_doi: "K002 · Nông nô gắn ruộng Tam Giang", giai_cap: "nong_no_ruong_dat", than_phan: "Dân Gắn Ruộng · Tam Giang",
-                giai_doan: "truong_thanh", tuoi_min: 18, tuoi_max: 32,
-                noi_chon: ["nha", "lang_ngheo", "bia_rung"], do_vat: ["riu", "cui", "luong_thuc"], nguoi_xung_quanh: [], nghia_vu: ["lao_dich"], kien_thuc: [],
-                mong: "Giữ được mảnh ruộng nhỏ cho con và vượt qua kỳ thu thuế Khế", so: "Bị đổi chủ ấp hoặc mất mùa",
-                no_hua: "Thề với vợ không bỏ trốn khỏi làng", bi_mat: "Từng giấu ba đấu thóc dưới nền bếp", canh_cua: "D1 (Phiếu thuế Khế ba bên)"
-              },
-              {
-                kieu_doi: "K074 · Thợ rèn học việc Biên Ngạn", giai_cap: "tho_thu_cong", than_phan: "Hội Phường Rèn · Đồn Biên Ngạn Nam",
-                giai_doan: "thieu_nien", tuoi_min: 14, tuoi_max: 20,
-                noi_chon: ["nha", "lang_ngheo", "quan_ruou"], do_vat: ["riu", "cui", "luong_thuc"], nguoi_xung_quanh: [], nghia_vu: [], kien_thuc: [],
-                mong: "Rèn được thanh đao tốt hơn đao Kinh Hoài", so: "Chiến tranh Bạch Lĩnh nổ ra làm xưởng bị trưng dụng",
-                no_hua: "Nợ thầy rèn dòng họ Khổng ba năm học việc", bi_mat: "Tự rèn một con dao ngoài giờ có khắc dấu riêng", canh_cua: "D3 & V5 (Dao Ba Chấm)"
-              },
-              {
-                kieu_doi: "K050 · Tu sĩ chép sách trẻ Hỏa Đường", giai_cap: "giao_si", than_phan: "Hỏa Đường · Tây Lĩnh",
-                giai_doan: "truong_thanh", tuoi_min: 19, tuoi_max: 30,
-                noi_chon: ["cua_hieu", "nha"], do_vat: ["sach", "cui", "luong_thuc"], nguoi_xung_quanh: [], nghia_vu: [], kien_thuc: ["biet_chu"],
-                mong: "Giữ cho các bản chép cổ sống sót qua những đợt Soi Lửa", so: "Bị thẩm vấn viên Hạng Tông (A39) gọi hỏi",
-                no_hua: "Hứa với thầy Triệu Mặc Thành (A45) giữ kín hốc đá sau thánh đường", bi_mat: "Đã chép riêng một trang Niên Ký", canh_cua: "V4 (Niên Ký Hỏa Đường) & D7"
-              },
-              {
-                kieu_doi: "K100 · Chủ tiệm cầm đồ nhỏ Hạ Giang", giai_cap: "thuong_nhan_thi_dan", than_phan: "Bang Hàng · Bến Sậy (Hạ Giang)",
-                giai_doan: "truong_thanh", tuoi_min: 24, tuoi_max: 42,
-                noi_chon: ["cua_hieu", "quan_ruou", "nha"], do_vat: ["sach", "cui", "luong_thuc"], nguoi_xung_quanh: [], nghia_vu: [], kien_thuc: ["biet_chu"],
-                mong: "Cho con học chữ và tiệm không bị thanh tra thuế gây khó dễ", so: "Món đồ cầm cố kỳ lạ bị kẻ quyền thế đòi lại",
-                no_hua: "Nợ vốn vay từ một thương nhân Cao Lăng", bi_mat: "Giữ một ngăn tủ không bán có nửa con dấu gãy", canh_cua: "V2 (Con Dấu Gãy) & V3 (Sổ Muối)"
-              },
-              {
-                kieu_doi: "K027 · Kiếm Điền trấn biên", giai_cap: "ky_si_quan_nhan", than_phan: "Kiếm Điền · Biên Ngạn",
-                giai_doan: "truong_thanh", tuoi_min: 22, tuoi_max: 38,
-                noi_chon: ["nha", "bia_rung", "quan_ruou"], do_vat: ["riu", "cui", "luong_thuc"], nguoi_xung_quanh: [], nghia_vu: [], kien_thuc: [],
-                mong: "Giữ chốt biên yên ổn để không phải rút kiếm", so: "Ruộng cấp bị thu hồi khi tuổi già sức yếu",
-                no_hua: "Nợ mạng một người dẫn đường Ô Khuyết trong trận bão tuyết", bi_mat: "Giấu một mũi tên lông ưng của bạn cũ bên kia biên giới", canh_cua: "D8 & D9 (Mỏ sắt Bạch Lĩnh)"
-              },
-              {
-                kieu_doi: "K039 · Thiên mệnh chi tử (Hoàng tộc / Kế vị)", giai_cap: "thien_menh_chi_tu", than_phan: "Hoàng tộc họ Lâm · Kinh Hoài",
-                giai_doan: "truong_thanh", tuoi_min: 18, tuoi_max: 28,
-                noi_chon: ["cua_hieu", "quan_ruou", "nha"], do_vat: ["sach", "cui", "luong_thuc"], nguoi_xung_quanh: [], nghia_vu: [], kien_thuc: ["biet_chu"],
-                mong: "Tìm ra cách tháo gỡ Khế Nợ trước Năm Đáo Hạn mà không làm vương quốc chia cắt", so: "Trở thành vị vua ký giấy bán Quyền Thu Tam Giang",
-                no_hua: "Gánh món nợ hai trăm năm của tổ phụ Lâm Khải (A01)", bi_mat: "Từng nghe một cung nữ già hát trọn vẹn Bài Ca Hai Vợ", canh_cua: "V7 (Ba Bản Khế Nợ) & E31 (Năm Đáo Hạn)"
-              }
-            ]
-          };
-          writeFile('assets/resources/data/world/tu_dien.json', worldData, true);
-
-          // 3. Đồng bộ mã nguồn TypeScript cho Cocos Creator (assets/scripts/engine/FatePredictor.ts)
-          const fatePredictorTS = `
-          export interface SurvivalForecast {
-            ngay_nguy_hiem: number | null;
-            nguyen_nhan_du_bao: string;
-            da_cai_menh: boolean;
-            mo_ta_du_bao: string;
-          }
-
-          export class FatePredictor {
-            /** Mô phỏng nhanh biến sinh tồn 14 ngày tới để tìm ngày_nguy_hiểm (Mục 10 & 44.3) */
-            public static predictFate(state: {
-              doi: number; lanh: number; suc_khoe: number;
-              cui: number; luong_thuc: number; isWinter: boolean;
-              initialDangerDays: number | null;
-            }): SurvivalForecast {
-              let simDoi = state.doi;
-              let simLanh = state.lanh;
-              let simSucKhoe = state.suc_khoe;
-              let simCui = state.cui;
-              let simFood = state.luong_thuc;
-
-              let dangerDay: number | null = null;
-              let cause = 'an_toan';
-
-              for (let day = 1; day <= 14; day++) {
-                // Mỗi ngày cần ~1 phần lương thực; nếu có lương thực thì giảm đói
-                if (simFood >= 0.8) {
-                  simFood -= 0.8;
-                  simDoi = Math.max(10, simDoi - 20);
-                } else if (simFood > 0) {
-                  simDoi = Math.max(20, simDoi - simFood * 20 + 12);
-                  simFood = 0;
-                } else {
-                  simDoi += 22;
-                }
-
-                // Mỗi đêm mùa Giá cần 1 bó củi để không bị lạnh cóng
-                if (state.isWinter) {
-                  if (simCui >= 0.8) {
-                    simCui -= 0.8;
-                    simLanh = Math.max(10, simLanh - 15);
-                  } else {
-                    simCui = 0;
-                    simLanh += 25;
-                  }
-                } else {
-                  simLanh = Math.max(0, simLanh - 10);
-                }
-
-                if (simDoi >= 95) simSucKhoe -= 28;
-                else if (simDoi >= 75) simSucKhoe -= 12;
-
-                if (simLanh >= 95) simSucKhoe -= 30;
-                else if (simLanh >= 75) simSucKhoe -= 14;
-
-                if (simSucKhoe <= 0) {
-                  dangerDay = day;
-                  cause = simDoi >= simLanh ? 'Kiệt sức vì đói' : 'Nhiễm lạnh đêm mùa Giá';
-                  break;
-                }
-              }
-
-              const daCaiMenh = state.initialDangerDays !== null && (dangerDay === null || dangerDay > state.initialDangerDays + 3);
-              let moTa = '';
-              if (dangerDay === null) {
-                moTa = daCaiMenh
-                  ? '🌟 ĐÃ CẢI MỆNH: Nhờ củi và lương thực tích trữ, bóng đen cái chết mùa Giá đã lùi xa (An toàn trên 14 ngày).'
-                  : 'Dự báo sinh tồn: Lượng củi và thức ăn hiện tại đủ cầm cự qua những ngày tới.';
-              } else {
-                moTa = '⚠️ DỰ BÁO SỐ PHẬN GỐC: Nguy cơ gục ngã sau khoảng ' + dangerDay + ' ngày nữa (' + cause + ') nếu không tích thêm lương/củi!';
-              }
-
-              return { ngay_nguy_hiem: dangerDay, nguyen_nhan_du_bao: cause, da_cai_menh: daCaiMenh, mo_ta_du_bao: moTa };
-            }
-          }
-          `;
-          writeFile('assets/scripts/engine/FatePredictor.ts', fatePredictorTS, true);
-
-          // 4. Tạo giao diện Web chơi trực tiếp Giai đoạn 2 & 3 (docs/index.html)
-          const htmlTemplate = `<!DOCTYPE html>
-          <html lang="vi">
-          <head>
-            <meta charset="UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <title>Thiên Mệnh Khả Biến (Fate Unfixed) - Giai Đoạn 2 & 3</title>
-            <style>
-              * { box-sizing: border-box; }
-              body { background: #101216; color: #e8e6e3; font-family: "Segoe UI", Roboto, sans-serif; margin: 0; padding: 14px; display: flex; justify-content: center; }
-              .container { max-width: 920px; width: 100%; background: #181b20; border: 1px solid #2e333d; border-radius: 10px; padding: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.65); }
-              .top-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; }
-              h1 { font-size: 19px; color: #ffd982; margin: 0; }
-              .top-controls { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-              .btn-random { background: #4a2c6b; color: #f3e6ff; border: 1px solid #7748a8; padding: 7px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600; }
-              .btn-random:hover { background: #5e3887; }
-              .toggle-authentic { background: #2b2222; color: #ffadad; border: 1px solid #5c3535; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px; }
-              .toggle-authentic.on { background: #6e2222; color: #fff; border-color: #ff6b6b; font-weight: bold; }
-              .persona-bar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid #282c34; }
-              .persona-btn { background: #222e28; color: #9ef0b6; border: 1px solid #355242; padding: 6px 10px; border-radius: 5px; cursor: pointer; font-size: 12.5px; }
-              .persona-btn.active { background: #36694c; color: #fff; font-weight: bold; }
-              .grid-info { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
-              @media (max-width: 680px) { .grid-info { grid-template-columns: 1fr; } }
-              .info-card { background: #131519; border: 1px solid #272b33; border-radius: 6px; padding: 10px 12px; font-size: 13.5px; line-height: 1.5; }
-              .info-card strong { color: #f0c674; }
-              .fate-banner { padding: 9px 12px; border-radius: 6px; font-size: 13.5px; margin-bottom: 12px; font-weight: 500; border-left: 4px solid #d4a359; background: #1e1c17; color: #f7dca1; }
-              .fate-banner.safe { border-left-color: #4ec978; background: #16241c; color: #a8f5c2; }
-              .fate-banner.danger { border-left-color: #e05a47; background: #261717; color: #ffb3a7; }
-              .frenetic-box { display: none; background: #2d1616; border: 2px solid #ff5c5c; border-radius: 8px; padding: 14px; margin-bottom: 14px; animation: pulse 1s infinite alternate; }
-              @keyframes pulse { from { box-shadow: 0 0 4px #ff5c5c44; } to { box-shadow: 0 0 14px #ff5c5caa; } }
-              .frenetic-title { color: #ff9494; font-weight: bold; font-size: 16px; margin-bottom: 6px; display: flex; justify-content: space-between; }
-              .narrative-box { background: #121317; border: 1px solid #2b2f38; border-radius: 6px; padding: 14px 16px; min-height: 125px; font-size: 15.5px; line-height: 1.6; white-space: pre-line; margin-bottom: 14px; }
-              .stance-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; background: #151921; border: 1px solid #283242; padding: 9px 12px; border-radius: 6px; margin-bottom: 14px; font-size: 13px; }
-              .stance-select { background: #1f2633; color: #fff; border: 1px solid #3c4c66; padding: 5px 8px; border-radius: 4px; font-size: 13px; }
-              .btn-skip { background: #2b394f; color: #b8d8ff; border: 1px solid #455d82; padding: 6px 11px; border-radius: 5px; cursor: pointer; font-size: 13px; }
-              .btn-skip:hover { background: #384b69; }
-              .btn-endlife { background: #33271e; color: #f2c894; border: 1px solid #594331; padding: 6px 11px; border-radius: 5px; cursor: pointer; font-size: 13px; margin-left: auto; }
-              .action-group-title { font-size: 13px; color: #9aa4b5; text-transform: uppercase; letter-spacing: 0.5px; margin: 10px 0 6px 0; }
-              .action-row { display: flex; gap: 8px; margin-bottom: 8px; align-items: center; }
-              .action-btn { flex: 1; text-align: left; background: #202733; color: #dcebff; border: 1px solid #38475e; padding: 10px 13px; border-radius: 6px; cursor: pointer; font-size: 14.5px; }
-              .action-btn:hover { background: #2b3547; }
-              .push-btn { background: #3b241c; color: #ffbe8c; border: 1px solid #693d2e; padding: 10px 11px; border-radius: 6px; cursor: pointer; font-size: 12.5px; white-space: nowrap; }
-              .push-btn:hover { background: #523227; }
-              .chronicle-modal { display: none; background: #141210; border: 2px solid #c99c52; border-radius: 8px; padding: 18px; margin-top: 14px; line-height: 1.6; }
-              .chronicle-modal h2 { color: #ffd982; margin-top: 0; font-size: 18px; }
-            </style>
-          </head>
-          <body>
-            <div class="container">
-              <div class="top-row">
-                <h1 id="headerTitle">THIÊN MỆNH KHẢ BIẾN</h1>
-                <div class="top-controls">
-                  <button class="btn-random" id="btnRandomDraw">🎲 Bốc Kiếp Sống Ngẫu Nhiên (Năm 0–200)</button>
-                  <button class="toggle-authentic" id="btnAuthentic">Chế độ Chân thực: TẮT</button>
-                </div>
-              </div>
-
-              <div class="persona-bar" id="personaBar"></div>
-
-              <div class="grid-info">
-                <div class="info-card" id="worldClockCard"></div>
-                <div class="info-card" id="personalStoryCard"></div>
-              </div>
-
-              <div class="fate-banner" id="fateBanner"></div>
-
-              <div class="frenetic-box" id="freneticBox">
-                <div class="frenetic-title">
-                  <span id="freneticTitle">CẢNH GẤP!</span>
-                  <span id="freneticTimer">08.0s</span>
-                </div>
-                <div id="freneticDesc" style="margin-bottom:10px; font-size:14.5px;"></div>
-                <div id="freneticChoices"></div>
-              </div>
-
-              <div class="narrative-box" id="narrativeBox"></div>
-
-              <div class="stance-bar">
-                <span><strong>Thiên hướng khi tua (Mục 39.3):</strong></span>
-                <select class="stance-select" id="stanceSelect">
-                  <option value="can_than">Tích trữ & Giữ sức qua mùa</option>
-                  <option value="cham_chi">Chăm chỉ rèn nghề / Phụ việc</option>
-                  <option value="nghe_ngong">Lang thang nghe ngóng dấu vết</option>
-                  <option value="bam_gia_dinh">Bám sát người thân & Tìm thuốc</option>
-                </select>
-                <button class="btn-skip" id="btnSkipBeat">⏩ Tua tới Điểm Ngắt Kế Tiếp (+3 ngày)</button>
-                <button class="btn-endlife" id="btnShowChronicle">📜 Xem Cáo Phó & Tổng Kết Đời</button>
-              </div>
-
-              <div id="menuBox"></div>
-
-              <div class="chronicle-modal" id="chronicleModal"></div>
-            </div>
-
-            <script>
-              const CONFIG = __CONFIG_JSON__;
-              const DATA = __DATA_JSON__;
-
-              let state = {
-                persona: null,
-                hour: 7,
-                dayInSeason: 12,
-                seasonIdx: 3, // Mặc định mùa Giá (Đông) để kiểm thử sinh tồn Mục 10
-                year: 45,
-                theLuc: 80,
-                sucKhoe: 85,
-                doi: 45,
-                lanh: 40,
-                chan: 10,
-                so: 10,
-                cui: 1.0,
-                luongThuc: 1.2,
-                amAnhDoi: 0,
-                talentRevealed: false,
-                initialDangerDays: null,
-                actionsTaken: 0,
-                cluesFound: [],
-                authenticMode: false,
-                lastCompletedClass: null
-              };
-
-              let freneticInterval = null;
-              let tiers = {};
-
-              function calcTiers(p) {
-                tiers = {};
-                for (const [k, cfg] of Object.entries(CONFIG.f_tuoi)) {
-                  if (k === 'thi_giac' && p.mu) { tiers[k] = 0; continue; }
-                  const age = Math.max(0.2, p.tuoi);
-                  const fTang = Math.min(1, Math.pow(age / cfg.tuoi_dinh, cfg.q));
-                  const fGiam = p.tuoi <= cfg.tuoi_suy ? 1 : Math.max(cfg.san_gia, 1 / (1 + Math.pow((p.tuoi - cfg.tuoi_suy) / (cfg.tuoi_nua - cfg.tuoi_suy), cfg.p)));
-                  const haoMon = k === 'suc_manh' ? (p.hao_mon_suc_manh || 0) : 0;
-                  const val = 65 * fTang * fGiam * (1 - haoMon);
-                  tiers[k] = Math.max(0, Math.min(5, Math.floor(val / 20)));
-                }
-              }
-
-              function predictFate() {
-                let sDoi = state.doi, sLanh = state.lanh, sSK = state.sucKhoe;
-                let sCui = state.cui, sFood = state.luongThuc;
-                const isWinter = state.seasonIdx === 3;
-                let dangerDay = null, cause = 'An toàn';
-
-                for (let d = 1; d <= 14; d++) {
-                  if (sFood >= 0.8) { sFood -= 0.8; sDoi = Math.max(10, sDoi - 20); }
-                  else if (sFood > 0) { sDoi = Math.max(20, sDoi - sFood * 20 + 12); sFood = 0; }
-                  else { sDoi += 22; }
-
-                  if (isWinter) {
-                    if (sCui >= 0.8) { sCui -= 0.8; sLanh = Math.max(10, sLanh - 15); }
-                    else { sCui = 0; sLanh += 25; }
-                  } else {
-                    sLanh = Math.max(0, sLanh - 10);
-                  }
-
-                  if (sDoi >= 95) sSK -= 28;
-                  else if (sDoi >= 75) sSK -= 12;
-
-                  if (sLanh >= 95) sSK -= 30;
-                  else if (sLanh >= 75) sSK -= 14;
-
-                  if (sSK <= 0) {
-                    dangerDay = d;
-                    cause = sDoi >= sLanh ? 'Kiệt sức vì đói' : 'Nhiễm lạnh đêm mùa Giá';
-                    break;
-                  }
-                }
-                return { dangerDay, cause };
-              }
-
-              function advanceClock(minutes) {
-                const hours = minutes / 60;
-                const prevHour = state.hour;
-                state.hour += hours;
-
-                // Tăng nhu cầu nền theo thời gian (Mục 7.1)
-                state.doi = Math.min(100, state.doi + hours * CONFIG.survival.hourly_hunger_gain);
-                const isNight = (prevHour >= 18 || prevHour < 6);
-                const isWinter = state.seasonIdx === 3;
-
-                if (isWinter) {
-                  state.lanh = Math.min(100, state.lanh + hours * (isNight ? 4.5 : 2.0));
-                }
-
-                // Qua đêm: tự động đốt 1 bó củi để giữ ấm
-                if (state.hour >= 24) {
-                  const daysPassed = Math.floor(state.hour / 24);
-                  state.hour = state.hour % 24;
-                  state.dayInSeason += daysPassed;
-
-                  for (let i = 0; i < daysPassed; i++) {
-                    if (state.cui >= 1.0) {
-                      state.cui -= 1.0;
-                      state.lanh = Math.max(10, state.lanh - 25);
-                    } else if (state.seasonIdx === 3) {
-                      state.lanh = Math.min(100, state.lanh + 25);
-                      state.sucKhoe = Math.max(0, state.sucKhoe - 8);
-                    }
-                    if (state.luongThuc >= 0.8 && state.doi > 45) {
-                      state.luongThuc -= 0.8;
-                      state.doi = Math.max(15, state.doi - 30);
-                    }
-                  }
-
-                  if (state.dayInSeason > CONFIG.time.days_per_season) {
-                    state.dayInSeason = 1;
-                    state.seasonIdx = (state.seasonIdx + 1) % 4;
-                    if (state.seasonIdx === 0) {
-                      state.year++;
-                      state.persona.tuoi++;
-                      calcTiers(state.persona);
-                    }
-                  }
-                }
-
-                // Hình thành Ám ảnh tâm lý khi suýt chết đói/lạnh (Mục 29.2)
-                if ((state.doi >= 80 || state.lanh >= 80) && state.amAnhDoi < 70) {
-                  state.amAnhDoi = 75;
-                }
-              }
-
-              function getMenu(p) {
-                const sources = new Set(['ban_than:moi_trang_thai']);
-                if (p.giai_doan === 'so_sinh') sources.add('ban_than:so_sinh');
-                if (state.lanh >= 35 || state.seasonIdx === 3) sources.add('thoi_diem:lanh');
-                if (state.seasonIdx === 3 && state.dayInSeason <= 3) sources.add('thoi_diem:ngay_bat_chao');
-
-                p.noi_chon.forEach(s => sources.add('noi_chon:' + s));
-                p.do_vat.forEach(s => sources.add('do_vat:' + s));
-                if (state.cui >= 1) sources.add('do_vat:cui');
-                if (state.luongThuc >= 1) sources.add('do_vat:luong_thuc');
-                p.nguoi_xung_quanh.forEach(s => sources.add('nguoi_xung_quanh:' + s));
-                p.nghia_vu.forEach(s => sources.add('nghia_vu:' + s));
-
-                const isDaylight = state.hour >= 6 && state.hour < 18;
-                const remDaylightHours = isDaylight ? (18 - state.hour) : 0;
-
-                return DATA.actions.filter(tpl => {
-                  if (!tpl.nguon_goi_y.some(s => sources.has(s))) return false;
-                  if (!tpl.giai_doan.includes(p.giai_doan)) return false;
-                  if (tpl.can_anh_sang && !isDaylight) return false;
-                  if (tpl.gio_toi_thieu_con_lai && remDaylightHours < tpl.gio_toi_thieu_con_lai) return false;
-
-                  for (const [ab, minT] of Object.entries(tpl.nang_luc_yeu_cau)) {
-                    if ((tiers[ab] ?? 0) < minT) return false;
-                  }
-                  if (tpl.vat_pham_yeu_cau && !tpl.vat_pham_yeu_cau.every(i => p.do_vat.includes(i))) return false;
-                  if (tpl.vat_pham_tieu_hao) {
-                    if (tpl.vat_pham_tieu_hao.cui && state.cui < tpl.vat_pham_tieu_hao.cui) return false;
-                    if (tpl.vat_pham_tieu_hao.luong_thuc && state.luongThuc < tpl.vat_pham_tieu_hao.luong_thuc) return false;
-                  }
-                  if (tpl.kien_thuc_yeu_cau && !tpl.kien_thuc_yeu_cau.every(k => p.kien_thuc.includes(k))) return false;
-                  return true;
-                }).map(tpl => {
-                  // Tính điểm xếp hạng (Mục 7.2 + Lực kéo ám ảnh Mục 29.3)
-                  let score = 20;
-                  const tags = tpl.tag || [];
-                  if (tags.includes('thuc_pham')) score += state.doi * 0.8;
-                  if (tags.includes('tich_tru') && state.amAnhDoi > 0) score += (state.amAnhDoi / 100) * 45;
-                  if (tags.includes('nghia_vu')) score += 30;
-                  return { ...tpl, score };
-                }).sort((a, b) => b.score - a.score);
-              }
-
-              function runAction(tpl, isPush) {
-                if (freneticInterval) return;
-                const p = state.persona;
-                const sr = CONFIG.stopping_rule;
-                const maxBeats = tpl.so_nhip_chuan || 6;
-                let beats = 0, reason = 'hoan_thanh';
-                const boost = isPush ? sr.push_through_boost : 0;
-
-                if (tpl.vat_pham_tieu_hao) {
-                  if (tpl.vat_pham_tieu_hao.cui) state.cui = Math.max(0, state.cui - tpl.vat_pham_tieu_hao.cui);
-                  if (tpl.vat_pham_tieu_hao.luong_thuc) state.luongThuc = Math.max(0, state.luongThuc - tpl.vat_pham_tieu_hao.luong_thuc);
-                }
-
-                let gainedCui = 0, gainedFood = 0;
-
-                while (beats < maxBeats) {
-                  beats++;
-                  state.theLuc = Math.max(0, Math.min(100, state.theLuc + tpl.chi_phi.the_luc));
-                  state.chan = Math.max(0, Math.min(100, state.chan + tpl.chi_phi.chan));
-                  state.doi = Math.max(0, Math.min(100, state.doi + tpl.chi_phi.doi));
-
-                  if (tpl.ket_qua.cui) { state.cui += tpl.ket_qua.cui; gainedCui += tpl.ket_qua.cui; }
-                  if (tpl.ket_qua.luong_thuc) { state.luongThuc += tpl.ket_qua.luong_thuc; gainedFood += tpl.ket_qua.luong_thuc; }
-                  if (tpl.ket_qua.lanh) state.lanh = Math.max(0, Math.min(100, state.lanh + tpl.ket_qua.lanh));
-                  if (tpl.ket_qua.suc_khoe) state.sucKhoe = Math.max(0, Math.min(100, state.sucKhoe + tpl.ket_qua.suc_khoe));
-
-                  if (state.theLuc <= 4) { reason = 'kiet_suc'; break; }
-
-                  const khoChiu = (100 - state.theLuc) * 0.65 + state.chan * 0.7 + state.doi * 0.4 + state.lanh * 0.35;
-                  const nguong = sr.base_threshold + p.luoi * sr.weight_luoi + p.kien_nhan * sr.weight_kien_nhan + p.y_chi * sr.weight_y_chi + p.trach_nhiem * sr.weight_trach_nhiem + boost + (Math.random() * 8 - 4);
-                  if (khoChiu > nguong && !tpl.tag.includes('ban_nang') && !tpl.tag.includes('sinh_ton')) {
-                    reason = 'ngat_noi_tam';
-                    break;
-                  }
-                }
-
-                if (isPush) {
-                  state.sucKhoe = Math.max(5, state.sucKhoe - 3);
-                }
-
-                const minutes = beats * 6;
-                advanceClock(minutes);
-                state.actionsTaken++;
-
-                let extraNotes = [];
-                if (gainedCui > 0) extraNotes.push('Thu được +' + gainedCui.toFixed(1) + ' bó củi.');
-                if (gainedFood > 0) extraNotes.push('Thu được +' + gainedFood.toFixed(1) + ' phần lương thực.');
-
-                // Bộc lộ thiên phú ẩn lần đầu (Mục 43.6 & 43.7)
-                if (!state.talentRevealed && p.thien_phu_noi_bat && state.actionsTaken >= 2) {
-                  state.talentRevealed = true;
-                  extraNotes.push('✨ [Bộc lộ Thiên phú ẩn - ' + p.thien_phu_noi_bat.ten + ']: ' + p.thien_phu_noi_bat.cau_bo_lo);
-                }
-
-                // Rò rỉ dấu vết Sương mù thông tin (Mục 35 & 54.2)
-                if (tpl.ket_qua.manh_moi || Math.random() < 0.25) {
-                  const trace = DATA.rumor_traces[state.actionsTaken % DATA.rumor_traces.length];
-                  if (!state.cluesFound.includes(trace)) state.cluesFound.push(trace);
-                  extraNotes.push('🌫️ [Sương mù thông tin]: ' + trace);
-                }
-
-                let rText = 'Bạn hoàn thành trọn vẹn công việc.';
-                if (reason === 'kiet_suc') rText = 'Tay bạn run bần bật, hơi thở đứt quãng không sao tiếp tục nổi nữa.';
-                else if (reason === 'ngat_noi_tam') rText = state.doi > 65 ? 'Bụng cồn cào khiến bạn chẳng còn chút kiên nhẫn nào, đành tự dừng tay.' : 'Cơn mỏi và sự bức bối dâng lên khiến bạn tự giác dừng lại nghỉ.';
-
-                document.getElementById('narrativeBox').textContent =
-                  (isPush ? '[Gắng gượng nghiến răng làm tiếp] ' : '') + tpl.mo_ta +
-                  '\\n\\n• Diễn biến: Làm ' + beats + ' nhịp (~' + minutes + ' phút). ' + extraNotes.join(' ') +
-                  '\\n• Cảm nhận nội tâm: ' + rText;
-
-                // Xác suất kích hoạt Cảnh gấp tính giờ (Mục 20)
-                if (state.actionsTaken % 4 === 0 && p.giai_doan !== 'so_sinh') {
-                  triggerFreneticScene();
-                }
-
-                saveToLocal();
-                render();
-              }
-
-              // Cảnh gấp tính giờ (Mục 20)
-              function triggerFreneticScene() {
-                const ev = DATA.frenetic_events[state.actionsTaken % DATA.frenetic_events.length];
-                const box = document.getElementById('freneticBox');
-                const titleEl = document.getElementById('freneticTitle');
-                const timerEl = document.getElementById('freneticTimer');
-                const descEl = document.getElementById('freneticDesc');
-                const choicesEl = document.getElementById('freneticChoices');
-
-                const p = state.persona;
-                let totalSec = CONFIG.frenetic.base_seconds - state.so * 0.04 + (p.can_dam || 50) * 0.05;
-                totalSec = Math.max(CONFIG.frenetic.min_seconds, Math.min(CONFIG.frenetic.max_seconds, totalSec));
-                let remSec = totalSec;
-
-                titleEl.textContent = ev.tieu_de;
-                descEl.textContent = ev.mo_ta;
-                choicesEl.innerHTML = '';
-
-                ev.choices.forEach(ch => {
-                  const btn = document.createElement('button');
-                  btn.className = 'action-btn';
-                  btn.style.marginBottom = '6px';
-                  btn.style.width = '100%';
-                  btn.textContent = '⚡ ' + ch.text;
-                  btn.onclick = () => resolveFrenetic(ch, false);
-                  choicesEl.appendChild(btn);
-                });
-
-                box.style.display = 'block';
-                freneticInterval = setInterval(() => {
-                  remSec -= 0.1;
-                  timerEl.textContent = Math.max(0, remSec).toFixed(1) + 's';
-                  if (remSec <= 0) {
-                    // Hết giờ: tự chọn theo bản năng tính cách (Mục 20)
-                    const autoChoice = (p.can_dam || 50) >= 60 ? ev.choices[0] : ev.choices[1];
-                    resolveFrenetic(autoChoice, true);
-                  }
-                }, 100);
-              }
-
-              function resolveFrenetic(choice, isAutoTimeout) {
-                clearInterval(freneticInterval);
-                freneticInterval = null;
-                document.getElementById('freneticBox').style.display = 'none';
-
-                state.theLuc = Math.max(0, Math.min(100, state.theLuc + (choice.the_luc || 0)));
-                state.sucKhoe = Math.max(5, Math.min(100, state.sucKhoe + (choice.suc_khoe || 0)));
-                if (choice.cui) state.cui = Math.max(0, state.cui + choice.cui);
-                if (choice.luong_thuc) state.luongThuc = Math.max(0, state.luongThuc + choice.luong_thuc);
-
-                const prefix = isAutoTimeout ? '[HẾT GIỜ - PHẢN XẠ BẢN NĂNG]: Bạn đứng sững một nhịp rồi cơ thể tự hành động! ' : '[PHẢN ỨNG KỊP THỜI]: ';
-                document.getElementById('narrativeBox').textContent = prefix + choice.ket_qua_text;
-                render();
-              }
-
-              // Tua theo Điểm ngắt và Thiên hướng (Mục 39)
-              function skipToNextBeat() {
-                if (freneticInterval) return;
-                const stance = document.getElementById('stanceSelect').value;
-                advanceClock(24 * 60 * 3); // Tua 3 ngày tới điểm ngắt kế tiếp
-
-                let beatMsg = '';
-                if (stance === 'can_than') {
-                  state.cui += 2.2;
-                  state.luongThuc += 1.8;
-                  state.theLuc = Math.min(100, state.theLuc + 15);
-                  beatMsg = '[Tua Chương - Thiên hướng Tích trữ]: Suốt 3 ngày qua bạn cần mẫn gom củi và giữ sức. Kho dự trữ tăng thêm +2.2 bó củi, +1.8 lương thực.';
-                } else if (stance === 'cham_chi') {
-                  state.luongThuc += 2.4;
-                  state.cui += 1.0;
-                  beatMsg = '[Tua Chương - Thiên hướng Rèn nghề]: Bạn phụ việc không ngơi tay, đổi công lấy được +2.4 phần lương thực và +1 bó củi.';
-                } else if (stance === 'nghe_ngong') {
-                  state.luongThuc += 1.2;
-                  const trace = DATA.rumor_traces[Math.floor(Math.random() * DATA.rumor_traces.length)];
-                  if (!state.cluesFound.includes(trace)) state.cluesFound.push(trace);
-                  beatMsg = '[Tua Chương - Điểm Ngắt Tin Đồn]: Bạn vừa kiếm ăn vừa lắng nghe người qua đường.\\n🌫️ ' + trace;
-                } else {
-                  state.sucKhoe = Math.min(100, state.sucKhoe + 10);
-                  state.lanh = Math.max(10, state.lanh - 20);
-                  state.luongThuc += 1.5;
-                  beatMsg = '[Tua Chương - Điểm Ngắt Gia Đình]: Bạn bám sát người thân, được ủ ấm và chia sẻ thức ăn qua những ngày gió bấc.';
-                }
-
-                document.getElementById('narrativeBox').textContent = beatMsg;
-                saveToLocal();
-                render();
-              }
-
-              // Bốc nhân vật ngẫu nhiên theo trọng số giai cấp & Luân chuyển giai cấp (Mục 47.3 & 47.11)
-              function drawRandomCharacter() {
-                const weights = CONFIG.reincarnation.he_so_hiem;
-                const pool = DATA.random_archetypes.map(arch => {
-                  let w = weights[arch.giai_cap] || 0.5;
-                  if (state.lastCompletedClass && arch.giai_cap !== state.lastCompletedClass) {
-                    w *= CONFIG.reincarnation.he_so_luan_chuyen;
-                  }
-                  return { arch, w };
-                });
-
-                const totalW = pool.reduce((s, item) => s + item.w, 0);
-                let r = Math.random() * totalW;
-                let chosen = pool[0].arch;
-                for (const item of pool) {
-                  r -= item.w;
-                  if (r <= 0) { chosen = item.arch; break; }
-                }
-
-                const randomYear = Math.floor(Math.random() * 190) + 5;
-                const randomAge = Math.floor(Math.random() * (chosen.tuoi_max - chosen.tuoi_min + 1)) + chosen.tuoi_min;
-
-                const customPersona = {
-                  id: 'RAND_' + Date.now(),
-                  title: '🎲 Kiếp Bốc Ngẫu Nhiên',
-                  ten: chosen.kieu_doi,
-                  tuoi: randomAge,
-                  nam_sinh: randomYear,
-                  giai_doan: chosen.giai_doan,
-                  giai_cap: chosen.giai_cap,
-                  than_phan: chosen.than_phan + ' (Năm ' + (randomYear + randomAge) + ')',
-                  boi_canh_mo_ta: 'Bạn được bốc ngẫu nhiên theo trọng số giai cấp (Mục 47.3) vào năm ' + (randomYear + randomAge) + ' của lịch sử gốc Hoài Dương. Thế giới đã hồi quy nguyên vẹn (Mục 47.4).',
-                  noi_chon: chosen.noi_chon,
-                  do_vat: chosen.do_vat,
-                  nguoi_xung_quanh: chosen.nguoi_xung_quanh,
-                  nghia_vu: chosen.nghia_vu,
-                  kien_thuc: chosen.kien_thuc,
-                  cui: 1.5, luong_thuc: 1.5, lanh_ban_dau: 40, doi_ban_dau: 45,
-                  luoi: 25, kien_nhan: 75, y_chi: 75, trach_nhiem: 70, can_dam: 60, hao_mon_suc_manh: 0, mu: false,
-                  thien_phu_noi_bat: { ten: "Trực giác sinh tồn", key: "truc_giac", cau_bo_lo: "Bạn bỗng nhạy cảm khác thường với những biến động quanh làng." },
-                  story: {
-                    mong: chosen.mong,
-                    so: chosen.so,
-                    no_hua: chosen.no_hua,
-                    bi_mat: chosen.bi_mat,
-                    canh_cua: chosen.canh_cua
-                  }
-                };
-
-                loadPersonaObject(customPersona, -1);
-              }
-
-              function showChronicle() {
-                const modal = document.getElementById('chronicleModal');
-                const p = state.persona;
-                const f = predictFate();
-                const caiMenhStatus = (state.initialDangerDays !== null && (f.dangerDay === null || f.dangerDay > state.initialDangerDays))
-                  ? 'ĐÃ NGHỊCH THIÊN CẢI MỆNH (Đẩy lùi cái chết dự báo gốc)'
-                  : 'Đang giữ nhịp sinh tồn';
-
-                state.lastCompletedClass = p.giai_cap;
-
-                modal.style.display = 'block';
-                modal.innerHTML =
-                  '<h2>📜 BIÊN NIÊN SỬ CUỐI ĐỜI & CÁO PHÓ (MỤC 37)</h2>' +
-                  '<p><strong>Nhân vật:</strong> ' + p.ten + ' · <strong>Giai cấp:</strong> ' + p.than_phan + '</p>' +
-                  '<p><strong>1. Cáo phó công khai (Lời người đời truyền miệng qua sương mù):</strong><br/>' +
-                  '<em>"Người ấy đã đi qua những mùa Giá khắc nghiệt của Hoài Dương. Người trong vùng chỉ biết đó là một kẻ cần mẫn giữ lửa bên hiên nhà, chưa từng để bếp tắt giữa đêm đông."</em></p>' +
-                  '<p><strong>2. Hồi ký thật (Sự thật lịch sử & Bảng chênh lệch số phận):</strong><br/>' +
-                  '• Mức bẻ cong số phận: <strong>' + caiMenhStatus + '</strong><br/>' +
-                  '• Bí mật mang theo: ' + p.story.bi_mat + '<br/>' +
-                  '• Cánh cửa chạm tới Mối Nợ Gốc: ' + p.story.canh_cua + '<br/>' +
-                  '• Dấu vết thu thập được: ' + (state.cluesFound.length > 0 ? state.cluesFound.length + ' mảnh tin đồn' : 'Sống cuộc đời bình lặng ngoài vòng xoáy') + '</p>' +
-                  '<p style="color:#9ef0b6; font-size:13px;">(Theo Mục 47.4 & 47.11: Đời kế tiếp thế giới sẽ hồi quy về lịch sử gốc nguyên vẹn, đồng thời nhân x2.0 trọng số bốc ra giai cấp khác với đời vừa sống!)</p>';
-              }
-
-              let activePersonaIdx = 2;
-
-              function loadPersonaObject(p, idx) {
-                activePersonaIdx = idx;
-                state.persona = JSON.parse(JSON.stringify(p));
-                state.hour = 8;
-                state.dayInSeason = 12;
-                state.seasonIdx = 3;
-                state.year = (p.nam_sinh || 30) + p.tuoi;
-                state.theLuc = 82;
-                state.sucKhoe = 85;
-                state.doi = p.doi_ban_dau ?? 45;
-                state.lanh = p.lanh_ban_dau ?? 40;
-                state.chan = 10;
-                state.so = 10;
-                state.cui = p.cui ?? 1.5;
-                state.luongThuc = p.luong_thuc ?? 1.5;
-                state.amAnhDoi = 0;
-                state.talentRevealed = false;
-                state.actionsTaken = 0;
-                state.cluesFound = [];
-                document.getElementById('chronicleModal').style.display = 'none';
-
-                calcTiers(state.persona);
-                const initForecast = predictFate();
-                state.initialDangerDays = initForecast.dangerDay;
-
-                document.getElementById('narrativeBox').textContent =
-                  '[NHẬP XÁC: ' + p.ten.toUpperCase() + ']\\n' + p.boi_canh_mo_ta;
-                render();
-              }
-
-              function saveToLocal() {
-                try {
-                  localStorage.setItem('FATE_UNFIXED_SAVE', JSON.stringify({
-                    year: state.year, cui: state.cui, luongThuc: state.luongThuc, authenticMode: state.authenticMode
-                  }));
-                } catch (e) {}
-              }
-
-              function render() {
-                const p = state.persona;
-                document.getElementById('headerTitle').textContent = 'THIÊN MỆNH KHẢ BIẾN · ' + p.ten + ' (' + p.tuoi + ' tuổi)';
-
-                const bar = document.getElementById('personaBar');
-                bar.innerHTML = '';
-                DATA.personas.forEach((item, idx) => {
-                  const b = document.createElement('button');
-                  b.className = 'persona-btn' + (idx === activePersonaIdx ? ' active' : '');
-                  b.textContent = item.title;
-                  b.onclick = () => loadPersonaObject(item, idx);
-                  bar.appendChild(b);
-                });
-
-                const fTheLuc = state.theLuc > 65 ? 'Dẻo dai' : (state.theLuc > 30 ? 'Thấm mệt' : 'Rã rời');
-                const fDoi = state.doi < 35 ? 'Bụng êm' : (state.doi < 70 ? 'Hơi cồn cào' : 'Đói thắt ruột');
-                const fLanh = state.lanh < 35 ? 'Đủ ấm' : (state.lanh < 70 ? 'Se lạnh' : 'Rét run cầm cập');
-                const timeOfDay = (state.hour >= 6 && state.hour < 18) ? 'Ban ngày' : 'Ban đêm';
-
-                document.getElementById('worldClockCard').innerHTML =
-                  '<strong>⏳ Thời gian & Sinh tồn (Mục 7.1, 50.4):</strong><br/>' +
-                  'Năm ' + state.year + ' Hoài Dương · Mùa <strong>' + CONFIG.time.seasons[state.seasonIdx] + '</strong> (Ngày ' + state.dayInSeason + '/15) · ' + Math.floor(state.hour) + 'h00 (' + timeOfDay + ')<br/>' +
-                  'Cảm nhận: ' + fTheLuc + ' | ' + fDoi + ' | ' + fLanh + '<br/>' +
-                  'Dự trữ: <strong>' + state.cui.toFixed(1) + ' bó củi</strong> · <strong>' + state.luongThuc.toFixed(1) + ' phần lương thực</strong>' +
-                  (state.amAnhDoi > 0 ? '<br/><span style="color:#ff9e7d;">[Ám ảnh đói/lạnh]: Thôi thúc tích trữ lương thực & củi</span>' : '');
-
-                document.getElementById('personalStoryCard').innerHTML =
-                  '<strong>📖 Câu chuyện riêng & Dây Chằng (Mục 51.5):</strong><br/>' +
-                  '• <strong>Mong:</strong> ' + p.story.mong + '<br/>' +
-                  '• <strong>Sợ:</strong> ' + p.story.so + '<br/>' +
-                  '• <strong>Nợ/Lời hứa:</strong> ' + p.story.no_hua + '<br/>' +
-                  '• <strong>Bí mật nhỏ:</strong> ' + p.story.bi_mat;
-
-                // Đường dự báo số phận (Mục 10)
-                const f = predictFate();
-                const banner = document.getElementById('fateBanner');
-                if (f.dangerDay === null) {
-                  banner.className = 'fate-banner safe';
-                  banner.textContent = (state.initialDangerDays !== null)
-                    ? '🌟 ĐƯỜNG DỰ BÁO SỐ PHẬN (MỤC 10): ĐÃ NGHỊCH THIÊN CẢI MỆNH! Từ chỗ dự báo chết sau ' + state.initialDangerDays + ' ngày, nay bạn đã tích đủ củi và lương thực để sống qua mùa Giá!'
-                    : '🟢 ĐƯỜNG DỰ BÁO SỐ PHẬN (MỤC 10): An toàn qua 14 ngày tới với lượng củi và lương thực hiện có.';
-                } else {
-                  banner.className = 'fate-banner danger';
-                  banner.textContent = '⚠️ ĐƯỜNG DỰ BÁO SỐ PHẬN (MỤC 10): Dự báo chạm ngưỡng nguy hiểm sau ' + f.dangerDay + ' ngày nữa (' + f.cause + '). Hãy bổ củi, săn thỏ hoặc kiếm thức ăn để đẩy lùi ngày nguy hiểm!';
-                }
-
-                // Vẽ Menu theo nhóm
-                const menu = document.getElementById('menuBox');
-                menu.innerHTML = '';
-                const actions = getMenu(p);
-                const groups = {};
-                actions.forEach(a => {
-                  const g = a.nhom || 'Hành động';
-                  if (!groups[g]) groups[g] = [];
-                  groups[g].push(a);
-                });
-
-                for (const [gName, list] of Object.entries(groups)) {
-                  const gTitle = document.createElement('div');
-                  gTitle.className = 'action-group-title';
-                  gTitle.textContent = gName;
-                  menu.appendChild(gTitle);
-
-                  list.forEach(tpl => {
-                    const row = document.createElement('div');
-                    row.className = 'action-row';
-                    const btn = document.createElement('button');
-                    btn.className = 'action-btn';
-                    btn.textContent = '▶ ' + tpl.ten_vi + ' (' + tpl.thoi_luong_mo + ')';
-                    btn.onclick = () => runAction(tpl, false);
-                    row.appendChild(btn);
-
-                    if (!tpl.tag.includes('ban_nang')) {
-                      const pBtn = document.createElement('button');
-                      pBtn.className = 'push-btn';
-                      pBtn.textContent = 'Gắng gượng';
-                      pBtn.onclick = () => runAction(tpl, true);
-                      row.appendChild(pBtn);
-                    }
-                    menu.appendChild(row);
-                  });
-                }
-              }
-
-              document.getElementById('btnRandomDraw').onclick = drawRandomCharacter;
-              document.getElementById('btnSkipBeat').onclick = skipToNextBeat;
-              document.getElementById('btnShowChronicle').onclick = showChronicle;
-              document.getElementById('btnAuthentic').onclick = function() {
-                state.authenticMode = !state.authenticMode;
-                this.className = 'toggle-authentic' + (state.authenticMode ? ' on' : '');
-                this.textContent = state.authenticMode ? 'Chế độ Chân thực: BẬT (Tự lưu để thoát)' : 'Chế độ Chân thực: TẮT';
-              };
-
-              // Mở mặc định Persona số 3 (Test case Trai mồ côi cải mệnh mùa đông Mục 10)
-              loadPersonaObject(DATA.personas[2], 2);
-            </script>
-          </body>
-          </html>`;
-
-          const finalHtml = htmlTemplate
-            .replace('__CONFIG_JSON__', JSON.stringify(gameConfig))
-            .replace('__DATA_JSON__', JSON.stringify(worldData));
-          writeFile('docs/index.html', finalHtml);
-
-          // 5. Bộ kiểm thử tự động GĐ1 + GĐ2 + GĐ3 (Kiểm tra cả Test Case Trai Mồ Côi Mục 10)
-          const testScript = `
-          const fs = require('fs');
-          const cfg = JSON.parse(fs.readFileSync('assets/resources/data/config/game_config.json', 'utf8'));
-          const data = JSON.parse(fs.readFileSync('assets/resources/data/world/tu_dien.json', 'utf8'));
-
-          function assert(cond, msg) {
-            if (!cond) { console.error('[THẤT BẠI] ' + msg); process.exit(1); }
-            console.log('[ĐẠT] ' + msg);
-          }
-
-          function predictDays(doi, lanh, sk, cui, food) {
-            for (let d = 1; d <= 14; d++) {
-              if (food >= 0.8) { food -= 0.8; doi = Math.max(10, doi - 20); }
-              else { doi += 22; }
-              if (cui >= 0.8) { cui -= 0.8; lanh = Math.max(10, lanh - 15); }
-              else { lanh += 25; }
-              if (doi >= 95) sk -= 28; else if (doi >= 75) sk -= 12;
-              if (lanh >= 95) sk -= 30; else if (lanh >= 75) sk -= 14;
-              if (sk <= 0) return d;
-            }
-            return null;
-          }
-
-          console.log('--- CHẠY KIỂM THỬ THỰC TẠI GĐ1, GĐ2 & GĐ3 ---');
-          const p3 = data.personas[2];
-          // Kết cục 1: Không làm gì -> đường dự báo chạm 0 trong mùa Giá
-          const initialDanger = predictDays(p3.doi_ban_dau, p3.lanh_ban_dau, 85, p3.cui, p3.luong_thuc);
-          assert(initialDanger !== null && initialDanger <= 6, 'Test Case Mục 10 (Kết cục gốc): Không hành động sẽ chạm ngưỡng chết đói/lạnh sau ' + initialDanger + ' ngày');
-
-          // Kết cục 2: Bổ củi và săn thỏ -> đẩy lùi đường dự báo qua mùa đông
-          const afterActionDanger = predictDays(25, 20, 85, p3.cui + 12, p3.luong_thuc + 12);
-          assert(afterActionDanger === null, 'Test Case Mục 10 (Cải mệnh): Bổ củi + săn thỏ đẩy lùi ngày nguy hiểm, sống sót qua mùa Giá');
-          assert(data.random_archetypes.length >= 6, 'Đã nạp ngân hàng Kiểu đời và Bốc ngẫu nhiên theo trọng số giai cấp');
-          `;
-          writeFile('tests/run_reality_tests.js', testScript);
-          EOF
-          node generate_project.js
-          rm generate_project.js
-
-      - name: Chạy Kiểm thử GĐ1 + GĐ2 (Test case Cải mệnh mùa đông Mục 10)
-        run: node tests/run_reality_tests.js
-
-      - name: Cập nhật toàn bộ file lên GitHub Repository & GitHub Pages
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git diff --staged --quiet || git commit -m "Upgrade to Stage 2 & 3: Fate Predictor, 4 Seasons, Frenetic Timer, Stance Skip & Story Archetypes"
-          git push
+                  { id: "giau_nhanh", text: "Lén đẩy bao lương vào gầm bếp củi", tag: "can_dam", the_luc: -8, suc_khoe: 0, ket_qua_text: "Tay bạn nhanh nhẹn phủ tro bếp lên túi lương thực ngay trước khi chúng bước vào sân (+0.5 lương thực giữ lại
