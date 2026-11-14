@@ -11,7 +11,7 @@
       background: #0b0c0e; color: #e5e2dc; font-family: "Segoe UI", system-ui, sans-serif;
     }
 
-    /* HIỆU ỨNG VIỀN MÀN HÌNH (ĐỎ KHI NGUY HIỂM -> XANH KHI THOÁT NẠN, KHÔNG ÂM THANH) */
+    /* HIỆU ỨNG VIỀN MÀN HÌNH (ĐỎ KHI NGUY HIỂM -> XANH KHI THOÁT NẠN) */
     .screen-vignette {
       position: fixed; inset: 0; pointer-events: none; z-index: 80;
       transition: box-shadow 0.7s ease;
@@ -28,15 +28,15 @@
       to   { box-shadow: inset 0 0 130px rgba(245, 30, 30, 0.95); }
     }
 
-    /* MÀN ĐEN CHUYỂN KIẾP */
+    /* MÀN ĐEN CHUYỂN KIẾP / NGỦ QUA ĐÊM */
     .transition-curtain {
       position: fixed; inset: 0; background: #050608; z-index: 250;
       display: none; flex-direction: column; align-items: center; justify-content: center;
-      padding: 24px; text-align: center; opacity: 0; transition: opacity 0.65s ease;
+      padding: 24px; text-align: center; opacity: 0; transition: opacity 0.6s ease;
     }
     .transition-curtain.show { display: flex; opacity: 1; }
     .transition-text {
-      max-width: 560px; font-size: 19px; line-height: 1.7; color: #d8c398;
+      max-width: 580px; font-size: 18.5px; line-height: 1.7; color: #d8c398;
       font-style: italic; letter-spacing: 0.4px;
     }
 
@@ -46,44 +46,48 @@
       z-index: 200; display: flex; align-items: center; justify-content: center; padding: 18px;
     }
     .start-box {
-      max-width: 640px; width: 100%; background: #13161c; border: 1px solid #323947;
-      border-radius: 10px; padding: 26px; box-shadow: 0 16px 50px rgba(0,0,0,0.85);
+      max-width: 650px; width: 100%; background: #13161c; border: 1px solid #323947;
+      border-radius: 10px; padding: 24px; box-shadow: 0 16px 50px rgba(0,0,0,0.85);
     }
-    .start-title { font-size: 26px; color: #ffd982; margin: 0 0 6px 0; letter-spacing: 1px; text-align: center; }
-    .start-sub { font-size: 13.5px; color: #96a0b3; text-align: center; margin-bottom: 20px; }
-    .mode-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; }
+    .start-title { font-size: 25px; color: #ffd982; margin: 0 0 6px 0; letter-spacing: 1px; text-align: center; }
+    .start-sub { font-size: 13px; color: #96a0b3; text-align: center; margin-bottom: 18px; }
+    .mode-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
     .mode-card {
-      background: #191d26; border: 1px solid #2e3545; border-radius: 8px; padding: 12px;
+      background: #191d26; border: 1px solid #2e3545; border-radius: 8px; padding: 11px;
       cursor: pointer; transition: all 0.15s ease;
     }
     .mode-card.selected { background: #28191b; border-color: #d9534f; box-shadow: 0 0 12px rgba(217, 83, 79, 0.25); }
     .mode-card.selected-normal { background: #1a2636; border-color: #5b8bd4; }
-    .mode-name { font-weight: 700; font-size: 14.5px; margin-bottom: 4px; color: #f0ede6; }
+    .mode-name { font-weight: 700; font-size: 14px; margin-bottom: 4px; color: #f0ede6; }
     .mode-desc { font-size: 12px; color: #9aa4b5; line-height: 1.45; }
     .start-persona-list {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; max-height: 230px; overflow-y: auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; max-height: 230px; overflow-y: auto;
     }
     .start-btn-random {
       width: 100%; background: #3c2657; color: #f3e3ff; border: 1px solid #6e489c;
-      padding: 12px; border-radius: 7px; font-size: 15px; font-weight: 700; cursor: pointer;
+      padding: 11px; border-radius: 7px; font-size: 14.5px; font-weight: 700; cursor: pointer;
     }
     .start-btn-random:hover { background: #4d3170; }
 
     /* KHUNG CHÍNH SPLIT-SCREEN 100VH */
     .app-shell {
-      display: flex; flex-direction: column; width: 100%; height: 100vh; max-width: 1460px; margin: 0 auto;
+      display: flex; flex-direction: column; width: 100%; height: 100vh; max-width: 1480px; margin: 0 auto;
       border-left: 1px solid #22262e; border-right: 1px solid #22262e; background: #12151a;
     }
     .top-bar {
       height: 48px; flex-shrink: 0; display: flex; align-items: center; justify-content: space-between;
-      padding: 0 18px; background: #161a22; border-bottom: 1px solid #262c38;
+      padding: 0 16px; background: #161a22; border-bottom: 1px solid #262c38;
     }
-    .char-summary { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .char-name { color: #ffd982; font-weight: 700; font-size: 15.5px; }
-    .char-sub { color: #8e99ad; font-size: 13px; }
+    .char-summary { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+    .char-name { color: #ffd982; font-weight: 700; font-size: 15px; }
+    .char-sub { color: #9aa6b8; font-size: 12.5px; }
     .loc-pill {
       font-size: 12px; padding: 2px 9px; border-radius: 4px; font-weight: 600;
       background: #1f2b3d; color: #a8d1ff; border: 1px solid #385073;
+    }
+    .skill-pill {
+      font-size: 11.5px; padding: 2px 7px; border-radius: 4px;
+      background: #1d2622; color: #a3ebba; border: 1px solid #2f4f3d;
     }
     .mode-pill {
       font-size: 11px; padding: 2px 7px; border-radius: 4px; font-weight: 700;
@@ -91,17 +95,17 @@
     }
     .top-nav { display: flex; align-items: center; gap: 8px; }
     .nav-btn {
-      background: #212733; color: #d4dff0; border: 1px solid #353f52; padding: 6px 12px;
-      border-radius: 6px; cursor: pointer; font-size: 12.5px;
+      background: #212733; color: #d4dff0; border: 1px solid #353f52; padding: 5px 11px;
+      border-radius: 6px; cursor: pointer; font-size: 12px;
     }
     .nav-btn:hover { background: #2c3444; }
 
-    .workspace { flex: 1; display: grid; grid-template-columns: 1.32fr 1.08fr; overflow: hidden; }
+    .workspace { flex: 1; display: grid; grid-template-columns: 1.28fr 1.12fr; overflow: hidden; }
     .left-column { display: flex; flex-direction: column; height: 100%; border-right: 1px solid #252a36; overflow: hidden; }
 
     /* THANH CẢNH BÁO GIÁC QUAN & TRẠNG THÁI NHÀ CỬA */
     .sensory-warning-strip {
-      flex-shrink: 0; padding: 7px 16px; font-size: 12.5px;
+      flex-shrink: 0; padding: 7px 14px; font-size: 12.5px;
       border-bottom: 1px solid #252a34; background: #161920; color: #9aa6b8;
       display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;
     }
@@ -114,11 +118,11 @@
 
     /* GIỮA MÀN HÌNH */
     .center-stage {
-      flex: 1; padding: 16px 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px;
+      flex: 1; padding: 15px 18px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px;
       background: radial-gradient(circle at center, #171b23 0%, #111419 100%);
     }
     .work-progress-box {
-      display: none; background: #19202b; border: 1px solid #3c4d69; border-radius: 7px; padding: 11px 14px;
+      display: none; background: #19202b; border: 1px solid #3c4d69; border-radius: 7px; padding: 10px 14px;
     }
     .work-progress-label { font-size: 13px; color: #cfe2ff; margin-bottom: 6px; display: flex; justify-content: space-between; }
     .work-progress-track { width: 100%; height: 8px; background: #0f1319; border-radius: 5px; overflow: hidden; }
@@ -129,13 +133,13 @@
       background: #181d26; border: 1px solid #313a4d; border-radius: 8px; padding: 16px 18px;
       box-shadow: 0 6px 20px rgba(0,0,0,0.45); transition: transform 0.14s ease, border-color 0.25s ease;
     }
-    .current-beat-card.pulse-action { transform: scale(1.005); border-color: #ffd982; }
+    .current-beat-card.pulse-action { transform: scale(1.004); border-color: #ffd982; }
     .beat-meta {
       display: flex; justify-content: space-between; font-size: 11.5px; color: #8490a6;
-      text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 9px;
+      text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;
     }
-    .beat-main-text { font-size: 16px; line-height: 1.65; color: #f2f0ec; margin-bottom: 12px; white-space: pre-line; }
-    .beat-deltas { display: flex; flex-wrap: wrap; gap: 6px; padding-top: 9px; border-top: 1px dashed #2a3242; }
+    .beat-main-text { font-size: 15.5px; line-height: 1.65; color: #f2f0ec; margin-bottom: 12px; white-space: pre-line; }
+    .beat-deltas { display: flex; flex-wrap: wrap; gap: 6px; padding-top: 8px; border-top: 1px dashed #2a3242; }
     .delta-pill { font-size: 11.5px; padding: 3px 8px; border-radius: 4px; background: #212836; color: #c5d2e8; }
     .delta-pill.gain { background: #173022; color: #9ef0b6; border: 1px solid #2b573d; }
     .delta-pill.warn { background: #36201a; color: #ffb899; border: 1px solid #63392c; }
@@ -143,20 +147,16 @@
     .recent-log { display: flex; flex-direction: column; gap: 6px; opacity: 0.68; font-size: 12.5px; }
     .log-entry { background: #13161d; border-left: 2px solid #2f384a; padding: 6px 10px; color: #9ea8ba; }
 
-    /* KHUNG TÌNH HUỐNG / BIẾN CỐ */
+    /* KHUNG BIẾN CỐ */
     .frenetic-overlay {
       display: none; background: #291316; border: 2px solid #ff5252; border-radius: 8px; padding: 14px;
       box-shadow: 0 0 28px rgba(255, 60, 60, 0.35);
     }
-    .frenetic-overlay.calm-encounter {
-      background: #18222d; border-color: #5b8bd4; box-shadow: 0 0 20px rgba(91, 139, 212, 0.25);
-    }
     .frenetic-header { display: flex; justify-content: space-between; color: #ff9494; font-weight: bold; font-size: 15px; margin-bottom: 8px; }
-    .frenetic-overlay.calm-encounter .frenetic-header { color: #a8d1ff; }
 
     /* GÓC DƯỚI BÊN TRÁI */
     .bottom-left-hud {
-      flex-shrink: 0; background: #151820; border-top: 1px solid #262c38; padding: 10px 16px;
+      flex-shrink: 0; background: #151820; border-top: 1px solid #262c38; padding: 10px 14px;
       display: flex; flex-direction: column; gap: 7px;
     }
     .hud-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; }
@@ -175,21 +175,26 @@
     }
     .btn-skip-auto:hover { background: #314461; }
 
-    /* CỘT BÊN PHẢI: THANH ĐI ĐẾN ĐỊA ĐIỂM GỌN + DANH SÁCH HÀNH ĐỘNG PHONG PHÚ */
+    /* CỘT BÊN PHẢI: THANH ĐI LẠI ĐỐI XỨNG + DANH SÁCH HÀNH ĐỘNG RÕ ĐIỀU KIỆN */
     .right-column { display: flex; flex-direction: column; height: 100%; background: #14171e; overflow: hidden; }
     .travel-bar {
       padding: 8px 12px; background: #161b24; border-bottom: 1px solid #262e3d;
       display: flex; flex-direction: column; gap: 5px; flex-shrink: 0;
     }
-    .travel-bar-label { font-size: 11px; color: #8896ad; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; }
+    .travel-bar-label {
+      font-size: 11px; color: #9aa8bf; text-transform: uppercase; letter-spacing: 0.4px; font-weight: 700;
+      display: flex; justify-content: space-between;
+    }
     .travel-chips { display: flex; gap: 5px; flex-wrap: wrap; }
     .travel-chip {
-      background: #1d2633; color: #b8d8ff; border: 1px solid #31435c; padding: 4px 9px;
-      border-radius: 5px; font-size: 12px; cursor: pointer; font-weight: 600;
+      background: #1d2633; color: #b8d8ff; border: 1px solid #31435c; padding: 4px 8px;
+      border-radius: 5px; font-size: 11.5px; cursor: pointer; font-weight: 600;
     }
+    .travel-chip.city-dest { background: #292238; color: #e5caff; border-color: #524070; }
+    .travel-chip.night-warn { border-color: #804832; color: #ffcaa8; }
     .travel-chip:hover:not(:disabled) { background: #273549; border-color: #52749e; }
     .travel-chip.current { background: #2e472d; color: #b8f5b6; border-color: #4b7849; cursor: default; }
-    .travel-chip:disabled { opacity: 0.4; cursor: not-allowed; }
+    .travel-chip:disabled { opacity: 0.45; cursor: not-allowed; }
 
     .right-header {
       padding: 8px 12px; background: #181c24; border-bottom: 1px solid #262c38;
@@ -207,20 +212,26 @@
     .action-card { display: flex; gap: 5px; align-items: stretch; }
     .btn-main-action {
       flex: 1; text-align: left; background: #1c222e; color: #e2eeff; border: 1px solid #303b50;
-      padding: 9px 11px; border-radius: 6px; cursor: pointer; display: flex; flex-direction: column; gap: 2px;
+      padding: 8px 11px; border-radius: 6px; cursor: pointer; display: flex; flex-direction: column; gap: 3px;
       transition: transform 0.08s ease, background 0.12s, border-color 0.12s;
     }
+    .btn-main-action.sleep-highlight { background: #1a2836; border-color: #48759e; }
+    .btn-main-action.ambition-highlight { background: #261f33; border-color: #59467a; }
     .btn-main-action:hover:not(:disabled) { background: #262f40; border-color: #52668a; }
-    .btn-main-action:active:not(:disabled) { transform: scale(0.985); }
-    .btn-main-action:disabled { opacity: 0.45; cursor: not-allowed; }
-    .act-name { font-size: 14px; font-weight: 600; }
-    .act-sub { font-size: 11.5px; color: #8896ad; }
+    .btn-main-action:active:not(:disabled) { transform: scale(0.988); }
+    .btn-main-action:disabled {
+      opacity: 0.52; background: #151820; border-color: #252a36; cursor: not-allowed;
+    }
+    .act-name { font-size: 13.8px; font-weight: 600; }
+    .act-sub { font-size: 11.5px; color: #8c9bb3; }
+    .act-req-missing { font-size: 11.5px; color: #ff9e80; font-weight: 600; }
+    .act-req-ok { font-size: 11.5px; color: #8ad6a3; }
     .btn-push {
       background: #331f18; color: #ffbe8c; border: 1px solid #593428; padding: 0 9px;
       border-radius: 6px; cursor: pointer; font-size: 11.5px; font-weight: 600;
     }
     .btn-push:hover:not(:disabled) { background: #4a2c22; }
-    .btn-push:disabled { opacity: 0.45; cursor: not-allowed; }
+    .btn-push:disabled { opacity: 0.35; cursor: not-allowed; }
 
     /* MODAL */
     .modal-backdrop {
@@ -228,7 +239,7 @@
       z-index: 150; align-items: center; justify-content: center; padding: 16px;
     }
     .modal-box {
-      background: #181c24; border: 1px solid #3e485c; border-radius: 10px; max-width: 620px; width: 100%;
+      background: #181c24; border: 1px solid #3e485c; border-radius: 10px; max-width: 640px; width: 100%;
       max-height: 85vh; display: flex; flex-direction: column; box-shadow: 0 14px 45px rgba(0,0,0,0.85);
     }
     .modal-header { padding: 13px 18px; border-bottom: 1px solid #282f3d; display: flex; justify-content: space-between; align-items: center; }
@@ -246,7 +257,7 @@
     }
 
     @media (max-width: 860px) {
-      .workspace { grid-template-columns: 1fr; grid-template-rows: 52% 48%; }
+      .workspace { grid-template-columns: 1fr; grid-template-rows: 50% 50%; }
       .left-column { border-right: none; border-bottom: 1px solid #262c38; }
     }
   </style>
@@ -262,13 +273,13 @@
   <div class="start-menu-overlay" id="startMenuOverlay">
     <div class="start-box">
       <h1 class="start-title">THIÊN MỆNH KHẢ BIẾN</h1>
-      <div class="start-sub">Nhập vai văn bản tả thực · Xác suất đời thực, hành động chi tiết theo từng nơi chốn</div>
+      <div class="start-sub">Nhập vai văn bản tả thực · Mưu sinh, Học chữ, Luyện võ, Buôn chuyến & Đổi mệnh</div>
 
       <div style="font-size:13px; color:#b8c2d4; margin-bottom:8px; font-weight:600;">1. Chọn quy tắc sinh tồn trước khi nhập thế:</div>
       <div class="mode-selector">
         <div class="mode-card selected-normal" id="cardModeNormal" onclick="selectStartMode(false)">
           <div class="mode-name">🕯️ Chế độ Thường</div>
-          <div class="mode-desc">Lưu tự động theo nhịp, phù hợp để trải nghiệm nhịp sống và các biến cố không gian.</div>
+          <div class="mode-desc">Lưu tự động theo nhịp, phù hợp để khám phá các nhánh học chữ, võ nghệ và vào thành lớn.</div>
         </div>
         <div class="mode-card" id="cardModeAuthentic" onclick="selectStartMode(true)">
           <div class="mode-name" style="color:#ff9e9e;">🩸 Chế độ Chân Thực (Một Mạng)</div>
@@ -289,24 +300,23 @@
         <span class="char-name" id="topCharName">Khổng Thạch</span>
         <span class="char-sub" id="topCharSub">17 tuổi · Dân Gắn Ruộng</span>
         <span class="loc-pill" id="topLocBadge">📍 Đang ở: Gian nhà tranh</span>
+        <span class="skill-pill" id="topProgressBadge">📚 Chữ: Mù chữ · ⚔️ Võ: 0 · ⚖️ Buôn: 0</span>
         <span class="mode-pill" id="topModeBadge" style="display:none;">CHÂN THỰC</span>
       </div>
       <div class="top-nav">
         <button class="nav-btn" id="btnToggleMute">🔊 Âm thanh: BẬT</button>
-        <button class="nav-btn" id="btnOpenBio">📖 Bản thân & Tâm niệm</button>
+        <button class="nav-btn" id="btnOpenBio">📖 Bản thân & Con đường đổi đời</button>
       </div>
     </header>
 
     <main class="workspace">
       <section class="left-column">
-        <!-- DÒNG CẢNH BÁO GIÁC QUAN + TRẠNG THÁI VẬT LÝ NGÔI NHÀ -->
         <div class="sensory-warning-strip" id="sensoryStrip">
           <span id="sensoryText">🕯️ Hơi thở đều đặn.</span>
           <div class="house-state-badges" id="houseBadges"></div>
         </div>
 
         <div class="center-stage">
-          <!-- KHUNG TÌNH HUỐNG ĐỘT XUẤT / ĐỜI THƯỜNG -->
           <div class="frenetic-overlay" id="freneticBox">
             <div class="frenetic-header">
               <span id="freneticTitle">⚡ TÌNH HUỐNG XẢY RA!</span>
@@ -316,7 +326,6 @@
             <div id="freneticChoices" style="display:flex; flex-direction:column; gap:6px;"></div>
           </div>
 
-          <!-- THANH CHẠY THỜI GIAN LÀM VIỆC -->
           <div class="work-progress-box" id="workProgressBox">
             <div class="work-progress-label">
               <span id="workProgressText">Đang thực hiện...</span>
@@ -327,7 +336,6 @@
             </div>
           </div>
 
-          <!-- DIỄN BIẾN HIỆN TẠI Ở GIỮA MÀN HÌNH -->
           <div class="current-beat-card" id="currentBeatCard">
             <div class="beat-meta">
               <span id="beatHeaderLeft">HIỆN TẠI</span>
@@ -343,34 +351,37 @@
         <!-- GÓC DƯỚI BÊN TRÁI -->
         <footer class="bottom-left-hud">
           <div class="hud-row">
-            <div class="clock-display" id="clockDisplay">⏳ Năm 45 · Mùa Giá (Ngày 12/15) · 08h00</div>
+            <div class="clock-display" id="clockDisplay">⏳ Năm 45 · Mùa Giá (Ngày 10/15) · 08h00</div>
             <div class="stock-pills">
-              <span class="stock-badge" id="stockXu">🪙 Tiền: 2 xu sắt</span>
+              <span class="stock-badge" id="stockXu">🪙 Tiền: 2 xu</span>
               <span class="stock-badge" id="stockWater">💧 Nước: 2 gáo</span>
               <span class="stock-badge" id="stockCui">🔥 Củi: 1.0 bó</span>
               <span class="stock-badge" id="stockFoodClean">🌾 Lương lành: 1.0</span>
               <span class="stock-badge spoiled" id="stockFoodSpoiled">🍂 Lương mốc: 0.0</span>
-              <span class="stock-badge secret" id="stockHidden" title="Lương thực giấu dưới hố gầm phản, người thu thuế không thấy được">🕳️ Hố giấu: 0.0</span>
+              <span class="stock-badge secret" id="stockHidden">🕳️ Hố giấu: 0.0</span>
             </div>
           </div>
           <div class="hud-row">
             <div class="feel-tags" id="feelTags"></div>
-            <button class="btn-skip-auto" id="btnSkipAuto">
-              ⏩ Để ngày tháng trôi (+2 Ngày theo tính cách)
+            <button class="btn-skip-auto" id="btnSkipAuto" title="Tự động ưu tiên ăn uống, sưởi ấm, bán đồ mua gạo trước rồi mới làm việc và rèn luyện">
+              ⏩ Để ngày tháng trôi (+2 Ngày · Tự ưu tiên Sinh tồn & Đổi đời)
             </button>
           </div>
         </footer>
       </section>
 
-      <!-- CỘT BÊN PHẢI: THANH ĐI LẠI GỌN TRÊN ĐẦU + HÀNH ĐỘNG CHI TIẾT TẠI CHỖ -->
+      <!-- CỘT BÊN PHẢI: THANH ĐI LẠI ĐỐI XỨNG + DANH SÁCH HÀNH ĐỘNG RÕ ĐIỀU KIỆN -->
       <aside class="right-column">
         <div class="travel-bar" id="travelBar">
-          <div class="travel-bar-label">🚶 Di chuyển sang nơi khác (Tốn 12–25 phút đi bộ):</div>
+          <div class="travel-bar-label">
+            <span>🚶 Di chuyển (Quãng đường 2 chiều đối xứng · Tốc độ tùy thể trạng):</span>
+            <span id="speedStatusHint" style="color:#ffd982;"></span>
+          </div>
           <div class="travel-chips" id="travelChips"></div>
         </div>
         <div class="right-header">
           <div class="right-title">
-            <span>Việc có thể làm tại đây</span>
+            <span>Hành động tại chỗ (Mờ = Chưa đủ điều kiện)</span>
             <span id="rightLocHint" style="color:#ffd982; font-weight:600;"></span>
           </div>
           <div class="filter-tabs" id="filterTabs"></div>
@@ -393,7 +404,7 @@
 
   <script>
     // =========================================================================
-    // 1. ÂM THANH TẢ THỰC (KHÔNG CÓ ÂM THANH LÚC THOÁT HIỂM)
+    // 1. ÂM THANH TẢ THỰC (KHÔNG CÓ ÂM THANH KHI THOÁT NẠN)
     // =========================================================================
     const SoundFX = {
       ctx: null,
@@ -413,7 +424,7 @@
         osc.type = 'triangle';
         osc.frequency.setValueAtTime(135, now);
         osc.frequency.exponentialRampToValueAtTime(38, now + 0.11);
-        gain.gain.setValueAtTime(0.32, now);
+        gain.gain.setValueAtTime(0.3, now);
         gain.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
         osc.connect(gain); gain.connect(this.ctx.destination);
         osc.start(now); osc.stop(now + 0.12);
@@ -471,7 +482,7 @@
           osc.frequency.setValueAtTime(190, now);
           osc.frequency.linearRampToValueAtTime(280, now + 0.05);
           osc.frequency.exponentialRampToValueAtTime(85, now + 0.18);
-          gain.gain.setValueAtTime(0.3, now);
+          gain.gain.setValueAtTime(0.28, now);
           gain.gain.exponentialRampToValueAtTime(0.01, now + 0.19);
           osc.connect(gain); gain.connect(this.ctx.destination);
           osc.start(now); osc.stop(now + 0.19);
@@ -485,7 +496,7 @@
         osc.type = 'sine';
         osc.frequency.setValueAtTime(60, now);
         osc.frequency.exponentialRampToValueAtTime(32, now + 0.14);
-        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.setValueAtTime(0.28, now);
         gain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
         osc.connect(gain); gain.connect(this.ctx.destination);
         osc.start(now); osc.stop(now + 0.15);
@@ -498,7 +509,7 @@
         osc.type = 'sine';
         osc.frequency.setValueAtTime(110, now);
         osc.frequency.exponentialRampToValueAtTime(55, now + 1.4);
-        gain.gain.setValueAtTime(0.25, now);
+        gain.gain.setValueAtTime(0.24, now);
         gain.gain.exponentialRampToValueAtTime(0.005, now + 1.45);
         osc.connect(gain); gain.connect(this.ctx.destination);
         osc.start(now); osc.stop(now + 1.45);
@@ -506,20 +517,34 @@
     };
 
     // =========================================================================
-    // 2. DANH MỤC ĐỊA ĐIỂM & KHO HÀNH ĐỘNG ĐỜI THỰC PHONG PHÚ TẠI TỪNG NƠI
+    // 2. MA TRẬN KHOẢNG CÁCH 2 CHIỀU ĐỐI XỨNG TUYỆT ĐỐI & ĐỊA ĐIỂM ĐỔI ĐỜI
     // =========================================================================
+    // Tọa độ vị trí (km quy đổi ra phút đi bộ chuẩn của thanh niên khỏe mạnh)
     const PLACES = [
-      { id: "nha", short: "🏠 Gian nhà tranh", full: "Gian nhà tranh (Trong nhà)", minutes: 12, dayOnly: false },
-      { id: "duong_lang", short: "🏘️ Đường làng & Giếng", full: "Đường làng & Hiên Hỏa Đường", minutes: 10, dayOnly: false },
-      { id: "bia_rung", short: "🌲 Bìa Rừng Đen", full: "Bìa Rừng Đen (Trên rừng)", minutes: 24, dayOnly: true },
-      { id: "ruong_chu_ap", short: "🌾 Đồng Chủ Ấp", full: "Cánh đồng Chủ Ấp", minutes: 15, dayOnly: true },
-      { id: "cho_ben_say", short: "🧺 Chợ Bến Sậy", full: "Chợ phiên Bến Sậy", minutes: 15, dayOnly: true },
-      { id: "quan_bon_nga", short: "🍶 Quán Bốn Ngả", full: "Quán trọ Bốn Ngả", minutes: 12, dayOnly: false },
-      { id: "cua_hieu", short: "📜 Hiệu Hạ Giang", full: "Cửa hiệu buôn Hạ Giang", minutes: 12, dayOnly: true }
+      { id: "nha", short: "🏠 Gian nhà tranh", full: "Gian nhà tranh (Trong nhà)", coord: 0, isCity: false },
+      { id: "duong_lang", short: "🏘️ Đường làng & Hỏa Đường", full: "Đường làng & Trường chữ Hỏa Đường", coord: 8, isCity: false },
+      { id: "ruong_chu_ap", short: "🌾 Đồng Chủ Ấp", full: "Cánh đồng Chủ Ấp", coord: 14, isCity: false },
+      { id: "bia_rung", short: "🌲 Bìa Rừng Đen", full: "Bìa Rừng Đen (Trên rừng)", coord: 20, isCity: false },
+      { id: "cho_ben_say", short: "🧺 Chợ & Bến Sậy", full: "Chợ phiên & Bến thuyền Bến Sậy", coord: 16, isCity: false },
+      { id: "quan_bon_nga", short: "🍶 Quán Bốn Ngả", full: "Quán trọ Bốn Ngả (Bến Bắc)", coord: 18, isCity: false },
+      { id: "don_bien_ngan", short: "⚔️ Đồn Biên Ngạn (Luyện võ)", full: "Đồn Biên Ngạn & Lò Rèn Họ Khổng", coord: 32, isCity: true },
+      { id: "kinh_hoai", short: "🏛️ Kinh đô Kinh Hoài (Đổi đời)", full: "Kinh đô Kinh Hoài & Thư Viện / Bang Hàng", coord: 40, isCity: true }
     ];
 
     const PLACE_NAMES = {};
     PLACES.forEach(p => PLACE_NAMES[p.id] = p.full);
+
+    // Ma trận đối xứng: Thời gian đi từ A -> B luôn BẰNG B -> A ở cùng thể trạng!
+    const BASE_DIST_MINUTES = {
+      nha:           { nha: 0,  duong_lang: 8,  ruong_chu_ap: 14, bia_rung: 20, cho_ben_say: 16, quan_bon_nga: 18, don_bien_ngan: 32, kinh_hoai: 40 },
+      duong_lang:    { nha: 8,  duong_lang: 0,  ruong_chu_ap: 8,  bia_rung: 16, cho_ben_say: 10, quan_bon_nga: 12, don_bien_ngan: 28, kinh_hoai: 35 },
+      ruong_chu_ap:  { nha: 14, duong_lang: 8,  ruong_chu_ap: 0,  bia_rung: 14, cho_ben_say: 12, quan_bon_nga: 15, don_bien_ngan: 30, kinh_hoai: 38 },
+      bia_rung:      { nha: 20, duong_lang: 16, ruong_chu_ap: 14, bia_rung: 0,  cho_ben_say: 22, quan_bon_nga: 20, don_bien_ngan: 24, kinh_hoai: 45 },
+      cho_ben_say:   { nha: 16, duong_lang: 10, ruong_chu_ap: 12, bia_rung: 22, cho_ben_say: 0,  quan_bon_nga: 6,  don_bien_ngan: 26, kinh_hoai: 30 },
+      quan_bon_nga:  { nha: 18, duong_lang: 12, ruong_chu_ap: 15, bia_rung: 20, cho_ben_say: 6,  quan_bon_nga: 0,  don_bien_ngan: 22, kinh_hoai: 28 },
+      don_bien_ngan: { nha: 32, duong_lang: 28, ruong_chu_ap: 30, bia_rung: 24, cho_ben_say: 26, quan_bon_nga: 22, don_bien_ngan: 0,  kinh_hoai: 36 },
+      kinh_hoai:     { nha: 40, duong_lang: 35, ruong_chu_ap: 38, bia_rung: 45, cho_ben_say: 30, quan_bon_nga: 28, don_bien_ngan: 36, kinh_hoai: 0  }
+    };
 
     const CONFIG = {
       seasons: ["Nảy (Xuân)", "Nắng (Hạ)", "Gặt (Thu)", "Giá (Đông)"],
@@ -535,335 +560,414 @@
       }
     };
 
+    // =========================================================================
+    // 3. DANH SÁCH HÀNH ĐỘNG ĐỜI THỰC + HỌC CHỮ, VÕ THUẬT, BUÔN BÁN & ĐỔI ĐỜI
+    // =========================================================================
     const ACTIONS = [
       // ==================== A. TRONG NHÀ (nha) ====================
       {
-        mau: "khoc_goi_me", ten_vi: "Khóc gọi hơi ấm của mẹ", nhom: "Sinh hoạt", thoi_luong_mo: "một chốc",
+        mau: "ngu_qua_dem", ten_vi: "🛏️ Lên phản đắp chăn ngủ qua đêm tới sáng (Hồi phục toàn diện)", nhom: "Ngủ & Nghỉ ngơi",
+        thoi_luong_mo: "tới 6h sáng", tai_noi: ["nha"], so_nhip: 4, sfx: "step", is_sleep: true,
+        giai_doan: ["so_sinh", "au_nhi", "thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
+        yeu_cau_gio_dem: true, yeu_cau: {}, tag: ["ban_nang", "nghi_ngoi"],
+        chi_phi: { the_luc: 0, chan: 0, doi: 0 }, ket_qua: { ngu_toi_sang: true },
+        mo_ta: "Bạn cài cửa, kéo ổ rơm và chăn vải thô đắp kín người, chìm vào giấc ngủ sâu qua đêm lạnh."
+      },
+      {
+        mau: "chop_mat_nghi", ten_vi: "💤 Chợp mắt nằm nghỉ trên phản gỗ (Hồi +28 Thể lực)", nhom: "Ngủ & Nghỉ ngơi",
+        thoi_luong_mo: "24 phút", tai_noi: ["nha"], so_nhip: 4, sfx: "step",
+        giai_doan: ["so_sinh", "au_nhi", "thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
+        yeu_cau: {}, tag: ["ban_nang", "nghi_ngoi"],
+        chi_phi: { the_luc: 7.0, chan: -2.0, doi: 0.6 }, ket_qua: {},
+        mo_ta: "Bạn nằm duỗi lưng trên chiếc phản gỗ trong nhà, điều hòa hơi thở để cơ bắp phục hồi."
+      },
+      {
+        mau: "khoc_goi_me", ten_vi: "Khóc gọi hơi ấm của mẹ", nhom: "Bản năng sơ sinh", thoi_luong_mo: "12 phút",
         tai_noi: ["nha"], so_nhip: 2, sfx: "step", giai_doan: ["so_sinh"], yeu_cau: { noi: 0 }, tag: ["ban_nang"],
         chi_phi: { the_luc: -1, chan: 0, doi: 1 }, ket_qua: { lanh: -15 },
         mo_ta: "Cổ họng bạn bật ra tiếng khóc khàn đặc, mẹ vội vã kéo thêm ổ rơm khô ủ ấm quanh người bạn."
       },
       {
-        mau: "bu_me", ten_vi: "Bú sữa mẹ", nhom: "Sinh hoạt", thoi_luong_mo: "một chốc",
+        mau: "bu_me", ten_vi: "Bú sữa mẹ", nhom: "Bản năng sơ sinh", thoi_luong_mo: "18 phút",
         tai_noi: ["nha"], so_nhip: 3, sfx: "step", can_nguoi: "me", giai_doan: ["so_sinh"], yeu_cau: {}, tag: ["ban_nang"],
         chi_phi: { the_luc: 2, chan: -4, doi: -18 }, ket_qua: { lanh: -8, suc_khoe: 2 },
         mo_ta: "Hơi ấm từ lòng mẹ và dòng sữa nóng làm cái bụng nhỏ dịu cơn co thắt."
       },
       {
-        mau: "an_luong_lanh", ten_vi: "Nấu cháo nóng từ lương lành (-0.5 Lương lành, -1 Gáo nước)", nhom: "Bếp núc & Ăn uống", thoi_luong_mo: "một chốc",
-        tai_noi: ["nha"], so_nhip: 3, sfx: "fire", can_do_vat: "luong_lanh",
+        mau: "an_luong_lanh", ten_vi: "🍚 Bắc nồi nấu cháo lương lành (Giảm mạnh cơn đói & hồi sức)", nhom: "Bếp núc & Ăn uống",
+        thoi_luong_mo: "18 phút", tai_noi: ["nha"], so_nhip: 3, sfx: "fire",
         giai_doan: ["au_nhi", "thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
-        yeu_cau: {}, tieu_hao: { luong_lanh: 0.5, nuoc: 1 }, tag: ["sinh_ton"],
-        chi_phi: { the_luc: 3, chan: -3, doi: -19 }, ket_qua: { suc_khoe: 2, lanh: -8, bep_am: true },
-        mo_ta: "Ở góc bếp trong nhà, bạn đun sôi nắm gạo lành với nước sạch. Hơi cháo nóng hổi làm cơ thể ấm sực lên."
+        yeu_cau: {}, req_check: { luong_lanh: 0.3, nuoc: 1 }, tieu_hao: { luong_lanh_linh_hoat: 0.4, nuoc: 1 }, tag: ["sinh_ton"],
+        chi_phi: { the_luc: 4, chan: -4, doi: -22 }, ket_qua: { suc_khoe: 3, lanh: -10, bep_am: true },
+        mo_ta: "Ở góc bếp trong nhà, bạn đun sôi gạo lành với nước sạch. Bát cháo nóng hổi làm cơ thể ấm sực và tỉnh táo hẳn lên."
       },
       {
-        mau: "an_luong_moc", ten_vi: "Luộc kỹ lương ẩm mốc với nước muối (-0.5 Lương mốc)", nhom: "Bếp núc & Ăn uống", thoi_luong_mo: "một chốc",
-        tai_noi: ["nha"], so_nhip: 4, sfx: "fire", can_do_vat: "luong_moc",
+        mau: "an_luong_moc", ten_vi: "🥣 Luộc kỹ lương ẩm mốc cầm hơi (Dùng khi thiếu gạo lành)", nhom: "Bếp núc & Ăn uống",
+        thoi_luong_mo: "24 phút", tai_noi: ["nha"], so_nhip: 4, sfx: "fire",
         giai_doan: ["au_nhi", "thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
-        yeu_cau: {}, tieu_hao: { luong_moc: 0.5 }, tag: ["sinh_ton"],
-        chi_phi: { the_luc: 0, chan: 3, doi: -12 }, ket_qua: { an_luong_moc_xu_ly: true, bep_am: true },
-        mo_ta: "Bạn gạn rửa nhiều lần rồi đun kỹ phần bột mốc trước khi nhắm mắt nuốt xuống để cầm hơi qua bữa."
+        yeu_cau: {}, req_check: { luong_moc: 0.4 }, tieu_hao: { luong_moc: 0.4 }, tag: ["sinh_ton"],
+        chi_phi: { the_luc: 1, chan: 2, doi: -13 }, ket_qua: { an_luong_moc_xu_ly: true, bep_am: true },
+        mo_ta: "Bạn gạn rửa nhiều lần rồi đun kỹ phần bột mốc trước khi nhắm mắt nuốt xuống để cầm cự qua cơn đói."
       },
       {
-        mau: "phoi_sang_luong_moc", ten_vi: "Đem lương ẩm mốc ra sân sàng sảy & phơi nắng", nhom: "Bếp núc & Ăn uống", thoi_luong_mo: "nửa buổi",
-        tai_noi: ["nha"], so_nhip: 4, sfx: "step", can_do_vat: "luong_moc", can_anh_sang: true,
+        mau: "phoi_sang_luong_moc", ten_vi: "☀️ Đem lương ẩm mốc ra sân sàng sảy & phơi nắng (Chuyển thành Lương lành)", nhom: "Bếp núc & Ăn uống",
+        thoi_luong_mo: "24 phút", tai_noi: ["nha"], so_nhip: 4, sfx: "step",
         giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
-        yeu_cau: { tay_kheo: 1 }, tag: ["muu_sinh"],
-        chi_phi: { the_luc: -1.5, chan: 0.8, doi: 1.0 }, ket_qua: { cuu_luong_moc: true },
-        mo_ta: "Tranh thủ lúc có nắng hanh, bạn trải nong ra hiên nhà, tỉ mẩn nhặt bỏ hạt thối và phơi khô số lương bị ẩm."
+        yeu_cau: { tay_kheo: 1 }, req_check: { luong_moc: 0.4, ban_ngay: true }, tag: ["muu_sinh"],
+        chi_phi: { the_luc: -1.2, chan: 0.5, doi: 0.8 }, ket_qua: { cuu_luong_moc: true },
+        mo_ta: "Tranh thủ lúc ban ngày có nắng hanh, bạn trải nong ra hiên nhà, tỉ mẩn nhặt bỏ hạt thối và phơi khô số lương bị ẩm."
       },
       {
-        mau: "dun_nuoc_sac_thuoc", ten_vi: "Đun nước sôi / Sắc lá thuốc uống ấm bụng", nhom: "Bếp núc & Ăn uống", thoi_luong_mo: "một chốc",
-        tai_noi: ["nha"], so_nhip: 3, sfx: "fire", can_nuoc: 1,
+        mau: "dun_nuoc_sac_thuoc", ten_vi: "🍵 Đun nước sôi / Sắc thảo dược uống ấm bụng & trị bệnh", nhom: "Bếp núc & Ăn uống",
+        thoi_luong_mo: "18 phút", tai_noi: ["nha"], so_nhip: 3, sfx: "fire",
         giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
-        yeu_cau: {}, tieu_hao: { nuoc: 1 }, tag: ["sinh_ton"],
-        chi_phi: { the_luc: 1.5, chan: -1, doi: -2 }, ket_qua: { uong_nuoc_am: true, bep_am: true },
-        mo_ta: "Bạn bắc siêu đất đun sôi gáo nước giếng (kèm lá thuốc nếu có), húp từng ngụm nóng giúp bụng êm lại và đỡ nhiễm lạnh."
+        yeu_cau: {}, req_check: { nuoc: 1 }, tieu_hao: { nuoc: 1 }, tag: ["sinh_ton"],
+        chi_phi: { the_luc: 2.0, chan: -1.5, doi: -2 }, ket_qua: { uong_nuoc_am: true, bep_am: true },
+        mo_ta: "Bạn bắc siêu đất đun sôi gáo nước giếng (kèm lá thuốc nếu có), húp từng ngụm nóng giúp bụng êm lại và đẩy lùi khí lạnh."
       },
       {
-        mau: "dot_lua_suoi", ten_vi: "Nhóm bếp củi sưởi ấm gian nhà (-0.7 Củi khô)", nhom: "Bếp núc & Ăn uống", thoi_luong_mo: "nửa buổi",
-        tai_noi: ["nha"], so_nhip: 4, sfx: "fire", can_do_vat: "cui",
+        mau: "dot_lua_suoi", ten_vi: "🔥 Nhóm bếp củi sưởi ấm gian nhà (Xua tan rét cóng)", nhom: "Bếp núc & Ăn uống",
+        thoi_luong_mo: "24 phút", tai_noi: ["nha"], so_nhip: 4, sfx: "fire",
         giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
-        yeu_cau: { tay_kheo: 0 }, tieu_hao: { cui: 0.7 }, tag: ["sinh_ton"],
-        chi_phi: { the_luc: 2, chan: -2, doi: 0.8 }, ket_qua: { lanh: -34, bep_am: true },
+        yeu_cau: { tay_kheo: 0 }, req_check: { cui: 0.6 }, tieu_hao: { cui: 0.6 }, tag: ["sinh_ton"],
+        chi_phi: { the_luc: 2.5, chan: -2, doi: 0.6 }, ket_qua: { lanh: -38, bep_am: true },
         mo_ta: "Ngọn lửa bập bùng bén vào củi khô trong bếp, xua đi cái lạnh cắt da đang luồn qua khe vách."
       },
       {
-        mau: "cai_then_cua", ten_vi: "Cài / Mở then cửa gỗ đầu hồi", nhom: "Nhà cửa & Phòng bị", thoi_luong_mo: "tức thì",
-        tai_noi: ["nha"], so_nhip: 1, sfx: "chop",
+        mau: "cat_luong_xuong_ho", ten_vi: "🕳️ Cất giấu 0.5 phần Lương lành xuống hố gầm phản (Chống tịch thu)", nhom: "Nhà cửa & Phòng bị",
+        thoi_luong_mo: "12 phút", tai_noi: ["nha"], so_nhip: 2, sfx: "step",
+        giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
+        yeu_cau: { tay_kheo: 0 }, req_check: { luong_lanh: 0.5, ho_chua_day: true }, tag: ["sinh_ton"],
+        chi_phi: { the_luc: -0.6, chan: 0, doi: 0.2 }, ket_qua: { cat_xuong_ho: true },
+        mo_ta: "Bạn lật tấm ván mục dưới gầm phản tối om, đem 0.5 phần lương lành cất xuống hố đất rồi phủ tro lên trên."
+      },
+      {
+        mau: "lay_luong_tu_ho", ten_vi: "🕳️ Lấy lương lành từ dưới hố gầm phản lên để nấu ăn", nhom: "Nhà cửa & Phòng bị",
+        thoi_luong_mo: "6 phút", tai_noi: ["nha"], so_nhip: 1, sfx: "step",
+        giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
+        yeu_cau: { tay_kheo: 0 }, req_check: { co_do_trong_ho: true }, tag: ["sinh_ton"],
+        chi_phi: { the_luc: -0.3, chan: 0, doi: 0.1 }, ket_qua: { lay_tu_ho: true },
+        mo_ta: "Bạn mở nắp hầm nhỏ dưới gầm phản, lấy toàn bộ phần lương thực dự phòng lên để chuẩn bị nấu cháo."
+      },
+      {
+        mau: "cai_then_cua", ten_vi: "🔒 Cài / Mở then cửa gỗ đầu hồi", nhom: "Nhà cửa & Phòng bị",
+        thoi_luong_mo: "6 phút", tai_noi: ["nha"], so_nhip: 1, sfx: "chop",
         giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
         yeu_cau: { tay_kheo: 0 }, tag: ["sinh_ton"],
         chi_phi: { the_luc: -0.2, chan: 0, doi: 0.1 }, ket_qua: { doi_trang_thai_cua: true },
-        mo_ta: "Bạn bước tới cánh cửa gỗ, kiểm tra lại thanh cài then."
+        mo_ta: "Bạn bước tới cánh cửa gỗ, điều chỉnh lại thanh cài then."
       },
       {
-        mau: "va_vach_tranh", ten_vi: "Trát bùn & chèn rơm vá kín khe vách rách (-0.4 Củi)", nhom: "Nhà cửa & Phòng bị", thoi_luong_mo: "nửa buổi",
-        tai_noi: ["nha"], so_nhip: 5, sfx: "step", can_do_vat: "cui", chi_hien_khi_vach_rach: true,
+        mau: "va_vach_tranh", ten_vi: "🧱 Trát bùn & chèn rơm vá kín khe vách rách", nhom: "Nhà cửa & Phòng bị",
+        thoi_luong_mo: "30 phút", tai_noi: ["nha"], so_nhip: 5, sfx: "step", chi_hien_khi_vach_rach: true,
         giai_doan: ["thieu_nien", "truong_thanh", "trung_nien", "gia"],
-        yeu_cau: { tay_kheo: 1 }, tieu_hao: { cui: 0.4 }, can_anh_sang: true, tag: ["sinh_ton"],
-        chi_phi: { the_luc: -2.5, chan: 0.8, doi: 1.2 }, ket_qua: { va_kin_vach: true },
+        yeu_cau: { tay_kheo: 1 }, req_check: { cui: 0.4 }, tieu_hao: { cui: 0.4 }, tag: ["sinh_ton"],
+        chi_phi: { the_luc: -2.2, chan: 0.6, doi: 1.0 }, ket_qua: { va_kin_vach: true },
         mo_ta: "Bạn trộn bùn đất với rơm bện trát kín những khe hở trên vách nứa. Nhà vừa ấm hơn vừa ngăn người ngoài ngó trộm vào trong."
       },
       {
-        mau: "chang_mai_nha", ten_vi: "Chằng lại kèo mái tranh chống gió lốc (-0.4 Củi)", nhom: "Nhà cửa & Phòng bị", thoi_luong_mo: "nửa buổi",
-        tai_noi: ["nha"], so_nhip: 4, sfx: "chop", can_do_vat: "cui", chi_hien_khi_mai_yeu: true,
+        mau: "chang_mai_nha", ten_vi: "🏠 Chằng lại kèo mái tranh chống gió lốc mùa Giá", nhom: "Nhà cửa & Phòng bị",
+        thoi_luong_mo: "24 phút", tai_noi: ["nha"], so_nhip: 4, sfx: "chop", chi_hien_khi_mai_yeu: true,
         giai_doan: ["thieu_nien", "truong_thanh", "trung_nien", "gia"],
-        yeu_cau: { tay_kheo: 1 }, tieu_hao: { cui: 0.4 }, can_anh_sang: true, tag: ["sinh_ton"],
-        chi_phi: { the_luc: -2.5, chan: 0.6, doi: 1.2 }, ket_qua: { gia_co_mai: true },
-        mo_ta: "Bạn dùng dây mây và cành gỗ cứng buộc chặt lại các thanh xà mái hiên, yên tâm không sợ gió bấc giật sập mái nữa."
+        yeu_cau: { tay_kheo: 1 }, req_check: { cui: 0.4 }, tieu_hao: { cui: 0.4 }, tag: ["sinh_ton"],
+        chi_phi: { the_luc: -2.2, chan: 0.5, doi: 1.0 }, ket_qua: { gia_co_mai: true },
+        mo_ta: "Bạn dùng dây mây và cành gỗ cứng buộc chặt lại các thanh xà mái hiên, yên tâm không sợ gió bấc giật tốc mái nữa."
       },
       {
-        mau: "giau_do_gam_phan", ten_vi: "Đào hố dưới gầm phản giấu/lấy lương thực (Chống tịch thu)", nhom: "Nhà cửa & Phòng bị", thoi_luong_mo: "một chốc",
-        tai_noi: ["nha"], so_nhip: 2, sfx: "step",
+        mau: "ben_duoc_di_dem", ten_vi: "🔦 Bện bó đuốc tẩm nhựa thông (Để soi đường đi rừng ban đêm)", nhom: "Thủ công & Rèn luyện",
+        thoi_luong_mo: "12 phút", tai_noi: ["nha"], so_nhip: 2, sfx: "fire",
         giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
-        yeu_cau: { tay_kheo: 0 }, tag: ["sinh_ton"],
-        chi_phi: { the_luc: -0.8, chan: 0, doi: 0.3 }, ket_qua: { chuyen_ho_giau_do: true },
-        mo_ta: "Bạn lật tấm ván mục dưới gầm phản tối om, cất giấu (hoặc lấy ra) phần lương thực dự phòng rồi phủ tro đất lên trên."
+        yeu_cau: { tay_kheo: 1 }, req_check: { cui: 0.3 }, tieu_hao: { cui: 0.3 }, tag: ["muu_sinh"],
+        chi_phi: { the_luc: -0.8, chan: 0, doi: 0.4 }, ket_qua: { tao_duoc: 1 },
+        mo_ta: "Bạn bó chặt cành khô với giẻ tẩm nhựa thông, tạo thành cây đuốc sáng rực giúp đi rừng ban đêm không sợ lạc hay thú dữ."
       },
       {
-        mau: "bo_cui_tai_nha", ten_vi: "Bổ khúc gỗ thô thành củi đốt (-1 Gỗ thô -> +1.5 Củi khô)", nhom: "Thủ công & Nghỉ ngơi", thoi_luong_mo: "nửa buổi",
-        tai_noi: ["nha"], so_nhip: 5, sfx: "chop", can_do_vat: "go_tho", can_riu: true,
+        mau: "bo_cui_tai_nha", ten_vi: "🪓 Bổ khúc gỗ thô thành củi đốt (+1.5 Bó củi khô)", nhom: "Thủ công & Rèn luyện",
+        thoi_luong_mo: "30 phút", tai_noi: ["nha"], so_nhip: 5, sfx: "chop",
         giai_doan: ["thieu_nien", "truong_thanh", "trung_nien", "gia"],
-        yeu_cau: { suc_manh: 1, tay_kheo: 1 }, tieu_hao: { go_tho: 1.0 }, can_anh_sang: true, tag: ["muu_sinh"],
-        chi_phi: { the_luc: -3.0, chan: 1.0, doi: 1.5 }, ket_qua: { cui: 1.5 },
+        yeu_cau: { suc_manh: 1, tay_kheo: 1 }, req_check: { go_tho: 1.0, co_riu: true }, tieu_hao: { go_tho: 1.0 }, tag: ["muu_sinh"],
+        chi_phi: { the_luc: -2.8, chan: 0.8, doi: 1.4 }, ket_qua: { cui: 1.5 },
         mo_ta: "Ở hiên sau nhà, bạn vung rìu bổ những khúc gỗ thô mang từ rừng về thành từng thanh củi nhỏ xếp gọn gàng."
       },
       {
-        mau: "dan_ro_ben_thung", ten_vi: "Ngồi đan rổ rá / Bện thừng rơm (Đem ra chợ bán)", nhom: "Thủ công & Nghỉ ngơi", thoi_luong_mo: "nửa buổi",
-        tai_noi: ["nha"], so_nhip: 5, sfx: "step",
+        mau: "dan_ro_ben_thung", ten_vi: "🧺 Ngồi đan rổ rá / Bện thừng rơm (+1 Đồ đan đem ra chợ bán lấy xu)", nhom: "Thủ công & Rèn luyện",
+        thoi_luong_mo: "30 phút", tai_noi: ["nha"], so_nhip: 5, sfx: "step",
         giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
         yeu_cau: { tay_kheo: 1 }, tag: ["muu_sinh"],
-        chi_phi: { the_luc: -1.4, chan: 0.5, doi: 1.1 }, ket_qua: { do_dan_lat: 1 },
+        chi_phi: { the_luc: -1.3, chan: 0.4, doi: 1.0 }, ket_qua: { do_dan_lat: 1 },
         mo_ta: "Ngồi trong nhà tránh gió (dù mắt mờ hay đêm tối vẫn lần tay làm được), bạn chẻ tre bện rơm đan thành chiếc rổ chắc chắn."
       },
       {
-        mau: "ke_chuyen_cho_chau", ten_vi: "Kể chuyện mùa cũ & Dạy cháu đan lát bên bếp", nhom: "Thủ công & Nghỉ ngơi", thoi_luong_mo: "một chốc",
-        tai_noi: ["nha"], so_nhip: 4, sfx: "fire", can_nguoi: "con_chau",
-        giai_doan: ["trung_nien", "gia"],
-        yeu_cau: { noi: 1, tri_nho: 1 }, tag: ["xa_hoi"],
-        chi_phi: { the_luc: -0.5, chan: -3.0, doi: 0.8 }, ket_qua: { luong_lanh: 0.25 },
-        mo_ta: "Trong gian nhà ấm, bạn chỉ dạy đám trẻ cách nhìn mây đoán gió và được con cháu biếu phần cơm nóng."
-      },
-      {
-        mau: "tinh_tam_nham_ca", ten_vi: "Ngồi tĩnh tâm / Nhẩm lại khúc ca và chuyện cũ", nhom: "Thủ công & Nghỉ ngơi", thoi_luong_mo: "một chốc",
-        tai_noi: ["nha"], so_nhip: 3, sfx: "step",
+        mau: "on_chu_doc_sach_nha", ten_vi: "📖 Ngồi bên đèn dầu ôn luyện mặt chữ & nghiền ngẫm sách (+Tri thức)", nhom: "Thủ công & Rèn luyện",
+        thoi_luong_mo: "30 phút", tai_noi: ["nha"], so_nhip: 5, sfx: "step",
         giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
-        yeu_cau: {}, tag: ["ban_nang", "nghi_ngoi"],
-        chi_phi: { the_luc: 2.5, chan: -5.0, doi: 0.5 }, ket_qua: {},
-        mo_ta: "Bạn ngồi xếp bằng trong góc nhà yên tĩnh, hít thở sâu và nhẩm lại những điều từng trải để lòng vơi bớt bức bối."
+        yeu_cau: { thi_giac: 1, tri_nho: 1 }, req_check: { tri_thuc_min: 1 }, tag: ["tri_thuc"],
+        chi_phi: { the_luc: -0.8, chan: 0.5, doi: 0.8 }, ket_qua: { tang_tri_thuc: 1 },
+        mo_ta: "Bạn lấy que củi cháy dở vạch từng nét chữ lên nền đất phẳng trong nhà, ôn lại những chữ đã học để chuẩn bị vào Kinh Hoài ứng tuyển."
       },
       {
-        mau: "nam_nghi", ten_vi: "Nằm nghỉ trên phản gỗ lấy lại sức", nhom: "Thủ công & Nghỉ ngơi", thoi_luong_mo: "một chốc",
-        tai_noi: ["nha"], so_nhip: 4, sfx: "step",
-        giai_doan: ["so_sinh", "au_nhi", "thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
-        yeu_cau: {}, tag: ["ban_nang", "nghi_ngoi"],
-        chi_phi: { the_luc: 7.5, chan: -1.5, doi: 0.7 }, ket_qua: {},
-        mo_ta: "Bạn nằm duỗi lưng trên chiếc phản gỗ trong nhà, hơi thở chậm lại giúp cơ bắp phục hồi."
+        mau: "luyen_dao_phap_san_nha", ten_vi: "🗡️ Đứng tấn & Vung đao gỗ luyện võ ngoài sân nhà (+Võ nghệ)", nhom: "Thủ công & Rèn luyện",
+        thoi_luong_mo: "30 phút", tai_noi: ["nha"], so_nhip: 5, sfx: "chop",
+        giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien"],
+        yeu_cau: { van_dong: 1, suc_manh: 1 }, tag: ["vo_thuat"],
+        chi_phi: { the_luc: -3.0, chan: -0.5, doi: 1.6 }, ket_qua: { tang_vo_nghe: 1 },
+        mo_ta: "Bạn đứng tấn vững chãi giữa khoảng sân hẹp, tập từng đường đao chém gió rèn luyện gân cốt và phản xạ thực chiến."
       },
 
-      // ==================== B. ĐƯỜNG LÀNG & HIÊN HỎA ĐƯỜNG (duong_lang) ====================
+      // ==================== B. ĐƯỜNG LÀNG & TRƯỜNG CHỮ HỎA ĐƯỜNG (duong_lang) ====================
       {
-        mau: "ganh_nuoc_gieng", ten_vi: "Ra giếng làng kéo nước sạch về nhà (+3 Gáo nước)", nhom: "Việc làng xóm", thoi_luong_mo: "một chốc",
-        tai_noi: ["duong_lang"], so_nhip: 3, sfx: "step",
+        mau: "ganh_nuoc_gieng", ten_vi: "💧 Ra giếng làng kéo nước sạch về nhà (+3 Gáo nước)", nhom: "Việc làng xóm",
+        thoi_luong_mo: "18 phút", tai_noi: ["duong_lang"], so_nhip: 3, sfx: "step",
         giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
         yeu_cau: { van_dong: 1 }, tag: ["sinh_ton"],
-        chi_phi: { the_luc: -1.8, chan: 0.2, doi: 0.9 }, ket_qua: { nuoc: 3 },
-        mo_ta: "Bạn thả gầu gỗ xuống giếng đá đầu làng, kéo lên làn nước trong vắt mang về đổ vào chum."
+        chi_phi: { the_luc: -1.6, chan: 0.2, doi: 0.8 }, ket_qua: { nuoc: 3 },
+        mo_ta: "Bạn thả gầu gỗ xuống giếng đá đầu làng, kéo lên làn nước trong vắt mang về đổ đầy chum."
       },
       {
-        mau: "hoi_tham_hang_xom", ten_vi: "Ghé sang nhà hàng xóm hỏi chuyện / Xin lửa bếp", nhom: "Việc làng xóm", thoi_luong_mo: "một chốc",
-        tai_noi: ["duong_lang"], so_nhip: 3, sfx: "step",
+        mau: "hoc_chu_hoa_duong", ten_vi: "📚 Ngồi nghe giảng sư Nhất Hỏa dạy nhận mặt chữ miễn phí (+Tri thức / Mở khóa Biết chữ)", nhom: "Học chữ & Đổi đời",
+        thoi_luong_mo: "30 phút", tai_noi: ["duong_lang"], so_nhip: 5, sfx: "step",
         giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
-        yeu_cau: { noi: 1 }, tag: ["xa_hoi"],
-        chi_phi: { the_luc: -0.6, chan: -2.0, doi: 0.6 }, ket_qua: { giao_tinh_hang_xom: true },
-        mo_ta: "Bạn đứng bên rào dâm bụt trò chuyện với bác hàng xóm, hỏi thăm lịch thu thuế và giữ tình tối lửa tắt đèn có nhau."
+        yeu_cau: { tri_nho: 1 }, req_check: { ban_ngay: true }, tag: ["tri_thuc"],
+        chi_phi: { the_luc: -1.0, chan: 0.6, doi: 0.9 }, ket_qua: { hoc_chu_lang: true },
+        mo_ta: "Dưới hiên thánh đường Nhất Hỏa, vị giảng sư kiên nhẫn viết từng chữ đơn giản lên bảng gỗ để dạy đám dân nghèo biết đọc phiếu thuế và sổ sách."
       },
       {
-        mau: "mot_rau_ven_muong", ten_vi: "Mót rau má, đào củ chuối ven bờ mương", nhom: "Việc làng xóm", thoi_luong_mo: "nửa buổi",
-        tai_noi: ["duong_lang"], so_nhip: 4, sfx: "step", can_anh_sang: true,
-        giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
-        yeu_cau: { van_dong: 1 }, tag: ["muu_sinh"],
-        chi_phi: { the_luc: -1.8, chan: 1.0, doi: 1.2 }, ket_qua: { hai_rau_muong: true },
-        mo_ta: "Bạn men theo bờ mương cạn quanh làng, vạch cỏ tìm những bụi rau dại và củ chuối còn sót lại."
-      },
-      {
-        mau: "xin_chao_hoa_duong", ten_vi: "Xếp hàng trước hiên Nhất Hỏa xin cháo bố thí", nhom: "Hiên Hỏa Đường", thoi_luong_mo: "một chốc",
-        tai_noi: ["duong_lang"], so_nhip: 4, sfx: "step",
+        mau: "xin_chao_hoa_duong", ten_vi: "🥣 Xếp hàng trước hiên Nhất Hỏa xin cháo bố thí", nhom: "Việc làng xóm",
+        thoi_luong_mo: "24 phút", tai_noi: ["duong_lang"], so_nhip: 4, sfx: "step",
         giai_doan: ["au_nhi", "thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
         yeu_cau: { van_dong: 1 }, tag: ["xa_hoi"],
-        chi_phi: { the_luc: -0.8, chan: 1.2, doi: 0.5 }, ket_qua: { xin_an_ngau_nhien: true },
-        mo_ta: "Bạn cầm bát đứng chờ trước nồi cháo công của các tu sĩ Nhất Hỏa và những nhà hảo tâm trong vùng."
+        chi_phi: { the_luc: -0.7, chan: 1.0, doi: 0.4 }, ket_qua: { xin_an_ngau_nhien: true },
+        mo_ta: "Bạn cầm bát đứng chờ trước nồi cháo công của các tu sĩ Nhất Hỏa."
       },
       {
-        mau: "xin_thuoc_hoa_duong", ten_vi: "Nhờ nữ tu y sĩ Nhất Hỏa bắt mạch & xin lá thuốc", nhom: "Hiên Hỏa Đường", thoi_luong_mo: "nửa buổi",
-        tai_noi: ["duong_lang"], so_nhip: 4, sfx: "step", can_anh_sang: true,
+        mau: "xin_thuoc_hoa_duong", ten_vi: "🌿 Nhờ nữ tu y sĩ Nhất Hỏa bắt mạch & xin thuốc trị bệnh (+8 Sức khỏe)", nhom: "Việc làng xóm",
+        thoi_luong_mo: "24 phút", tai_noi: ["duong_lang"], so_nhip: 4, sfx: "step",
         giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
-        yeu_cau: { noi: 1 }, tag: ["sinh_ton"],
-        chi_phi: { the_luc: -0.8, chan: 0, doi: 0.8 }, ket_qua: { kham_benh_mien_phi: true },
-        mo_ta: "Bạn ngồi chờ ở hiên nhà thuốc từ thiện để nữ tu y sĩ kiểm tra vết thương và cơn ho lạnh."
+        yeu_cau: { noi: 1 }, req_check: { ban_ngay: true }, tag: ["sinh_ton"],
+        chi_phi: { the_luc: -0.7, chan: 0, doi: 0.7 }, ket_qua: { kham_benh_mien_phi: true },
+        mo_ta: "Bạn ngồi chờ ở hiên nhà thuốc từ thiện để nữ tu y sĩ kiểm tra vết thương và cơn suy nhược."
       },
-
-      // ==================== C. TRÊN BÌA RỪNG ĐEN (bia_rung) ====================
       {
-        mau: "nhat_cui_rung", ten_vi: "Lội rừng nhặt cành củi khô gãy rụng (+0.6 Củi khô)", nhom: "Kiếm củi & Hái lượm", thoi_luong_mo: "nửa buổi",
-        tai_noi: ["bia_rung"], so_nhip: 5, sfx: "step", can_anh_sang: true,
+        mau: "mot_rau_ven_muong", ten_vi: "🌱 Mót rau má, đào củ chuối ven bờ mương (+0.3 Lương lành)", nhom: "Việc làng xóm",
+        thoi_luong_mo: "24 phút", tai_noi: ["duong_lang"], so_nhip: 4, sfx: "step",
         giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
         yeu_cau: { van_dong: 1 }, tag: ["muu_sinh"],
-        chi_phi: { the_luc: -2.2, chan: 1.0, doi: 1.5 }, ket_qua: { cui: 0.6 },
-        mo_ta: "Dưới tán cây ẩm ướt của Bìa Rừng Đen, bạn gom những cành củi khô gãy rụng bó lại mang về."
+        chi_phi: { the_luc: -1.6, chan: 0.8, doi: 1.0 }, ket_qua: { hai_rau_muong: true },
+        mo_ta: "Bạn men theo bờ mương cạn quanh làng, vạch cỏ tìm những bụi rau dại và củ chuối non sạch sẽ."
+      },
+
+      // ==================== C. TRÊN BÌA RỪNG ĐEN (bia_rung - ĐI ĐƯỢC CẢ NGÀY LẪN ĐÊM) ====================
+      {
+        mau: "nhat_cui_rung", ten_vi: "🔥 Lội rừng nhặt cành củi khô gãy rụng (+0.7 Bó củi khô)", nhom: "Kiếm củi & Hái lượm",
+        thoi_luong_mo: "30 phút", tai_noi: ["bia_rung"], so_nhip: 5, sfx: "step",
+        giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
+        yeu_cau: { van_dong: 1 }, tag: ["muu_sinh"],
+        chi_phi: { the_luc: -2.0, chan: 0.8, doi: 1.4 }, ket_qua: { cui: 0.7 },
+        mo_ta: "Dưới tán cây của Bìa Rừng Đen, bạn gom những cành củi khô gãy rụng bó chặt lại mang về."
       },
       {
-        mau: "don_go_rung", ten_vi: "Vung rìu đốn khúc gỗ lớn mang về nhà (Cần Rìu -> +1.3 Gỗ thô)", nhom: "Kiếm củi & Hái lượm", thoi_luong_mo: "khá lâu",
-        tai_noi: ["bia_rung"], so_nhip: 6, sfx: "chop", can_riu: true, can_anh_sang: true,
+        mau: "don_go_rung", ten_vi: "🪵 Vung rìu đốn khúc gỗ lớn (+1.4 Gỗ thô mang về nhà bổ củi)", nhom: "Kiếm củi & Hái lượm",
+        thoi_luong_mo: "36 phút", tai_noi: ["bia_rung"], so_nhip: 6, sfx: "chop",
         giai_doan: ["thieu_nien", "truong_thanh", "trung_nien"],
-        yeu_cau: { suc_manh: 1, van_dong: 1 }, tag: ["muu_sinh"],
-        chi_phi: { the_luc: -3.5, chan: 1.2, doi: 1.9 }, ket_qua: { go_tho: 1.3 },
-        mo_ta: "Bạn chọn những thân cây khô trên sườn đồi, vung rìu chặt thành từng khúc gỗ thô vác về nhà để dành bổ củi."
+        yeu_cau: { suc_manh: 1, van_dong: 1 }, req_check: { co_riu: true }, tag: ["muu_sinh"],
+        chi_phi: { the_luc: -3.2, chan: 1.0, doi: 1.8 }, ket_qua: { go_tho: 1.4 },
+        mo_ta: "Bạn chọn những thân cây khô trên sườn đồi, vung rìu chặt thành từng khúc gỗ thô vác về nhà."
       },
       {
-        mau: "hai_thao_duoc_nam", ten_vi: "Vạch lá tìm hái thảo dược, gừng gió & nấm rừng", nhom: "Kiếm củi & Hái lượm", thoi_luong_mo: "nửa buổi",
-        tai_noi: ["bia_rung"], so_nhip: 5, sfx: "step", can_anh_sang: true,
+        mau: "hai_thao_duoc_nam", ten_vi: "🌿 Tìm hái thảo dược, gừng gió & củ mài (+1 Thảo dược, +0.35 Lương lành)", nhom: "Kiếm củi & Hái lượm",
+        thoi_luong_mo: "30 phút", tai_noi: ["bia_rung"], so_nhip: 5, sfx: "step",
         giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
         yeu_cau: { van_dong: 1, thi_giac: 1 }, tag: ["muu_sinh"],
-        chi_phi: { the_luc: -2.0, chan: 0.5, doi: 1.4 }, ket_qua: { hai_loc_rung: true },
-        mo_ta: "Bạn lần theo các hốc đá ẩm và sườn đồi khuất gió tìm lá thuốc dân gian, củ mài và nấm hương."
+        chi_phi: { the_luc: -1.8, chan: 0.4, doi: 1.3 }, ket_qua: { hai_loc_rung: true },
+        mo_ta: "Bạn lần theo các hốc đá ẩm tìm lá thuốc dân gian, củ mài và nấm rừng."
       },
       {
-        mau: "san_tho_bia_rung", ten_vi: "Gài bẫy dây bắt thỏ hoang & gà rừng", nhom: "Săn bắt", thoi_luong_mo: "nửa ngày",
-        tai_noi: ["bia_rung"], so_nhip: 6, sfx: "step", can_anh_sang: true, gio_con_lai: 3,
+        mau: "san_tho_bia_rung", ten_vi: "🏹 Gài bẫy dây bắt thỏ hoang & gà rừng", nhom: "Săn bắt",
+        thoi_luong_mo: "36 phút", tai_noi: ["bia_rung"], so_nhip: 6, sfx: "step",
         giai_doan: ["thieu_nien", "truong_thanh", "trung_nien"],
         yeu_cau: { van_dong: 1, thi_giac: 1 }, tag: ["muu_sinh"],
-        chi_phi: { the_luc: -3.2, chan: 0.8, doi: 1.8 }, ket_qua: { san_bat_ngau_nhien: true },
+        chi_phi: { the_luc: -3.0, chan: 0.6, doi: 1.6 }, ket_qua: { san_bat_ngau_nhien: true },
         mo_ta: "Bạn lần theo vết chân thú trên lớp lá mục, kiên nhẫn gài dây bẫy ở lối mòn thú hoang hay qua lại."
-      },
-      {
-        mau: "bat_ca_khe_suoi", ten_vi: "Lội khe suối đá lật tìm cua ốc & cá nhỏ", nhom: "Săn bắt", thoi_luong_mo: "nửa buổi",
-        tai_noi: ["bia_rung"], so_nhip: 5, sfx: "step", can_anh_sang: true,
-        giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien"],
-        yeu_cau: { van_dong: 1, tay_kheo: 1 }, tag: ["muu_sinh"],
-        chi_phi: { the_luc: -2.4, chan: 0.6, doi: 1.5 }, ket_qua: { bat_oc_suoi: true },
-        mo_ta: "Bất chấp làn nước suối lạnh buốt, bạn lật từng hòn đá cuội bắt cá bống và ốc đá mang về cải thiện bữa ăn."
       },
 
       // ==================== D. CÁNH ĐỒNG CHỦ ẤP (ruong_chu_ap) ====================
       {
-        mau: "gat_lua_lao_dich", ten_vi: "Còng lưng gặt lúa lao dịch nộp Chủ Ấp", nhom: "Ngoài đồng", thoi_luong_mo: "khá lâu",
-        tai_noi: ["ruong_chu_ap"], so_nhip: 6, sfx: "chop", can_anh_sang: true,
+        mau: "gat_lua_lao_dich", ten_vi: "🌾 Còng lưng gặt lúa lao dịch nộp Chủ Ấp (Nhận thóc / xu công)", nhom: "Ngoài đồng",
+        thoi_luong_mo: "36 phút", tai_noi: ["ruong_chu_ap"], so_nhip: 6, sfx: "chop",
         giai_doan: ["thieu_nien", "truong_thanh", "trung_nien"],
         yeu_cau: { suc_manh: 2, van_dong: 2 }, tag: ["muu_sinh"],
-        chi_phi: { the_luc: -3.8, chan: 2.0, doi: 2.0 }, ket_qua: { tra_cong_lao_dich: true },
-        mo_ta: "Giữa cánh đồng lộng gió của Chủ Ấp, bạn còng lưng cắt từng lượm lúa dưới ánh mắt soi mói của gã quản trang."
+        chi_phi: { the_luc: -3.5, chan: 1.8, doi: 1.8 }, ket_qua: { tra_cong_lao_dich: true },
+        mo_ta: "Giữa cánh đồng của Chủ Ấp, bạn còng lưng cắt từng lượm lúa dưới ánh mắt soi mói của gã quản trang."
       },
       {
-        mau: "mot_lua_roi", ten_vi: "Cúi mót bông lúa sót lại trên gốc rạ", nhom: "Ngoài đồng", thoi_luong_mo: "nửa buổi",
-        tai_noi: ["ruong_chu_ap"], so_nhip: 4, sfx: "step", can_anh_sang: true,
+        mau: "mot_lua_roi", ten_vi: "🌾 Cúi mót bông lúa sót lại & mò củ ấu ven đầm", nhom: "Ngoài đồng",
+        thoi_luong_mo: "24 phút", tai_noi: ["ruong_chu_ap"], so_nhip: 4, sfx: "step",
         giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
         yeu_cau: { van_dong: 1 }, tag: ["muu_sinh"],
-        chi_phi: { the_luc: -2.0, chan: 1.2, doi: 1.4 }, ket_qua: { mot_lua_ngau_nhien: true },
-        mo_ta: "Chờ lúc đám thợ gặt đã đi xa, bạn cúi mò từng bông lúa sót lại dưới gốc rạ ướt bùn."
-      },
-      {
-        mau: "dao_cu_au_ven_dam", ten_vi: "Lội đầm lầy ven ruộng mò củ ấu, ngó sen", nhom: "Ngoài đồng", thoi_luong_mo: "nửa buổi",
-        tai_noi: ["ruong_chu_ap"], so_nhip: 4, sfx: "step", can_anh_sang: true,
-        giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien"],
-        yeu_cau: { van_dong: 1 }, tag: ["muu_sinh"],
-        chi_phi: { the_luc: -2.3, chan: 1.0, doi: 1.5 }, ket_qua: { dao_cu_au: true },
-        mo_ta: "Bạn dầm chân dưới bùn đầm ven ruộng, mò những củ ấu đen sẫm chắc ruột mang về luộc."
+        chi_phi: { the_luc: -1.8, chan: 1.0, doi: 1.2 }, ket_qua: { mot_lua_ngau_nhien: true },
+        mo_ta: "Bạn cúi mò từng bông lúa sót lại trên gốc rạ và vớt củ ấu già ven đầm."
       },
 
       // ==================== E. CHỢ PHIÊN BẾN SẬY (cho_ben_say) ====================
       {
-        mau: "doi_cui_lay_gao", ten_vi: "Đem 1.2 bó củi khô đổi lấy 0.6 phần gạo lành", nhom: "Mua bán & Đổi chác", thoi_luong_mo: "một chốc",
-        tai_noi: ["cho_ben_say"], so_nhip: 3, sfx: "step", can_cui_toi_thieu: 1.2,
+        mau: "mua_gao_bang_xu", ten_vi: "🍚 Dùng 2 Xu sắt đong 0.7 phần Lương lành", nhom: "Mua bán & Buôn chuyến",
+        thoi_luong_mo: "12 phút", tai_noi: ["cho_ben_say"], so_nhip: 2, sfx: "step",
         giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
-        yeu_cau: { van_dong: 1, noi: 1 }, tieu_hao: { cui: 1.2 }, tag: ["xa_hoi"],
-        chi_phi: { the_luc: -0.8, chan: 0, doi: 0.6 }, ket_qua: { luong_lanh: 0.6 },
-        mo_ta: "Ở góc chợ phiên Bến Sậy, bạn mặc cả với bà hàng gạo để đổi bó củi khô lấy một vốc gạo trắng mang về."
+        yeu_cau: { noi: 1 }, req_check: { xu_sat: 2 }, tieu_hao: { xu_sat: 2 }, tag: ["sinh_ton"],
+        chi_phi: { the_luc: -0.4, chan: -1, doi: 0.2 }, ket_qua: { luong_lanh: 0.7 },
+        mo_ta: "Bạn trao 2 đồng xu sắt cho hàng gạo ở Bến Sậy, đong đầy túi gạo trắng thơm mang về."
       },
       {
-        mau: "ban_do_dan_lat", ten_vi: "Bày bán rổ rá đan lát lấy tiền (-1 Đồ đan -> +3 Xu sắt)", nhom: "Mua bán & Đổi chác", thoi_luong_mo: "nửa buổi",
-        tai_noi: ["cho_ben_say"], so_nhip: 3, sfx: "step", can_do_dan_lat: 1,
+        mau: "doi_cui_lay_gao", ten_vi: "🔥 Đem 1.0 bó Củi khô đổi lấy 0.55 phần Lương lành", nhom: "Mua bán & Buôn chuyến",
+        thoi_luong_mo: "18 phút", tai_noi: ["cho_ben_say"], so_nhip: 3, sfx: "step",
         giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
-        yeu_cau: { noi: 1 }, tieu_hao: { do_dan_lat: 1 }, tag: ["muu_sinh"],
-        chi_phi: { the_luc: -0.8, chan: 0.5, doi: 0.7 }, ket_qua: { xu_sat: 3 },
-        mo_ta: "Bạn ngồi bên góc chợ bán chiếc rổ tre mình tự tay đan ở nhà, thu về được 3 đồng xu sắt."
+        yeu_cau: { van_dong: 1, noi: 1 }, req_check: { cui: 1.0 }, tieu_hao: { cui: 1.0 }, tag: ["xa_hoi"],
+        chi_phi: { the_luc: -0.6, chan: 0, doi: 0.5 }, ket_qua: { luong_lanh: 0.55 },
+        mo_ta: "Ở góc chợ Bến Sậy, bạn đổi bó củi khô lấy một túi gạo sạch."
       },
       {
-        mau: "mua_gao_bang_xu", ten_vi: "Dùng 3 xu sắt đong 0.8 phần gạo lành", nhom: "Mua bán & Đổi chác", thoi_luong_mo: "một chốc",
-        tai_noi: ["cho_ben_say"], so_nhip: 2, sfx: "step", can_xu: 3,
+        mau: "ban_do_dan_lat", ten_vi: "🧺 Bán 1 Đồ đan lát lấy +3 Xu sắt (& +Kinh nghiệm buôn bán)", nhom: "Mua bán & Buôn chuyến",
+        thoi_luong_mo: "18 phút", tai_noi: ["cho_ben_say"], so_nhip: 3, sfx: "step",
         giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
-        yeu_cau: { noi: 1 }, tieu_hao: { xu_sat: 3 }, tag: ["sinh_ton"],
-        chi_phi: { the_luc: -0.4, chan: -1, doi: 0.3 }, ket_qua: { luong_lanh: 0.8 },
-        mo_ta: "Bạn đếm đủ 3 đồng xu sắt trao cho hàng gạo, cẩn thận buộc chặt túi gạo mới vào lưng áo."
+        yeu_cau: { noi: 1 }, req_check: { do_dan_lat: 1 }, tieu_hao: { do_dan_lat: 1 }, tag: ["muu_sinh"],
+        chi_phi: { the_luc: -0.6, chan: 0.2, doi: 0.5 }, ket_qua: { xu_sat: 3, tang_buon_ban: 1 },
+        mo_ta: "Bạn khéo léo mời khách qua chợ mua chiếc rổ tre mình tự đan, thu về 3 đồng xu sắt và học thêm cách nhìn giá chợ."
       },
       {
-        mau: "boc_vac_ben_thuyen", ten_vi: "Bốc vác bao hàng thuê ở bến thuyền (+3 Xu sắt)", nhom: "Làm thuê ở chợ", thoi_luong_mo: "khá lâu",
-        tai_noi: ["cho_ben_say"], so_nhip: 6, sfx: "chop", can_anh_sang: true,
+        mau: "ban_thao_duoc_cho", ten_vi: "🌿 Bán 1 nắm Thảo dược rừng lấy +4 Xu sắt", nhom: "Mua bán & Buôn chuyến",
+        thoi_luong_mo: "18 phút", tai_noi: ["cho_ben_say"], so_nhip: 3, sfx: "step",
+        giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
+        yeu_cau: { noi: 1 }, req_check: { thao_duoc: 1 }, tieu_hao: { thao_duoc: 1 }, tag: ["muu_sinh"],
+        chi_phi: { the_luc: -0.5, chan: 0, doi: 0.4 }, ket_qua: { xu_sat: 4, tang_buon_ban: 1 },
+        mo_ta: "Hiệu thuốc ở chợ Bến Sậy thu mua ngay nắm thảo dược rừng của bạn với giá 4 đồng xu sắt."
+      },
+      {
+        mau: "mua_kien_hang_buon", ten_vi: "📦 Gom 1 Kiện hàng quê giá sỉ (-6 Xu sắt -> Đem lên Kinh Hoài bán lời gấp đôi)", nhom: "Mua bán & Buôn chuyến",
+        thoi_luong_mo: "24 phút", tai_noi: ["cho_ben_say"], so_nhip: 4, sfx: "step",
+        giai_doan: ["thieu_nien", "truong_thanh", "trung_nien", "gia"],
+        yeu_cau: { noi: 1 }, req_check: { xu_sat: 6 }, tieu_hao: { xu_sat: 6 }, tag: ["thuong_mai"],
+        chi_phi: { the_luc: -1.2, chan: -0.5, doi: 0.8 }, ket_qua: { hang_buon: 1, tang_buon_ban: 1 },
+        mo_ta: "Bạn gom mua một kiện tơ thô và muối hạt tại bến sông với giá 6 xu sắt, chuẩn bị gánh lên Kinh đô Kinh Hoài bán kiếm lời lớn!"
+      },
+      {
+        mau: "boc_vac_ben_thuyen", ten_vi: "⚓ Bốc vác bao hàng thuê ở bến thuyền (+3 Xu sắt)", nhom: "Làm thuê ở bến",
+        thoi_luong_mo: "36 phút", tai_noi: ["cho_ben_say"], so_nhip: 6, sfx: "chop",
         giai_doan: ["thieu_nien", "truong_thanh", "trung_nien"],
         yeu_cau: { suc_manh: 2, van_dong: 2 }, tag: ["muu_sinh"],
-        chi_phi: { the_luc: -3.8, chan: 1.5, doi: 2.0 }, ket_qua: { xu_sat: 3 },
-        mo_ta: "Bạn vác từng bao muối và kiện vải nặng trịch từ dưới thuyền lên bến, mồ hôi ướt đẫm lưng đổi lấy mấy đồng xu sắt."
-      },
-      {
-        mau: "nghe_tin_cho_phien", ten_vi: "Đi quanh chợ dò giá lúa & nghe người rao tin", nhom: "Làm thuê ở chợ", thoi_luong_mo: "một chốc",
-        tai_noi: ["cho_ben_say"], so_nhip: 3, sfx: "step",
-        giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
-        yeu_cau: { thinh_giac: 1 }, tag: ["xa_hoi"],
-        chi_phi: { the_luc: -0.8, chan: -1.5, doi: 0.7 }, ket_qua: { nghe_tin_cho: true },
-        mo_ta: "Bạn đi dọc các sạp hàng nghe ngóng giá lúa gạo và chuyện thời cuộc khắp vùng Hạ Giang."
+        chi_phi: { the_luc: -3.5, chan: 1.2, doi: 1.8 }, ket_qua: { xu_sat: 3 },
+        mo_ta: "Bạn vác từng bao muối nặng trịch từ dưới thuyền của Đoàn Thuyền lên bến, nhận 3 đồng xu sắt tiền công."
       },
 
-      // ==================== F. QUÁN TRỌ BỐN NGẢ (quan_bon_nga) & HIỆU HẠ GIANG (cua_hieu) ====================
+      // ==================== F. QUÁN TRỌ BỐN NGẢ (quan_bon_nga) ====================
       {
-        mau: "hat_rong_ke_chuyen", ten_vi: "Hát rong / Kể chuyện xưa cho khách uống rượu", nhom: "Tại quán trọ", thoi_luong_mo: "nửa buổi",
-        tai_noi: ["quan_bon_nga"], so_nhip: 5, sfx: "step",
+        mau: "hat_rong_ke_chuyen", ten_vi: "🎶 Hát rong / Kể chuyện xưa cho khách thương hồ (+2 Xu sắt & ăn lót dạ)", nhom: "Tại quán trọ",
+        thoi_luong_mo: "30 phút", tai_noi: ["quan_bon_nga"], so_nhip: 5, sfx: "step",
         giai_doan: ["thieu_nien", "truong_thanh", "trung_nien", "gia"],
         yeu_cau: { noi: 1, thinh_giac: 1 }, tag: ["xa_hoi"],
-        chi_phi: { the_luc: -1.4, chan: -1.0, doi: 1.2 }, ket_qua: { hat_rong_quan: true },
-        mo_ta: "Bạn cất giọng hát khúc ca cổ giữa quán rượu ồn ào, khách thương hồ vỗ bàn ném thưởng mấy đồng xu lẻ và bánh khô."
+        chi_phi: { the_luc: -1.2, chan: -1.0, doi: 0.5 }, ket_qua: { hat_rong_quan: true },
+        mo_ta: "Bạn cất giọng hát khúc ca cổ giữa quán rượu, khách thương hồ vỗ bàn thưởng 2 đồng xu sắt và nửa chiếc bánh nướng."
       },
       {
-        mau: "phu_rua_bat_che_cui", ten_vi: "Phụ rửa bát & chẻ củi bếp sau quán cho bà chủ", nhom: "Tại quán trọ", thoi_luong_mo: "nửa buổi",
-        tai_noi: ["quan_bon_nga"], so_nhip: 5, sfx: "chop",
+        mau: "phu_rua_bat_che_cui", ten_vi: "🍲 Phụ rửa bát & chẻ củi sau bếp cho bà chủ Ngô Hạnh (+0.4 Lương lành, +0.3 Củi)", nhom: "Tại quán trọ",
+        thoi_luong_mo: "30 phút", tai_noi: ["quan_bon_nga"], so_nhip: 5, sfx: "chop",
         giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
         yeu_cau: { tay_kheo: 1 }, tag: ["muu_sinh"],
-        chi_phi: { the_luc: -2.2, chan: 1.2, doi: 1.0 }, ket_qua: { phu_bep_quan: true },
-        mo_ta: "Bạn ngồi sau bếp quán trọ cọ rửa chồng bát đĩa mỡ màng và nhóm lò giúp bà chủ Ngô Hạnh."
+        chi_phi: { the_luc: -2.0, chan: 1.0, doi: 0.8 }, ket_qua: { phu_bep_quan: true },
+        mo_ta: "Bạn ngồi sau bếp quán trọ cọ rửa chồng bát đĩa và nhóm lò giúp bà chủ Ngô Hạnh."
       },
       {
-        mau: "ngoi_goc_quan_nghe_lom", ten_vi: "Ngồi góc khuất sưởi ké hơi ấm & lắng nghe khách bàn chuyện", nhom: "Tại quán trọ", thoi_luong_mo: "một chốc",
-        tai_noi: ["quan_bon_nga"], so_nhip: 3, sfx: "fire",
+        mau: "ngu_tro_quan_bon_nga", ten_vi: "🛏️ Thuê chiếu góc quán ngủ qua đêm tới sáng (-1 Xu sắt, ấm áp an toàn)", nhom: "Tại quán trọ",
+        thoi_luong_mo: "tới 6h sáng", tai_noi: ["quan_bon_nga"], so_nhip: 4, sfx: "step", is_sleep: true,
         giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
-        yeu_cau: { thinh_giac: 1 }, tag: ["xa_hoi"],
-        chi_phi: { the_luc: 1.5, chan: -2.0, doi: 0.7 }, ket_qua: { lanh: -12, nghe_tin_cho: true },
-        mo_ta: "Bạn ngồi thu mình gần lò rượu ấm trong quán, tai lắng nghe đám lính biên ải và lái buôn nói chuyện đường xa."
+        yeu_cau_gio_dem: true, yeu_cau: {}, req_check: { xu_sat: 1 }, tieu_hao: { xu_sat: 1 }, tag: ["nghi_ngoi"],
+        chi_phi: { the_luc: 0, chan: 0, doi: 0 }, ket_qua: { ngu_toi_sang: true },
+        mo_ta: "Bạn trả 1 đồng xu sắt cho bà chủ quán, được trải chiếu nằm cạnh lò rượu ấm áp ngủ một mạch tới sáng."
+      },
+
+      // ==================== G. ĐỒN BIÊN NGẠN & LÒ RÈN HỌ KHỔNG (don_bien_ngan - VÕ THUẬT & BẢO TIÊU) ====================
+      {
+        mau: "hoc_vo_bien_ngan", ten_vi: "⚔️ Theo đội trưởng Phạm Hổ luyện Đao pháp & Cận chiến (+2 Võ nghệ)", nhom: "Võ thuật & Binh nghiệp",
+        thoi_luong_mo: "36 phút", tai_noi: ["don_bien_ngan"], so_nhip: 6, sfx: "chop",
+        giai_doan: ["thieu_nien", "truong_thanh", "trung_nien"],
+        yeu_cau: { van_dong: 1, suc_manh: 1 }, tag: ["vo_thuat"],
+        chi_phi: { the_luc: -3.6, chan: -1.0, doi: 1.8 }, ket_qua: { tang_vo_nghe: 2 },
+        mo_ta: "Trên bãi tập gió cát của Đồn Biên Ngạn, bạn được chỉ điểm cách bước bộ, đỡ đòn và vung đao dứt khoát."
       },
       {
-        mau: "doc_so_sach", ten_vi: "Ngồi bàn gỗ chép sổ thuê & Kiểm đếm giấy nợ", nhom: "Tại cửa hiệu", thoi_luong_mo: "nửa buổi",
-        tai_noi: ["cua_hieu"], so_nhip: 5, sfx: "step", can_biet_chu: true,
-        giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
-        yeu_cau: { thi_giac: 2 }, tag: ["tri_thuc"],
-        chi_phi: { the_luc: -0.9, chan: 1.2, doi: 1.0 }, ket_qua: { cong_chep_so: true },
-        mo_ta: "Trong cửa hiệu Hạ Giang, bạn cặm cụi lần từng dòng chữ mực tàu và cộng sổ thuê cho chủ buôn."
+        mau: "phu_lo_ren_ho_khong", ten_vi: "🔨 Phụ kéo bễ & đập sắt tại Lò rèn Khổng Thảo (+3 Xu sắt, +1 Võ nghệ)", nhom: "Võ thuật & Binh nghiệp",
+        thoi_luong_mo: "36 phút", tai_noi: ["don_bien_ngan"], so_nhip: 6, sfx: "chop",
+        giai_doan: ["thieu_nien", "truong_thanh", "trung_nien"],
+        yeu_cau: { suc_manh: 1, tay_kheo: 1 }, tag: ["muu_sinh"],
+        chi_phi: { the_luc: -3.2, chan: 0.5, doi: 1.6 }, ket_qua: { xu_sat: 3, tang_vo_nghe: 1, lanh: -15 },
+        mo_ta: "Hơi lửa lò rèn nóng rực làm tan hết giá lạnh. Bạn vung búa đập từng phôi thép đỏ hồng cùng thợ rèn dòng họ Khổng."
       },
       {
-        mau: "sap_xep_kien_hang", ten_vi: "Quét dọn & Kiểm đếm bao hàng trong kho hiệu", nhom: "Tại cửa hiệu", thoi_luong_mo: "nửa buổi",
-        tai_noi: ["cua_hieu"], so_nhip: 4, sfx: "step",
+        mau: "nhan_bao_tieu_thuong_doan", ten_vi: "🛡️ Nhận đi Bảo tiêu hộ tống xe hàng qua đèo (+8 Xu sắt, +2 Võ nghệ)", nhom: "Võ thuật & Binh nghiệp",
+        thoi_luong_mo: "48 phút", tai_noi: ["don_bien_ngan"], so_nhip: 7, sfx: "chop",
+        giai_doan: ["thieu_nien", "truong_thanh", "trung_nien"],
+        yeu_cau: { van_dong: 2, suc_manh: 1 }, req_check: { vo_nghe_min: 3 }, tag: ["vo_thuat"],
+        chi_phi: { the_luc: -4.0, chan: -1.5, doi: 2.0 }, ket_qua: { xu_sat: 8, tang_vo_nghe: 2 },
+        mo_ta: "Nhờ võ nghệ vững vàng, bạn cầm đao đi kèm xe hàng qua hẻm núi Biên Ngạn, đánh đuổi đám cướp vặt và nhận 8 đồng xu sắt hậu hĩnh!"
+      },
+      {
+        mau: "lap_cong_phong_kiem_dien", ten_vi: "🎖️ Đầu quân lập chiến công trấn ải -> Phong bậc KIẾM ĐIỀN (Đổi giai cấp & Cấp ruộng!)", nhom: "Đổi Đời & Thăng Tiến",
+        thoi_luong_mo: "1 buổi", tai_noi: ["don_bien_ngan"], so_nhip: 7, sfx: "chop",
+        giai_doan: ["thieu_nien", "truong_thanh", "trung_nien"],
+        yeu_cau: { van_dong: 2, suc_manh: 2 }, req_check: { vo_nghe_min: 8 }, tag: ["doi_doi"],
+        chi_phi: { the_luc: -4.5, chan: -5.0, doi: 2.0 }, ket_qua: { thang_cap_kiem_dien: true },
+        mo_ta: "Bạn dẫn đầu toán tuần tiễu đẩy lùi cuộc đột kích ở sườn Bạch Lĩnh, chính thức được ghi tên vào ngạch Kiếm Điền (Tiểu quý tộc quân nhân, miễn lao dịch và được cấp ấp điền)!"
+      },
+
+      // ==================== H. KINH ĐÔ KINH HOÀI (kinh_hoai - TRI THỨC, BUÔN LỚN & ĐỔI VẬN MỆNH) ====================
+      {
+        mau: "ban_kien_hang_kinh_hoai", ten_vi: "💰 Bán Kiện hàng quê cho Bang Hàng Kinh Hoài (+13 Xu sắt, lời gấp đôi!)", nhom: "Thương trường Kinh Đô",
+        thoi_luong_mo: "24 phút", tai_noi: ["kinh_hoai"], so_nhip: 4, sfx: "step",
+        giai_doan: ["thieu_nien", "truong_thanh", "trung_nien", "gia"],
+        yeu_cau: { noi: 1 }, req_check: { hang_buon: 1 }, tieu_hao: { hang_buon: 1 }, tag: ["thuong_mai"],
+        chi_phi: { the_luc: -1.0, chan: -2.0, doi: 0.7 }, ket_qua: { xu_sat: 13, tang_buon_ban: 2 },
+        mo_ta: "Giữa phố phường sầm uất của Kinh Hoài, kiện hàng quê bạn gánh từ Bến Sậy lên bán đắt như tôm tươi, thu về 13 đồng xu sắt!"
+      },
+      {
+        mau: "chep_sach_thu_vien_kinh", ten_vi: "📜 Chép thuê sách cổ & học toán pháp ở Kinh Hoài (+4 Xu sắt, +2 Tri thức)", nhom: "Khoa cử & Tri thức",
+        thoi_luong_mo: "30 phút", tai_noi: ["kinh_hoai"], so_nhip: 5, sfx: "step",
         giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
-        yeu_cau: { tay_kheo: 1 }, tag: ["muu_sinh"],
-        chi_phi: { the_luc: -1.8, chan: 1.0, doi: 1.1 }, ket_qua: { xu_sat: 2 },
-        mo_ta: "Bạn xếp gọn các bao hàng khô trong kho của cửa hiệu, được quản sự trả cho 2 đồng xu sắt."
+        yeu_cau: { thi_giac: 1, tri_nho: 1 }, req_check: { biet_chu: true }, tag: ["tri_thuc"],
+        chi_phi: { the_luc: -1.2, chan: 0, doi: 0.9 }, ket_qua: { xu_sat: 4, tang_tri_thuc: 2 },
+        mo_ta: "Bạn ngồi trong thư phòng ở Kinh Hoài chép lại các văn bản lịch sử và sổ sách, vừa có tiền vừa mở mang học vấn."
+      },
+      {
+        mau: "chuoc_than_tu_do", ten_vi: "🔓 Nộp 20 Xu sắt tại nha môn để CHUỘC THÂN (Thoát kiếp Dân Gắn Ruộng!)", nhom: "Đổi Đời & Thăng Tiến",
+        thoi_luong_mo: "30 phút", tai_noi: ["kinh_hoai"], so_nhip: 5, sfx: "step", chi_hien_khi_nong_no: true,
+        giai_doan: ["thieu_nien", "truong_thanh", "trung_nien", "gia"],
+        yeu_cau: { noi: 1 }, req_check: { xu_sat: 20 }, tieu_hao: { xu_sat: 20 }, tag: ["doi_doi"],
+        chi_phi: { the_luc: -1.0, chan: -10.0, doi: 0.5 }, ket_qua: { chuoc_than_thanh_cong: true },
+        mo_ta: "Bạn đặt 20 đồng xu sắt tích cóp bằng mồ hôi nước mắt lên bàn thư lại, nhận tờ văn tự xóa bỏ thân phận Dân Gắn Ruộng, chính thức trở thành Thị dân tự do!"
+      },
+      {
+        mau: "thi_tuyen_thu_lai", ten_vi: "🎓 Ứng tuyển kỳ khảo hạch THƯ LẠI / CHỨC SỰ (Đổi đời thành Quan chức nhỏ!)", nhom: "Đổi Đời & Thăng Tiến",
+        thoi_luong_mo: "42 phút", tai_noi: ["kinh_hoai"], so_nhip: 6, sfx: "step",
+        giai_doan: ["thieu_nien", "truong_thanh", "trung_nien", "gia"],
+        yeu_cau: { tri_nho: 2 }, req_check: { biet_chu: true, tri_thuc_min: 6 }, tag: ["doi_doi"],
+        chi_phi: { the_luc: -2.0, chan: -8.0, doi: 1.2 }, ket_qua: { thang_cap_chuc_su: true },
+        mo_ta: "Nhờ thông hiểu chữ nghĩa và tính toán sổ sách chuẩn xác, bạn vượt qua kỳ khảo hạch ở Kinh Hoài, được bổ nhiệm làm Thư lại Chức Sự có bổng lộc ổn định!"
+      },
+      {
+        mau: "mo_sap_bang_hang", ten_vi: "🏮 Góp 30 Xu sắt lập hiệu buôn gia nhập BANG HÀNG (Đổi đời thành Thương gia!)", nhom: "Đổi Đời & Thăng Tiến",
+        thoi_luong_mo: "36 phút", tai_noi: ["kinh_hoai"], so_nhip: 5, sfx: "step",
+        giai_doan: ["thieu_nien", "truong_thanh", "trung_nien", "gia"],
+        yeu_cau: { noi: 1 }, req_check: { xu_sat: 30, buon_ban_min: 4 }, tieu_hao: { xu_sat: 30 }, tag: ["doi_doi"],
+        chi_phi: { the_luc: -1.5, chan: -10.0, doi: 0.8 }, ket_qua: { thang_cap_thuong_nhan: true },
+        mo_ta: "Bạn chính thức treo biển hiệu buôn của riêng mình tại Kinh Hoài, bước chân vào hàng ngũ Thương gia Bang Hàng!"
       }
     ];
 
     const AMBIENT_WHISPERS = [
-      "Lúc đi ngang đầu xóm, bạn thoáng nghe mấy người già bảo năm nay người thu thuế đeo con dấu có tới ba hình khắc lạ, thu theo từng mùa chứ không thu lắt nhắt.",
+      "Lúc đi ngang đầu xóm, bạn thoáng nghe mấy người già bảo năm nay người thu thuế đeo con dấu có tới ba hình khắc lạ, thu theo từng mùa.",
       "Bên vệ đường, một lão mù vừa gảy đàn vừa nghêu ngao câu hát cũ về một vị lãnh chúa năm xưa từng bỏ rơi người vợ vùng núi sau khi mượn được binh lương.",
       "Chỗ lò rèn cuối chợ có người mang tới sửa một thanh đoản đao cũ kỹ; ông thợ rèn vừa nhìn thấy ba chấm nhỏ trên chuôi đã vội đóng cửa xưởng.",
       "Mấy phu bốc vác ở bến sông thì thào với nhau rằng kho lương lớn trên kinh đô nhìn ngoài thì niêm phong kín mít nhưng bên trong nhiều gian đã mốc meo trống rỗng.",
       "Đoàn người miền núi dắt ngựa chở lông cừu đi qua ngõ, họ bảo vùng núi phía bắc đang có quân lính kéo lên đào bới tìm mạch sắt.",
-      "Bà hàng nước đầu bến thở dài kể chuyện một chủ ruộng muối vừa chết bất đắc kỳ tử ngay sau khi mang cuốn sổ cái đi kiện đám chủ thuyền ngoài biển."
+      "Ở Kinh Hoài đang mở đợt tuyển mộ người biết chữ vào chép sổ kho và tuyển tráng đinh có võ nghệ ở Đồn Biên Ngạn."
     ];
 
     const PERSONAS = [
@@ -871,15 +975,16 @@
         id: "P1", title: "Đứa trẻ sơ sinh mùa gầy (1 tuổi)", ten: "Đứa con nhà nông nô", tuoi: 1, nam_sinh: 160, giai_doan: "so_sinh",
         giai_cap: "nong_no_ruong_dat", than_phan: "Con của Dân Gắn Ruộng · Làng Sậy Đỏ",
         vi_tri_khoi_dau: "nha",
-        boi_canh_mo_ta: "Bạn mới một tuổi, nằm trong ổ rơm mỏng giữa gian nhà tranh lạnh buốt. Ngoài vách đất tiếng gió rít từng hồi, hơi thở bạn nóng rực vì chớm sốt.",
+        boi_canh_mo_ta: "Bạn mới một tuổi, nằm trong ổ rơm mỏng giữa gian nhà tranh lạnh buốt. Khi lớn hơn qua các năm, bạn có thể ra trường chữ Nhất Hỏa học chữ hoặc lên Biên Ngạn học võ.",
         nguoi: ["me"], nghia_vu: [], biet_chu: false, co_riu: false,
+        tri_thuc: 0, vo_nghe: 0, buon_ban: 0,
         cua_cai_then: true, vach_rach: true, mai_vung: false,
-        xu_sat: 0, nuoc: 2, cui: 1.0, go_tho: 0, luong_lanh: 1.0, luong_moc: 0.0, lanh: 55, doi: 50,
+        xu_sat: 2, nuoc: 2, cui: 1.2, go_tho: 0, luong_lanh: 1.0, luong_moc: 0.0, lanh: 50, doi: 48,
         luoi: 30, kien_nhan: 50, y_chi: 50, trach_nhiem: 20, can_dam: 30, hao_mon: 0, mu: false,
         tam_niem: {
-          mong: "Qua được cơn sốt mùa đông và có hơi ấm của mẹ",
-          so: "Đêm lạnh tắt lửa hoặc bị bỏ lại một mình",
-          ganh_nang: "Cha mẹ còn nợ chủ ruộng nửa vụ thóc từ mùa trước",
+          mong: "Qua được cơn sốt mùa đông, lớn lên học chữ hoặc học nghề đổi đời",
+          so: "Đêm lạnh tắt lửa hoặc cả đời bị trói buộc làm nông nô",
+          ganh_nang: "Cha mẹ còn nợ chủ ruộng nửa vụ thóc",
           goc_khuat: "Dưới lớp tã vải thô có giấu một nắm hạt giống lúa chịu hạn của gia đình"
         }
       },
@@ -887,31 +992,33 @@
         id: "P2", title: "Đứa trẻ mồ côi bên bến sông (8 tuổi)", ten: "Bé Sậy", tuoi: 8, nam_sinh: 183, giai_doan: "thieu_nhi",
         giai_cap: "ke_ngoai_le", than_phan: "Trẻ không nơi nương tựa · Bến Sậy",
         vi_tri_khoi_dau: "nha",
-        boi_canh_mo_ta: "Bạn tám tuổi, trú tạm trong một túp lều tranh ven bến sông. Trong lều bạn có thể đan rổ rá, đào hố giấu lương dưới gầm phản, phơi lương mốc hoặc đun nước; muốn gánh nước thì ra giếng làng, muốn kiếm củi thì lên Bìa Rừng Đen.",
+        boi_canh_mo_ta: "Bạn tám tuổi, trú tạm trong túp lều ven sông. Bạn có thể đan rổ rá đem ra chợ bán lấy xu, ra hiên Hỏa Đường học nhận mặt chữ miễn phí để sau này lên Kinh Hoài đổi vận mệnh.",
         nguoi: [], nghia_vu: [], biet_chu: false, co_riu: false,
+        tri_thuc: 1, vo_nghe: 0, buon_ban: 1,
         cua_cai_then: false, vach_rach: true, mai_vung: false,
-        xu_sat: 1, nuoc: 2, cui: 0.9, go_tho: 0, luong_lanh: 0.6, luong_moc: 0.5, lanh: 45, doi: 52,
+        xu_sat: 2, nuoc: 2, cui: 1.0, go_tho: 0, luong_lanh: 0.7, luong_moc: 0.5, lanh: 42, doi: 48,
         luoi: 20, kien_nhan: 75, y_chi: 80, trach_nhiem: 60, can_dam: 55, hao_mon: 0, mu: false,
         tam_niem: {
-          mong: "Vá lại vách lều kín gió và kiếm được bữa no bụng",
-          so: "Người thu sưu hoặc kẻ lạ ngó qua khe vách phát hiện chỗ trốn",
-          ganh_nang: "Nhớ ơn những người nghèo bên bến từng nhường cho mình củ khoai sượng",
-          goc_khuat: "Trong túi áo rách có giấu một chiếc chìa khóa đồng nặng trịch nhặt được dưới bùn sông"
+          mong: "Học biết chữ hoặc buôn bán giỏi để bước chân vào Kinh đô Kinh Hoài",
+          so: "Bị xua đuổi khỏi bến sông khi sương muối tràn về",
+          ganh_nang: "Nhớ ơn những người nghèo bên bến từng nhường cho mình củ khoai",
+          goc_khuat: "Trong túi áo rách có giấu chiếc chìa khóa đồng nặng trịch nhặt được dưới bùn sông"
         }
       },
       {
         id: "P3", title: "Trai trẻ gắn ruộng (17 tuổi)", ten: "Khổng Thạch", tuoi: 17, nam_sinh: 28, giai_doan: "thieu_nien",
         giai_cap: "nong_no_ruong_dat", than_phan: "Dân Gắn Ruộng · Tam Giang",
         vi_tri_khoi_dau: "nha",
-        boi_canh_mo_ta: "Bạn đang ở trong gian nhà tranh vách nứa. Tại nhà bạn có thể bổ gỗ thành củi, trát kín vách, chằng lại mái nhà, đào hố giấu thóc dưới gầm phản hoặc đan rổ rá. Phía trên cột phải là thanh chọn chân bước để đi ra Giếng làng, lên Rừng Đen, ra Đồng hoặc ra Chợ.",
+        boi_canh_mo_ta: "Bạn 17 tuổi, sức vóc dẻo dai. Ngoài việc tích củi lương qua mùa Giá, bạn có thể lên Đồn Biên Ngạn luyện Đao pháp lập công thành Kiếm Điền, hoặc tích 20 xu sắt lên Kinh Hoài chuộc thân thoát kiếp nông nô!",
         nguoi: [], nghia_vu: ["lao_dich"], biet_chu: false, co_riu: true,
+        tri_thuc: 0, vo_nghe: 2, buon_ban: 0,
         cua_cai_then: false, vach_rach: true, mai_vung: false,
-        xu_sat: 2, nuoc: 2, cui: 1.0, go_tho: 1.0, luong_lanh: 0.8, luong_moc: 0.5, lanh: 42, doi: 48,
+        xu_sat: 3, nuoc: 2, cui: 1.2, go_tho: 1.0, luong_lanh: 0.9, luong_moc: 0.4, lanh: 40, doi: 45,
         luoi: 15, kien_nhan: 85, y_chi: 80, trach_nhiem: 75, can_dam: 65, hao_mon: 0, mu: false,
         tam_niem: {
-          mong: "Gia cố lại mái và vách nhà, tích đủ củi khô và lương thực để vượt qua mùa đông",
-          so: "Đến kỳ thu thuế giữa mùa bị quản trang lấy sạch lương dự trữ",
-          ganh_nang: "Phải đi làm lao dịch ở Cánh đồng Chủ Ấp",
+          mong: "Chuộc thân tự do hoặc luyện võ lập công trở thành Kiếm Điền",
+          so: "Cả đời còng lưng làm Dân Gắn Ruộng bị quản trang chèn ép",
+          ganh_nang: "Nghĩa vụ lao dịch cho Chủ Ấp",
           goc_khuat: "Giữ con dao cắt lúa cũ của cha để lại, trên chuôi gỗ có khắc ba chấm nhỏ"
         }
       },
@@ -919,54 +1026,57 @@
         id: "P4", title: "Lão nông tuổi xế chiều (68 tuổi)", ten: "Lão Ngô Tam", tuoi: 68, nam_sinh: 45, giai_doan: "gia",
         giai_cap: "nong_dan_tu_do", than_phan: "Người già trong xóm · Làng Sậy Đỏ",
         vi_tri_khoi_dau: "nha",
-        boi_canh_mo_ta: "Bạn sáu mươi tám tuổi, đang ngồi bên bếp than trong căn nhà đất đã trát vách kín đáo. Dù sức yếu không đi đốn gỗ được, ở trong nhà bạn vẫn có thể đan rổ rá, đun nước thuốc, dạy bảo con cháu hoặc bước ra ngõ hỏi chuyện xóm giềng.",
+        boi_canh_mo_ta: "Bạn 68 tuổi, bước chân đi lại đã chậm hơn thời trai trẻ (do hao mòn khớp theo tuổi tác). Bạn sống nhờ kinh nghiệm, đan lát và chỉ dạy con cháu trong nhà.",
         nguoi: ["con_chau"], nghia_vu: [], biet_chu: false, co_riu: false,
+        tri_thuc: 2, vo_nghe: 0, buon_ban: 2,
         cua_cai_then: true, vach_rach: false, mai_vung: true,
-        xu_sat: 3, nuoc: 3, cui: 2.0, go_tho: 0, luong_lanh: 1.2, luong_moc: 0.0, lanh: 35, doi: 40,
+        xu_sat: 4, nuoc: 3, cui: 2.0, go_tho: 0, luong_lanh: 1.2, luong_moc: 0.0, lanh: 35, doi: 38,
         luoi: 35, kien_nhan: 85, y_chi: 75, trach_nhiem: 85, can_dam: 60, hao_mon: 0.45, mu: false,
         tam_niem: {
           mong: "Nhìn đám cháu nhỏ bình an qua mùa Giá",
           so: "Cảnh đói kém năm xưa lặp lại trên mảnh đất này",
-          ganh_nang: "Lời hứa năm xưa với bà đỡ già đã cứu mạng mình lúc mới lọt lòng",
+          ganh_nang: "Lời hứa năm xưa với bà đỡ già đã cứu mạng mình",
           goc_khuat: "Từng lén sửa lại con số thóc của xóm để giúp dân làng đỡ bị siết thuế"
         }
       },
       {
         id: "P5", title: "Người học việc giữ sổ (15 tuổi)", ten: "Điền Cẩm Tú", tuoi: 15, nam_sinh: 150, giai_doan: "thieu_nien",
         giai_cap: "thuong_nhan_thi_dan", than_phan: "Học việc giữ sổ · Hạ Giang",
-        vi_tri_khoi_dau: "cua_hieu",
-        boi_canh_mo_ta: "Bạn đang làm việc tại Cửa hiệu buôn Hạ Giang. Bạn có thể chép sổ thuê, kiểm đếm kiện hàng trong kho hiệu, hoặc dùng thanh di chuyển trên đầu cột phải để sang Chợ Bến Sậy, Quán Bốn Ngả và về Nhà.",
+        vi_tri_khoi_dau: "kinh_hoai",
+        boi_canh_mo_ta: "Bạn 15 tuổi, đã biết chữ và đang ở Kinh đô Kinh Hoài. Bạn có thể chép sách tích lũy Tri thức để thi đỗ Thư lại Chức Sự, hoặc buôn chuyến giữa Bến Sậy và Kinh Hoài để lập hiệu buôn Bang Hàng!",
         nguoi: [], nghia_vu: [], biet_chu: true, co_riu: false,
+        tri_thuc: 3, vo_nghe: 0, buon_ban: 2,
         cua_cai_then: true, vach_rach: false, mai_vung: true,
-        xu_sat: 4, nuoc: 3, cui: 2.2, go_tho: 0, luong_lanh: 1.5, luong_moc: 0.0, lanh: 25, doi: 35,
+        xu_sat: 6, nuoc: 3, cui: 2.0, go_tho: 0, luong_lanh: 1.5, luong_moc: 0.0, lanh: 25, doi: 35,
         luoi: 30, kien_nhan: 80, y_chi: 75, trach_nhiem: 75, can_dam: 50, hao_mon: 0, mu: false,
         tam_niem: {
-          mong: "Giữ được công việc chép sổ và tìm hiểu rõ cái chết năm xưa của ông nội",
+          mong: "Thi đỗ Chức Sự hoặc lập hiệu buôn lớn để điều tra vụ án Sổ Muối của ông nội",
           so: "Bị chủ thương hội phát hiện mình đang âm thầm đối chiếu sổ cũ",
           ganh_nang: "Lời dặn của cha trước ngày gia đình mất ruộng muối",
-          goc_khuat: "Cất giấu một mảnh giấy chép lại các khoản lãi ngầm dưới đáy rương ở nhà"
+          goc_khuat: "Cất giấu một mảnh giấy chép lại các khoản lãi ngầm dưới đáy rương"
         }
       },
       {
         id: "P6", title: "Người hát rong mù (30 tuổi)", ten: "Khách mù Quán Bốn Ngả", tuoi: 30, nam_sinh: 142, giai_doan: "truong_thanh",
         giai_cap: "ke_ngoai_le", than_phan: "Người hát rong · Bến Bắc",
         vi_tri_khoi_dau: "quan_bon_nga",
-        boi_canh_mo_ta: "Bạn đang đứng ở Quán trọ Bốn Ngả. Dù đôi mắt mù lòa không đọc sách hay săn bắn được, khi về nhà bạn vẫn có thể lần tay đan rổ rá, cài then cửa, giấu lương thực dưới gầm phản, đun nước và nấu cháo.",
+        boi_canh_mo_ta: "Đôi mắt mù lòa khiến bước chân bạn dò dẫm chậm hơn người thường, nhưng đôi tai và tài ăn nói giúp bạn kiếm xu ở Quán Bốn Ngả, mua gạo ở chợ và đan lát tại nhà.",
         nguoi: [], nghia_vu: [], biet_chu: true, co_riu: false,
+        tri_thuc: 2, vo_nghe: 0, buon_ban: 2,
         cua_cai_then: false, vach_rach: true, mai_vung: false,
-        xu_sat: 3, nuoc: 2, cui: 1.6, go_tho: 0, luong_lanh: 1.0, luong_moc: 0.5, lanh: 35, doi: 40,
+        xu_sat: 5, nuoc: 2, cui: 1.6, go_tho: 0, luong_lanh: 1.0, luong_moc: 0.4, lanh: 35, doi: 38,
         luoi: 30, kien_nhan: 80, y_chi: 80, trach_nhiem: 60, can_dam: 50, hao_mon: 0, mu: true,
         tam_niem: {
-          mong: "Có đủ cơm ăn qua ngày và giữ trọn những khúc ca cổ",
+          mong: "Tích đủ tiền mở sạp hoặc có chốn dưỡng già ấm áp",
           so: "Đôi tai kém dần khi tuổi già ập tới",
-          ganh_nang: "Chia sẻ phần bánh kiếm được cho đứa trẻ dẫn đường mỗi tối",
+          ganh_nang: "Chia sẻ phần bánh kiếm được cho đứa trẻ dẫn đường",
           goc_khuat: "Thuộc lòng một đoạn ca cổ bị cấm hát trong kinh thành"
         }
       }
     ];
 
     // =========================================================================
-    // 3. TRẠNG THÁI TRÒ CHƠI & BỘ KIỂM SOÁT TỶ LỆ XÁC SUẤT ĐỜI THỰC
+    // 4. TRẠNG THÁI TRÒ CHƠI & CÔNG THỨC TỐC ĐỘ DI CHUYỂN ĐỐI XỨNG
     // =========================================================================
     let state = {
       persona: null,
@@ -976,29 +1086,34 @@
       location: "nha",
       cuaCaiThen: false,
       vachRach: true,
-      maiVung: false,           // Đã chằng chống mái nhà chưa
+      maiVung: false,
       bepConKhoi: false,
-      hoGiauDo: 0.0,            // Lương lành giấu dưới hố gầm phản (tối đa 2.0)
-      thaoDuoc: 0,              // Lá thuốc hái trên rừng
-      doDanLat: 0,              // Rổ rá đan để bán ở chợ
-      xuSat: 2,                 // Đồng xu sắt
-      nuocSach: 2,              // Gáo nước sạch
-      tinhLangXom: 1,           // Quan hệ với hàng xóm
+      coDuoc: 0,                // Số bó đuốc soi đường đi đêm
+      hoGiauDo: 0.0,
+      thaoDuoc: 0,
+      doDanLat: 0,
+      hangBuon: 0,              // Kiện hàng mua sỉ ở chợ để đem lên Kinh Hoài bán
+      xuSat: 3,
+      nuocSach: 2,
+      triThuc: 0,               // Điểm Tri thức / Học vấn
+      voNghe: 0,                // Điểm Võ nghệ / Đao pháp
+      buonBan: 0,               // Điểm Kinh nghiệm thương trường
+      tinhLangXom: 1,
       hour: 8,
       dayInSeason: 10,
       seasonIdx: 3,
       year: 45,
       totalDaysPlayed: 0,
-      lastTaxSeasonKey: "",     // Đảm bảo mỗi mùa chỉ thu thuế ĐÚNG 1 LẦN
-      lastDangerDay: -10,       // Đảm bảo biến cố nguy hiểm cách nhau nhiều ngày
+      lastTaxSeasonKey: "",
+      lastDangerDay: -10,
       theLuc: 80,
       sucKhoe: 85,
-      doi: 48,
+      doi: 45,
       lanh: 40,
       chan: 10,
-      cui: 1.0,
+      cui: 1.2,
       goTho: 0.0,
-      luongLanh: 0.8,
+      luongLanh: 0.9,
       luongMoc: 0.4,
       amAnhDoi: 0,
       actionsTaken: 0,
@@ -1009,6 +1124,7 @@
 
     let freneticInterval = null;
     let tiers = {};
+    let rawVanDong = 60;
     let selectedStartMode = false;
 
     function shuffleArray(arr) {
@@ -1034,10 +1150,55 @@
         const age = Math.max(0.2, p.tuoi);
         const fTang = Math.min(1, Math.pow(age / cfg.tuoi_dinh, cfg.q));
         const fGiam = p.tuoi <= cfg.tuoi_suy ? 1 : Math.max(cfg.san_gia, 1 / (1 + Math.pow((p.tuoi - cfg.tuoi_suy) / (cfg.tuoi_nua - cfg.tuoi_suy), cfg.p)));
-        const haoMon = k === 'suc_manh' ? (p.hao_mon || 0) : 0;
+        const haoMon = (k === 'suc_manh' || k === 'van_dong') ? (p.hao_mon || 0) : 0;
         const val = 65 * fTang * fGiam * (1 - haoMon);
+        if (k === 'van_dong') rawVanDong = val;
         tiers[k] = Math.max(0, Math.min(5, Math.floor(val / 20)));
       }
+    }
+
+    // TÍNH THỜI GIAN ĐI BỘ ĐỐI XỨNG (A -> B LUÔN BẰNG B -> A) & PHỤ THUỘC TUỔI, MÙ LÒA, ĐÓI MỆT, ĐÊM TỐI
+    function getTravelMinutes(fromId, toId) {
+      if (fromId === toId) return { minutes: 0, reasons: [] };
+      const base = (BASE_DIST_MINUTES[fromId] && BASE_DIST_MINUTES[fromId][toId]) || 15;
+      let mult = 1.0;
+      const reasons = [];
+
+      // 1. Ảnh hưởng của tuổi tác & năng lực vận động (Mục 7.2 & 36.1)
+      if (rawVanDong < 35) {
+        mult *= 1.45;
+        reasons.push("chân yếu/lão hóa");
+      } else if (rawVanDong < 50) {
+        mult *= 1.2;
+        reasons.push("bước chân nhỏ");
+      } else if (state.voNghe >= 4) {
+        mult *= 0.85;
+        reasons.push("khinh thân nhanh nhẹn");
+      }
+
+      // 2. Ảnh hưởng của mù lòa
+      if (state.persona && state.persona.mu) {
+        mult *= 1.35;
+        reasons.push("dò đường");
+      }
+
+      // 3. Ảnh hưởng của đói hoặc kiệt sức
+      if (state.theLuc <= 28 || state.doi >= 72) {
+        mult *= 1.35;
+        reasons.push("đói mệt");
+      }
+
+      // 4. Ảnh hưởng của đi đêm không có đuốc
+      const isNight = state.hour >= 18 || state.hour < 6;
+      if (isNight && state.coDuoc <= 0) {
+        mult *= 1.25;
+        reasons.push("đêm tối");
+      }
+
+      return {
+        minutes: Math.max(4, Math.round(base * mult)),
+        reasons
+      };
     }
 
     function setScreenVignette(mode) {
@@ -1060,11 +1221,11 @@
         if (callback) callback();
         setTimeout(() => {
           curtain.classList.remove('show');
-        }, 650);
-      }, 1350);
+        }, 550);
+      }, 1150);
     }
 
-    function advanceClock(minutes, markSmoke = false) {
+    function advanceClock(minutes, markSmoke = false, isSleeping = false) {
       const hours = minutes / 60;
       const prevHour = state.hour;
       state.hour += hours;
@@ -1072,13 +1233,14 @@
       if (markSmoke) state.bepConKhoi = true;
       else if (hours >= 1.5) state.bepConKhoi = false;
 
-      state.doi = Math.min(100, state.doi + hours * 2.1);
+      // Khi ngủ tiêu hao năng lượng ít hơn lúc thức làm việc
+      state.doi = Math.min(100, state.doi + hours * (isSleeping ? 1.1 : 2.0));
       const isNight = (prevHour >= 18 || prevHour < 6);
-      const outdoorPenalty = (state.location !== 'nha' && state.location !== 'quan_bon_nga' && state.location !== 'cua_hieu') ? 1.35 : 1.0;
-      const wallLeakPenalty = (state.location === 'nha' && state.vachRach) ? 1.2 : 0.85;
+      const outdoorPenalty = (state.location === 'bia_rung' || state.location === 'ruong_chu_ap') ? 1.35 : 1.0;
+      const wallLeakPenalty = (state.location === 'nha' && state.vachRach) ? 1.2 : 0.8;
 
-      if (state.seasonIdx === 3) {
-        state.lanh = Math.min(100, state.lanh + hours * (isNight ? 3.8 : 1.6) * outdoorPenalty * wallLeakPenalty);
+      if (state.seasonIdx === 3 && !isSleeping) {
+        state.lanh = Math.min(100, state.lanh + hours * (isNight ? 3.5 : 1.5) * outdoorPenalty * wallLeakPenalty);
       }
 
       if (state.hour >= 24) {
@@ -1089,15 +1251,15 @@
         state.bepConKhoi = false;
 
         for (let i = 0; i < days; i++) {
-          if (state.location === 'nha' && state.cui >= 0.7) {
-            state.cui = Math.max(0, state.cui - 0.7);
-            state.lanh = Math.max(10, state.lanh - 22);
-          } else if (state.seasonIdx === 3) {
-            state.lanh = Math.min(100, state.lanh + 20);
-            state.sucKhoe = Math.max(0, state.sucKhoe - 9);
+          if (state.location === 'nha' && state.cui >= 0.6) {
+            state.cui = Math.max(0, state.cui - 0.6);
+            state.lanh = Math.max(10, state.lanh - 24);
+          } else if (state.seasonIdx === 3 && state.location !== 'quan_bon_nga') {
+            state.lanh = Math.min(100, state.lanh + 18);
+            state.sucKhoe = Math.max(0, state.sucKhoe - 8);
           }
           if (state.doi >= 88) {
-            state.sucKhoe = Math.max(0, state.sucKhoe - 10);
+            state.sucKhoe = Math.max(0, state.sucKhoe - 9);
           }
         }
 
@@ -1118,74 +1280,155 @@
 
       if (state.sucKhoe <= 0 && !state.isDead) {
         state.isDead = true;
-        showEndOfLifeChronicle("Hơi thở cuối cùng tắt lịm giữa đêm lạnh vì cơ thể đã cạn kiệt sinh lực.");
+        showEndOfLifeChronicle("Hơi thở cuối cùng tắt lịm vì cơ thể đã cạn kiệt sinh lực.");
       }
     }
 
-    function getMenu(p) {
-      const isDaylight = state.hour >= 6 && state.hour < 18;
-      const remHours = isDaylight ? (18 - state.hour) : 0;
+    // KIỂM TRA ĐIỀU KIỆN HÀNH ĐỘNG & TRẢ VỀ LÝ DO RÕ RÀNG ĐỂ HIỂN THỊ TRÊN NÚT (KHÔNG TỐN THỜI GIAN VÔ ÍCH)
+    function checkActionAvailability(p, tpl) {
+      const isNight = state.hour >= 18 || state.hour < 6;
+      const missing = [];
 
+      if (tpl.yeu_cau_gio_dem && !isNight) {
+        missing.push("Chỉ ngủ qua đêm từ 18h00 tối đến 05h00 sáng (Hiện tại: " + Math.floor(state.hour) + "h00)");
+      }
+
+      for (const [ab, minT] of Object.entries(tpl.yeu_cau || {})) {
+        if ((tiers[ab] ?? 0) < minT) {
+          const abNames = { van_dong: "Vận động", suc_manh: "Sức mạnh", tay_kheo: "Khéo tay", thi_giac: "Thị giác (Mắt sáng)", thinh_giac: "Thính giác", noi: "Giọng nói", tri_nho: "Trí nhớ" };
+          missing.push("Cơ thể không đáp ứng: cần " + (abNames[ab] || ab) + " bậc ≥ " + minT);
+        }
+      }
+
+      const rc = tpl.req_check;
+      if (rc) {
+        if (rc.luong_lanh && state.luongLanh < rc.luong_lanh) {
+          missing.push("Cần ≥ " + rc.luong_lanh + " Lương lành (Hiện có " + state.luongLanh.toFixed(1) + " · Hãy ra Chợ mua/đổi hoặc lấy từ Hố giấu)");
+        }
+        if (rc.luong_moc && state.luongMoc < rc.luong_moc) {
+          missing.push("Cần ≥ " + rc.luong_moc + " Lương mốc (Hiện có " + state.luongMoc.toFixed(1) + ")");
+        }
+        if (rc.nuoc && state.nuocSach < rc.nuoc) {
+          missing.push("Cần ≥ " + rc.nuoc + " Gáo nước sạch (Hiện có " + state.nuocSach + " · Hãy ra Đường làng kéo nước giếng)");
+        }
+        if (rc.cui && state.cui < rc.cui) {
+          missing.push("Cần ≥ " + rc.cui + " Bó củi khô (Hiện có " + state.cui.toFixed(1) + " · Hãy lên Bìa Rừng Đen nhặt củi)");
+        }
+        if (rc.go_tho && state.goTho < rc.go_tho) {
+          missing.push("Cần ≥ " + rc.go_tho + " Gỗ thô (Hiện có " + state.goTho.toFixed(1) + " · Hãy lên Rừng Đen đốn gỗ)");
+        }
+        if (rc.co_riu && !p.co_riu) {
+          missing.push("Cần có Rìu sắt");
+        }
+        if (rc.do_dan_lat && state.doDanLat < rc.do_dan_lat) {
+          missing.push("Cần ≥ 1 Đồ đan lát (Hãy về Nhà ngồi đan rổ rá trước)");
+        }
+        if (rc.thao_duoc && state.thaoDuoc < rc.thao_duoc) {
+          missing.push("Cần ≥ 1 Thảo dược (Hãy lên Bìa Rừng Đen tìm hái)");
+        }
+        if (rc.hang_buon && state.hangBuon < rc.hang_buon) {
+          missing.push("Cần ≥ 1 Kiện hàng quê (Hãy mua sỉ ở Chợ Bến Sậy với giá 6 xu trước)");
+        }
+        if (rc.xu_sat && state.xuSat < rc.xu_sat) {
+          missing.push("Cần ≥ " + rc.xu_sat + " Xu sắt (Hiện có " + state.xuSat + " xu)");
+        }
+        if (rc.ban_ngay && isNight) {
+          missing.push("Cần ánh sáng ban ngày (06h00 – 18h00)");
+        }
+        if (rc.ho_chua_day && state.hoGiauDo >= 2.0) {
+          missing.push("Hố giấu dưới gầm phản đã đầy (2.0 phần)");
+        }
+        if (rc.co_do_trong_ho && state.hoGiauDo <= 0.05) {
+          missing.push("Hố giấu đang trống không (0.0 phần)");
+        }
+        if (rc.biet_chu && !p.biet_chu) {
+          missing.push("Cần Biết chữ (Hãy tới Đường làng học chữ ở hiên Nhất Hỏa đạt 3 điểm Tri thức)");
+        }
+        if (rc.tri_thuc_min && state.triThuc < rc.tri_thuc_min) {
+          missing.push("Cần Tri thức ≥ " + rc.tri_thuc_min + " (Hiện có " + state.triThuc + ")");
+        }
+        if (rc.vo_nghe_min && state.voNghe < rc.vo_nghe_min) {
+          missing.push("Cần Võ nghệ ≥ " + rc.vo_nghe_min + " (Hiện có " + state.voNghe + " · Hãy luyện đao ở Nhà hoặc Đồn Biên Ngạn)");
+        }
+        if (rc.buon_ban_min && state.buonBan < rc.buon_ban_min) {
+          missing.push("Cần Kinh nghiệm buôn bán ≥ " + rc.buon_ban_min + " (Hiện có " + state.buonBan + ")");
+        }
+      }
+
+      return {
+        canRun: missing.length === 0,
+        missingText: missing.join(" · ")
+      };
+    }
+
+    function getActionsForCurrentPlace(p) {
       return ACTIONS.filter(tpl => {
         if (!tpl.tai_noi || !tpl.tai_noi.includes(state.location)) return false;
         if (!tpl.giai_doan.includes(p.giai_doan)) return false;
-
-        if (tpl.can_do_vat === 'luong_lanh' && state.luongLanh < 0.5) return false;
-        if (tpl.can_do_vat === 'luong_moc' && state.luongMoc < 0.5) return false;
-        if (tpl.can_do_vat === 'cui' && state.cui < (tpl.tieu_hao?.cui || 0.4)) return false;
-        if (tpl.can_do_vat === 'go_tho' && state.goTho < 1.0) return false;
-        if (tpl.can_cui_toi_thieu && state.cui < tpl.can_cui_toi_thieu) return false;
-        if (tpl.can_do_dan_lat && state.doDanLat < tpl.can_do_dan_lat) return false;
-        if (tpl.can_xu && state.xuSat < tpl.can_xu) return false;
-        if (tpl.can_nuoc && state.nuocSach < tpl.can_nuoc) return false;
-        if (tpl.can_riu && !p.co_riu) return false;
         if (tpl.chi_hien_khi_vach_rach && !state.vachRach) return false;
         if (tpl.chi_hien_khi_mai_yeu && state.maiVung) return false;
+        if (tpl.chi_hien_khi_nong_no && p.giai_cap !== 'nong_no_ruong_dat') return false;
         if (tpl.can_nguoi && !p.nguoi.includes(tpl.can_nguoi)) return false;
-        if (tpl.can_biet_chu && !p.biet_chu) return false;
-
-        if (tpl.can_anh_sang && !isDaylight) return false;
-        if (tpl.gio_con_lai && remHours < tpl.gio_con_lai) return false;
-
-        for (const [ab, minT] of Object.entries(tpl.yeu_cau)) {
-          if ((tiers[ab] ?? 0) < minT) return false;
-        }
         return true;
-      });
+      }).map(tpl => {
+        const status = checkActionAvailability(p, tpl);
+        return { tpl, canRun: status.canRun, missingText: status.missingText };
+      }).sort((a, b) => (a.canRun === b.canRun ? 0 : a.canRun ? -1 : 1));
     }
 
-    // DI CHUYỂN NHANH BẰNG THANH CHỌN ĐỊA ĐIỂM TRÊN ĐẦU CỘT PHẢI
+    // DI CHUYỂN ĐỐI XỨNG 2 CHIỀU (ĐI ĐƯỢC CẢ BAN ĐÊM LÊN RỪNG)
     window.travelToPlace = function(destId) {
       if (state.isWorking || freneticInterval || state.isDead || destId === state.location) return;
       const placeObj = PLACES.find(pl => pl.id === destId);
       if (!placeObj) return;
 
+      const travelInfo = getTravelMinutes(state.location, destId);
+      const isNight = state.hour >= 18 || state.hour < 6;
       SoundFX.playSoftStep();
+
       const prevLocName = PLACE_NAMES[state.location];
       state.location = destId;
       state.activeCategory = 'Tất cả';
-      state.theLuc = Math.max(0, state.theLuc - 2.0);
-      advanceClock(placeObj.minutes, false);
+      state.theLuc = Math.max(0, state.theLuc - Math.max(1.5, travelInfo.minutes * 0.12));
+
+      let nightNote = "";
+      if (isNight && destId === 'bia_rung') {
+        if (state.coDuoc > 0) {
+          state.coDuoc--;
+          nightNote = "\n\n🔦 Bạn châm cháy một bó đuốc nhựa thông cầm tay (-1 Đuốc), ánh lửa bập bùng soi rõ lối mòn lên rừng đêm và làm thú hoang không dám tới gần.";
+        } else {
+          state.lanh = Math.min(100, state.lanh + 8);
+          nightNote = "\n\n🌑 Bạn mò mẫm lên Bìa Rừng Đen giữa đêm tối không có đuốc. Sương đêm lạnh buốt và cành gai quệt vào người làm bước chân chậm hẳn lại.";
+        }
+      }
+
+      advanceClock(travelInfo.minutes, false, false);
       state.actionsTaken++;
 
-      let msg = "Bạn rời khỏi " + prevLocName + ", đi bộ " + placeObj.minutes + " phút tới " + placeObj.full + ".";
-      if (destId !== 'nha' && Math.random() < 0.25) {
-        msg += "\n\n" + nextFromDeck('whisperDeck', AMBIENT_WHISPERS);
-      }
+      const speedDetail = travelInfo.reasons.length > 0 ? " (Do " + travelInfo.reasons.join(", ") + ")" : "";
+      let msg = "Bạn rời khỏi " + prevLocName + ", đi bộ " + travelInfo.minutes + " phút" + speedDetail + " tới " + placeObj.full + "." + nightNote;
 
       updateCenterStage(msg, [
         { label: '📍 Tới: ' + placeObj.short, type: '' },
-        { label: '⏱️ +' + placeObj.minutes + ' phút đi đường', type: '' }
+        { label: '⏱️ +' + travelInfo.minutes + ' phút đi đường', type: '' }
       ]);
       render();
     };
 
     function runAction(tpl, isPush) {
       if (state.isWorking || freneticInterval || state.isDead) return;
-      state.isWorking = true;
+      const check = checkActionAvailability(state.persona, tpl);
+      if (!check.canRun) return; // Tuyệt đối không chạy nếu chưa đủ điều kiện
 
+      // Nếu là hành động Đi ngủ qua đêm tới sáng
+      if (tpl.is_sleep) {
+        executeOvernightSleep(tpl);
+        return;
+      }
+
+      state.isWorking = true;
       const isStarvingOrExhausted = (state.doi >= 72 || state.theLuc <= 26);
-      const stepDelayMs = isStarvingOrExhausted ? 330 : 140;
+      const stepDelayMs = isStarvingOrExhausted ? 310 : 135;
       const totalSteps = tpl.so_nhip || 3;
 
       const progBox = document.getElementById('workProgressBox');
@@ -1196,7 +1439,7 @@
       progBox.style.display = 'block';
       progFill.style.width = '0%';
       progFill.className = 'work-progress-fill' + (isStarvingOrExhausted ? ' slow-strained' : '');
-      progPace.textContent = isStarvingOrExhausted ? '⚠️ Cử động chậm chạp, nặng nề vì đói mệt' : 'Nhịp độ bình thường';
+      progPace.textContent = isStarvingOrExhausted ? '⚠️ Cử động chậm chạp vì đói mệt' : 'Nhịp độ bình thường';
 
       render();
 
@@ -1217,9 +1460,41 @@
             progBox.style.display = 'none';
             state.isWorking = false;
             finalizeActionResult(tpl, isPush, isStarvingOrExhausted);
-          }, 100);
+          }, 90);
         }
       }, stepDelayMs);
+    }
+
+    // XỬ LÝ ĐI NGỦ QUA ĐÊM TỚI 06H00 SÁNG HÔM SAU
+    function executeOvernightSleep(tpl) {
+      if (tpl.tieu_hao && tpl.tieu_hao.xu_sat) {
+        state.xuSat = Math.max(0, state.xuSat - tpl.tieu_hao.xu_sat);
+      }
+      const hoursToMorning = state.hour >= 18 ? (24 - state.hour + 6) : (6 - state.hour);
+      const sleepMinutes = Math.max(120, Math.round(hoursToMorning * 60));
+
+      playReincarnationTransition(
+        "Đêm khuya tĩnh mịch, bạn nhắm mắt chìm vào giấc ngủ sâu cho tới khi tiếng gà gáy sáng vang lên...",
+        () => {
+          state.cuaCaiThen = true;
+          advanceClock(sleepMinutes, false, true);
+          state.hour = 6;
+          state.theLuc = 95;
+          state.chan = Math.max(0, state.chan - 25);
+          state.sucKhoe = Math.min(100, state.sucKhoe + 6);
+          state.lanh = Math.max(15, state.lanh - 20);
+          state.actionsTaken++;
+
+          updateCenterStage(
+            tpl.mo_ta + "\n\nBình minh ngày mới đã lên (06h00 sáng). Sau một giấc ngủ trọn đêm, cơ thể bạn đã hồi phục dồi dào sinh lực!",
+            [
+              { label: '🌅 Đã tới 06h00 sáng hôm sau', type: 'gain' },
+              { label: '💪 Thể lực hồi phục 95%', type: 'gain' }
+            ]
+          );
+          render();
+        }
+      );
     }
 
     function finalizeActionResult(tpl, isPush, wasSlowed) {
@@ -1238,10 +1513,15 @@
       if (tpl.tieu_hao) {
         if (tpl.tieu_hao.cui) state.cui = Math.max(0, state.cui - tpl.tieu_hao.cui);
         if (tpl.tieu_hao.go_tho) state.goTho = Math.max(0, state.goTho - tpl.tieu_hao.go_tho);
-        if (tpl.tieu_hao.luong_lanh) state.luongLanh = Math.max(0, state.luongLanh - tpl.tieu_hao.luong_lanh);
+        if (tpl.tieu_hao.luong_lanh_linh_hoat) {
+          const used = Math.min(state.luongLanh, tpl.tieu_hao.luong_lanh_linh_hoat);
+          state.luongLanh = Math.max(0, state.luongLanh - used);
+        }
         if (tpl.tieu_hao.luong_moc) state.luongMoc = Math.max(0, state.luongMoc - tpl.tieu_hao.luong_moc);
         if (tpl.tieu_hao.nuoc) state.nuocSach = Math.max(0, state.nuocSach - tpl.tieu_hao.nuoc);
         if (tpl.tieu_hao.do_dan_lat) state.doDanLat = Math.max(0, state.doDanLat - tpl.tieu_hao.do_dan_lat);
+        if (tpl.tieu_hao.thao_duoc) state.thaoDuoc = Math.max(0, state.thaoDuoc - tpl.tieu_hao.thao_duoc);
+        if (tpl.tieu_hao.hang_buon) state.hangBuon = Math.max(0, state.hangBuon - tpl.tieu_hao.hang_buon);
         if (tpl.tieu_hao.xu_sat) state.xuSat = Math.max(0, state.xuSat - tpl.tieu_hao.xu_sat);
       }
 
@@ -1264,177 +1544,193 @@
 
         const khoChiu = (100 - state.theLuc) * 0.65 + state.chan * 0.7 + state.doi * 0.4 + state.lanh * 0.35;
         const nguong = 55 - p.luoi * 0.45 + p.kien_nhan * 0.5 + p.y_chi * 0.35 + boost + (Math.random() * 8 - 4);
-        if (khoChiu > nguong && !tpl.tag.includes('ban_nang') && !tpl.tag.includes('sinh_ton')) {
+        if (khoChiu > nguong && !tpl.tag.includes('ban_nang') && !tpl.tag.includes('sinh_ton') && !tpl.tag.includes('doi_doi')) {
           stopReason = 'ngat_noi_tam';
           break;
         }
       }
 
-      // XỬ LÝ CHI TIẾT CÁC HÀNH ĐỘNG ĐỜI THỰC
       const kq = tpl.ket_qua;
       if (kq.nuoc) {
         state.nuocSach += kq.nuoc;
         outcomeNotes.push("Chum nước trong góc bếp đã có thêm " + kq.nuoc + " gáo nước giếng trong vắt.");
       }
+      if (kq.tao_duoc) {
+        state.coDuoc += kq.tao_duoc;
+        outcomeNotes.push("Bạn làm xong 1 bó đuốc nhựa thông (Hiện có: " + state.coDuoc + " bó đuốc để đi rừng ban đêm).");
+      }
       if (kq.do_dan_lat) {
         state.doDanLat += kq.do_dan_lat;
-        outcomeNotes.push("Bạn đan xong 1 món đồ tre/rơm bền chắc (Hiện có: " + state.doDanLat + " món, có thể đem ra Chợ Bến Sậy bán lấy xu sắt).");
+        outcomeNotes.push("Bạn đan xong 1 món đồ tre/rơm (Hiện có: " + state.doDanLat + " món, đem ra Chợ Bến Sậy bán được 3 xu sắt).");
+      }
+      if (kq.hang_buon) {
+        state.hangBuon += kq.hang_buon;
+        outcomeNotes.push("Bạn đã có 1 Kiện hàng quê trong tay. Hãy di chuyển tới Kinh đô Kinh Hoài để bán lấy 13 xu sắt!");
       }
       if (kq.xu_sat) {
         state.xuSat += kq.xu_sat;
         gainedXu += kq.xu_sat;
       }
+      if (kq.tang_tri_thuc) {
+        state.triThuc += kq.tang_tri_thuc;
+        outcomeNotes.push("Học vấn của bạn tăng thêm +" + kq.tang_tri_thuc + " (Tri thức hiện tại: " + state.triThuc + ").");
+      }
+      if (kq.hoc_chu_lang) {
+        state.triThuc += 1;
+        if (!p.biet_chu && state.triThuc >= 3) {
+          p.biet_chu = true;
+          outcomeNotes.push("🎓 [ĐỘT PHÁ TRI THỨC]: Sau nhiều buổi kiên trì nghe giảng, bạn đã chính thức BIẾT ĐỌC BIẾT VIẾT! Từ nay bạn có thể đọc sách, chép sổ thuê và lên Kinh Hoài thi tuyển Thư lại!");
+        } else {
+          outcomeNotes.push("Bạn ghi nhớ thêm nhiều mặt chữ mới (Tri thức: " + state.triThuc + "/3 để thoát mù chữ).");
+        }
+      }
+      if (kq.tang_vo_nghe) {
+        state.voNghe += kq.tang_vo_nghe;
+        outcomeNotes.push("Thân pháp và đao thuật của bạn tinh tiến thêm +" + kq.tang_vo_nghe + " (Võ nghệ hiện tại: " + state.voNghe + ").");
+      }
+      if (kq.tang_buon_ban) {
+        state.buonBan += kq.tang_buon_ban;
+        outcomeNotes.push("Kinh nghiệm thương trường tăng +" + kq.tang_buon_ban + " (Buôn bán hiện tại: " + state.buonBan + ").");
+      }
+      if (kq.chuoc_than_thanh_cong) {
+        p.giai_cap = "thuong_nhan_thi_dan";
+        p.than_phan = "Thị dân Tự do · Hoài Dương";
+        p.nghia_vu = [];
+        outcomeNotes.push("🌟 [ĐỔI MỆNH THÀNH CÔNG]: Bạn đã thoát khỏi xiềng xích Dân Gắn Ruộng, trở thành Thị dân tự do không còn bị bắt đi gặt lúa lao dịch nữa!");
+      }
+      if (kq.thang_cap_kiem_dien) {
+        p.giai_cap = "ky_si_quan_nhan";
+        p.than_phan = "Kiếm Điền (Quân nhân quý tộc) · Biên Ngạn";
+        p.nghia_vu = [];
+        state.xuSat += 15; gainedXu += 15;
+        outcomeNotes.push("🌟 [VƯỢT VŨ MÔN - PHONG BẬC KIẾM ĐIỀN]: Từ một kẻ hàn vi, bạn đã bước lên tầng lớp Kiếm Điền có bổng lộc và ruộng cấp riêng (+15 Xu sắt thưởng chiến công)!");
+      }
+      if (kq.thang_cap_chuc_su) {
+        p.giai_cap = "quan_lai";
+        p.than_phan = "Thư lại Chức Sự · Kinh Hoài";
+        p.nghia_vu = [];
+        state.xuSat += 12; gainedXu += 12;
+        outcomeNotes.push("🌟 [KHOA CỬ ĐỔI ĐỜI - THƯ LẠI CHỨC SỰ]: Bạn chính thức khoác áo Chức Sự làm việc tại nha môn Kinh Hoài (+12 Xu sắt bổng lộc)!");
+      }
+      if (kq.thang_cap_thuong_nhan) {
+        p.giai_cap = "thuong_nhan_thi_dan";
+        p.than_phan = "Chủ hiệu Bang Hàng · Kinh Hoài";
+        p.nghia_vu = [];
+        state.luongLanh += 3.0; gainedClean += 3.0;
+        outcomeNotes.push("🌟 [PHÚ THƯƠNG KINH HOÀI]: Hiệu buôn của bạn chính thức khai trương trong Bang Hàng, kho lương thực luôn đầy ắp (+3.0 Lương lành)!");
+      }
       if (kq.doi_trang_thai_cua) {
         state.cuaCaiThen = !state.cuaCaiThen;
-        outcomeNotes.push(state.cuaCaiThen
-          ? "Bạn đã luồn thanh gỗ cài chặt then cửa từ bên trong."
-          : "Bạn rút thanh cài then, để cửa gỗ khép hờ.");
+        outcomeNotes.push(state.cuaCaiThen ? "Đã cài chặt then cửa gỗ." : "Đã mở then cửa gỗ.");
       }
       if (kq.va_kin_vach) {
         state.vachRach = false;
-        outcomeNotes.push("Những khe hở trên vách nứa đã được trát bùn kín mít, ngăn gió lạnh và ánh mắt dòm ngó từ ngoài ngõ.");
+        outcomeNotes.push("Vách nhà đã được trát bùn kín mít.");
       }
       if (kq.gia_co_mai) {
         state.maiVung = true;
-        outcomeNotes.push("Kèo mái nhà đã được chằng buộc chắc chắn, dù đêm mùa Giá có nổi gió lốc cũng không còn lo tốc mái.");
+        outcomeNotes.push("Kèo mái nhà đã được chằng buộc vững chắc.");
       }
-      if (kq.chuyen_ho_giau_do) {
-        if (state.luongLanh >= 0.5 && state.hoGiauDo < 2.0) {
-          const moveAmt = Math.min(0.8, state.luongLanh);
-          state.luongLanh -= moveAmt;
-          state.hoGiauDo += moveAmt;
-          outcomeNotes.push("Bạn đã đem " + moveAmt.toFixed(1) + " phần lương lành giấu xuống hố đất dưới gầm phản (Dù kẻ cướp hay lính thu thuế vào lục nhà cũng không phát hiện được).");
-        } else if (state.hoGiauDo > 0) {
-          const takeAmt = state.hoGiauDo;
-          state.luongLanh += takeAmt;
-          state.hoGiauDo = 0;
-          outcomeNotes.push("Bạn lấy toàn bộ " + takeAmt.toFixed(1) + " phần lương lành từ dưới hố giấu lên để chuẩn bị nấu ăn.");
-        } else {
-          outcomeNotes.push("Hiện bạn chưa có đủ lương lành (cần ít nhất 0.5 phần) để cất xuống hố giấu.");
-        }
+      if (kq.cat_xuong_ho) {
+        state.luongLanh = Math.max(0, state.luongLanh - 0.5);
+        state.hoGiauDo += 0.5;
+        outcomeNotes.push("Đã cất 0.5 phần lương lành xuống hố giấu dưới gầm phản (Hiện giấu: " + state.hoGiauDo.toFixed(1) + " phần).");
+      }
+      if (kq.lay_tu_ho) {
+        const amt = state.hoGiauDo;
+        state.luongLanh += amt;
+        state.hoGiauDo = 0;
+        outcomeNotes.push("Đã lấy " + amt.toFixed(1) + " phần lương lành từ dưới hố giấu lên.");
       }
       if (kq.cuu_luong_moc) {
         const convert = Math.min(0.6, state.luongMoc);
         state.luongMoc -= convert;
-        state.luongLanh += convert * 0.75;
-        gainedClean += convert * 0.75;
-        outcomeNotes.push("Sau khi sàng bỏ phần mốc đen và phơi nắng, bạn cứu lại được +" + (convert * 0.75).toFixed(2) + " phần lương thực sạch.");
+        state.luongLanh += convert * 0.8;
+        gainedClean += convert * 0.8;
+        outcomeNotes.push("Sàng sảy và phơi nắng giúp biến đổi thành +" + (convert * 0.8).toFixed(2) + " phần lương lành.");
       }
       if (kq.an_luong_moc_xu_ly) {
-        // Nếu có nước sạch đun kỹ thì tỷ lệ đau bụng giảm chỉ còn 20%, không có nước sạch thì 55%
-        const sickChance = state.nuocSach > 0 ? 0.20 : 0.55;
+        const sickChance = state.nuocSach > 0 ? 0.18 : 0.50;
         if (state.nuocSach > 0) state.nuocSach--;
         if (Math.random() < sickChance) {
-          state.sucKhoe = Math.max(0, state.sucKhoe - 7);
-          outcomeNotes.push("Dù đã cố nuốt, độc tố ẩm mốc vẫn làm bụng bạn quặn đau âm ỉ (-7 Sức khỏe).");
+          state.sucKhoe = Math.max(0, state.sucKhoe - 6);
+          outcomeNotes.push("Chất mốc làm bụng bạn quặn đau âm ỉ (-6 Sức khỏe).");
         } else {
-          outcomeNotes.push("Nhờ gạn rửa bằng nước sạch và đun sôi kỹ, bụng bạn chỉ hơi đầy chướng chứ không bị ngộ độc.");
+          outcomeNotes.push("Nhờ đun kỹ với nước sạch nên bụng bạn không bị ngộ độc.");
         }
       }
       if (kq.uong_nuoc_am) {
         state.lanh = Math.max(5, state.lanh - 18);
         if (state.thaoDuoc > 0) {
           state.thaoDuoc--;
-          state.sucKhoe = Math.min(100, state.sucKhoe + 9);
-          outcomeNotes.push("Bạn sắc 1 nắm thảo dược rừng vào siêu nước, bát thuốc đắng ngắt nhưng làm dứt hẳn cơn đau bụng và hồi phục sức khỏe (+9 Sức khỏe).");
+          state.sucKhoe = Math.min(100, state.sucKhoe + 10);
+          outcomeNotes.push("Sắc 1 nắm thảo dược uống giúp cơ thể hồi phục mạnh (+10 Sức khỏe).");
         } else {
           state.sucKhoe = Math.min(100, state.sucKhoe + 3);
-          outcomeNotes.push("Bát nước sôi nóng hổi giúp cơ thể ấm lên và dịu cơn khát (+3 Sức khỏe).");
-        }
-      }
-      if (kq.giao_tinh_hang_xom) {
-        state.tinhLangXom++;
-        if (Math.random() < 0.45) {
-          state.cui += 0.25; gainedCui += 0.25;
-          outcomeNotes.push("Bác hàng xóm thương tình dúi cho bạn một cục than hồng giữ lửa và vài thanh củi khô (+0.25 bó củi).");
-        } else {
-          outcomeNotes.push("Bác hàng xóm dặn nhỏ: 'Kỳ thu thuế mùa này rơi vào khoảng ngày 13–14 trong mùa, nhớ cất kỹ thóc gạo dưới gầm phản nhé!'");
+          outcomeNotes.push("Nước sôi ấm giúp dịu bụng và hồi phục nhẹ (+3 Sức khỏe).");
         }
       }
       if (kq.hai_rau_muong) {
-        state.luongLanh += 0.3; gainedClean += 0.3;
-        outcomeNotes.push("Bạn hái được một rổ rau má và lõi củ chuối non sạch sẽ (+0.3 lương lành).");
+        state.luongLanh += 0.35; gainedClean += 0.35;
+        outcomeNotes.push("Hái được rổ rau má và củ chuối non (+0.35 Lương lành).");
       }
       if (kq.kham_benh_mien_phi) {
         state.sucKhoe = Math.min(100, state.sucKhoe + 8);
-        outcomeNotes.push("Nữ tu y sĩ rửa vết trầy xước và phát cho bạn một gói bột thuốc thảo mộc uống tại chỗ (+8 Sức khỏe).");
+        outcomeNotes.push("Nữ tu Nhất Hỏa phát thuốc giúp bạn khỏe lên (+8 Sức khỏe).");
       }
       if (kq.hai_loc_rung) {
         state.thaoDuoc++;
         state.luongLanh += 0.35; gainedClean += 0.35;
-        outcomeNotes.push("Bạn đào được một củ mài lớn (+0.35 lương lành) và hái được 1 nắm lá thuốc quý (Hiện có: " + state.thaoDuoc + " nắm thảo dược).");
-      }
-      if (kq.bat_oc_suoi) {
-        state.luongLanh += 0.45; gainedClean += 0.45;
-        state.lanh = Math.min(100, state.lanh + 6);
-        outcomeNotes.push("Tay tê cóng vì nước suối lạnh nhưng bạn bắt được một giỏ cá bống và ốc đá tươi ngon (+0.45 lương lành).");
+        outcomeNotes.push("Đào được củ mài (+0.35 Lương lành) và +1 nắm Thảo dược quý.");
       }
       if (kq.san_bat_ngau_nhien) {
+        const bonusChance = Math.min(0.25, state.voNghe * 0.05);
         const roll = Math.random();
-        if (roll < 0.48) {
-          state.luongLanh += 0.75; gainedClean += 0.75;
-          outcomeNotes.push("Bẫy dây bật căng, bạn bắt được một con thỏ rừng béo múp (+0.75 lương lành).");
-        } else if (roll < 0.80) {
-          state.luongMoc += 0.4; gainedSpoiled += 0.4;
-          outcomeNotes.push("Không bẫy được thỏ, bạn chỉ nhặt được phần thịt thú rừng còn sót lại đã hơi ôi (+0.4 lương mốc).");
+        if (roll < 0.50 + bonusChance) {
+          state.luongLanh += 0.8; gainedClean += 0.8;
+          outcomeNotes.push("Bắt được một con thỏ rừng béo khỏe (+0.8 Lương lành).");
         } else {
-          outcomeNotes.push("Hôm nay thú rừng cảnh giác không dính bẫy, bạn đành thu dây quay về.");
+          state.luongMoc += 0.35; gainedSpoiled += 0.35;
+          outcomeNotes.push("Chỉ nhặt được ít thịt thú rừng sót lại (+0.35 Lương mốc).");
         }
       }
       if (kq.tra_cong_lao_dich) {
         const roll = Math.random();
         if (roll < 0.25) {
-          outcomeNotes.push("Gã quản trang lấy cớ bạn gặt sót gốc rạ, thẳng tay trừ nửa phần công, chỉ ném cho bạn 1 đồng xu sắt!");
           state.xuSat += 1; gainedXu += 1;
+          outcomeNotes.push("Quản trang bắt lỗi gặt chậm, chỉ trả cho bạn 1 đồng xu sắt.");
         } else if (roll < 0.65) {
           state.luongMoc += 0.55; gainedSpoiled += 0.55;
-          outcomeNotes.push("Làm quần quật cả buổi, quản trang phát cho bạn một đấu thóc ẩm lấy từ đáy kho (+0.55 lương mốc).");
+          outcomeNotes.push("Nhận được một đấu thóc ẩm dưới đáy kho (+0.55 Lương mốc).");
         } else {
-          state.luongLanh += 0.45; gainedClean += 0.45;
-          outcomeNotes.push("Hôm nay có mặt thư lại kiểm sổ nên quản trang phải phát đủ phần thóc khô ráo cho bạn (+0.45 lương lành).");
+          state.luongLanh += 0.5; gainedClean += 0.5;
+          outcomeNotes.push("Nhận được phần thóc khô ráo (+0.5 Lương lành).");
         }
       }
       if (kq.mot_lua_ngau_nhien) {
-        state.luongMoc += 0.25; state.luongLanh += 0.2;
-        gainedSpoiled += 0.25; gainedClean += 0.2;
-        outcomeNotes.push("Bạn nhặt nhạnh được cả bông lúa khô lẫn bông lúa ngập bùn (về nhà có thể đem phơi nắng).");
-      }
-      if (kq.dao_cu_au) {
-        state.luongLanh += 0.4; gainedClean += 0.4;
-        outcomeNotes.push("Bạn vớt được một vạt củ ấu già bùi ngọt (+0.4 lương lành).");
+        state.luongLanh += 0.3; state.luongMoc += 0.25;
+        gainedClean += 0.3; gainedSpoiled += 0.25;
+        outcomeNotes.push("Mót được cả bông lúa khô lẫn củ ấu (+0.3 Lương lành, +0.25 Lương mốc).");
       }
       if (kq.xin_an_ngau_nhien) {
-        const roll = Math.random();
-        if (roll < 0.55) {
-          state.doi = Math.max(10, state.doi - 16);
-          outcomeNotes.push("Tu sĩ Nhất Hỏa múc cho bạn một bát cháo nóng hổi ăn ngay tại hiên, cái bụng đói dịu hẳn lại.");
-        } else {
-          state.luongMoc += 0.35; gainedSpoiled += 0.35;
-          outcomeNotes.push("Nồi cháo đã cạn, người phụ bếp vét phần cháy khê ở đáy nồi gói vào lá chuối đưa cho bạn mang về (+0.35 lương mốc).");
-        }
+        state.doi = Math.max(10, state.doi - 16);
+        outcomeNotes.push("Được phát một bát cháo nóng ăn tại chỗ làm dịu cơn đói.");
       }
       if (kq.hat_rong_quan) {
         state.xuSat += 2; gainedXu += 2;
-        state.doi = Math.max(15, state.doi - 8);
-        outcomeNotes.push("Khách trong quán thưởng cho bạn 2 đồng xu sắt và nửa chiếc bánh nướng ăn lót dạ.");
+        state.doi = Math.max(15, state.doi - 10);
+        outcomeNotes.push("Khách thưởng 2 đồng xu sắt và nửa chiếc bánh nướng.");
       }
       if (kq.phu_bep_quan) {
-        state.luongLanh += 0.35; gainedClean += 0.35;
+        state.luongLanh += 0.4; gainedClean += 0.4;
         state.cui += 0.3; gainedCui += 0.3;
-        outcomeNotes.push("Bà chủ quán Ngô Hạnh gói cho bạn một nắm cơm sạch và cho phép ôm phần củi vụn sau bếp về nhà.");
-      }
-      if (kq.cong_chep_so) {
-        state.xuSat += 3; gainedXu += 3;
-        outcomeNotes.push("Chủ hiệu gật đầu ưng ý trước nét chữ rõ ràng của bạn, trả công 3 đồng xu sắt.");
-      }
-      if (kq.nghe_tin_cho) {
-        outcomeNotes.push(nextFromDeck('whisperDeck', AMBIENT_WHISPERS));
+        outcomeNotes.push("Được bà chủ quán cho 0.4 phần cơm sạch và 0.3 bó củi.");
       }
 
       if (isPush) state.sucKhoe = Math.max(0, state.sucKhoe - 3);
 
-      const minutes = beats * 6 * (wasSlowed ? 1.45 : 1);
-      advanceClock(minutes, !!kq.bep_am);
+      const minutes = beats * 6 * (wasSlowed ? 1.4 : 1);
+      advanceClock(minutes, !!kq.bep_am, false);
       state.actionsTaken++;
 
       const deltas = [{ label: '⏱️ +' + Math.round(minutes) + ' phút', type: '' }];
@@ -1445,23 +1741,11 @@
       if (gainedClean > 0) deltas.push({ label: '🌾 +' + gainedClean.toFixed(1) + ' lương lành', type: 'gain' });
       if (gainedSpoiled > 0) deltas.push({ label: '🍂 +' + gainedSpoiled.toFixed(1) + ' lương mốc', type: 'warn' });
 
-      let rText = '';
-      if (stopReason === 'kiet_suc') {
-        rText = 'Tay chân bạn run bần bật, mắt tối sầm lại không sao gượng thêm được nữa.';
-        deltas.push({ label: '⚠️ Dừng vì kiệt sức', type: 'warn' });
-      } else if (stopReason === 'ngat_noi_tam') {
-        rText = state.doi > 65 ? 'Cơn đói cồn cào rút cạn kiên nhẫn, bạn đành buông tay nửa chừng.' : 'Cơn mỏi và sự uể oải dâng lên khiến bạn tự dừng lại.';
-        deltas.push({ label: '🛑 Tự dừng theo tâm lý', type: 'warn' });
-      }
-
       const bodyParts = [tpl.mo_ta];
-      if (wasSlowed) bodyParts.push("Vì cơ thể đang đói mệt rã rời, từng cử động của bạn đều trì trệ và tốn nhiều thời gian hơn bình thường.");
       if (outcomeNotes.length > 0) bodyParts.push(outcomeNotes.join(' '));
-      if (rText) bodyParts.push(rText);
 
       updateCenterStage(bodyParts.join('\n\n'), deltas);
 
-      // KIỂM TRA XÁC SUẤT BIẾN CỐ ĐỜI THỰC (KHÔNG BAO GIỜ LẶP VÔ LÝ)
       if (!state.isDead && p.giai_doan !== 'so_sinh') {
         checkRealisticWorldEvents();
       }
@@ -1470,18 +1754,127 @@
     }
 
     // =========================================================================
-    // 4. BỘ ĐIỀU PHỐI XÁC SUẤT ĐỜI THỰC (92% YÊN BÌNH, THUẾ 1 LẦN/MÙA, COOLDOWN NGÀY)
+    // 5. TRÍ THÔNG MINH TỰ ĐỘNG KHI TUA NGÀY THÁNG (KHÔNG BAO GIỜ NHỊN ĐÓI KHI CÓ TIỀN/ĐỒ)
+    // =========================================================================
+    function skipDaysSmart() {
+      if (state.isWorking || freneticInterval || state.isDead) return;
+      SoundFX.playSoftStep();
+      const p = state.persona;
+      const stepsLog = [];
+      const deltas = [{ label: '⏩ Trôi qua 2 ngày', type: '' }];
+
+      // BƯỚC 1: TỰ ĐỘNG BÁN ĐỒ ĐAN / THẢO DƯỢC & DÙNG XU MUA GẠO LÀNH NẾU THIẾU LƯƠNG
+      if (state.luongLanh < 1.0) {
+        if (state.doDanLat > 0) {
+          const sold = state.doDanLat;
+          state.xuSat += sold * 3;
+          state.doDanLat = 0;
+          state.buonBan += 1;
+          stepsLog.push("Mang " + sold + " đồ đan lát ra chợ bán thu về +" + (sold * 3) + " xu sắt.");
+        }
+        if (state.thaoDuoc > 0 && state.sucKhoe >= 65) {
+          const soldHerb = state.thaoDuoc;
+          state.xuSat += soldHerb * 4;
+          state.thaoDuoc = 0;
+          stepsLog.push("Bán thảo dược ở chợ thu về +" + (soldHerb * 4) + " xu sắt.");
+        }
+        // Nếu có tiền xu (như 11 xu ở ảnh 2), lập tức mua gạo lành!
+        if (state.xuSat >= 2) {
+          const packsToBuy = Math.min(3, Math.floor(state.xuSat / 2));
+          state.xuSat -= packsToBuy * 2;
+          state.luongLanh += packsToBuy * 0.7;
+          deltas.push({ label: '🌾 Đong +' + (packsToBuy * 0.7).toFixed(1) + ' gạo lành', type: 'gain' });
+          stepsLog.push("Dùng " + (packsToBuy * 2) + " xu sắt đong thêm " + (packsToBuy * 0.7).toFixed(1) + " phần gạo lành mang về nhà.");
+        }
+      }
+
+      // BƯỚC 2: NẾU CÓ LƯƠNG DƯỚI HỐ GIẤU MÀ TRÊN BẾP HẾT GẠO -> LẤY LÊN NẤU ĂN
+      if (state.luongLanh < 0.5 && state.hoGiauDo > 0) {
+        state.luongLanh += state.hoGiauDo;
+        stepsLog.push("Lấy " + state.hoGiauDo.toFixed(1) + " phần lương lành từ hố giấu dưới gầm phản lên nấu ăn.");
+        state.hoGiauDo = 0;
+      }
+
+      // BƯỚC 3: PHƠI NẮNG LƯƠNG MỐC THÀNH LƯƠNG LÀNH
+      if (state.luongMoc >= 0.5) {
+        const conv = Math.min(0.8, state.luongMoc);
+        state.luongMoc -= conv;
+        state.luongLanh += conv * 0.75;
+        stepsLog.push("Đem phần lương ẩm mốc ra sân sàng sảy, phơi nắng thu lại " + (conv * 0.75).toFixed(2) + " phần lương sạch.");
+      }
+
+      // BƯỚC 4: ĂN UỐNG ĐẦY ĐỦ & NHÓM BẾP SƯỞI ẤM (ƯU TIÊN SINH MẠNG SỐ 1)
+      if (state.nuocSach < 2) {
+        state.nuocSach += 3;
+        stepsLog.push("Ra giếng làng kéo nước sạch đổ đầy chum.");
+      }
+      if (state.luongLanh >= 0.4) {
+        const eatAmt = Math.min(0.8, state.luongLanh);
+        state.luongLanh -= eatAmt;
+        state.doi = Math.max(12, state.doi - 45);
+        state.sucKhoe = Math.min(100, state.sucKhoe + 8);
+        deltas.push({ label: '🍚 Đã nấu ăn no bụng', type: 'gain' });
+        stepsLog.push("Bắc nồi nấu cháo gạo lành ăn no bụng, cơ thể hồi phục sức lực.");
+      } else if (state.luongMoc >= 0.4) {
+        state.luongMoc -= 0.4;
+        state.doi = Math.max(20, state.doi - 30);
+        stepsLog.push("Đun kỹ lương mốc với nước sôi để ăn qua bữa.");
+      }
+
+      if (state.cui < 1.0) {
+        state.cui += 1.2;
+        stepsLog.push("Lên bìa rừng gom thêm +1.2 bó củi khô về tích trữ.");
+      }
+      if (state.lanh >= 35 && state.cui >= 0.6) {
+        state.cui -= 0.6;
+        state.lanh = 15;
+        deltas.push({ label: '🔥 Đã nhóm bếp sưởi ấm', type: 'gain' });
+        stepsLog.push("Nhóm bếp lửa ấm áp trong nhà và ngủ đủ giấc ban đêm.");
+      }
+
+      // BƯỚC 5: DÀNH THỜI GIAN DƯ ĐỂ RÈN LUYỆN ĐỔI ĐỜI THEO TÍNH CÁCH / HOÀN CẢNH
+      if (p.biet_chu) {
+        state.triThuc += 1;
+        state.xuSat += 2;
+        deltas.push({ label: '📚 +1 Tri thức, +2 Xu', type: 'gain' });
+        stepsLog.push("Chép sổ thuê và nghiền ngẫm sách vở (+1 Tri thức, +2 Xu sắt).");
+      } else if (p.co_riu && state.voNghe > 0) {
+        state.voNghe += 1;
+        deltas.push({ label: '⚔️ +1 Võ nghệ', type: 'gain' });
+        stepsLog.push("Luyện tập đao pháp ngoài sân để chuẩn bị lập công ở Đồn Biên Ngạn (+1 Võ nghệ).");
+      } else {
+        state.doDanLat += 1;
+        deltas.push({ label: '🧺 +1 Đồ đan lát', type: 'gain' });
+        stepsLog.push("Ngồi đan thêm được 1 chiếc rổ tre để dành mang ra chợ bán.");
+      }
+
+      state.location = 'nha';
+      state.theLuc = Math.min(95, state.theLuc + 25);
+      advanceClock(24 * 60 * 2, false, true);
+      state.hour = 8;
+      state.actionsTaken++;
+
+      updateCenterStage(
+        "[TỰ ĐỘNG SINH TỒN & RÈN LUYỆN QUA 2 NGÀY]:\n• " + stepsLog.join("\n• "),
+        deltas
+      );
+      render();
+    }
+
+    // =========================================================================
+    // 6. BIẾN CỐ ĐỜI THỰC (THUẾ 1 LẦN/MÙA, RỪNG 6%, CHỢ 4%)
     // =========================================================================
     function checkRealisticWorldEvents() {
       const currentSeasonKey = state.year + "_" + state.seasonIdx;
       const isDaytime = state.hour >= 8 && state.hour <= 17;
 
-      // 1. THU TÔ THUẾ THEO MÙA (Mục 22.2): Chỉ xảy ra ĐÚNG 1 LẦN mỗi mùa vào kỳ thu thuế (ngày 13-15), ban ngày, khi đang ở nhà
       if (
         state.location === 'nha' &&
         isDaytime &&
         state.dayInSeason >= 13 &&
         state.lastTaxSeasonKey !== currentSeasonKey &&
+        state.persona.giai_cap !== 'ky_si_quan_nhan' &&
+        state.persona.giai_cap !== 'quan_lai' &&
         Math.random() < 0.35
       ) {
         state.lastTaxSeasonKey = currentSeasonKey;
@@ -1490,51 +1883,30 @@
         return;
       }
 
-      // Nếu mới gặp biến cố trong vòng 2 ngày qua thì tuyệt đối không kích hoạt biến cố nguy hiểm tiếp (Đảm bảo nhịp thở đời thực)
       if (state.totalDaysPlayed - state.lastDangerDay < 2) return;
 
-      // 2. TRÊN BÌA RỪNG ĐEN: Chỉ 6% xác suất gặp Chó hoang / Tuần rừng trong một lần làm việc trên rừng
-      if (state.location === 'bia_rung' && Math.random() < 0.06) {
+      const isNight = state.hour >= 18 || state.hour < 6;
+      const forestChance = (isNight && state.coDuoc <= 0) ? 0.14 : 0.05;
+      if (state.location === 'bia_rung' && Math.random() < forestChance) {
         state.lastDangerDay = state.totalDaysPlayed;
         triggerForestDanger();
-        return;
-      }
-
-      // 3. GIÓ LỐC ĐÊM ĐÔNG TỐC MÁI: Chỉ 3% khi đang mùa Giá, ban đêm, ở nhà VÀ chưa chằng chống mái (`!state.maiVung`)
-      if (state.location === 'nha' && state.seasonIdx === 3 && !isDaytime && !state.maiVung && Math.random() < 0.03) {
-        state.lastDangerDay = state.totalDaysPlayed;
-        triggerWinterRoofStorm();
-        return;
-      }
-
-      // 4. NGOÀI CHỢ / QUÁN TRỌ: Chỉ 4% xác suất gặp kẻ móc túi hoặc tuần đinh hỏi giấy
-      if ((state.location === 'cho_ben_say' || state.location === 'quan_bon_nga') && Math.random() < 0.04) {
-        state.lastDangerDay = state.totalDaysPlayed;
-        triggerMarketIncident();
       }
     }
 
-    // TÌNH HUỐNG 1: THU TÔ THUẾ ĐỊNH KỲ (1 LẦN MỖI MÙA, CÓ 5 LỰA CHỌN ỨNG PHÓ THỰC TẾ)
     function triggerTaxCollectorAtHome() {
       SoundFX.playDoorKnock();
       setScreenVignette('danger');
 
       const collectorTypes = [
-        { id: "de_tinh", ten: "Người lính thu sưu già đi một mình, vẻ mặt mệt mỏi", pha_cua: false },
-        { id: "da_nghi", ten: "Gã thu thuế đeo dấu ba bên ánh mắt dòm ngó xét nét", pha_cua: false },
-        { id: "hung_han", ten: "Gã quản trang hung hãn dẫn theo hai tên tay sai vác gậy", pha_cua: true }
+        { id: "de_tinh", ten: "Người lính thu sưu già đi một mình", pha_cua: false },
+        { id: "da_nghi", ten: "Gã thu thuế đeo dấu ba bên ánh mắt dòm ngó", pha_cua: false },
+        { id: "hung_han", ten: "Gã quản trang dẫn theo hai tên tay sai", pha_cua: true }
       ];
       const collector = collectorTypes[Math.floor(Math.random() * collectorTypes.length)];
 
-      const doorStr = state.cuaCaiThen ? "Cửa ĐÃ cài then" : "Cửa CHƯA cài then";
-      const wallStr = state.vachRach ? "Vách tranh RÁCH (có khe hở)" : "Vách ĐÃ TRÁT KÍN";
-      const smokeStr = state.bepConKhoi ? "Bếp CÒN KHÓI ẤM" : "Bếp ĐÃ NGUỘI";
-      const pitStr = state.hoGiauDo > 0 ? "Đã giấu " + state.hoGiauDo.toFixed(1) + " lương dưới hố gầm phản" : "Chưa giấu lương xuống hố";
-
       const desc =
-        "[ĐẾN KỲ THU SƯU THUẾ MÙA NÀY - 1 LẦN/MÙA]\n" +
-        "Tiếng gõ cửa vang lên: " + collector.ten + " đến thu tô thuế định kỳ.\n" +
-        "• Hiện trạng nhà bạn: [" + doorStr + "] · [" + wallStr + "] · [" + smokeStr + "] · [" + pitStr + "].";
+        "[KỲ THU SƯU THUẾ MÙA NÀY - 1 LẦN DUY NHẤT TRONG MÙA]\n" +
+        "Ngoài sân: " + collector.ten + " gõ cửa thu tô thuế định kỳ.";
 
       const choices = [
         {
@@ -1542,83 +1914,48 @@
           resolve: () => evaluateHomeHiding("gam_phan", collector)
         },
         {
-          text: "Mở cửa cho xem góc bếp trống (Dựa vào hố giấu dưới gầm phản & tình làng xóm)",
+          text: "Mở cửa cho xem góc bếp trống (Giữ an toàn cho lương dưới hố giấu)",
           resolve: () => evaluateHomeHiding("mo_cua_than_nhien", collector)
-        },
-        {
-          text: "Đứng im cố thủ trong nhà không lên tiếng (Phụ thuộc vách kín và then cửa)",
-          resolve: () => evaluateHomeHiding("dung_im", collector)
         }
       ];
 
       if (state.xuSat >= 2) {
         choices.push({
-          text: "Nhét nhanh 2 đồng xu sắt vào tay gã thu thuế xin khất qua mùa sau",
+          text: "Đóng 2 đồng xu sắt tiền sưu thuế để yên ổn làm ăn",
           resolve: () => evaluateHomeHiding("hoi_lo_xu", collector)
         });
       }
 
-      showSituationUI("⚡ ĐẾN KỲ THU TÔ THUẾ TRONG MÙA!", desc, choices, true);
+      showSituationUI("⚡ ĐẾN KỲ THU TÔ THUẾ TRONG MÙA!", desc, choices);
     }
 
     function evaluateHomeHiding(method, collector) {
-      clearSituationUI(true);
+      clearSituationUI();
       let story = "";
       const deltas = [];
 
       if (method === "hoi_lo_xu") {
         state.xuSat -= 2;
-        story = "Bạn mở hé cửa, kín đáo nhét 2 đồng xu sắt vào tay gã thu thuế. Hắn掂 nhẹ đồng xu, gạch tên nhà bạn vào diện 'đã kiểm' rồi dẫn người sang xóm bên.";
-        deltas.push({ label: "🪙 -2 xu sắt · Đã qua kỳ thuế mùa này", type: "gain" });
+        story = "Bạn nộp 2 đồng xu sắt, gã thu thuế gạch tên nhà bạn vào sổ hoàn tất kỳ thuế mùa này rồi rời đi.";
+        deltas.push({ label: "🪙 -2 xu sắt · Hoàn tất kỳ thuế", type: "gain" });
       } else if (method === "mo_cua_than_nhien") {
         if (state.luongLanh <= 0.3 && state.hoGiauDo > 0) {
-          story = "Bạn mở cửa mời vào. Nhìn quanh gian nhà chỉ thấy chiếc nồi không (vì phần lương lành đã được bạn giấu kín dưới hố đất gầm phản), chúng lục tìm không thấy gì đành tặc lưỡi bỏ đi!";
-          deltas.push({ label: "🕳️ Giữ trọn lương thực nhờ hố giấu gầm phản", type: "gain" });
-        } else if (state.tinhLangXom >= 3) {
-          story = "Bạn vừa mở cửa thì bác hàng xóm bước sang nói đỡ rằng nhà bạn vừa ốm dậy chẳng còn gì. Nể lời người lớn trong xóm, toán thu thuế chỉ lấy tượng trưng 0.3 bó củi rồi đi.";
-          state.cui = Math.max(0, state.cui - 0.3);
-          deltas.push({ label: "🤝 Hàng xóm nói đỡ giúp qua kỳ thuế", type: "gain" });
-        } else if (collector.id === "de_tinh") {
-          story = "Người lính già nhìn cảnh nhà nghèo rớt mồng tơi của bạn, thở dài bảo 'Thôi ráng cầm cự qua mùa Giá đi' rồi tha cho kỳ này.";
-          deltas.push({ label: "💚 Gặp người thu thuế có lòng thương", type: "gain" });
+          story = "Nhờ đã cất lương xuống hố giấu dưới gầm phản, chúng nhìn quanh nồi niêu trống trơn đành tặc lưỡi bỏ đi!";
+          deltas.push({ label: "🕳️ Bảo toàn lương thực nhờ hố giấu", type: "gain" });
         } else {
+          const takenCui = Math.min(state.cui, 0.6);
+          state.cui = Math.max(0, state.cui - takenCui);
+          story = "Chúng thu đi " + takenCui.toFixed(1) + " bó củi khô trừ vào phần sưu thuế mùa này.";
+          deltas.push({ label: "🔥 -" + takenCui.toFixed(1) + " bó củi thuế mùa", type: "warn" });
+        }
+      } else {
+        if (!state.cuaCaiThen && collector.id !== "de_tinh") {
           const takenCui = Math.min(state.cui, 0.7);
           state.cui = Math.max(0, state.cui - takenCui);
-          story = "Do lương thực và củi vẫn để lộ ngoài góc bếp, chúng thu đi " + takenCui.toFixed(1) + " bó củi trừ vào phần tô thuế mùa này.";
-          deltas.push({ label: "🔥 Nộp -" + takenCui.toFixed(1) + " bó củi thuế mùa", type: "warn" });
-        }
-      } else if (method === "dung_im") {
-        if (!state.cuaCaiThen) {
-          const takenCui = Math.min(state.cui, 0.8);
-          state.cui = Math.max(0, state.cui - takenCui);
-          story = "Vì cửa không cài then, chúng đẩy cửa bước thẳng vào bắt gặp bạn đang đứng giữa nhà và thu mất " + takenCui.toFixed(1) + " bó củi.";
-          deltas.push({ label: "⚠️ Bị phát hiện vì quên cài then cửa", type: "warn" });
-        } else if (state.vachRach) {
-          const takenCui = Math.min(state.cui, 0.8);
-          state.cui = Math.max(0, state.cui - takenCui);
-          story = "Cửa cài then nhưng vách tranh còn khe hở lớn, gã thu thuế ngó qua khe vách thấy rõ bạn đang đứng bên trong nên buộc bạn phải mở cửa nộp " + takenCui.toFixed(1) + " bó củi.";
-          deltas.push({ label: "👁️ Lộ diện qua khe vách rách", type: "warn" });
+          story = "Vì cửa chưa cài then, chúng đẩy cửa vào lấy mất " + takenCui.toFixed(1) + " bó củi.";
+          deltas.push({ label: "⚠️ Quên cài then cửa", type: "warn" });
         } else {
-          story = "Nhờ cửa cài chặt then và vách nhà đã trát bùn kín mít, chúng ngó quanh không thấy ai, gọi vài tiếng rồi bỏ sang nhà khác.";
-          deltas.push({ label: "💚 Cố thủ thành công nhờ vách kín", type: "gain" });
-        }
-      } else if (method === "gam_phan") {
-        if (!state.cuaCaiThen && collector.id !== "de_tinh") {
-          const takenCui = Math.min(state.cui, 0.8);
-          state.cui = Math.max(0, state.cui - takenCui);
-          story = "Cửa không cài then khiến chúng tự tiện bước vào nhà, lấy gậy khua dưới gầm phản phát hiện ra bạn và thu đi " + takenCui.toFixed(1) + " bó củi.";
-          deltas.push({ label: "⚠️ Cửa không khóa, bị lục soát", type: "warn" });
-        } else if (collector.pha_cua && state.bepConKhoi && Math.random() < 0.5) {
-          state.cuaCaiThen = false;
-          const takenCui = Math.min(state.cui, 0.8);
-          state.cui = Math.max(0, state.cui - takenCui);
-          story = "Thấy khói bếp vừa đun còn bốc lên ấm nóng mà gọi không ai thưa, gã quản trang hung hãn đạp bung then cửa vào lục soát!";
-          deltas.push({ label: "🚪 Lộ khói bếp, bị đạp cửa", type: "warn" });
-        } else {
-          const detail = state.vachRach
-            ? "Gã thu thuế áp mắt ngó qua khe vách rách, nhưng vì bạn đã nằm ép dưới gầm phản tối om nên hắn chỉ thấy gian nhà trống không."
-            : "Vách nhà trát kín và cửa cài chặt then khiến chúng không nhìn vào trong được.";
-          story = detail + " Gõ thêm vài tiếng không thấy động tĩnh, chúng tặc lưỡi bỏ đi!";
+          story = "Bạn nằm im trong bóng tối dưới gầm phản, gã thu thuế ngó qua không thấy ai đành bỏ sang nhà khác!";
           deltas.push({ label: "💚 Trốn thoát kỳ thuế an toàn", type: "gain" });
         }
       }
@@ -1627,115 +1964,42 @@
       render();
     }
 
-    // TÌNH HUỐNG 2: TRÊN BÌA RỪNG ĐEN (CHỈ 6% XÁC SUẤT, CÓ NHIỀU CÁCH XỬ TRÍ THỰC TẾ)
     function triggerForestDanger() {
       SoundFX.playDogBark();
       setScreenVignette('danger');
 
-      const desc = "Từ lùm cây rậm rạp trên Bìa Rừng Đen, một con chó hoang đói mồi gầm gừ lao ra chắn ngang đường mòn của bạn!";
+      const desc = "Trên lối mòn Bìa Rừng Đen, một con chó hoang đói mồi gầm gừ lao ra chắn ngang đường của bạn!";
       const choices = [
         {
-          text: "Vung rìu / gậy gỗ lớn đập mạnh xuống gốc cây và hét vang để áp đảo nó",
+          text: "Vung vũ khí / gậy gỗ lớn đập mạnh dọa nó (Võ nghệ hiện tại: " + state.voNghe + ")",
           resolve: () => {
-            clearSituationUI(true);
-            state.theLuc = Math.max(0, state.theLuc - 8);
-            updateCenterStage("Tiếng đập chát chúa làm con thú giật mình khựng lại, cụp đuôi lùi dần vào bụi rậm.", [{ label: "💚 Dọa退 thú dữ an toàn", type: "gain" }]);
-            render();
-          }
-        },
-        {
-          text: "Leo nhanh lên chạc cây sồi thấp ngay bên cạnh chờ nó bỏ đi",
-          resolve: () => {
-            clearSituationUI(true);
+            clearSituationUI();
             state.theLuc = Math.max(0, state.theLuc - 6);
-            updateCenterStage("Bạn đu người trèo lên chạc cây cao. Con chó hoang sủa gắt dưới gốc cây một lúc rồi tự bỏ đi kiếm mồi nơi khác.", [{ label: "💚 Tránh trên chạc cây an toàn", type: "gain" }]);
-            render();
-          }
-        }
-      ];
-
-      if (state.luongMoc >= 0.2) {
-        choices.push({
-          text: "Ném một nắm lương ẩm mốc/thức ăn thừa về phía bụi cây đánh lạc hướng (-0.2 Lương mốc)",
-          resolve: () => {
-            clearSituationUI(true);
-            state.luongMoc = Math.max(0, state.luongMoc - 0.2);
-            updateCenterStage("Con thú đói lập tức lao tới ngoạm lấy mẩu thức ăn bạn ném ra, bạn nhân cơ hội lặng lẽ rút lui xuống đồi.", [{ label: "💚 Đánh lạc hướng không tốn sức", type: "gain" }]);
-            render();
-          }
-        });
-      }
-
-      showSituationUI("⚡ NGUY HIỂM TRÊN RỪNG: CHÓ HOANG CHẮN ĐƯỜNG!", desc, choices, true);
-    }
-
-    // TÌNH HUỐNG 3: GIÓ LỐC ĐÊM ĐÔNG (CHỈ XẢY RA KHI CHƯA CHẰNG MÁI NHÀ)
-    function triggerWinterRoofStorm() {
-      SoundFX.playHeartbeat();
-      setScreenVignette('danger');
-
-      const desc = "Đêm mùa Giá nổi cơn gió bấc rít gào! Vì mái tranh chưa được chằng buộc kỹ, một góc kèo mái hiên kêu răng rắc sắp bị gió giật bung!";
-      const choices = [
-        {
-          text: "Lấy thân gỗ và dây rơm chèn giữ cột mái ngay trong đêm (-10 Thể lực, giữ nguyên củi)",
-          resolve: () => {
-            clearSituationUI(true);
-            state.theLuc = Math.max(0, state.theLuc - 10);
-            state.maiVung = true;
-            updateCenterStage("Bạn đội gió lạnh chèn chặt lại góc mái hiên và buộc cố định vào cột cái. Mái nhà từ nay đã vững vàng trước gió bấc.", [{ label: "🏠 Đã gia cố mái vững chắc", type: "gain" }]);
+            updateCenterStage("Bạn quát lớn vung gậy đánh bật con thú dữ lùi vào bụi rậm.", [{ label: "💚 Đánh đuổi thú dữ", type: "gain" }]);
             render();
           }
         },
         {
-          text: "Ôm thúng lương thực và củi khô lùi vào góc trong cùng tránh gió",
+          text: "Leo nhanh lên chạc cây sồi bên cạnh chờ nó bỏ đi",
           resolve: () => {
-            clearSituationUI(true);
-            state.lanh = Math.min(100, state.lanh + 10);
-            updateCenterStage("Gió lốc làm tốc một mảng tranh ngoài hiên khiến gió lạnh lùa vào, nhưng người và lương thực của bạn vẫn an toàn.", [{ label: "🌬️ Nhà bị gió lùa lạnh hơn", type: "warn" }]);
+            clearSituationUI();
+            state.theLuc = Math.max(0, state.theLuc - 5);
+            updateCenterStage("Bạn trèo lên chạc cây cao an toàn chờ con thú bỏ đi.", [{ label: "💚 Tránh trên chạc cây", type: "gain" }]);
             render();
           }
         }
       ];
 
-      showSituationUI("⚡ GIÓ BẤC ĐÊM ĐÔNG GIẬT KÈO MÁI HIÊN!", desc, choices, true);
+      showSituationUI("⚡ NGUY HIỂM TRÊN RỪNG!", desc, choices);
     }
 
-    // TÌNH HUỐNG 4: NGOÀI CHỢ / QUÁN TRỌ
-    function triggerMarketIncident() {
-      SoundFX.playHeartbeat();
-      setScreenVignette('danger');
-
-      const desc = "Giữa đám người chen chúc ở bến chợ, một kẻ lạ mặt giả vờ va vào vai bạn để thò tay lần mò túi đựng xu sắt và lương thực!";
-      const choices = [
-        {
-          text: "Chụp chặt cổ tay hắn và nhìn thẳng vào mắt cảnh cáo",
-          resolve: () => {
-            clearSituationUI(true);
-            updateCenterStage("Bị bạn bắt quả tang ngay lúc vừa chạm vào túi, kẻ móc túi tái mặt rút tay lại rồi lẩn nhanh vào đám đông.", [{ label: "💚 Giữ trọn túi đồ", type: "gain" }]);
-            render();
-          }
-        },
-        {
-          text: "Lùi nhanh một bước giữ chặt túi áo rồi rẽ sang sạp hàng có tuần đinh đứng",
-          resolve: () => {
-            clearSituationUI(true);
-            updateCenterStage("Thấy bạn cảnh giác bước về phía lính gác chợ, kẻ gian lập tức bỏ ý định và quay đi hướng khác.", [{ label: "💚 Tránh kẻ gian khéo léo", type: "gain" }]);
-            render();
-          }
-        }
-      ];
-
-      showSituationUI("⚡ KẺ GIAN RÌNH MÓC TÚI GIỮA CHỢ!", desc, choices, true);
-    }
-
-    function showSituationUI(title, desc, choices, isDanger) {
+    function showSituationUI(title, desc, choices) {
       const box = document.getElementById('freneticBox');
       const titleEl = document.getElementById('freneticTitle');
       const timerEl = document.getElementById('freneticTimer');
       const descEl = document.getElementById('freneticDesc');
       const choicesEl = document.getElementById('freneticChoices');
 
-      box.className = 'frenetic-overlay' + (isDanger ? '' : ' calm-encounter');
       titleEl.textContent = title;
       descEl.textContent = desc;
       choicesEl.innerHTML = '';
@@ -1745,7 +2009,7 @@
         const btn = document.createElement('button');
         btn.className = 'btn-main-action';
         btn.innerHTML = '<span class="act-name">▶ ' + ch.text + '</span>';
-        btn.onclick = () => ch.resolve(false);
+        btn.onclick = () => ch.resolve();
         choicesEl.appendChild(btn);
       });
 
@@ -1753,17 +2017,15 @@
       freneticInterval = setInterval(() => {
         remSec -= 0.1;
         timerEl.textContent = Math.max(0, remSec).toFixed(1) + 's';
-        if (remSec <= 0) {
-          choices[0].resolve(true);
-        }
+        if (remSec <= 0) choices[0].resolve();
       }, 100);
     }
 
-    function clearSituationUI(wasDanger) {
+    function clearSituationUI() {
       clearInterval(freneticInterval);
       freneticInterval = null;
       document.getElementById('freneticBox').style.display = 'none';
-      if (wasDanger) setScreenVignette('relief');
+      setScreenVignette('relief');
     }
 
     function updateCenterStage(mainText, deltas) {
@@ -1795,50 +2057,16 @@
       });
     }
 
-    function skipDaysByPersonality() {
-      if (state.isWorking || freneticInterval || state.isDead) return;
-      SoundFX.playSoftStep();
-      const p = state.persona;
-      state.location = 'nha';
-      advanceClock(24 * 60 * 2, false);
-      state.actionsTaken++;
-
-      let msg = '';
-      const deltas = [{ label: '🏠 Đã ở tại nhà', type: '' }, { label: '⏩ Trôi qua 2 ngày', type: '' }];
-
-      if (state.amAnhDoi >= 60 || state.doi >= 65) {
-        state.luongMoc += 0.5;
-        state.cui += 0.7;
-        deltas.push({ label: '🍂 +0.5 lương mốc', type: 'warn' }, { label: '🔥 +0.7 bó củi', type: 'gain' });
-        msg = "Nỗi sợ đói lạnh thôi thúc bạn không dám ngồi yên. Hai ngày qua bạn tự lên bìa rừng mót củi và đào củ dại mang về nhà cầm cự.";
-      } else if (p.luoi >= 45) {
-        state.theLuc = Math.min(100, state.theLuc + 18);
-        state.chan = Math.max(0, state.chan - 12);
-        state.cuaCaiThen = true;
-        deltas.push({ label: '💤 Cài cửa nghỉ ngơi trong nhà', type: '' });
-        msg = "Tính khí uể oải khiến bạn ngại ra gió. Bạn cài then cửa nằm nghỉ trong ổ rơm, cơ thể đỡ mỏi nhưng củi gạo vơi nhẹ.";
-      } else {
-        state.cui += 1.0;
-        state.luongLanh += 0.4;
-        deltas.push({ label: '🔥 +1.0 bó củi', type: 'gain' }, { label: '🌾 +0.4 lương lành', type: 'gain' });
-        msg = "Bản tính nhẫn nại giúp bạn đều đặn làm lụng, gánh nước và kiếm củi tích trữ vào góc bếp.";
-      }
-
-      updateCenterStage(msg, deltas);
-      render();
-    }
-
     function showEndOfLifeChronicle(deathReason) {
       const p = state.persona;
       openModal('📜 Khép Lại Một Kiếp Người',
         '<p style="color:#ff9e9e; font-weight:600;">' + deathReason + '</p>' +
         '<p><strong>Người đã khuất:</strong> ' + p.ten + ' (Hưởng dương ' + p.tuoi + ' tuổi) · ' + p.than_phan + '</p>' +
         '<hr style="border-color:#2b3242"/>' +
-        '<p><strong>Lời người quanh vùng truyền miệng:</strong><br/>' +
-        '<em>"Người ấy từng sống qua những mùa Giá lạnh lẽo của Hoài Dương, lặng lẽ gánh chịu phận mình rồi nằm xuống dưới lớp cỏ khô ngoài đồng."</em></p>' +
-        '<p><strong>Sự thật mang theo xuống mộ:</strong><br/>' +
-        '• Tâm nguyện cả đời: ' + p.tam_niem.mong + '<br/>' +
-        '• Góc khuất chưa từng nói: ' + p.tam_niem.goc_khuat + '</p>' +
+        '<p><strong>Thành tựu để lại trên thế gian:</strong><br/>' +
+        '• Học vấn: ' + (p.biet_chu ? 'Đã biết chữ (Tri thức ' + state.triThuc + ')' : 'Chưa biết chữ') + '<br/>' +
+        '• Võ nghệ: Cấp ' + state.voNghe + ' · Kinh nghiệm thương trường: Cấp ' + state.buonBan + '<br/>' +
+        '• Góc khuất mang theo: ' + p.tam_niem.goc_khuat + '</p>' +
         '<button class="start-btn-random" style="margin-top:14px;" onclick="returnToStartMenu()">🕯️ Khép lại kiếp này & Bước sang kiếp khác</button>'
       );
     }
@@ -1849,7 +2077,11 @@
 
       document.getElementById('topCharName').textContent = p.ten;
       document.getElementById('topCharSub').textContent = p.tuoi + ' tuổi · ' + p.than_phan;
-      document.getElementById('topLocBadge').textContent = '📍 Đang ở: ' + PLACE_NAMES[state.location];
+      document.getElementById('topLocBadge').textContent = '📍 ' + PLACE_NAMES[state.location];
+      document.getElementById('topProgressBadge').textContent =
+        '📚 Chữ: ' + (p.biet_chu ? 'Biết chữ (' + state.triThuc + ')' : 'Học ' + state.triThuc + '/3') +
+        ' · ⚔️ Võ: ' + state.voNghe +
+        ' · ⚖️ Buôn: ' + state.buonBan;
       document.getElementById('topModeBadge').style.display = state.authenticMode ? 'inline-block' : 'none';
       document.getElementById('rightLocHint').textContent = PLACE_NAMES[state.location];
 
@@ -1858,13 +2090,13 @@
       const sText = document.getElementById('sensoryText');
       if (state.sucKhoe <= 35 || state.doi >= 82 || state.lanh >= 82) {
         strip.className = 'sensory-warning-strip critical';
-        sText.textContent = '🩸 Mắt bạn hoa đom đóm, đầu ngón tay tê cứng và lồng ngực đau nhói từng cơn vì đói lạnh...';
-      } else if (state.cui < 0.8 || (state.luongLanh + state.luongMoc + state.hoGiauDo) < 0.6 || state.doi >= 60 || state.lanh >= 60) {
+        sText.textContent = '🩸 Mắt bạn hoa đom đóm, tay chân tê cứng vì đói lạnh! Hãy nấu ăn hoặc nhóm bếp ngay!';
+      } else if (state.cui < 0.6 || (state.luongLanh + state.luongMoc + state.hoGiauDo) < 0.5 || state.doi >= 60 || state.lanh >= 60) {
         strip.className = 'sensory-warning-strip warn';
-        sText.textContent = '⚠️ Gió bấc thổi lạnh buốt, bụng bắt đầu cồn cào mà củi gạo dự trữ trên bếp đã vơi dần.';
+        sText.textContent = '⚠️ Gió lạnh thổi buốt và bụng bắt đầu cồn cào. Hãy chú ý ăn uống và giữ ấm.';
       } else {
         strip.className = 'sensory-warning-strip';
-        sText.textContent = '🕯️ Hơi thở đều đặn, cơ thể vẫn đủ sức chống chọi với tiết trời.';
+        sText.textContent = '🕯️ Cơ thể tỉnh táo, đủ sức làm việc hoặc đi xa tìm cơ hội đổi đời.';
       }
 
       const hBadges = document.getElementById('houseBadges');
@@ -1884,17 +2116,11 @@
         bRoof.className = 'house-badge ' + (state.maiVung ? 'safe' : 'vuln');
         bRoof.textContent = state.maiVung ? '🏠 Mái: Đã chằng vững' : '🍃 Mái: Chưa chằng';
         hBadges.appendChild(bRoof);
-
-        if (state.bepConKhoi) {
-          const bSmoke = document.createElement('span');
-          bSmoke.className = 'house-badge vuln';
-          bSmoke.textContent = '♨️ Bếp: Còn khói ấm';
-          hBadges.appendChild(bSmoke);
-        }
       }
 
       // GÓC DƯỚI TRÁI: THỜI GIAN & KHO ĐỒ
-      const timeOfDay = (state.hour >= 6 && state.hour < 18) ? 'Ban ngày' : 'Ban đêm';
+      const isNight = state.hour >= 18 || state.hour < 6;
+      const timeOfDay = !isNight ? 'Ban ngày' : 'Ban đêm';
       document.getElementById('clockDisplay').textContent =
         '⏳ Năm ' + state.year + ' · Mùa ' + CONFIG.seasons[state.seasonIdx] + ' (Ngày ' + state.dayInSeason + '/15) · ' + Math.floor(state.hour) + 'h00 (' + timeOfDay + ')';
       document.getElementById('stockXu').textContent = '🪙 Tiền: ' + state.xuSat + ' xu';
@@ -1911,9 +2137,12 @@
         { text: state.doi < 40 ? '🍚 Bụng êm' : (state.doi < 70 ? '🥣 Bụng cồn cào' : '🥀 Đói hoa mắt'), cls: state.doi < 40 ? 'good' : (state.doi >= 70 ? 'bad' : '') },
         { text: state.lanh < 40 ? '🔥 Đủ ấm' : (state.lanh < 70 ? '🌬️ Se lạnh' : '❄️ Rét run cầm cập'), cls: state.lanh < 40 ? 'good' : (state.lanh >= 70 ? 'bad' : '') }
       ];
+      if (state.goTho >= 1) tags.push({ text: '🪵 Gỗ thô: ' + state.goTho.toFixed(1), cls: 'good' });
       if (state.doDanLat > 0) tags.push({ text: '🧺 Đồ đan: ' + state.doDanLat, cls: 'good' });
       if (state.thaoDuoc > 0) tags.push({ text: '🌿 Thảo dược: ' + state.thaoDuoc, cls: 'good' });
-      if (state.sucKhoe < 55) tags.push({ text: '🤒 Người suy nhược', cls: 'bad' });
+      if (state.hangBuon > 0) tags.push({ text: '📦 Kiện hàng buôn: ' + state.hangBuon, cls: 'good' });
+      if (state.coDuoc > 0) tags.push({ text: '🔦 Đuốc đi đêm: ' + state.coDuoc, cls: 'good' });
+      if (state.sucKhoe < 55) tags.push({ text: '🤒 Suy nhược (' + Math.round(state.sucKhoe) + '%)', cls: 'bad' });
       tags.forEach(t => {
         const s = document.createElement('span');
         s.className = 'feel-tag ' + t.cls;
@@ -1921,31 +2150,41 @@
         feelContainer.appendChild(s);
       });
 
-      // THANH ĐI LẠI GỌN TRÊN ĐẦU CỘT PHẢI (Ẩn với trẻ sơ sinh 1 tuổi)
+      // THANH ĐI LẠI ĐỐI XỨNG 2 CHIỀU (ĐI ĐƯỢC CẢ BAN ĐÊM LÊN RỪNG & VÀO THÀNH LỚN)
       const travelBar = document.getElementById('travelBar');
       const travelChips = document.getElementById('travelChips');
+      const speedHint = document.getElementById('speedStatusHint');
+
       if (p.giai_doan === 'so_sinh') {
         travelBar.style.display = 'none';
       } else {
         travelBar.style.display = 'flex';
         travelChips.innerHTML = '';
-        const isDaylight = state.hour >= 6 && state.hour < 18;
+        const sampleTravel = getTravelMinutes('nha', 'duong_lang');
+        speedHint.textContent = sampleTravel.reasons.length > 0
+          ? 'Tốc độ: Chậm (' + sampleTravel.reasons.join(', ') + ')'
+          : 'Tốc độ: Nhanh nhẹn bình thường';
+
         PLACES.forEach(pl => {
-          if (pl.id === 'cua_hieu' && !p.biet_chu) return;
           const btn = document.createElement('button');
           const isCurrent = pl.id === state.location;
-          btn.className = 'travel-chip' + (isCurrent ? ' current' : '');
-          btn.disabled = isCurrent || state.isWorking || !!freneticInterval || state.isDead || (pl.dayOnly && !isDaylight);
-          btn.textContent = pl.short + (isCurrent ? ' (Đang đứng)' : '');
-          btn.title = pl.dayOnly && !isDaylight ? 'Trời đã tối không thể đi tới nơi này' : ('Đi bộ mất ' + pl.minutes + ' phút');
+          const tInfo = getTravelMinutes(state.location, pl.id);
+          const isNightForest = isNight && pl.id === 'bia_rung';
+
+          btn.className = 'travel-chip' + (isCurrent ? ' current' : '') + (pl.isCity ? ' city-dest' : '') + (isNightForest ? ' night-warn' : '');
+          btn.disabled = isCurrent || state.isWorking || !!freneticInterval || state.isDead;
+          btn.textContent = pl.short + (isCurrent ? ' (Đang đứng)' : ' (' + tInfo.minutes + 'p)');
+          btn.title = isCurrent
+            ? 'Bạn đang đứng tại đây'
+            : ('Đi bộ 2 chiều đối xứng mất ' + tInfo.minutes + ' phút' + (isNightForest ? ' · Đêm tối trên rừng lạnh hơn (Nên bện đuốc mang theo)' : ''));
           btn.onclick = () => window.travelToPlace(pl.id);
           travelChips.appendChild(btn);
         });
       }
 
-      // DANH SÁCH HÀNH ĐỘNG PHONG PHÚ TẠI CHỖ
-      const allActions = getMenu(p);
-      const categories = ['Tất cả', ...new Set(allActions.map(a => a.nhom))];
+      // DANH SÁCH HÀNH ĐỘNG (HIỆN CẢ NÚT ĐỦ ĐIỀU KIỆN LẪN NÚT LÀM MỜ GHI RÕ CÔNG THỨC THIẾU)
+      const allActions = getActionsForCurrentPlace(p);
+      const categories = ['Tất cả', ...new Set(allActions.map(a => a.tpl.nhom))];
       if (!categories.includes(state.activeCategory)) state.activeCategory = 'Tất cả';
 
       const tabBox = document.getElementById('filterTabs');
@@ -1960,25 +2199,32 @@
 
       const menu = document.getElementById('menuBox');
       menu.innerHTML = '';
-      const filtered = state.activeCategory === 'Tất cả' ? allActions : allActions.filter(a => a.nhom === state.activeCategory);
+      const filtered = state.activeCategory === 'Tất cả' ? allActions : allActions.filter(a => a.tpl.nhom === state.activeCategory);
 
-      filtered.forEach(tpl => {
+      filtered.forEach(item => {
+        const { tpl, canRun, missingText } = item;
         const card = document.createElement('div');
         card.className = 'action-card';
 
         const btn = document.createElement('button');
-        btn.className = 'btn-main-action';
-        btn.disabled = state.isWorking || !!freneticInterval || state.isDead;
+        const extraCls = tpl.is_sleep ? ' sleep-highlight' : (tpl.tag.includes('doi_doi') ? ' ambition-highlight' : '');
+        btn.className = 'btn-main-action' + extraCls;
+        btn.disabled = !canRun || state.isWorking || !!freneticInterval || state.isDead;
+
+        const reqLine = canRun
+          ? '<span class="act-req-ok">✓ Đủ điều kiện thực hiện · Ước chừng: ' + tpl.thoi_luong_mo + '</span>'
+          : '<span class="act-req-missing">🔒 ' + missingText + '</span>';
+
         btn.innerHTML =
-          '<span class="act-name">▶ ' + tpl.ten_vi + '</span>' +
-          '<span class="act-sub">' + tpl.nhom + ' · Ước chừng: ' + tpl.thoi_luong_mo + '</span>';
+          '<span class="act-name">' + (canRun ? '▶ ' : '') + tpl.ten_vi + '</span>' +
+          reqLine;
         btn.onclick = () => runAction(tpl, false);
         card.appendChild(btn);
 
-        if (!tpl.tag.includes('ban_nang')) {
+        if (!tpl.tag.includes('ban_nang') && !tpl.is_sleep) {
           const pBtn = document.createElement('button');
           pBtn.className = 'btn-push';
-          pBtn.disabled = state.isWorking || !!freneticInterval || state.isDead;
+          pBtn.disabled = !canRun || state.isWorking || !!freneticInterval || state.isDead;
           pBtn.textContent = 'Gắng';
           pBtn.onclick = () => runAction(tpl, true);
           card.appendChild(pBtn);
@@ -2025,11 +2271,16 @@
           state.vachRach = p.vach_rach !== undefined ? p.vach_rach : true;
           state.maiVung = !!p.mai_vung;
           state.bepConKhoi = false;
+          state.coDuoc = 0;
           state.hoGiauDo = 0.0;
           state.thaoDuoc = 0;
           state.doDanLat = 0;
-          state.xuSat = p.xu_sat ?? 2;
+          state.hangBuon = 0;
+          state.xuSat = p.xu_sat ?? 3;
           state.nuocSach = p.nuoc ?? 2;
+          state.triThuc = p.tri_thuc ?? 0;
+          state.voNghe = p.vo_nghe ?? 0;
+          state.buonBan = p.buon_ban ?? 0;
           state.tinhLangXom = 1;
           state.hour = 8; state.dayInSeason = 10; state.seasonIdx = 3;
           state.year = (p.nam_sinh || 30) + p.tuoi;
@@ -2037,10 +2288,10 @@
           state.lastTaxSeasonKey = "";
           state.lastDangerDay = -10;
           state.theLuc = 80; state.sucKhoe = 85;
-          state.doi = p.doi ?? 50; state.lanh = p.lanh ?? 45; state.chan = 10;
-          state.cui = p.cui ?? 1.0;
+          state.doi = p.doi ?? 45; state.lanh = p.lanh ?? 40; state.chan = 10;
+          state.cui = p.cui ?? 1.2;
           state.goTho = p.go_tho ?? 0.0;
-          state.luongLanh = p.luong_lanh ?? 0.8;
+          state.luongLanh = p.luong_lanh ?? 0.9;
           state.luongMoc = p.luong_moc ?? 0.3;
           state.amAnhDoi = 0; state.actionsTaken = 0; state.recentHistory = [];
           state.activeCategory = 'Tất cả';
@@ -2073,13 +2324,17 @@
     document.getElementById('btnOpenBio').onclick = () => {
       const p = state.persona;
       if (!p) return;
-      openModal('📖 Tâm Niệm & Hoàn Cảnh Bản Thân',
-        '<p><strong>Thân phận hiện tại:</strong> ' + p.ten + ' (' + p.tuoi + ' tuổi) · ' + p.than_phan + '</p>' +
-        '<p><strong>• Vị trí đang đứng:</strong> ' + PLACE_NAMES[state.location] + '</p>' +
-        '<p><strong>• Mong mỏi trong lòng:</strong> ' + p.tam_niem.mong + '</p>' +
-        '<p><strong>• Nỗi sợ thường trực:</strong> ' + p.tam_niem.so + '</p>' +
-        '<p><strong>• Gánh nặng trên vai:</strong> ' + p.tam_niem.ganh_nang + '</p>' +
-        '<p><strong>• Góc khuất giữ kín:</strong> ' + p.tam_niem.goc_khuat + '</p>' +
+      openModal('📖 Tâm Niệm & Con Đường Đổi Đời (Mục 22.5)',
+        '<p><strong>Thân phận hiện tại:</strong> ' + p.ten + ' (' + p.tuoi + ' tuổi) · <strong>Giai cấp:</strong> ' + p.than_phan + '</p>' +
+        '<p><strong>• Năng lực tích lũy:</strong> 📚 Tri thức: ' + state.triThuc + ' (' + (p.biet_chu ? 'Đã biết chữ' : 'Cần 3 điểm để biết chữ') + ') · ⚔️ Võ nghệ: ' + state.voNghe + ' · ⚖️ Buôn bán: ' + state.buonBan + '</p>' +
+        '<hr style="border-color:#2b3242"/>' +
+        '<p><strong>🌟 Ba con đường vượt phận hàn vi (Di động xã hội):</strong><br/>' +
+        '1. <strong>Con đường Võ nghiệp (Đồn Biên Ngạn):</strong> Luyện Võ nghệ đạt ≥ 8 ➔ Lập chiến công ở Bạch Lĩnh để được phong bậc <strong>Kiếm Điền</strong>.<br/>' +
+        '2. <strong>Con đường Khoa cử (Đường làng ➔ Kinh Hoài):</strong> Học chữ ở hiên Nhất Hỏa (Tri thức ≥ 3) rồi lên Kinh Hoài chép sách (Tri thức ≥ 6) ➔ Thi đỗ <strong>Thư lại Chức Sự</strong>.<br/>' +
+        '3. <strong>Con đường Thương gia (Chợ Bến Sậy ➔ Kinh Hoài):</strong> Mua Kiện hàng quê ở Bến Sậy (6 xu) gánh lên Kinh Hoài bán lấy 13 xu ➔ Tích đủ 20 xu để <strong>Chuộc thân tự do</strong> hoặc 30 xu để mở hiệu buôn <strong>Bang Hàng</strong>.</p>' +
+        '<hr style="border-color:#2b3242"/>' +
+        '<p><strong>• Mong mỏi:</strong> ' + p.tam_niem.mong + '<br/>' +
+        '<strong>• Góc khuất giữ kín:</strong> ' + p.tam_niem.goc_khuat + '</p>' +
         '<div class="danger-zone-box">' +
           '<button class="btn-reincarnate-red" onclick="document.getElementById(\'confirmReincarnateBox\').style.display=\'block\'">🩸 Từ bỏ kiếp này (Sang kiếp mới)</button>' +
           '<div class="confirm-reincarnate-box" id="confirmReincarnateBox">' +
@@ -2099,7 +2354,7 @@
     };
 
     document.getElementById('btnCloseModal').onclick = closeModal;
-    document.getElementById('btnSkipAuto').onclick = skipDaysByPersonality;
+    document.getElementById('btnSkipAuto').onclick = skipDaysSmart;
 
     initStartMenu();
   </script>
