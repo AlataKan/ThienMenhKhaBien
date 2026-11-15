@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Thiên Mệnh Khả Biến (Fate Unfixed) - GĐ 1-9</title>
-  <link rel="stylesheet" href="./style.css" />
+  <title>Thiên Mệnh Khả Biến (Fate Unfixed) - GĐ 1-11</title>
+  <link rel="stylesheet" href="./style.css?v=15" />
 </head>
 <body>
   <div class="screen-vignette" id="screenVignette"></div>
@@ -17,7 +17,10 @@
   <div class="start-menu-overlay" id="startMenuOverlay">
     <div class="start-box">
       <h1 class="start-title">THIÊN MỆNH KHẢ BIẾN</h1>
-      <div class="start-sub">Giai đoạn 1–9: Sinh tồn, Làng xã, Danh vọng, Hội Phường, Gia đình, 6 Thời kỳ &amp; Cải mệnh</div>
+      <div class="start-sub">Giai đoạn 1–11: Sinh tồn, Làng xã, Danh vọng, Hội Phường, Gia đình, 6 Thời kỳ &amp; Cải mệnh</div>
+
+      <!-- Hộp tự kiểm tra và báo lỗi nếu trình duyệt chưa nạp đủ file -->
+      <div id="bootDiagBox" style="display:none; background:#3b181b; border:1px solid #ff6b6b; color:#ffd6d6; padding:10px 12px; border-radius:6px; margin-bottom:12px; font-size:13px; line-height:1.5;"></div>
 
       <div style="font-size:13px; color:#b8c2d4; margin-bottom:8px; font-weight:600;">1. Chọn quy tắc sinh tồn trước khi nhập thế:</div>
       <div class="mode-selector">
@@ -69,7 +72,6 @@
         </div>
 
         <div class="center-stage">
-          <!-- KHUNG CẢNH GẤP HOẶC HỘI THOẠI NPC -->
           <div class="frenetic-overlay" id="freneticBox">
             <div class="frenetic-header">
               <span id="freneticTitle">⚡ TÌNH HUỐNG XẢY RA!</span>
@@ -155,8 +157,32 @@
     </div>
   </div>
 
-  <script src="./data.js"></script>
-  <script src="./game.js"></script>
-  <script src="./i18n.js"></script>
+  <script>
+    window.addEventListener("error", function(e) {
+      var box = document.getElementById("bootDiagBox");
+      if (box) {
+        box.style.display = "block";
+        box.innerHTML += "⚠️ <strong>Lỗi mã nguồn:</strong> " + e.message + " (tại " + (e.filename || "script") + ":" + e.lineno + ")<br/>";
+      }
+    });
+  </script>
+  <script src="./data.js?v=15"></script>
+  <script src="./game.js?v=15"></script>
+  <script src="./i18n.js?v=15"></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", function() {
+      var missing = [];
+      if (typeof PERSONAS === "undefined") missing.push("data.js");
+      if (typeof beginLifeWithPersona === "undefined") missing.push("game.js");
+      if (typeof translateStringToEn === "undefined") missing.push("i18n.js");
+      if (missing.length > 0) {
+        var box = document.getElementById("bootDiagBox");
+        if (box) {
+          box.style.display = "block";
+          box.innerHTML += "⚠️ <strong>Không tìm thấy hoặc chưa nạp được file:</strong> <code>" + missing.join(", ") + "</code> trong thư mục <code>docs/</code>. Hãy kiểm tra lại tên file trên GitHub!";
+        }
+      }
+    });
+  </script>
 </body>
 </html>
