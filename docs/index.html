@@ -1184,7 +1184,7 @@
       maiVung: false,
       bepConKhoi: false,
       daVaoHoiPhuong: false,    // Đã gia nhập Hội Phường (Mục 22.2, 26)
-      coBangChung: 0,           // Vật phẩm Bằng chứng (Mục 31.2: dùng tống tiền / tố cáo)
+      coBangChung: 0, benhTat: [],              // Danh sách bệnh đang mắc: 'cam_lanh', 'dau_bung', 'ho_suong' (Mục 43.5)           // Vật phẩm Bằng chứng (Mục 31.2: dùng tống tiền / tố cáo)
       coDuoc: 0,
       hoGiauDo: 0.0,
       thaoDuoc: 0,
@@ -1355,8 +1355,26 @@
         state.bepConKhoi = false;
 
         for (let i = 0; i < days; i++) {
-          // Tiếng xấu giảm nhẹ theo thời gian (Mục 21.3)
-          if (state.rep.tieng_xau > 0) state.rep.tieng_xau = Math.max(0, state.rep.tieng_xau - 1);
+          // 1. Tiếng xấu giảm nhẹ theo thời gian (Mục 21.3)
+if (state.rep.tieng_xau > 0) state.rep.tieng_xau = Math.max(0, state.rep.tieng_xau - 1);
+
+// 2. Hạn dùng lương thực (Mục 27): Lương lành để ngoài qua ngày bị ẩm mốc 1 phần nhỏ
+if (state.luongLanh > 0.4) {
+  const spoiledAmt = Math.min(state.luongLanh, 0.1);
+  state.luongLanh = Math.max(0, state.luongLanh - spoiledAmt);
+  state.luongMoc += spoiledAmt;
+}
+
+// 3. Bệnh tật theo mùa & Sinh hoạt (Mục 27 & 43.5)
+if (state.lanh >= 75 && !state.benhTat.includes('cam_lanh') && Math.random() < 0.45) {
+  state.benhTat.push('cam_lanh');
+}
+if (state.seasonIdx === 3 && (state.location === 'cho_ben_say' || state.location === 'kinh_hoai') && !state.benhTat.includes('ho_suong') && Math.random() < 0.12) {
+  state.benhTat.push('ho_suong');
+}
+if (state.benhTat.length > 0) {
+  state.sucKhoe = Math.max(0, state.sucKhoe - state.benhTat.length * 4);
+}
 
           if (state.location === 'nha' && state.cui >= 0.6) {
             state.cui = Math.max(0, state.cui - 0.6);
@@ -1923,12 +1941,32 @@
         if (Math.random() < sickChance) { state.sucKhoe = Math.max(0, state.sucKhoe - 6); outcomeNotes.push("Bụng đau quặn vì độc tố mốc (-6 Sức khỏe)."); }
       }
       if (kq.uong_nuoc_am) {
-        state.lanh = Math.max(5, state.lanh - 18);
-        if (state.thaoDuoc > 0) { state.thaoDuoc--; state.sucKhoe = Math.min(100, state.sucKhoe + 10); outcomeNotes.push("Sắc thảo dược uống hồi phục +10 Sức khỏe."); }
-        else { state.sucKhoe = Math.min(100, state.sucKhoe + 3); }
-      }
-      if (kq.hai_rau_muong) { state.luongLanh += 0.35; gainedClean += 0.35; }
-      if (kq.kham_benh_mien_phi) { state.sucKhoe = Math.min(100, state.sucKhoe + 8); }
+  state.lanh = Math.max(5, state.lanh - 18);
+  if (state.thaoDuoc > 0) {
+    state.thaoDuoc--;
+    state.sucKhoe = Math.min(100, state.sucKhoe + 10);
+    if (state.benhTat.length > 0) {
+      const cured = state.benhTat.pop();
+      outcomeNotes.push("🍵 Bát thuốc thảo dược nóng hổi làm toát mồ hôi độc, chữa khỏi chứng bệnh (" + cured + ") và hồi phục +10 Sức khỏe!");
+    } else {
+      outcomeNotes.push("Sắc thảo dược uống hồi phục +10 Sức khỏe.");
+    }
+  } else {
+    state.sucKhoe = Math.min(100, state.sucKhoe + 3);
+    if (state.benhTat.includes('cam_lanh') && Math.random() < 0.4) {
+      state.benhTat = state.benhTat.filter(b => b !== 'cam_lanh');
+      outcomeNotes.push("Uống nước sôi nóng giúp giải bớt hàn khí, dứt cơn cảm lạnh.");
+    }
+  }
+}
+if (kq.hai_rau_muong) { state.luongLanh += 0.35; gainedClean += 0.35; }
+if (kq.kham_benh_mien_phi) {
+  state.sucKhoe = Math.min(100, state.sucKhoe + 8);
+  if (state.benhTat.length > 0) {
+    state.benhTat = [];
+    outcomeNotes.push("🌿 Nữ tu y sĩ Nhất Hỏa châm cứu và cho bạn uống thuốc đặc trị, đẩy lùi toàn bộ chứng bệnh trong người!");
+  }
+}
       if (kq.hai_loc_rung) { state.thaoDuoc++; state.luongLanh += 0.35; gainedClean += 0.35; }
       if (kq.san_bat_ngau_nhien) {
         if (Math.random() < 0.55) { state.luongLanh += 0.8; gainedClean += 0.8; outcomeNotes.push("Bẫy được thỏ rừng (+0.8 Lương lành)."); }
