@@ -770,3 +770,45 @@ const PERSONAS = [
     }
   }
 ];
+// =========================================================================
+// 5. DANH MỤC THÀNH TỰU THEO HÀNH ĐỘNG THẬT & SONG NGỮ VIỆT - ANH (GĐ 10 & 11)
+// =========================================================================
+const ACHIEVEMENTS_DB = [
+  { id: "ACH_SURVIVE_WINTER", ten_vi: "Qua Cơn Gió Bấc", ten_en: "Winter Survivor", mo_ta: "Tích trữ đủ củi và lương thực sống sót qua một mùa Giá khắc nghiệt." },
+  { id: "ACH_LITERATE", ten_vi: "Thoát Kiếp Mù Chữ", ten_en: "Awakened Mind", mo_ta: "Kiên trì học nhận mặt chữ ở hiên Nhất Hỏa cho tới khi biết đọc biết viết." },
+  { id: "ACH_FREE_CITIZEN", ten_vi: "Xé Bỏ Văn Tự Nông Nô", ten_en: "Unbound Chains", mo_ta: "Tích cóp đủ 20 đồng xu sắt lên Kinh Hoài chuộc thân thành người tự do." },
+  { id: "ACH_MARTIAL_RANK", ten_vi: "Danh Chấn Biên Ngạn", ten_en: "Frontier Blade", mo_ta: "Rèn luyện võ nghệ và lập chiến công ở Bạch Lĩnh, được phong bậc Kiếm Điền." },
+  { id: "ACH_SCHOLAR_OFFICIAL", ten_vi: "Bút Nghiên Đổi Mệnh", ten_en: "Court Scribe", mo_ta: "Từ kẻ hàn vi học chữ và vượt qua kỳ khảo hạch Thư lại Chức Sự tại Kinh Hoài." },
+  { id: "ACH_GUILD_MASTER", ten_vi: "Phú Thương Bang Hàng", ten_en: "Merchant of Hoai", mo_ta: "Gia nhập Hội Phường và góp đủ 30 xu sắt mở hiệu buôn lớn ở Kinh Hoài." },
+  { id: "ACH_PEACEMAKER", ten_vi: "Lấy Ân Xóa Thù", ten_en: "Village Peacemaker", mo_ta: "Nhờ trưởng làng dàn xếp hóa giải thành công một mối thù xích mích." },
+  { id: "ACH_FAMILY_LINE", ten_vi: "Tre Già Măng Mọc", ten_en: "New Sprout", mo_ta: "Lập gia đình khi đủ 18 tuổi và đón đứa con đầu lòng chào đời bình an." },
+  { id: "ACH_WORLD_DELTA", ten_vi: "Nghịch Thiên Cải Mệnh", ten_en: "Fate Unfixed", mo_ta: "Tạo ra ít nhất một dấu ấn Delta làm thay đổi vận mệnh làng xóm hoặc quốc gia." },
+  { id: "ACH_FULL_LIFE", ten_vi: "Vòng Đời Viên Mã", ten_en: "Fulfilled Life", mo_ta: "Sống thọ qua 60 tuổi giữa thế giới trung cổ khắc nghiệt." }
+];
+
+const I18N_UI = {
+  vi: {
+    start_title: "THIÊN MỆNH KHẢ BIẾN",
+    start_sub: "Giai đoạn 1–11 (Hoàn chỉnh): Sinh tồn, Xã hội, 6 Thời kỳ, Cải mệnh, Lưu game & Thành tựu",
+    btn_random: "🎲 Bốc Kiếp Sống Ngẫu Nhiên (Theo Tỷ Lệ Giai Cấp)",
+    btn_continue: "▶️ Tiếp Tục Kiếp Đang Chơi Dở",
+    btn_social: "🤝 Quan hệ & Danh tiếng",
+    btn_bio: "📖 Bản thân & Đổi đời",
+    btn_sys: "⚙️ Lưu / Thành tựu / VI-EN",
+    btn_skip: "⏩ Để ngày tháng trôi (+2 Ngày · Tự ưu tiên Sinh tồn & Rèn luyện)",
+    right_header: "Việc tại chỗ & Người xung quanh",
+    lang_label: "🌐 Ngôn ngữ: Tiếng Việt"
+  },
+  en: {
+    start_title: "FATE UNFIXED (THIÊN MỆNH KHẢ BIẾN)",
+    start_sub: "Stages 1–11 (Complete): Survival, Society, 6 Eras, World Delta, Save & Achievements",
+    btn_random: "🎲 Draw Random Life (Weighted by Social Class)",
+    btn_continue: "▶️ Continue Saved Life",
+    btn_social: "🤝 Relations & Reputation",
+    btn_bio: "📖 Self & Ambition",
+    btn_sys: "⚙️ Save / Trophies / VI-EN",
+    btn_skip: "⏩ Let Days Pass (+2 Days · Smart Auto-Survival)",
+    right_header: "Local Actions & Nearby NPCs",
+    lang_label: "🌐 Language: English"
+  }
+};
