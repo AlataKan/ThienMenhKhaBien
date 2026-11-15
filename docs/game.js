@@ -2156,3 +2156,58 @@ showEndOfLifeChronicle = function(deathReason) {
     bodyEl.innerHTML = bodyEl.innerHTML.replace('<button class="start-btn-random"', endingHtml + '<button class="start-btn-random"');
   }
 };
+
+
+// === WORLD_FORGE_RUNTIME_HOOK: NẠP GÓI THẾ GIỚI DỰNG SẴN (MỤC 46.2 & 47.3) ===
+window.startRandomReincarnation = function() {
+  if (window.WORLD_PACK && Array.isArray(window.WORLD_PACK.genealogy) && window.WORLD_PACK.genealogy.length > 0) {
+    const pop = window.WORLD_PACK.genealogy;
+    const royals = pop.filter(p => p.giai_cap === "thien_menh_chi_tu");
+    const others = pop.filter(p => p.giai_cap !== "thien_menh_chi_tu");
+    let picked;
+    if (royals.length > 0 && Math.random() < 0.0008) {
+      picked = royals[Math.floor(Math.random() * royals.length)];
+    } else {
+      const pool = others.map(p => {
+        let w = p.he_so_hiem || 0.8;
+        if (state.lastFulfilledClass && p.giai_cap !== state.lastFulfilledClass) w *= 2.0;
+        return { p, w };
+      });
+      let r = Math.random() * pool.reduce((s, x) => s + x.w, 0);
+      picked = pool[0].p;
+      for (const item of pool) { r -= item.w; if (r <= 0) { picked = item.p; break; } }
+    }
+    const rescueHint = picked.du_bao_chet_yeu
+      ? ("\n⚠️ [Dự báo số phận gốc]: Dễ gặp nạn lúc trẻ (" + picked.nguyen_nhan_tu_vong_goc + "). Đường cải mệnh gợi ý: " + picked.duong_cuu.join(" / ") + ".")
+      : "\n🕯️ [Dự báo số phận gốc]: Thể trạng bình ổn nếu giữ đủ củi và lương thực qua các mùa Giá.";
+    const personObj = {
+      id: picked.id,
+      title: picked.ten + " (" + picked.tuoi_khoi_dau + " tuổi)",
+      ten: picked.ten,
+      tuoi: picked.tuoi_khoi_dau,
+      nam_sinh: picked.nam_sinh,
+      giai_doan: getLifeStageByAge(picked.tuoi_khoi_dau),
+      giai_cap: picked.giai_cap,
+      than_phan: picked.than_phan,
+      vi_tri_khoi_dau: picked.vi_tri_khoi_dau || "nha",
+      boi_canh_mo_ta: "[Gói Thế Giới Hoài Dương · Mã " + picked.id + "]\nCon của " + picked.cha_me[0] + " và " + picked.cha_me[1] + ", sống tại " + picked.ten_nut + " (Chủ nút: " + picked.chu_nut_ten + ")." + rescueHint,
+      nguoi: [],
+      nghia_vu: picked.giai_cap === "nong_no_ruong_dat" ? ["lao_dich"] : [],
+      biet_chu: !!picked.biet_chu,
+      co_riu: !!picked.co_riu,
+      nhay_ben_xh: 60,
+      tri_thuc: picked.biet_chu ? 3 : 0,
+      vo_nghe: picked.vi_tri_khoi_dau === "don_bien_ngan" ? 2 : 0,
+      buon_ban: picked.vi_tri_khoi_dau === "cho_ben_say" ? 2 : 0,
+      cua_cai_then: false,
+      vach_rach: picked.giai_cap === "nong_no_ruong_dat" || picked.giai_cap === "ke_ngoai_le",
+      mai_vung: false,
+      xu_sat: 3, nuoc: 2, cui: 1.2, go_tho: 0, luong_lanh: 0.9, luong_moc: 0.3, lanh: 40, doi: 45,
+      luoi: 25, kien_nhan: 75, y_chi: 75, trach_nhiem: 70, can_dam: 60, hao_mon: 0, mu: false,
+      tam_niem: picked.tam_niem
+    };
+    state.lastFulfilledClass = null;
+    beginLifeWithPersona(personObj);
+    return;
+  }
+};
