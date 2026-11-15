@@ -580,6 +580,7 @@ function openNpcDialogue(npc) {
         } else {
           state.xuSat -= 2;
           Object.values(state.npcRelations).forEach(r => { if (r.feud_bac > 0) r.feud_bac = Math.max(0, r.feud_bac - 2); });
+          if (typeof unlockAchievement === 'function') unlockAchievement("ACH_PEACEMAKER");
           updateCenterStage("Trưởng làng Ngô Tam đứng ra dàn xếp ổn thỏa, các mối bất hòa quanh vùng đều được hạ nhiệt!", [{ label: "🕊️ Đã hóa giải Mối thù (Feud)", type: "gain" }]);
         }
         render();
@@ -1359,6 +1360,8 @@ function skipDaysSmart() {
   state.actionsTaken++;
 
   updateCenterStage("[TỰ ĐỘNG SINH TỒN & RÈN LUYỆN QUA 2 NGÀY]:\n• " + stepsLog.join("\n• "), deltas);
+  if (typeof checkAllAchievements === 'function') checkAllAchievements();
+  if (!state.authenticMode && !state.isDead && typeof saveGameToDevice === 'function') saveGameToDevice(false);
   render();
 }
 
