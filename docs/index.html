@@ -1055,7 +1055,83 @@
         mo_ta: "Bạn chính thức treo biển hiệu buôn của riêng mình tại Kinh Hoài, bước chân vào hàng ngũ Thương gia Bang Hàng!"
       }
     ];
+// GIAI ĐOẠN 8 (PHẦN 1): 6 THỜI KỲ HOÀI DƯƠNG, 7 BIẾN VĨ MÔ & CHỈ BÁO SƯƠNG MÙ (MỤC 35 & 52)
+    const HOAI_DUONG_ERAS = [
+      { id: 1, minY: 0,   maxY: 30,  ten: "Thời kỳ I · Mùa Khế", he_so_doi: 1.2, he_so_thue: 0.9 },
+      { id: 2, minY: 31,  maxY: 70,  ten: "Thời kỳ II · Bình Yên Mượn", he_so_doi: 0.85, he_so_thue: 1.0 },
+      { id: 3, minY: 71,  maxY: 105, ten: "Thời kỳ III · Kho Rỗng Dần", he_so_doi: 1.15, he_so_thue: 1.3 },
+      { id: 4, minY: 106, maxY: 145, ten: "Thời kỳ IV · Bạch Lĩnh", he_so_doi: 1.25, he_so_thue: 1.45 },
+      { id: 5, minY: 146, maxY: 182, ten: "Thời kỳ V · Nợ Chồng Nợ", he_so_doi: 1.4, he_so_thue: 1.65 },
+      { id: 6, minY: 183, maxY: 270, ten: "Thời kỳ VI · Đáo Hạn", he_so_doi: 1.35, he_so_thue: 1.8 }
+    ];
 
+    const MACRO_EVENTS_DB = [
+      {
+        id: "E12_dich_ho_suong", minY: 60, maxY: 66,
+        check: (m) => m.no_khe >= 0.7,
+        chi_bao: "🌫️ [Tín hiệu quanh vùng]: Nhiều nhà ngoài phố đóng kín cửa treo dải vải trắng, chợ vắng hẳn người qua lại và mùi lá thuốc xông khói đặc quánh trong sương sớm.",
+        tac_dong: (st) => { if (!st.benhTat.includes('ho_suong') && Math.random() < 0.25) st.benhTat.push('ho_suong'); }
+      },
+      {
+        id: "E15_mat_mua_kho_gia", minY: 90, maxY: 98,
+        check: (m) => m.do_rong_kho >= 0.35,
+        chi_bao: "🌫️ [Tín hiệu quanh vùng]: Xe chở thóc cứu tế từ Kho Thiên Lộc về chỉ phát nhỏ giọt một nửa định mức; ngoài chợ giá gạo tăng vọt khiến nhiều tá điền bỏ ruộng.",
+        tac_dong: (st) => { st.macroPriceSpike = 1.4; }
+      },
+      {
+        id: "E18_noi_day_mua_gia_1", minY: 97, maxY: 103,
+        check: (m) => m.bat_man_tam_giang >= 0.65 && m.to_chuc_tam_giang >= 0.15,
+        chi_bao: "🌫️ [Tín hiệu quanh vùng]: Nhiều cánh đồng ở Tam Giang không ai cày cấy, ban đêm có tiếng bước chân rầm rập và lính Kiếm Điền lập chốt xét hỏi khắp các ngả đường.",
+        tac_dong: (st) => { st.macroPriceSpike = 1.3; }
+      },
+      {
+        id: "E20_chien_tranh_bach_linh_1", minY: 114, maxY: 122,
+        check: (m) => m.cang_thang_bach_linh >= 0.65,
+        chi_bao: "🌫️ [Tín hiệu quanh vùng]: Từng đoàn lính vác giáo đi về hướng bắc, giá sắt ở lò rèn tăng vọt và những toán người Ô Khuyết tị nạn bắt đầu dựng lều tạm ven Bến Bắc.",
+        tac_dong: (st) => { st.macroPriceSpike = 1.35; }
+      },
+      {
+        id: "E23_nam_kho_vong", minY: 134, maxY: 142,
+        check: (m) => m.do_rong_kho >= 0.55,
+        chi_bao: "🌫️ [Tín hiệu quanh vùng]: Cửa Kho Thiên Lộc đóng im ỉm báo hết thóc, dòng người đói rách từ Hạ Giang đổ về tìm đào rễ cây và cướp các xe lương trên đường.",
+        tac_dong: (st) => { st.macroPriceSpike = 1.6; }
+      },
+      {
+        id: "E25_chien_tranh_bach_linh_2", minY: 149, maxY: 162,
+        check: (m) => m.cang_thang_bach_linh >= 0.65 && m.no_khe >= 1.3,
+        chi_bao: "🌫️ [Tín hiệu quanh vùng]: Tiếng trống gom lính vang lên dưới cổng thành, thanh niên trai tráng trong xóm bị gọi đi biên ải khiến ruộng vườn thiếu hẳn người làm.",
+        tac_dong: (st) => { st.macroPriceSpike = 1.45; }
+      },
+      {
+        id: "E29_noi_bat_chao", minY: 174, maxY: 181,
+        check: (m) => m.bat_man_tam_giang >= 0.78 && m.to_chuc_tam_giang >= 0.38,
+        chi_bao: "🌫️ [Tín hiệu quanh vùng]: Các ngôi làng ở Tam Giang im lìm khác thường vào ban đêm, phiếu thuế bị xé bỏ ngoài đầu ngõ và dân làng lặng lẽ góp gạo nấu chung nồi cháo lớn.",
+        tac_dong: (st) => { st.macroPriceSpike = 1.4; }
+      },
+      {
+        id: "E31_nam_dao_han", minY: 188, maxY: 205,
+        check: (m) => m.no_khe >= 1.75,
+        chi_bao: "🌫️ [Tín hiệu quanh vùng]: Những toán người đeo con dấu ba bên trực tiếp đến niêm phong các kho thóc, dân làng rào kín cổng tre còn kỵ binh Ô Khuyết đã xuất hiện ở thảo nguyên phía bắc.",
+        tac_dong: (st) => { st.macroPriceSpike = 1.7; }
+      }
+    ];
+
+    function getCurrentEra(year) {
+      return HOAI_DUONG_ERAS.find(e => year >= e.minY && year <= e.maxY) || HOAI_DUONG_ERAS[0];
+    }
+
+    function computeMacroVariables(year) {
+      const t = Math.max(0, Math.min(200, year)) / 200;
+      return {
+        no_khe: Number((0.6 + t * 1.4).toFixed(2)),
+        do_rong_kho: Number(Math.min(0.85, t * 0.8).toFixed(2)),
+        bat_man_tam_giang: Number(Math.min(0.95, 0.45 + t * 0.45).toFixed(2)),
+        to_chuc_tam_giang: Number(Math.min(0.75, 0.05 + t * 0.5).toFixed(2)),
+        cang_thang_bach_linh: Number(Math.min(0.9, 0.15 + Math.sin(year / 18) * 0.25 + t * 0.55).toFixed(2)),
+        ran_nut_hoa_duong: Number(Math.min(0.85, 0.05 + t * 0.7).toFixed(2)),
+        su_that_ro: Number(Math.min(0.5, 0.02 + t * 0.25).toFixed(2))
+      };
+    }
     const AMBIENT_WHISPERS = [
       "Lúc đi ngang đầu xóm, bạn thoáng nghe mấy người già bảo năm nay người thu thuế đeo con dấu có tới ba hình khắc lạ, thu theo từng mùa.",
       "Bên vệ đường, một lão mù vừa gảy đàn vừa nghêu ngao câu hát cũ về một vị lãnh chúa năm xưa từng bỏ rơi người vợ vùng núi sau khi mượn được binh lương.",
@@ -1299,6 +1375,7 @@
 
       if (state.persona && state.persona.mu) { mult *= 1.35; reasons.push("dò đường"); }
       if (state.theLuc <= 28 || state.doi >= 72) { mult *= 1.35; reasons.push("đói mệt"); }
+      if (state.benhTat && state.benhTat.length > 0) { mult *= 1.25; reasons.push("đang mang bệnh"); }
 if (state.benhTat && state.benhTat.length > 0) { mult *= 1.25; reasons.push("đang mang bệnh"); }
 
       const isNight = state.hour >= 18 || state.hour < 6;
@@ -1940,10 +2017,23 @@ if (state.benhTat.length > 0) {
         const sickChance = state.nuocSach > 0 ? 0.18 : 0.50;
         if (state.nuocSach > 0) state.nuocSach--;
         if (Math.random() < sickChance) {
-  state.sucKhoe = Math.max(0, state.sucKhoe - 6);
-  if (state.benhTat && !state.benhTat.includes('dau_bung')) state.benhTat.push('dau_bung');
-  outcomeNotes.push("Bụng đau quặn vì độc tố mốc (-6 Sức khỏe, mắc chứng Đau bụng tà).");
-}
+          state.sucKhoe = Math.max(0, state.sucKhoe - 6);
+          if (state.benhTat && !state.benhTat.includes('dau_bung')) state.benhTat.push('dau_bung');
+          outcomeNotes.push("Bụng đau quặn vì độc tố mốc (-6 Sức khỏe, mắc chứng Đau bụng tà).");
+        }
+      }
+
+      // GIAI ĐOẠN 8: Kiểm tra biến vĩ mô & phát Tín hiệu Sương mù quan sát được (Mục 35 & 52.6)
+      const macroVars = computeMacroVariables(state.year);
+      state.macroPriceSpike = 1.0;
+      MACRO_EVENTS_DB.forEach(ev => {
+        if (state.year >= ev.minY && state.year <= ev.maxY && ev.check(macroVars)) {
+          ev.tac_dong(state);
+          if (state.location !== 'nha' && Math.random() < 0.25 && !outcomeNotes.includes(ev.chi_bao)) {
+            outcomeNotes.push(ev.chi_bao);
+          }
+        }
+      });
       }
       if (kq.uong_nuoc_am) {
   state.lanh = Math.max(5, state.lanh - 18);
@@ -2176,8 +2266,9 @@ if (kq.kham_benh_mien_phi) {
 
       const isNight = state.hour >= 18 || state.hour < 6;
       const timeOfDay = !isNight ? 'Ban ngày' : 'Ban đêm';
+      const currentEra = getCurrentEra(state.year);
       document.getElementById('clockDisplay').textContent =
-        '⏳ Năm ' + state.year + ' · Mùa ' + CONFIG.seasons[state.seasonIdx] + ' (Ngày ' + state.dayInSeason + '/15) · ' + Math.floor(state.hour) + 'h00 (' + timeOfDay + ')';
+        '⏳ Năm ' + state.year + ' (' + currentEra.ten + ') · Mùa ' + CONFIG.seasons[state.seasonIdx] + ' (Ngày ' + state.dayInSeason + '/15) · ' + Math.floor(state.hour) + 'h00';
       document.getElementById('stockXu').textContent = '🪙 Tiền: ' + state.xuSat + ' xu';
       document.getElementById('stockWater').textContent = '💧 Nước: ' + state.nuocSach + ' gáo';
       document.getElementById('stockCui').textContent = '🔥 Củi: ' + state.cui.toFixed(1) + ' bó';
