@@ -2001,25 +2001,251 @@ window.openHallOfFameModal = function() {
   );
 };
 
-// CỬA SỔ HỆ THỐNG: LƯU GAME, CHẾ ĐỘ CHÂN THỰC (D19), CỠ CHỮ & NGÔN NGỮ
-window.openSystemModal = function() {
-  const saveActionBtn = state.authenticMode
-    ? '<button class="btn-main-action" onclick="saveGameToDevice(true); returnToStartMenu();"><span class="act-name">🩸 Lưu tạm để thoát (Chế độ Chân thực - Mục 47.11)</span><span class="act-sub">Đưa bạn ra màn hình chính; bản lưu tạm này sẽ tự xóa ngay khi bạn nạp lại!</span></button>'
-    : '<button class="btn-main-action" onclick="saveGameToDevice(false); closeModal();"><span class="act-name">💾 Lưu trò chơi ngay (Chế độ Thường)</span><span class="act-sub">Trò chơi cũng đã tự động lưu sau mỗi nhịp hành động.</span></button>';
+// =========================================================================
+// 9. GIAI ĐOẠN 10 & 11: LƯU/NẠP OFFLINE, CHẾ ĐỘ CHÂN THỰC (D19) & THÀNH TỰU
+// (Phần chuyển đổi ngôn ngữ VI ↔ EN đã được tách riêng sang file docs/i18n.js)
+// =========================================================================
+const SAVE_SLOT_KEY = "TMKB_ACTIVE_RUN_V1";
+const PROFILE_SLOT_KEY = "TMKB_META_PROFILE_V1";
 
-  openModal("⚙️ Lưu Game, Thành Tựu, Cỡ Chữ & Ngôn Ngữ (GĐ 10 & 11)",
+window.appSettings = {
+  lang: "vi",
+  fontSizeScale: 1.0,
+  disableFreneticTimer: false
+};
+
+const ACHIEVEMENTS_LIST = [
+  { id: "ACH_SURVIVE_WINTER", ten_vi: "Qua Cơn Gió Bấc", ten_en: "Winter Survivor", mo_ta_vi: "Sống sót qua một mùa Giá khắc nghiệt.", mo_ta_en: "Survive a harsh Frost (Winter) season." },
+  { id: "ACH_LITERATE", ten_vi: "Thoát Kiếp Mù Chữ", ten_en: "Awakened Mind", mo_ta_vi: "Học nhận mặt chữ ở hiên Nhất Hỏa tới khi biết đọc biết viết.", mo_ta_en: "Study at the First-Flame porch until becoming literate." },
+  { id: "ACH_FREE_CITIZEN", ten_vi: "Xé Bỏ Văn Tự Nông Nô", ten_en: "Unbound Chains", mo_ta_vi: "Tích đủ 20 xu sắt lên Kinh Hoài chuộc thân thành người tự do.", mo_ta_en: "Pay 20 Iron Coins in Kinh Hoai to redeem your freedom." },
+  { id: "ACH_MARTIAL_RANK", ten_vi: "Danh Chấn Biên Ngạn", ten_en: "Frontier Blade", mo_ta_vi: "Lập chiến công ở Bạch Lĩnh, được phong bậc Kiếm Điền.", mo_ta_en: "Achieve frontier merit and be promoted to Sword-Field Knight." },
+  { id: "ACH_SCHOLAR_OFFICIAL", ten_vi: "Bút Nghiên Đổi Mệnh", ten_en: "Court Scribe", mo_ta_vi: "Vượt qua kỳ khảo hạch Thư lại Chức Sự tại Kinh Hoài.", mo_ta_en: "Pass the Court Scribe Official examination in the Capital." },
+  { id: "ACH_GUILD_MASTER", ten_vi: "Phú Thương Bang Hàng", ten_en: "Merchant of Hoai", mo_ta_vi: "Góp đủ 30 xu sắt mở hiệu buôn lớn trong Bang Hàng.", mo_ta_en: "Invest 30 Iron Coins to establish a trading house in the Merchant Guild." },
+  { id: "ACH_PEACEMAKER", ten_vi: "Lấy Ân Xóa Thù", ten_en: "Village Peacemaker", mo_ta_vi: "Nhờ trưởng làng dàn xếp hóa giải thành công một mối thù.", mo_ta_en: "Resolve a local feud through the village elder's mediation." },
+  { id: "ACH_FAMILY_LINE", ten_vi: "Tre Già Măng Mọc", ten_en: "New Sprout", mo_ta_vi: "Lập gia đình khi đủ 18 tuổi và đón con chào đời.", mo_ta_en: "Marry at age 18+ and welcome a newborn child." },
+  { id: "ACH_WORLD_DELTA", ten_vi: "Nghịch Thiên Cải Mệnh", ten_en: "Fate Unfixed", mo_ta_vi: "Tạo ra ít nhất một dấu ấn Delta làm thay đổi vận mệnh vùng.", mo_ta_en: "Create at least one World Delta that alters the default history." },
+  { id: "ACH_FULL_LIFE", ten_vi: "Vòng Đời Viên Mãn", ten_en: "Fulfilled Life", mo_ta_vi: "Sống thọ qua 60 tuổi giữa thế giới trung cổ khắc nghiệt.", mo_ta_en: "Live past age 60 in a harsh medieval world." }
+];
+
+function loadMetaProfile() {
+  try {
+    const raw = localStorage.getItem(PROFILE_SLOT_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch (e) {}
+  return { achievements: {}, pastLives: [] };
+}
+
+function saveMetaProfile(prof) {
+  try { localStorage.setItem(PROFILE_SLOT_KEY, JSON.stringify(prof)); } catch (e) {}
+}
+
+function unlockAchievement(achId) {
+  const prof = loadMetaProfile();
+  const modeTag = state.authenticMode ? "authentic" : "normal";
+  if (!prof.achievements[achId] || (state.authenticMode && prof.achievements[achId] !== "authentic")) {
+    prof.achievements[achId] = modeTag;
+    saveMetaProfile(prof);
+  }
+}
+
+function checkAllAchievements() {
+  if (!state.persona) return;
+  if (state.totalDaysPlayed >= 5 && state.seasonIdx !== 3) unlockAchievement("ACH_SURVIVE_WINTER");
+  if (state.persona.biet_chu && state.triThuc >= 3) unlockAchievement("ACH_LITERATE");
+  if (state.persona.than_phan.includes("Thị dân Tự do")) unlockAchievement("ACH_FREE_CITIZEN");
+  if (state.persona.giai_cap === "ky_si_quan_nhan") unlockAchievement("ACH_MARTIAL_RANK");
+  if (state.persona.giai_cap === "quan_lai") unlockAchievement("ACH_SCHOLAR_OFFICIAL");
+  if (state.persona.than_phan.includes("Bang Hàng")) unlockAchievement("ACH_GUILD_MASTER");
+  if (state.daKetHon && state.soCon > 0) unlockAchievement("ACH_FAMILY_LINE");
+  if (state.deltasGhiNhan && state.deltasGhiNhan.length > 0) unlockAchievement("ACH_WORLD_DELTA");
+  if (state.persona.tuoi >= 60) unlockAchievement("ACH_FULL_LIFE");
+}
+
+function saveGameToDevice(isExitSave = false) {
+  if (!state.persona || state.isDead) return;
+  try {
+    localStorage.setItem(SAVE_SLOT_KEY, JSON.stringify({ savedAt: new Date().toLocaleString("vi-VN"), isExitSave, state }));
+    refreshContinueButton();
+  } catch (e) {}
+}
+
+function clearSavedGameOnDevice() {
+  try { localStorage.removeItem(SAVE_SLOT_KEY); refreshContinueButton(); } catch (e) {}
+}
+
+function refreshContinueButton() {
+  const btn = document.getElementById("btnContinueSavedGame");
+  if (!btn) return;
+  try {
+    const raw = localStorage.getItem(SAVE_SLOT_KEY);
+    if (!raw) { btn.style.display = "none"; return; }
+    const data = JSON.parse(raw);
+    if (data && data.state && data.state.persona && !data.state.isDead) {
+      const p = data.state.persona;
+      const isEn = window.appSettings && window.appSettings.lang === "en";
+      btn.style.display = "block";
+      btn.textContent = isEn
+        ? ("▶️ Continue: " + p.ten + " (Age " + p.tuoi + " · Year " + data.state.year + ")")
+        : ("▶️ Tiếp tục: " + p.ten + " (" + p.tuoi + " tuổi · Năm " + data.state.year + ")");
+    } else {
+      btn.style.display = "none";
+    }
+  } catch (e) { btn.style.display = "none"; }
+}
+
+window.continueSavedGame = function() {
+  try {
+    const raw = localStorage.getItem(SAVE_SLOT_KEY);
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    if (!data || !data.state || !data.state.persona) return;
+    state = data.state;
+    if (state.authenticMode) clearSavedGameOnDevice();
+    document.getElementById("startMenuOverlay").style.display = "none";
+    closeModal();
+    calcTiers(state.persona);
+    updateCenterStage(
+      "Bạn mở mắt tiếp tục hành trình của " + state.persona.ten + " tại " + PLACE_NAMES[state.location] + ".",
+      [{ label: state.authenticMode ? "🩸 Chế độ Chân thực (Đã xóa bản lưu tạm)" : "🕯️ Đã nạp bản lưu", type: "gain" }]
+    );
+    render();
+  } catch (e) {}
+};
+
+window.exportSaveToJsonFile = function() {
+  if (!state.persona) return;
+  saveGameToDevice(true);
+  const blob = new Blob([JSON.stringify({ state, meta: loadMetaProfile() }, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "ThienMenhKhaBien_Save_Nam" + state.year + ".json";
+  a.click();
+  URL.revokeObjectURL(url);
+  if (state.authenticMode) returnToStartMenu();
+};
+
+window.importSaveFromJsonFile = function(event) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const parsed = JSON.parse(e.target.result);
+      if (parsed.meta) saveMetaProfile(parsed.meta);
+      if (parsed.state && parsed.state.persona) {
+        state = parsed.state;
+        saveGameToDevice(false);
+        closeModal();
+        document.getElementById("startMenuOverlay").style.display = "none";
+        calcTiers(state.persona);
+        updateCenterStage("Đã nhập file lưu thành công!", [{ label: "📂 Đã khôi phục kiếp sống", type: "gain" }]);
+        render();
+      }
+    } catch (err) {}
+  };
+  reader.readAsText(file);
+};
+
+window.changeFontScale = function(scale) {
+  window.appSettings.fontSizeScale = scale;
+  document.querySelector(".beat-main-text").style.fontSize = Math.round(15.5 * scale) + "px";
+};
+
+window.toggleAccessibilityTimer = function() {
+  window.appSettings.disableFreneticTimer = !window.appSettings.disableFreneticTimer;
+  window.openSystemModal();
+};
+
+const origShowChronicleG10 = showEndOfLifeChronicle;
+showEndOfLifeChronicle = function(deathReason) {
+  checkAllAchievements();
+  clearSavedGameOnDevice();
+  if (state.persona) {
+    const prof = loadMetaProfile();
+    prof.pastLives.unshift({
+      ten: state.persona.ten,
+      tuoi: state.persona.tuoi,
+      than_phan: state.persona.than_phan,
+      nam_mat: state.year,
+      authentic: state.authenticMode,
+      deltas: state.deltasGhiNhan.length
+    });
+    if (prof.pastLives.length > 15) prof.pastLives.pop();
+    saveMetaProfile(prof);
+  }
+  origShowChronicleG10(deathReason);
+};
+
+const origFinalizeG10 = finalizeActionResult;
+finalizeActionResult = function(tpl, isPush, wasSlowed) {
+  origFinalizeG10(tpl, isPush, wasSlowed);
+  checkAllAchievements();
+  if (!state.authenticMode && !state.isDead) saveGameToDevice(false);
+};
+
+const origSkipG10 = skipDaysSmart;
+skipDaysSmart = function() {
+  origSkipG10();
+  checkAllAchievements();
+  if (!state.authenticMode && !state.isDead) saveGameToDevice(false);
+};
+
+const origShowSituationG10 = showSituationUI;
+showSituationUI = function(title, desc, choices) {
+  origShowSituationG10(title, desc, choices);
+  if (window.appSettings.disableFreneticTimer && freneticInterval) {
+    clearInterval(freneticInterval);
+    freneticInterval = null;
+    document.getElementById("freneticTimer").textContent = "Tắt đếm giờ";
+  }
+};
+
+window.openHallOfFameModal = function() {
+  const prof = loadMetaProfile();
+  const isEn = window.appSettings.lang === "en";
+  const achHtml = ACHIEVEMENTS_LIST.map(a => {
+    const unlockedMode = prof.achievements[a.id];
+    const badge = unlockedMode === "authentic"
+      ? '<span style="color:#ff9e9e; font-weight:bold;">[🩸 Authentic]</span>'
+      : (unlockedMode ? '<span style="color:#9ef0b6; font-weight:bold;">[✓ Unlocked]</span>' : '<span style="color:#6c7587;">[🔒 Locked]</span>');
+    return '<div style="background:#13161d; padding:8px 11px; border-radius:6px; margin-bottom:6px; border-left:3px solid ' + (unlockedMode ? '#d4a359' : '#2b3242') + ';">' +
+      '<strong>🏆 ' + (isEn ? a.ten_en : a.ten_vi) + '</strong> ' + badge + '<br/>' +
+      '<span style="font-size:12.5px; color:#9ea8ba;">' + (isEn ? a.mo_ta_en : a.mo_ta_vi) + '</span></div>';
+  }).join("");
+
+  const livesHtml = prof.pastLives.length === 0
+    ? '<p style="color:#8490a6; font-size:13px;">' + (isEn ? 'No past lives recorded yet.' : 'Chưa có kiếp sống nào khép lại.') + '</p>'
+    : prof.pastLives.map(l =>
+        '<div style="font-size:13px; padding:5px 0; border-bottom:1px dashed #262c38;">• <strong>' + l.ten + '</strong> (' + l.tuoi + ' · ' + l.nam_mat + ') — ' + l.than_phan + ' · Delta: ' + l.deltas + '</div>'
+      ).join("");
+
+  openModal(isEn ? "🏆 Hall of Fame & Achievements" : "🏆 Hồ Sơ Kiếp Sống & Thành Tựu",
+    "<p><strong>" + (isEn ? "1. Real-Action Achievements:" : "1. Bộ Thành Tựu Theo Hành Động Thật:") + "</strong></p>" + achHtml +
+    "<hr style='border-color:#2b3242; margin:14px 0;'/>" +
+    "<p><strong>" + (isEn ? "2. Past Lives Chronicle:" : "2. Biên Niên Sử Các Kiếp Đã Sống:") + "</strong></p>" + livesHtml
+  );
+};
+
+window.openSystemModal = function() {
+  const isEn = window.appSettings.lang === "en";
+  const saveActionBtn = state.authenticMode
+    ? '<button class="btn-main-action" onclick="saveGameToDevice(true); returnToStartMenu();"><span class="act-name">' + (isEn ? '🩸 Save & Exit (Authentic Mode - Deleted on load)' : '🩸 Lưu tạm để thoát (Chế độ Chân thực - Xóa ngay khi nạp)') + '</span></button>'
+    : '<button class="btn-main-action" onclick="saveGameToDevice(false); closeModal();"><span class="act-name">' + (isEn ? '💾 Save Game Now (Normal Mode)' : '💾 Lưu trò chơi ngay (Chế độ Thường)') + '</span></button>';
+
+  openModal(isEn ? "⚙️ System, Save, Achievements & Language" : "⚙️ Lưu Game, Thành Tựu, Cỡ Chữ & Ngôn Ngữ",
     '<div style="display:flex; flex-direction:column; gap:9px;">' +
       saveActionBtn +
-      '<button class="btn-main-action" onclick="openHallOfFameModal()"><span class="act-name">🏆 Xem Hồ Sơ Kiếp Sống & Bảng Thành Tựu</span><span class="act-sub">Theo dõi các thành tựu hành động thật và lịch sử các kiếp đã trải qua</span></button>' +
-      '<button class="btn-main-action" onclick="exportSaveToJsonFile()"><span class="act-name">📤 Xuất file Save (.json) về thiết bị</span><span class="act-sub">Dùng để chuyển file lưu giữa Điện thoại và Máy tính (Mục 46.4)</span></button>' +
-      '<label class="btn-main-action" style="cursor:pointer;"><span class="act-name">📥 Nhập file Save (.json) từ thiết bị</span><span class="act-sub">Khôi phục kiếp sống và hồ sơ thành tựu từ file .json</span><input type="file" accept=".json" style="display:none;" onchange="importSaveFromJsonFile(event)"/></label>' +
+      '<button class="btn-main-action" onclick="openHallOfFameModal()"><span class="act-name">' + (isEn ? '🏆 Hall of Fame & Achievements' : '🏆 Xem Hồ Sơ Kiếp Sống & Bảng Thành Tựu') + '</span></button>' +
+      '<button class="btn-main-action" onclick="exportSaveToJsonFile()"><span class="act-name">' + (isEn ? '📤 Export Save File (.json)' : '📤 Xuất file Save (.json) về thiết bị') + '</span></button>' +
+      '<label class="btn-main-action" style="cursor:pointer;"><span class="act-name">' + (isEn ? '📥 Import Save File (.json)' : '📥 Nhập file Save (.json) từ thiết bị') + '</span><input type="file" accept=".json" style="display:none;" onchange="importSaveFromJsonFile(event)"/></label>' +
       '<hr style="border-color:#2b3242; width:100%;"/>' +
       '<div style="display:flex; gap:8px; flex-wrap:wrap;">' +
-        '<button class="nav-btn" onclick="toggleLanguage()">🌐 Đổi Ngôn Ngữ (VI ↔ EN)</button>' +
-        '<button class="nav-btn" onclick="changeFontScale(0.9)">A- Cỡ chữ nhỏ</button>' +
-        '<button class="nav-btn" onclick="changeFontScale(1.0)">A Cỡ chữ vừa</button>' +
-        '<button class="nav-btn" onclick="changeFontScale(1.15)">A+ Cỡ chữ lớn</button>' +
-        '<button class="nav-btn" onclick="toggleAccessibilityTimer()">⏱️ Đồng hồ cảnh gấp: ' + (appSettings.disableFreneticTimer ? 'ĐANG TẮT' : 'ĐANG BẬT') + '</button>' +
+        '<button class="nav-btn" onclick="toggleLanguage()">🌐 ' + (isEn ? 'Switch Language (EN ➔ VI)' : 'Đổi Ngôn Ngữ (VI ➔ EN)') + '</button>' +
+        '<button class="nav-btn" onclick="changeFontScale(0.9)">A-</button>' +
+        '<button class="nav-btn" onclick="changeFontScale(1.0)">A</button>' +
+        '<button class="nav-btn" onclick="changeFontScale(1.15)">A+</button>' +
+        '<button class="nav-btn" onclick="toggleAccessibilityTimer()">⏱️ ' + (window.appSettings.disableFreneticTimer ? 'Timer: OFF' : 'Timer: ON') + '</button>' +
       '</div>' +
     '</div>'
   );
@@ -2027,6 +2253,7 @@ window.openSystemModal = function() {
 
 const btnSysEl = document.getElementById("btnOpenSystem");
 if (btnSysEl) btnSysEl.onclick = window.openSystemModal;
+document.getElementById("btnSkipAuto").onclick = skipDaysSmart;
 
 initStartMenu();
 refreshContinueButton();
