@@ -1299,6 +1299,7 @@
 
       if (state.persona && state.persona.mu) { mult *= 1.35; reasons.push("dò đường"); }
       if (state.theLuc <= 28 || state.doi >= 72) { mult *= 1.35; reasons.push("đói mệt"); }
+if (state.benhTat && state.benhTat.length > 0) { mult *= 1.25; reasons.push("đang mang bệnh"); }
 
       const isNight = state.hour >= 18 || state.hour < 6;
       if (isNight && state.coDuoc <= 0) { mult *= 1.25; reasons.push("đêm tối"); }
@@ -1938,7 +1939,11 @@ if (state.benhTat.length > 0) {
       if (kq.an_luong_moc_xu_ly) {
         const sickChance = state.nuocSach > 0 ? 0.18 : 0.50;
         if (state.nuocSach > 0) state.nuocSach--;
-        if (Math.random() < sickChance) { state.sucKhoe = Math.max(0, state.sucKhoe - 6); outcomeNotes.push("Bụng đau quặn vì độc tố mốc (-6 Sức khỏe)."); }
+        if (Math.random() < sickChance) {
+  state.sucKhoe = Math.max(0, state.sucKhoe - 6);
+  if (state.benhTat && !state.benhTat.includes('dau_bung')) state.benhTat.push('dau_bung');
+  outcomeNotes.push("Bụng đau quặn vì độc tố mốc (-6 Sức khỏe, mắc chứng Đau bụng tà).");
+}
       }
       if (kq.uong_nuoc_am) {
   state.lanh = Math.max(5, state.lanh - 18);
