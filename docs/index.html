@@ -33,7 +33,12 @@
 
       <div style="font-size:13px; color:#b8c2d4; margin-bottom:8px; font-weight:600;">2. Chọn thân phận khởi đầu hoặc phó mặc cho số phận:</div>
       <div class="start-persona-list" id="startPersonaList"></div>
+      <button class="start-btn-random" id="btnContinueSavedGame" style="display:none; margin-bottom:8px; background:#1e4d38; border-color:#3b8c66;" onclick="continueSavedGame()">▶️ Tiếp Tục Kiếp Đang Chơi Dở</button>
       <button class="start-btn-random" onclick="startRandomReincarnation()">🎲 Bốc Kiếp Sống Ngẫu Nhiên (Theo Tỷ Lệ Giai Cấp)</button>
+      <div style="display:flex; gap:8px; margin-top:10px;">
+        <button class="nav-btn" style="flex:1; justify-content:center; padding:8px;" onclick="openHallOfFameModal()">🏆 Hồ Sơ Kiếp Sống &amp; Thành Tựu</button>
+        <button class="nav-btn" style="flex:1; justify-content:center; padding:8px;" onclick="toggleLanguage()" id="btnStartLang">🌐 Ngôn ngữ: Tiếng Việt</button>
+      </div>
     </div>
   </div>
 
@@ -52,6 +57,7 @@
         <button class="nav-btn" id="btnToggleMute">🔊 Âm thanh: BẬT</button>
         <button class="nav-btn" id="btnOpenSocial">🤝 Quan hệ &amp; Danh tiếng</button>
         <button class="nav-btn" id="btnOpenBio">📖 Bản thân &amp; Đổi đời</button>
+        <button class="nav-btn" id="btnOpenSystem">⚙️ Lưu / Thành tựu / VI-EN</button>
       </div>
     </header>
 
