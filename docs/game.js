@@ -2018,3 +2018,141 @@ document.getElementById("btnSkipAuto").onclick = skipDaysSmart;
 
 initStartMenu();
 refreshContinueButton();
+
+// =========================================================================
+// 10. BỐC KIẾP SỐNG TỪ NGÂN HÀNG KIỂU ĐỜI (0-200 NĂM), 3 HỒI ĐỜI NGƯỜI & 4 KẾT CỤC THẾ GIỚI (MỤC 49.6, 51.5, 54)
+// =========================================================================
+function evaluateHoaiDuongWorldEnding() {
+  const mod = state.macroDeltaMod || { no_khe: 0, do_rong_kho: 0, cang_thang_bach_linh: 0, to_chuc_tam_giang: 0 };
+  if (mod.cang_thang_bach_linh <= -0.25) return WORLD_ENDINGS_DB.E_CAI_TO;
+  if (mod.no_khe <= -0.3 || mod.do_rong_kho <= -0.2) return WORLD_ENDINGS_DB.E_THOA_HIEP;
+  if (mod.to_chuc_tam_giang >= 0.2) return WORLD_ENDINGS_DB.E_TU_TRI;
+  return WORLD_ENDINGS_DB.E_VO_NO;
+}
+
+// GHI ĐÈ HÀM BỐC NGẪU NHIÊN ĐỂ SINH TỪ ARCHETYPES_POOL (TRỌNG SỐ GIAI CẤP MỤC 47.3 & LUÂN CHUYỂN MỤC 47.11)
+window.startRandomReincarnation = function() {
+  if (typeof ARCHETYPES_POOL === "undefined" || ARCHETYPES_POOL.length === 0) {
+    const fallback = PERSONAS[Math.floor(Math.random() * PERSONAS.length)];
+    beginLifeWithPersona(fallback);
+    return;
+  }
+
+  const weighted = ARCHETYPES_POOL.map(arch => {
+    let w = CLASS_RARITY_WEIGHTS[arch.giai_cap] || 0.5;
+    if (state.lastFulfilledClass && arch.giai_cap !== state.lastFulfilledClass) {
+      w *= 2.0; // Mục 47.11: Nhân x2.0 trọng số cho giai cấp khác sau một đời viên mãn
+    }
+    return { arch, w };
+  });
+
+  let r = Math.random() * weighted.reduce((s, item) => s + item.w, 0);
+  let picked = weighted[0].arch;
+  for (const item of weighted) {
+    r -= item.w;
+    if (r <= 0) { picked = item.arch; break; }
+  }
+
+  const randomAge = Math.floor(Math.random() * (picked.tuoi_max - picked.tuoi_min + 1)) + picked.tuoi_min;
+  const randomBirthYear = Math.floor(Math.random() * 175) + 1;
+  const ho = picked.ho_goi_y[Math.floor(Math.random() * picked.ho_goi_y.length)];
+  const ten = picked.ten_goi_y[Math.floor(Math.random() * picked.ten_goi_y.length)];
+  const fullName = ho === "Lâm" ? (ho + " " + ten) : (ho + " " + ten + " (" + picked.ten_kieu + ")");
+
+  const generatedPersona = {
+    id: picked.ma + "_" + Date.now(),
+    title: picked.ten_kieu + " (" + randomAge + " tuổi)",
+    ten: fullName,
+    tuoi: randomAge,
+    nam_sinh: randomBirthYear,
+    giai_doan: getLifeStageByAge(randomAge),
+    giai_cap: picked.giai_cap,
+    than_phan: picked.than_phan,
+    vi_tri_khoi_dau: picked.vi_tri,
+    boi_canh_mo_ta: picked.boi_canh,
+    nguoi: [],
+    nghia_vu: picked.giai_cap === "nong_no_ruong_dat" ? ["lao_dich"] : [],
+    biet_chu: !!picked.biet_chu,
+    co_riu: !!picked.co_riu,
+    nhay_ben_xh: 55 + Math.floor(Math.random() * 25),
+    tri_thuc: picked.biet_chu ? 3 : 0,
+    vo_nghe: picked.vi_tri === "don_bien_ngan" ? 2 : 0,
+    buon_ban: picked.vi_tri === "cho_ben_say" ? 2 : 0,
+    cua_cai_then: false,
+    vach_rach: picked.giai_cap === "nong_no_ruong_dat" || picked.giai_cap === "ke_ngoai_le",
+    mai_vung: picked.giai_cap === "thien_menh_chi_tu" || picked.giai_cap === "thuong_nhan_thi_dan",
+    xu_sat: picked.giai_cap === "thien_menh_chi_tu" ? 12 : (picked.giai_cap === "thuong_nhan_thi_dan" ? 6 : 3),
+    nuoc: 2,
+    cui: 1.2,
+    go_tho: 0,
+    luong_lanh: 1.0,
+    luong_moc: 0.3,
+    lanh: 40,
+    doi: 45,
+    luoi: 20 + Math.floor(Math.random() * 25),
+    kien_nhan: 60 + Math.floor(Math.random() * 25),
+    y_chi: 65 + Math.floor(Math.random() * 20),
+    trach_nhiem: 60 + Math.floor(Math.random() * 25),
+    can_dam: 50 + Math.floor(Math.random() * 30),
+    hao_mon: picked.hao_mon || 0,
+    mu: !!picked.mu,
+    diem_ngat_hoi_2: picked.diem_ngat_hoi_2,
+    diem_ngat_hoi_3: picked.diem_ngat_hoi_3,
+    tam_niem: {
+      mong: picked.mong,
+      so: picked.so,
+      ganh_nang: picked.ganh_nang,
+      goc_khuat: picked.goc_khuat
+    }
+  };
+
+  state.lastFulfilledClass = null;
+  state.daKichHoatHoi2 = false;
+  state.daKichHoatHoi3 = false;
+  beginLifeWithPersona(generatedPersona);
+};
+
+// KIỂM TRA ĐIỂM NGẮT 3 HỒI CUỘC ĐỜI (MỤC 39 & 51.5)
+function checkThreeActLifeBeats() {
+  const p = state.persona;
+  if (!p) return null;
+  if (p.tuoi >= 18 && !state.daKichHoatHoi2 && state.actionsTaken >= 3 && p.diem_ngat_hoi_2) {
+    state.daKichHoatHoi2 = true;
+    return "📖 [Bước sang Hồi II · Trưởng Thành]: " + p.diem_ngat_hoi_2;
+  }
+  if (p.tuoi >= 50 && !state.daKichHoatHoi3 && state.actionsTaken >= 6 && p.diem_ngat_hoi_3) {
+    state.daKichHoatHoi3 = true;
+    return "🍂 [Bước sang Hồi III · Xế Chiều]: " + p.diem_ngat_hoi_3;
+  }
+  return null;
+}
+
+const origFinalizeG12 = finalizeActionResult;
+finalizeActionResult = function(tpl, isPush, wasSlowed) {
+  origFinalizeG12(tpl, isPush, wasSlowed);
+  const actBeat = checkThreeActLifeBeats();
+  if (actBeat && !state.isDead) {
+    const box = document.getElementById("narrativeBox");
+    if (box && !box.textContent.includes(actBeat)) {
+      updateCenterStage(box.textContent + "\n\n" + actBeat, [
+        { label: "📖 Điểm ngắt cuộc đời", type: "gain" }
+      ]);
+    }
+  }
+};
+
+// HIỂN THỊ KẾT CỤC THẾ GIỚI HOÀI DƯƠNG TRONG CÁO PHÓ CUỐI ĐỜI (MỤC 37 & 49.6)
+const origChronicleG12 = showEndOfLifeChronicle;
+showEndOfLifeChronicle = function(deathReason) {
+  origChronicleG12(deathReason);
+  const ending = evaluateHoaiDuongWorldEnding();
+  const isEn = window.appSettings && window.appSettings.lang === "en";
+  const bodyEl = document.getElementById("modalBody");
+  if (bodyEl && ending) {
+    const endingHtml =
+      '<div style="background:#141c24; border:1px solid #3c5a78; border-radius:6px; padding:10px 12px; margin-top:10px;">' +
+      '<strong style="color:#ffd982;">🌍 ' + (isEn ? ending.ten_en : ending.ten_vi) + '</strong><br/>' +
+      '<span style="font-size:13px; color:#c5d2e8;">' + (isEn ? ending.mo_ta_en : ending.mo_ta_vi) + '</span></div>';
+    bodyEl.innerHTML = bodyEl.innerHTML.replace('<button class="start-btn-random"', endingHtml + '<button class="start-btn-random"');
+  }
+};
