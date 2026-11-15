@@ -2193,6 +2193,12 @@ if (kq.kham_benh_mien_phi) {
       if (state.thaoDuoc > 0) tags.push({ text: '🌿 Thảo dược: ' + state.thaoDuoc, cls: 'good' });
       if (state.hangBuon > 0) tags.push({ text: '📦 Kiện hàng: ' + state.hangBuon, cls: 'good' });
       if (state.rep.tieng_xau >= 20) tags.push({ text: '⚠️ Đang bị chú ý vì Tiếng xấu', cls: 'bad' });
+      if (state.sucKhoe < 55) tags.push({ text: '🤒 Suy nhược (' + Math.round(state.sucKhoe) + '%)', cls: 'bad' });
+      const tenBenhMap = { cam_lanh: '🤧 Bệnh: Cảm lạnh', dau_bung: '🤢 Bệnh: Đau bụng tà', ho_suong: '😷 Dịch: Ho Sương' };
+      (state.benhTat || []).forEach(b => tags.push({ text: tenBenhMap[b] || b, cls: 'bad' }));
+      if (state.daKetHon) tags.push({ text: '💍 Đã lập gia đình (Con: ' + (state.soCon || 0) + ')', cls: 'good' });
+      const giaGaoMua = state.seasonIdx === 2 ? '🌾 Chợ mùa Gặt: Gạo rẻ' : (state.seasonIdx === 3 ? '❄️ Chợ mùa Giá: Củi đắt, Gạo khan' : '⚖️ Giá chợ: Bình ổn');
+      tags.push({ text: giaGaoMua, cls: state.seasonIdx === 2 ? 'good' : '' });
       tags.forEach(t => {
         const s = document.createElement('span');
         s.className = 'feel-tag ' + t.cls;
@@ -2323,6 +2329,91 @@ if (kq.kham_benh_mien_phi) {
           state.bepConKhoi = false;
           state.daVaoHoiPhuong = false;
           state.coBangChung = 0;
+          state.benhTat = [];
+          state.daKetHon = p.tuoi >= 50;
+          state.soCon = p.tuoi >= 50 ? 2 : 0;
+
+          // Bổ sung hành động Giai đoạn 7 (Hôn nhân >= 18 tuổi, Sinh con & Chợ theo mùa - Mục 27, 36.2, 47.8)
+          if (!ACTIONS.some(a => a.mau === 'nho_lam_moi_ket_hon')) {
+            ACTIONS.push(
+              {
+                mau: "nho_lam_moi_ket_hon",
+                ten_vi: "💍 Nhờ người làm mối & Sắm lễ cưới hỏi lập gia đình (-12 Xu sắt · Yêu cầu từ 18 tuổi)",
+                nhom: "Gia đình & Vòng đời (GĐ7)",
+                thoi_luong_mo: "1 buổi",
+                tai_noi: ["duong_lang"],
+                so_nhip: 6,
+                sfx: "fire",
+                giai_doan: ["truong_thanh", "trung_nien"],
+                yeu_cau: { noi: 1 },
+                req_check: { xu_sat: 12, chua_ket_hon: true, tuoi_18: true, khong_tieng_xau_nang: true },
+                tieu_hao: { xu_sat: 12 },
+                tag: ["xa_hoi", "doi_doi"],
+                chi_phi: { the_luc: -2.0, chan: -15.0, doi: 1.0 },
+                ket_qua: { ket_hon_thanh_cong: true },
+                mo_ta: "Bạn sắm sửa sính lễ trầu cau và 12 đồng xu sắt nhờ bà mối cùng trưởng làng chứng giám, chính thức đón người bạn đời về chung sống dưới mái nhà tranh!"
+              },
+              {
+                mau: "cham_soc_gia_dinh_sinh_con",
+                ten_vi: "👶 Chăm sóc bạn đời & Đón con chào đời (-1.0 Lương lành, -1 Thảo dược · Cần Mụ Bảy Ve đỡ đẻ)",
+                nhom: "Gia đình & Vòng đời (GĐ7)",
+                thoi_luong_mo: "nửa ngày",
+                tai_noi: ["nha"],
+                so_nhip: 6,
+                sfx: "fire",
+                giai_doan: ["truong_thanh", "trung_nien"],
+                yeu_cau: {},
+                req_check: { da_ket_hon: true, luong_lanh: 1.0, thao_duoc: 1 },
+                tieu_hao: { luong_lanh_linh_hoat: 1.0, thao_duoc: 1 },
+                tag: ["sinh_ton", "doi_doi"],
+                chi_phi: { the_luc: -3.0, chan: -20.0, doi: 1.5 },
+                ket_qua: { sinh_con_thanh_cong: true },
+                mo_ta: "Nhờ chuẩn bị sẵn gạo lành nấu cháo bổ dưỡng và lá thuốc ấm, ca vượt cạn trong gian nhà tranh diễn ra suôn sẻ. Tiếng khóc chào đời của đứa trẻ vang lên ấm áp!"
+              }
+            );
+
+            // Nối điều kiện kiểm tra Hôn nhân >= 18 tuổi (Quy tắc cứng Mục 47.8) & xử lý kết quả Gia đình + Giá mùa vụ
+            const origCheck = checkActionAvailability;
+            checkActionAvailability = function(person, tpl) {
+              const res = origCheck(person, tpl);
+              if (tpl.req_check) {
+                if (tpl.req_check.tuoi_18 && person.tuoi < 18) {
+                  res.canRun = false;
+                  res.missingText = "Chỉ được kết hôn khi đã đủ 18 tuổi trở lên (Hiện tại: " + person.tuoi + " tuổi)";
+                }
+                if (tpl.req_check.chua_ket_hon && state.daKetHon) {
+                  res.canRun = false;
+                  res.missingText = "Bạn đã lập gia đình rồi";
+                }
+                if (tpl.req_check.da_ket_hon && !state.daKetHon) {
+                  res.canRun = false;
+                  res.missingText = "Cần lập gia đình trước (Nhờ làm mối ở Đường làng khi đủ 18 tuổi)";
+                }
+              }
+              return res;
+            };
+
+            const origFinalize = finalizeActionResult;
+            finalizeActionResult = function(tpl, isPush, wasSlowed) {
+              // Xử lý kết quả Hôn nhân & Sinh con (Mục 27 & 36.2)
+              if (tpl.ket_qua && tpl.ket_qua.ket_hon_thanh_cong) {
+                state.daKetHon = true;
+                state.rep.danh_du += 15;
+              }
+              if (tpl.ket_qua && tpl.ket_qua.sinh_con_thanh_cong) {
+                state.soCon = (state.soCon || 0) + 1;
+                if (!state.persona.nguoi.includes('con_chau')) state.persona.nguoi.push('con_chau');
+              }
+              // Điều chỉnh sản lượng mua gạo / đổi củi theo Giá chợ 4 mùa (Mục 27)
+              if (tpl.mau === 'mua_gao_bang_xu') {
+                tpl.ket_qua.luong_lanh = state.seasonIdx === 2 ? 0.95 : (state.seasonIdx === 3 ? 0.5 : 0.7);
+              }
+              if (tpl.mau === 'doi_cui_lay_gao') {
+                tpl.ket_qua.luong_lanh = state.seasonIdx === 3 ? 0.85 : (state.seasonIdx === 2 ? 0.7 : 0.55);
+              }
+              origFinalize(tpl, isPush, wasSlowed);
+            };
+          }
           state.coDuoc = 0;
           state.hoGiauDo = 0.0;
           state.thaoDuoc = 0;
