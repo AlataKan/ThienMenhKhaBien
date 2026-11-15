@@ -358,3 +358,239 @@ if (typeof render === "function") {
     prevRenderCanon();
   };
 }
+// =========================================================================
+// 5. TRỌN BỘ 120 KIỂU ĐỜI TẦNG C (K001 - K120) & NGÂN HÀNG 6 ĐIỂM NGẮT 3 HỒI (MỤC 54.4 & 54.6)
+// Đinh dạng nén: [Mã, Tên kiểu đời, Mã giai cấp, Sợi dây, Vị trí khởi đầu, Mong -> Sợ, Nợ/Lời hứa, Bí mật nhỏ, Cánh cửa, Cờ đặc biệt]
+// Mã giai cấp: nn (nông nô), nd (nông dân), nl (ngoài lề), tc (thợ thủ công), tn (thương nhân/thị dân), gs (giáo sĩ), tq (tiểu quý tộc/Kiếm Điền), dq (hoàng tộc/đại quý tộc)
+// =========================================================================
+const RAW_120_ARCHETYPES = [
+  // ==================== SỢI LÚA (K001 - K024) ====================
+  ["K001", "Đứa trẻ nông nô sinh giữa mùa gầy", "nn", "lua", "nha", "một bữa no → bị bán khỏi làng", "mẹ nợ chủ ruộng nửa vụ lúa", "giấu nắm hạt giống trong tã", "D1", "baby"],
+  ["K002", "Nông nô gắn ruộng Tam Giang", "nn", "lua", "nha", "con có mảnh ruộng riêng → đổi chủ", "thề với vợ không bỏ trốn", "từng bỏ trốn một đêm rồi quay lại", "D1", "axe"],
+  ["K003", "Tá điền nợ địa tô", "nd", "lua", "ruong_chu_ap", "trả hết tô trước mùa Giá → bị đuổi khỏi ruộng", "nợ chủ ruộng một vụ thóc", "giấu ba bao lúa dưới nền nhà", "D1", ""],
+  ["K004", "Tiểu nông Đông Cốc", "nd", "lua", "ruong_chu_ap", "giữ ruộng cho con → sâu bệnh mất mùa", "hứa gả con cho họ hàng", "thửa ruộng thực ra là của anh trai đã mất", "D6", ""],
+  ["K005", "Con cả gánh các em", "nn", "lua", "nha", "nuôi các em khôn lớn → mẹ ốm nặng", "lời hứa với cha lúc hấp hối", "từng trộm khoai nhà hàng xóm cứu đói", "D4", "youth"],
+  ["K006", "Phu kho Thiên Lộc", "nd", "lua", "kinh_hoai", "cho con học chữ → mất việc ở kho", "nợ quản kho một ân huệ", "đã thấy bao lúa mốc trong kho mà im lặng", "D6", ""],
+  ["K007", "Thợ xay lúa làng", "tc", "lua", "duong_lang", "không bị chủ thầu ép giá → hạn hán", "cầm cối xay cho chủ nợ", "biết rõ ai lấy bớt bột của ai trong làng", "D1", ""],
+  ["K008", "Người chăn bò Cao Nguyên Sương", "nd", "lua", "bia_rung", "đàn gia súc không bị sói vồ → mất đàn", "mượn bò giống của họ hàng", "làm chết một con bê vì ngủ quên", "D8", ""],
+  ["K009", "Ngư dân Hải Đường", "nd", "lua", "cho_ben_say", "mẻ cá đầy khoang → bão biển", "nợ tiền lưới của chủ thuyền", "bán cá lậu thuế cho thuyền lạ ngoài bến", "D5", ""],
+  ["K010", "Thợ làm muối Đồi Muối", "tc", "lua", "cho_ben_say", "tiền công đủ ăn → chủ muối phá sản", "nợ tiền ứng trước", "biết sổ muối chép hai bản lãi khác nhau", "D5", ""],
+  ["K011", "Bà đỡ làng", "nd", "lua", "duong_lang", "không mất đứa trẻ nào → bị đồn là điềm xấu", "lời hứa với bà thầy truyền nghề", "biết cha thật của vài đứa trẻ trong vùng", "D4", ""],
+  ["K012", "Trưởng làng", "nd", "lua", "duong_lang", "làng đủ ăn qua đông → bị quan quở trách", "nợ dân làng một vụ cứu đói", "khai thiếu sản lượng thóc để giảm thuế cho dân", "D1", "elder"],
+  ["K013", "Người nhặt rác bờ sông Hạ Giang", "nl", "lua", "cho_ben_say", "một chỗ ngủ ấm → bị xua đuổi", "nợ quán trọ một bữa ăn", "nhặt được vật kim loại lạ dưới bùn chưa dám bán", "V1", ""],
+  ["K014", "Trẻ mồ côi sau mùa đói", "nl", "lua", "quan_bon_nga", "có người nhận nuôi → đói rét", "lời hứa của người đỡ đầu", "nhớ rõ mặt kẻ đã bỏ rơi mình", "D4", "child"],
+  ["K015", "Người trồng dâu nuôi tằm Vĩ Thủy", "nn", "lua", "ruong_chu_ap", "tơ tằm được giá → mưa ẩm hỏng kén", "nợ hội phường bán tơ", "nuôi tằm trộm trong góc chuồng gà", "D1", ""],
+  ["K016", "Người gánh nước thuê khập khiễng (KK)", "nl", "lua", "duong_lang", "đủ tiền thuê góc nhà → bị bắt đi lao dịch", "hứa với bà chủ trọ", "giấu cái chân thành tật từ thuở nhỏ", "D4", "kk_leg"],
+  ["K017", "Nông nô bỏ ruộng lên thị trấn", "nn", "lua", "cho_ben_say", "kiếm được việc làm → bị bắt giải về ấp", "cha mẹ già còn ở lại quê", "đang trốn khoản thuế Khế tồn đọng", "D1", ""],
+  ["K018", "Lão nông nuôi cháu mồ côi", "nn", "lua", "nha", "nhìn cháu khôn lớn → mình nhắm mắt trước", "lời hứa với người con trai đã khuất", "chôn con ở gò đất không dám dựng bia", "D4", "elder"],
+  ["K019", "Người chở lúa thuê trên sông", "tc", "lua", "cho_ben_say", "chuyến đò chở đầy → thuyền mắc cạn", "nợ tiền thuê thuyền", "biết số lúa lên bến Hạ Giang ít hơn trên sổ", "D6", ""],
+  ["K020", "Cô gái Tam Giang học chữ nhờ tu sĩ", "nd", "lua", "duong_lang", "đọc thông phiếu thuế → bị tuần đinh nghi ngờ", "nợ ân tình một tu sĩ dạy chữ", "lén chép lại danh sách người nợ thuế trong xóm", "D10", "lit"],
+  ["K021", "Thợ gặt thuê đi theo mùa", "nd", "lua", "ruong_chu_ap", "tiền công đủ qua mùa đông → bị chủ ruộng giữ chân", "nợ tiền trọ đầu mùa", "từng bị một chủ ruộng giàu quỵt cả tháng công", "D4", ""],
+  ["K022", "Chủ ấp nhỏ sợ nông nô bỏ trốn", "tq", "lua", "ruong_chu_ap", "giữ đủ người cày ruộng → bị chủ nợ siết đất", "cầm cố đất cho giáo đường", "lén che giấu nông nô chạy trốn từ ấp khác tới", "D1", "lit"],
+  ["K023", "Thanh tra lương vùng", "tq", "lua", "kinh_hoai", "thanh tra đúng sự thật → bị cấp trên ép ký khống", "nợ quan trên một ân huệ cất nhắc", "luôn ghi hai bản số liệu thực và khống", "D6", "lit"],
+  ["K024", "Người nấu cháo công", "nn", "lua", "duong_lang", "ai xếp hàng cũng có phần → cạn sạch bồ gạo", "lời hứa với vị Cha Đường", "lén lấy gạo nhà mình bỏ thêm vào nồi cháo công", "D4", ""],
+
+  // ==================== SỢI NGAI (K025 - K048) ====================
+  ["K025", "Con thứ của Chủ Ấp", "tq", "ngai", "kinh_hoai", "được chia mảnh đất riêng → bị gửi vào giáo đường", "hứa với mẹ không tranh giành với anh cả", "thích nghề rèn thủ công hơn lễ nghi quý tộc", "D7", "lit"],
+  ["K026", "Chủ Ấp nhỏ nợ thuế Khế", "tq", "ngai", "ruong_chu_ap", "giữ được đất tổ phụ → mất ấp vào tay chủ nợ", "đang cầm cố ruộng tốt", "từng lén khắc giả một con dấu biên nhận thuế", "D1", "lit"],
+  ["K027", "Kiếm Điền già hết sức", "tq", "ngai", "don_bien_ngan", "tuổi già yên ổn → ruộng cấp bị thu hồi", "nợ đồng đội cũ một mạng sống", "giấu vết sẹo dài từ trận đánh đầu đời", "D9", "elder"],
+  ["K028", "Con gái Chủ Ấp có hôn ước chính trị (từ 18 tuổi)", "tq", "ngai", "kinh_hoai", "tự chọn người thương → bị gả trừ nợ", "tờ hôn ước gia tộc định sẵn", "biết đọc chữ và xem sổ sách lén", "D1", "18plus_lit"],
+  ["K029", "Cung nữ hầu Vương hậu", "tc", "ngai", "kinh_hoai", "được xuất cung về quê → biết quá nhiều chuyện mật", "lời thề giữ kín việc trong cung", "từng nghe hát trọn vẹn khúc ca miền núi trong nội điện", "D2", ""],
+  ["K030", "Thị vệ cổng cung", "tq", "ngai", "kinh_hoai", "được thăng chức đội trưởng → bị nghi ngờ", "nợ đội trưởng tiền bảo lãnh", "thấy rõ những ai lén ra vào cung lúc nửa đêm", "D6", ""],
+  ["K031", "Người hầu bàn tiệc quan lớn", "tc", "ngai", "kinh_hoai", "nhận tiền thưởng hậu hĩnh → lỡ tay làm đổ rượu", "nợ tiền chuộc của chủ nhà", "nghe lỏm được cuộc bàn bạc về món nợ quốc gia", "D5", ""],
+  ["K032", "Tri Ấp thu thuế Khế", "tq", "ngai", "kinh_hoai", "thu đủ định mức → dân chúng làm loạn", "nợ ân tình tiến cử của cấp trên", "tự bỏ tiền túi bù vào phần thuế thiếu của dân nghèo", "D1", "lit"],
+  ["K033", "Thư lại giữ hộ tịch", "tq", "ngai", "kinh_hoai", "giữ sổ sách sạch sẽ → bị ép xóa tên người", "nợ một ân huệ của Chủ Ấp", "lén chép lại tên một dòng họ mà người trên muốn xóa", "D6", "lit"],
+  ["K034", "Con trai quan nhỏ học trường chữ", "tq", "ngai", "kinh_hoai", "thi đỗ chức sự → thua kém con nhà quyền quý", "lời hứa nối nghiệp cha", "đọc trộm sách chép tay bị cấm trong thư viện", "D10", "lit"],
+  ["K035", "Quý tộc sa sút bán đồ cũ", "tq", "ngai", "cho_ben_say", "giữ lại thể diện gia phong → cạn sạch đồng xu cuối", "nợ tiền lãi tiệm cầm đồ", "còn giấu một món bảo vật gia truyền chưa đành lòng bán", "V2", "lit"],
+  ["K036", "Người chép thuê cho quan, mắt mờ dần (KK)", "tc", "ngai", "kinh_hoai", "nét chữ ngay ngắn → đôi mắt mù dần", "nợ ơn người thầy dạy chữ", "mỗi văn kiện quan trọng đều chép hai bản, giữ lại một", "D10", "kk_eye"],
+  ["K037", "Người đưa thư triều đình", "nd", "ngai", "quan_bon_nga", "giao thư đúng hạn → bị chặn cướp giữa đèo", "lời thề không mở niêm phong", "đã lén đọc một bức mật thư gửi lên biên ải", "D5", ""],
+  ["K038", "Tay sai thu thuế đeo dấu ba bên", "tn", "ngai", "cho_ben_say", "thu đủ chỉ tiêu lãnh thưởng → bị dân làng căm ghét", "nợ tiền bảo lãnh của chủ Bang Hàng", "nhận ra hình khắc kỳ lạ trên tờ khế gốc", "D1", ""],
+  ["K039", "Hoàng tộc xa", "dq", "ngai", "kinh_hoai", "giữ yên vị thế → bị cuốn vào tranh đoạt ngôi vị", "lời dặn của bậc trưởng bối", "cất giữ một mảnh ngọc bội không rõ nguồn gốc", "D2", "lit"],
+  ["K040", "Người nuôi ngựa trong cung", "tc", "ngai", "kinh_hoai", "đàn ngựa khỏe mạnh → bị đổ vạ khi ngựa ốm", "nợ tiền trưởng chuồng ngựa", "biết rõ con ngựa tốt nào từng được lén đưa ra biên giới", "D9", ""],
+  ["K041", "Thanh tra thuế trẻ", "tq", "ngai", "kinh_hoai", "làm đúng chức trách → bị điều đi vùng xa", "nợ ân tình người thầy cũ", "phát hiện số bạc thuế nộp về không khớp với sổ thu", "D1", "lit"],
+  ["K042", "Người xử kiện làng", "tq", "ngai", "duong_lang", "phân xử công tâm → bị Chủ Ấp gây sức ép", "lời thề trước dân làng", "từng xử ép một vụ tranh đất và day dứt mãi", "D6", "lit"],
+  ["K043", "Lính canh kho thuế", "tq", "ngai", "kinh_hoai", "nhận đủ lương tháng → bị đổi ca đêm mùa Giá", "nợ tiền đội trưởng", "biết rõ các rương thuế trong kho đã vơi đi một nửa", "D6", ""],
+  ["K044", "Quý tộc họ Hà cũ", "tq", "ngai", "duong_lang", "khôi phục thanh danh gia tộc → bị dò xét", "lời thề trước bàn thờ tổ tiên", "giấu một bức thư tay của vị vương hậu họ Hà năm xưa", "D2", "lit"],
+  ["K045", "Chủ ấp Rừng Đen săn bắn", "tq", "ngai", "bia_rung", "giữ vùng rừng yên tĩnh → triều đình đòi tăng thuế", "nợ tiền lễ Hỏa Đường", "lén cho người săn bắn trong khu rừng cấm của vua", "D1", "lit"],
+  ["K046", "Gián điệp nhỏ cho một Chủ Ấp", "tn", "ngai", "quan_bon_nga", "săn được tin đắt giá → bị lộ thân phận", "nợ mạng người bảo trợ", "lén bán tin tức cho cả hai phe để tự vệ", "D5", ""],
+  ["K047", "Tù nhân ngục Kinh Hoài", "nl", "ngai", "kinh_hoai", "được ân xá ra tù → bỏ mạng trong ngục lạnh", "lời hứa nhắn tin cho bạn tù", "nghe được cái tên thật của một nhân vật lớn trong cung", "D6", ""],
+  ["K048", "Kiểm kê quân lương", "tq", "ngai", "don_bien_ngan", "sổ sách đủ số → phát hiện lương thảo thiếu hụt", "nợ ân tình vị tướng biên", "buộc phải ghi lệch con số để giữ yên quân tâm", "D6", "lit"],
+
+  // ==================== SỢI HỎA (K049 - K072) ====================
+  ["K049", "Đứa trẻ được dâng vào Hỏa Đường", "gs", "hoa", "duong_lang", "được học chữ nghĩa → mất tự do suốt đời", "cha mẹ nợ thuế thập phân", "trong lòng không hề muốn làm tu sĩ", "D7", "youth_lit"],
+  ["K050", "Tu sĩ chép sách trẻ", "gs", "hoa", "duong_lang", "giữ cho sách cổ sống sót → sách bị đem đốt", "lời hứa với vị thầy già", "lén chép riêng một bản Niên Ký cất giấu", "V4", "lit"],
+  ["K051", "Cha Đường làng nghèo", "gs", "hoa", "duong_lang", "nồi cháo công đủ chia cho làng → bị đòi nộp thập phân", "nợ tổng đường khoản lễ năm", "lấy phần lương thảo của chính mình bỏ thêm vào nồi cháo", "D4", "lit"],
+  ["K052", "Nữ tu y sĩ", "gs", "hoa", "duong_lang", "cứu sống người bệnh → bị Soi Lửa chất vấn", "nợ ơn nữ tu truyền nghề", "lén dùng bài thuốc dân gian nằm ngoài sách giáo luật", "D4", "lit"],
+  ["K053", "Soi Lửa tập sự", "gs", "hoa", "kinh_hoai", "được thăng bậc thẩm vấn → ám ảnh mùi khói lửa", "lời hứa tuân phục sư phụ", "chưa từng dám nhìn thẳng vào mắt người bị xét hỏi", "D7", "lit"],
+  ["K054", "Người học chữ muộn, trí nhớ kém (KK)", "nd", "hoa", "duong_lang", "tự viết nổi tên mình → bị người đời chê cười", "nợ tiền dầu đèn của thầy dạy", "phải ghi nhớ mặt chữ bằng các hình vẽ ký hiệu riêng", "D10", "kk_mem"],
+  ["K055", "Giảng sư Nhất Hỏa lưu động", "gs", "hoa", "duong_lang", "mọi ngôi làng đều có cháo ấm → bị bắt vì dị giáo", "lời thề với huynh đệ đồng môn", "đã từng hoài nghi các điều khoản thu thập phân", "D4", "lit"],
+  ["K056", "Cha Đường thu thập phân", "gs", "hoa", "duong_lang", "thu đủ định mức nộp lên → bị dân làng oán hận", "nợ ân cất nhắc của giáo chủ", "lén giữ lại một phần thóc thập phân chia cho hộ đói", "D1", "lit"],
+  ["K057", "Người giữ đèn thánh đường", "gs", "hoa", "duong_lang", "ngọn Sinh Hỏa không bao giờ tắt → cháy lan màn trướng", "lời thề với Đường chủ đầu tiên", "biết rõ bên dưới chân đèn đá lớn có hốc giấu đồ", "V4", ""],
+  ["K058", "Thợ đóng sách, làm giấy", "tc", "hoa", "kinh_hoai", "làm ra mẻ giấy bền đẹp → thiếu vỏ cây nguyên liệu", "nợ vốn chủ xưởng giấy", "cất giấu những mảnh giấy vụn có ghi các dòng chữ cấm", "D10", ""],
+  ["K059", "Dân thường hay cầu bình an", "nd", "hoa", "duong_lang", "con cái khỏe mạnh → mất mùa đói kém", "còn nợ lễ vật tạ ơn thánh đường", "tin rằng mọi tai ương đều có điềm báo từ trước", "D7", ""],
+  ["K060", "Người được cứu nhờ cháo công", "nd", "hoa", "duong_lang", "báo đáp ơn cứu mạng → bị gọi đi phu dịch", "lời hứa phụ việc cho Cha Đường", "thuở đói lòng từng lén múc trộm thêm một bát cháo", "D4", ""],
+  ["K061", "Người bị Soi Lửa hỏi rồi thả", "nd", "hoa", "kinh_hoai", "sống yên ổn phần đời còn lại → bị triệu tập lần nữa", "lời thề tuyệt đối giữ im lặng", "trong lúc hoảng loạn đã lỡ khai tên một người bạn", "D7", ""],
+  ["K062", "Thầy lang dân gian", "nd", "hoa", "duong_lang", "chữa lành bệnh cho dân → bị vu cáo làm tà thuật", "lời hứa cứu người với bệnh nhân cũ", "từng bốc nhầm vị thuốc làm một ca bệnh trở nặng", "D4", ""],
+  ["K063", "Thầy giáo trường chữ làng", "gs", "hoa", "duong_lang", "học trò nghèo biết đọc chữ → thiếu giấy bút", "nợ kinh phí của Hỏa Đường", "lén dạy học trò đọc hiểu cả các văn tự khế ước", "D10", "lit"],
+  ["K064", "Người sống sót qua dịch Ho Sương, phổi yếu (KK)", "nd", "hoa", "nha", "qua được mùa đông lạnh → nhớ lại cảnh dịch bệnh", "nợ mạng người đã chăm sóc mình", "vẫn cất mảnh vải trắng treo cửa năm dịch bệnh", "D4", "kk_lung"],
+  ["K065", "Người chôn cất thuê", "nl", "hoa", "duong_lang", "đủ tiền đong gạo → bị người làng xa lánh", "lời hứa đắp mộ tử tế cho người khuất", "đào trúng một món đồ cổ trong ngôi mộ vô danh", "D4", ""],
+  ["K066", "Người hát kinh thuê", "nd", "hoa", "duong_lang", "nhận đủ tiền công lễ → khản đặc mất giọng", "nợ tiền chủ đám lễ", "thuộc lòng cả những khúc ca thế tục bị cấm hát", "D2", ""],
+  ["K067", "Học trò trẻ Cao Lăng", "tn", "hoa", "kinh_hoai", "hoàn thành việc học → cạn sạch tiền trọ", "nợ học phí của thầy", "lén gửi thư chép lại các tư liệu hiếm về quê", "V4", "lit"],
+  ["K068", "Người bán sách giả", "nl", "hoa", "cho_ben_say", "kiếm đủ tiền qua ngày → bị Soi Lửa bắt quả tang", "nợ tiền giấy của chủ lò in", "thực ra thuộc lòng từng chữ của một bản sách thật", "D10", "lit"],
+  ["K069", "Viện trưởng tu viện Tây Lĩnh", "gs", "hoa", "duong_lang", "giữ vườn thuốc tu viện bình yên → bị lửa thiêu", "lời hứa với vị viện trưởng tiền nhiệm", "đang lén che giấu một giảng sư phái Nhất Hỏa", "V4", "lit"],
+  ["K070", "Quản tài sản thập phân", "gs", "hoa", "kinh_hoai", "sổ sách khớp từng đấu thóc → kho thập phân thiếu hụt", "nợ ơn cất nhắc của giáo chủ", "đã sửa lại con số để che giấu phần thóc bị mốc", "D6", "lit"],
+  ["K071", "Người dịch chữ cổ", "gs", "hoa", "kinh_hoai", "dịch trọn vẹn văn bản cổ → bị cấm công bố", "nợ ân tình người thầy truyền chữ", "đọc hiểu được những dòng ghi chú cổ trên Niên Ký", "V4", "lit"],
+  ["K072", "Người tu khổ hạnh ngoài lề", "nl", "hoa", "bia_rung", "tâm trí tĩnh lặng → cơn đói hành hạ", "lời nguyện giữ im lặng", "trước khi đi tu từng là một người lính biên ải", "D4", ""],
+
+  // ==================== SỢI BIÊN (K073 - K096) ====================
+  ["K073", "Lính nghĩa vụ trẻ bị gom", "nd", "bien", "don_bien_ngan", "sống sót trở về quê → bỏ mạng nơi chiến trường", "lời hứa trở về với mẹ già", "cầm giáo đứng gác nhưng chưa từng muốn giết ai", "D9", ""],
+  ["K074", "Thợ rèn học việc Biên Ngạn", "tc", "bien", "don_bien_ngan", "rèn thạo nghề sắt → thầy dạy khắc nghiệt", "nợ ba năm công học việc", "lén tự rèn một thanh đoản đao ngoài giờ", "D3", "axe"],
+  ["K075", "Người dẫn đường qua núi", "nd", "bien", "bia_rung", "kiếm đủ tiền nuôi thân → lạc giữa bão tuyết", "nợ mạng người dẫn đường đi trước", "từng lén dẫn đường cho một thương khách Ô Khuyết", "D8", ""],
+  ["K076", "Người buôn lậu muối và sắt qua biên", "tn", "bien", "don_bien_ngan", "chuyến hàng lãi lớn → bị tuần biên bắt giữ", "nợ vốn của chủ hàng lớn", "quen biết và làm ăn với cả hai bên chiến tuyến", "D9", ""],
+  ["K077", "Lính đánh thuê già", "nl", "bien", "don_bien_ngan", "kiếm khoản tiền dưỡng già cuối → không ai còn thuê", "nợ mạng người đồng đội cũ", "luôn đeo chiếc vòng cổ kỷ vật của người cha", "D9", "elder"],
+  ["K078", "Dân tị nạn Tây Lĩnh", "nd", "bien", "duong_lang", "dựng lại mái nhà mới → bị xua đuổi", "lời hứa tìm lại người thân thất lạc", "mang theo bức thư cũ của tổ tiên trong bọc áo", "D7", ""],
+  ["K079", "Người Ô Khuyết bán len ở chợ biên", "nd", "bien", "cho_ben_say", "bán được giá tốt → bị cướp sạch hàng", "nợ hàng của trưởng trại", "thuộc một khổ hát cổ mà người miền xuôi không biết", "D2", ""],
+  ["K080", "Người đưa thư biên giới", "nd", "bien", "don_bien_ngan", "chuyển thư an toàn → bị phục kích giữa đèo", "lời thề không để mất thư", "đã vô tình đọc được thư hòa giải của một sứ giả", "D8", ""],
+  ["K081", "Chủ đồn nhỏ", "tq", "bien", "don_bien_ngan", "giữ vững đồn biên → quân lương gửi lên bị cắt xén", "nợ ân tình của tướng chỉ huy", "đang cưu mang vợ con của những người lính đã tử trận", "D9", ""],
+  ["K082", "Mụ thuốc doanh trại", "nd", "bien", "don_bien_ngan", "cứu sống thương binh → cạn kiệt thảo dược", "nợ tiền thuốc của thầy lang", "lén mua lá thuốc từ người miền núi bên kia biên giới", "D9", ""],
+  ["K083", "Góa phụ lính", "nd", "bien", "nha", "nuôi con khôn lớn → bị cắt phần trợ cấp tử sĩ", "lời hứa với người chồng trước ngày ra trận", "cất giữ thanh đoản đao khắc ba chấm của chồng", "D3", ""],
+  ["K084", "Đứa trẻ lớn lên trong doanh trại", "nd", "bien", "don_bien_ngan", "tìm được tung tích cha → chiến sự nổ ra", "lời dặn của mẹ", "thuộc lòng mọi ngóc ngách và lối thoát quanh đồn", "D9", "child"],
+  ["K085", "Người Ô Khuyết rời bộ lạc", "nd", "bien", "quan_bon_nga", "sống tự do nơi đất mới → bị người xung quanh dè bỉu", "món nợ ân tình với bộ lạc cũ", "giữ một mảnh đá khắc lời thề tổ núi", "D8", ""],
+  ["K086", "Người chăm ngựa chiến", "tc", "bien", "don_bien_ngan", "ngựa chiến sung sức → quân đội thua trận", "nợ tiền chủ trại ngựa", "thương quý một con ngựa già như người thân", "D9", ""],
+  ["K087", "Thợ mỏ thăm dò Bạch Lĩnh", "tc", "bien", "don_bien_ngan", "tìm ra mạch sắt lớn → sập hầm mỏ", "nợ tiền ứng của chủ thầu", "lén giấu một mẩu quặng bạc nguyên chất trong túi", "D9", "axe"],
+  ["K088", "Kẻ đào ngũ", "nl", "bien", "bia_rung", "trốn thoát về miền xuôi → bị đội truy bắt nhận mặt", "nợ mạng người bạn đồng ngũ", "vẫn còn giấu tấm thẻ bài quân ngũ dưới đáy túi", "D9", ""],
+  ["K089", "Người nấu ăn doanh trại", "nd", "bien", "don_bien_ngan", "nấu đủ cơm cho lính → lương thực bị ẩm mốc", "nợ tiền của quản bếp", "lén san sẻ cơm cháy cuối nồi cho đám trẻ tị nạn", "D4", ""],
+  ["K090", "Thợ rèn Cao Lăng bán dao", "tc", "bien", "don_bien_ngan", "khách mua nông cụ đông → chiến tranh làm đứt đường sắt", "nợ tiền than của chủ xưởng", "nhận ra dấu ba chấm trên thanh đao của một khách lạ", "D3", "axe"],
+  ["K091", "Người đọc chữ trên bia biên", "nd", "bien", "don_bien_ngan", "hiểu rõ lịch sử vùng biên → bị quan trấn thủ nghi kỵ", "nợ ơn dạy chữ của một tu sĩ", "đọc được tên vị vương hậu đầu tiên khắc trên bia đá cũ", "V2", "lit"],
+  ["K092", "Thợ săn Rừng Đen điếc một tai (KK)", "nd", "bien", "bia_rung", "săn được nhiều thú → phạm vào luật rừng của Chủ Ấp", "nợ phần da thú nộp tô", "biết lối vào một hang đá cổ giáp sườn núi Bạch Lĩnh", "D8", "kk_ear"],
+  ["K093", "Kẻ cướp đường núi", "nl", "bien", "bia_rung", "kiếm đủ ăn qua mùa tuyết → bị lính biên truy quét", "nợ máu với gã đầu đảng", "trước khi bị dồn vào bước đường cùng vốn là nông dân hiền lành", "D1", "axe"],
+  ["K094", "Người lái xe lương quân", "nd", "bien", "don_bien_ngan", "chở lương tới đồn an toàn → bị quy tội hao hụt", "nợ tiền thế chân cho quản kho", "thấy rõ số bao thóc chất lên xe ít hơn con số ghi trong lệnh", "D6", ""],
+  ["K095", "Cô gái gả qua biên giới (từ 18 tuổi)", "nd", "bien", "don_bien_ngan", "giữ hòa khí hai nhà → bị coi như con tin", "hôn ước hòa hiếu vùng biên", "nói thông thạo cả tiếng Hoài Dương lẫn tiếng miền núi", "D8", "18plus"],
+  ["K096", "Người giữ trạm lửa hiệu", "tq", "bien", "don_bien_ngan", "báo tin kịp thời → khói mù làm báo nhầm hiệu lệnh", "nợ ơn cất nhắc của trưởng đồn", "từng một lần châm lửa trễ nửa khắc vì ngủ gật", "D9", ""],
+
+  // ==================== SỢI BẠC (K097 - K120) ====================
+  ["K097", "Học trò thợ dệt Vĩ Thủy", "tc", "bac", "cho_ben_say", "lên bậc thợ cả → xưởng dệt đóng cửa vì thuế", "nợ tiền học nghề của thầy", "cất giấu một mẫu hoa văn dệt tơ của riêng mình", "D5", ""],
+  ["K098", "Thợ cả Hội Phường", "tc", "bac", "cho_ben_say", "giữ giá tiền công cho thợ → bị thương hội ép giá", "nợ quỹ chung của Hội Phường", "từng đứng đầu cuộc bãi công đòi quyền lợi năm trước", "D5", ""],
+  ["K099", "Chủ quán rượu thị trấn", "tn", "bac", "quan_bon_nga", "quán xá đông khách → bị lính tuần trấn lột", "nợ tiền thuê đất mở quán", "biết rõ tin đồn nào là thật, tin đồn nào do ai tung ra", "D5", ""],
+  ["K100", "Chủ tiệm cầm đồ nhỏ", "tn", "bac", "cho_ben_say", "khấm khá mà không bị thanh tra → đồ cầm bị đòi lại", "nợ vốn người cho vay lớn", "giữ riêng một món cổ vật nhạy cảm không dám bày bán", "V3", "lit"],
+  ["K101", "Tiểu thương rong", "tn", "bac", "cho_ben_say", "bán sạch gánh hàng → bị cướp dọc đường quê", "nợ tiền lấy hàng sỉ", "thường đi đường vòng để né trạm thu thuế chợ", "D5", ""],
+  ["K102", "Kế toán thuê cho thương nhân", "tn", "bac", "kinh_hoai", "sổ sách cân đối → bị ông chủ ép sửa số liệu", "nợ tiền bảo lãnh của chủ hiệu", "luôn âm thầm chép một cuốn sổ phụ giữ làm bằng chứng", "V3", "lit"],
+  ["K103", "Thủy thủ Tịch Hải lên bờ", "tn", "bac", "cho_ben_say", "nhận đủ tiền công chuyến biển → dịch bệnh ở cảng", "nợ tiền ứng của thuyền trưởng", "lén giấu vài món hàng ngoại nhập miễn thuế trong hành lý", "D5", ""],
+  ["K104", "Chủ thuyền sông nhỏ", "tn", "bac", "cho_ben_say", "chuyến hàng xuôi dòng có lãi → thuyền mắc cạn", "nợ tiền đóng thuyền của Đoàn Thuyền", "từng mua giấy thông hành chép tay giá rẻ để qua trạm", "D5", ""],
+  ["K105", "Thợ đóng thuyền", "tc", "bac", "cho_ben_say", "đóng được con thuyền vững chãi → thiếu gỗ tốt", "nợ tiền gỗ của chủ xưởng", "để ý thấy các thuyền lớn của thương hội chở bạc nặng bất thường", "D5", "axe"],
+  ["K106", "Kẻ giả mạo giấy tờ", "nl", "bac", "kinh_hoai", "nét bút giả tinh vi không ai biết → bị nha môn phát giác", "nợ tiền của kẻ đặt hàng ngầm", "từng được thuê chép giả một tờ phụ lục khế ước cổ", "V7", "lit"],
+  ["K107", "Tay buôn lậu thành thị", "nl", "bac", "cho_ben_say", "phất lên nhanh chóng → bị đồng bọn bán đứng", "nợ phần chia cho đầu sỏ", "lén gửi tiền tích cóp vào hòm công đức nhà thờ để cất giấu", "D5", ""],
+  ["K108", "Người cho vay nặng lãi nhỏ", "tn", "bac", "cho_ben_say", "thu hồi đủ cả vốn lẫn lãi → bị con nợ tố cáo", "bản thân lại là con nợ của chủ thuyền lớn", "chỉ là kẻ thu gom bạc lẻ nộp lên cho thương hội", "D5", ""],
+  ["K109", "Ca nương trà lâu Kinh Hoài (từ 18 tuổi, nói bóng gió)", "nl", "bac", "kinh_hoai", "tích đủ bạc tự chuộc thân → lộ những điều nghe được bên bàn trà", "nợ văn tự chuộc thân với chủ lầu", "nhớ rõ từng khuôn mặt và giọng nói của các vị quan khách quen", "D5", "18plus"],
+  ["K110", "Con nhà buôn giàu bị ép kế nghiệp", "tn", "bac", "kinh_hoai", "được tự do làm điều mình thích → gánh nặng gia sản", "lời hứa giữ hiệu buôn với cha", "trong thâm tâm chỉ muốn làm một người thợ thủ công bình dị", "D5", "lit"],
+  ["K111", "Người quét kho cảng", "nl", "bac", "cho_ben_say", "có việc làm đều đặn → bến cảng vắng tàu", "nợ tiền trọ của quản bến", "nhặt được một tờ giấy rách có đóng con dấu ba bên", "D1", ""],
+  ["K112", "Phu khuân vác Bến Sậy", "nd", "bac", "cho_ben_say", "đủ sức vác hàng mỗi ngày → chấn thương lưng", "nợ tiền cơm của chủ trọ", "nghe lỏm được chuyện mặc cả lãi suất giữa các lái buôn lớn", "D5", ""],
+  ["K113", "Người đổi tiền ở chợ", "tn", "bac", "cho_ben_say", "ăn chênh lệch tỷ giá ổn định → bị cướp sạp tiền", "nợ vốn bạc của chủ hiệu lớn", "nhìn thoáng qua là biết đồng xu nào đúc thiếu sắt", "D5", "lit"],
+  ["K114", "Thợ kim hoàn", "tc", "bac", "kinh_hoai", "gặp được khách sang trọng → nhận phải đồ gian", "nợ phí thường niên của Hội Phường", "từng được thuê nấu chảy một mảnh kim loại có khắc chữ cổ", "V2", ""],
+  ["K115", "Tay móc túi chợ phiên", "nl", "bac", "cho_ben_say", "kiếm đủ ăn qua ngày → bị tuần chợ bắt tại trận", "nợ tiền bảo kê của gã đầu sỏ", "từng móc được một chiếc túi gấm có đựng nửa con dấu lạ", "D5", ""],
+  ["K116", "Nhân viên thu thuế Bang Hàng", "tn", "bac", "cho_ben_say", "thu đủ sổ thuế → bị tiểu thương oán ghét", "nợ ân tình của chủ thương hội", "thấy rõ dòng tiền thuế Khế thực chất chảy về đâu", "D1", "lit"],
+  ["K117", "Người hát rong kể chuyện, mù (KK)", "nl", "bac", "quan_bon_nga", "nhớ trọn vẹn các khúc ca cổ → tuổi già lãng quên", "nợ ơn đứa trẻ dẫn đường", "thuộc lòng một dị bản kỳ lạ của Bài Ca Hai Vợ", "V6", "kk_blind"],
+  ["K118", "Thợ khắc dấu", "tc", "bac", "kinh_hoai", "tay nghề tinh xảo → bị ép khắc con dấu giả", "nợ ơn truyền nghề của sư phụ", "tổ tiên từng khắc một con dấu ngọc rồi chính tay bẻ làm đôi", "V2", ""],
+  ["K119", "Người bán bánh rong phiên chợ lớn", "nd", "bac", "cho_ben_say", "bán hết mẹt bánh nóng → mưa rào ế khách", "nợ tiền bột của chủ lò bánh", "đứng góc chợ nên hay nghe lỏm được chuyện đại sự kinh thành", "D1", ""],
+  ["K120", "Lái buôn Cao Lăng qua Hoài Dương", "tn", "bac", "quan_bon_nga", "chuyến buôn đường dài có lãi → bị giữ hàng ở trạm thuế", "nợ vốn của thương hội Cao Lăng", "lén kẹp các bản sách chép tay hiếm vào giữa những kiện vải", "D10", "lit"]
+];
+
+const GC_CODE_MAP = {
+  nn: { giai_cap: "nong_no_ruong_dat", label: "Dân Gắn Ruộng" },
+  nd: { giai_cap: "nong_dan_tu_do",    label: "Nông dân tự do" },
+  nl: { giai_cap: "ke_ngoai_le",       label: "Kẻ Không Tên (Ngoài lề)" },
+  tc: { giai_cap: "tho_thu_cong",      label: "Thợ thủ công" },
+  tn: { giai_cap: "thuong_nhan_thi_dan", label: "Thương nhân & Thị dân" },
+  gs: { giai_cap: "giao_si",           label: "Giáo sĩ Hỏa Đường" },
+  tq: { giai_cap: "ky_si_quan_nhan",   label: "Tiểu quý tộc / Kiếm Điền" },
+  dq: { giai_cap: "thien_menh_chi_tu", label: "Hoàng tộc / Đại quý tộc" }
+};
+
+const THREAD_NAME_MAP = {
+  lua: "Sợi Lúa (Sinh tồn & Ruộng đất)",
+  ngai: "Sợi Ngai (Quyền lực & Thuế khóa)",
+  hoa: "Sợi Hỏa (Đức tin & Tri thức)",
+  bien: "Sợi Biên (Biên ải & Khói lửa)",
+  bac: "Sợi Bạc (Thương trường & Khế nợ)"
+};
+
+// CHUYỂN HÓA 120 KIỂU ĐỜI THÀNH ĐỐI TƯỢNG ĐẦY ĐỦ 6 ĐIỂM NGẮT (3 HỒI) & BƠM VÀO ARCHETYPES_POOL
+(function hydrateAll120Archetypes() {
+  if (typeof ARCHETYPES_POOL === "undefined") return;
+
+  const hoPoolByThread = {
+    lua: ["Ngô", "Khổng", "Lý", "Trần", "Bùi", "Đỗ"],
+    ngai: ["Lâm", "Hạ", "Tạ", "Phó", "Tôn", "Quách"],
+    hoa: ["Huyền", "Nguyên", "Cát", "Triệu", "Lục"],
+    bien: ["Khổng", "Phạm", "Quách", "Bạc", "Sơn", "Khuất"],
+    bac: ["Đoàn", "Mộc", "Điền", "Mai", "Ngô", "Lục"]
+  };
+  const tenPool = ["Thạch", "Cần", "Lúa", "Thảo", "Hổ", "Tâm", "Hiền", "Phát", "Lộc", "Nhẫn", "An", "Vân", "Sơn", "Tú", "Bình", "Tể", "Hạnh", "Minh"];
+
+  const full120 = RAW_120_ARCHETYPES.map(row => {
+    const [ma, ten_kieu, gcKey, soi, vi_tri, mongSo, ganh_nang, goc_khuat, canh_cua, flag] = row;
+    const [mong, so] = mongSo.split("→").map(s => s.trim());
+    const gcInfo = GC_CODE_MAP[gcKey] || GC_CODE_MAP.nd;
+
+    // Quy tắc cứng Mục 47.8 & 54.5: Các kiểu đời 18+ bắt buộc tuổi khởi đầu >= 18
+    let tuoiMin = 15, tuoiMax = 30;
+    if (flag.includes("baby")) { tuoiMin = 1; tuoiMax = 2; }
+    else if (flag.includes("child")) { tuoiMin = 8; tuoiMax = 12; }
+    else if (flag.includes("youth")) { tuoiMin = 13; tuoiMax = 17; }
+    else if (flag.includes("18plus")) { tuoiMin = 18; tuoiMax = 26; }
+    else if (flag.includes("elder")) { tuoiMin = 58; tuoiMax = 68; }
+
+    const isKK = flag.startsWith("kk_");
+    const haoMon = flag === "kk_leg" ? 0.35 : (flag === "kk_lung" ? 0.25 : (flag === "kk_eye" ? 0.2 : 0));
+    const isMu = flag === "kk_blind";
+    const bietChu = flag.includes("lit") || gcKey === "gs" || gcKey === "tq" || gcKey === "dq";
+    const coRiu = flag.includes("axe") || (gcKey === "nn" && tuoiMin >= 15);
+
+    // Ngân hàng 6 Điểm ngắt chia 3 Hồi (Mục 54.4 & 56.2: Hồi 1: 2 điểm, Hồi 2: 2 điểm, Hồi 3: 2 điểm)
+    const soseiBeats = {
+      hoi_1: [
+        "Lần đầu cảm nhận rõ nỗi lo của gia đình về [" + so + "] giữa những ngày thiếu thốn.",
+        "Nghe người lớn trong vùng thì thào nhắc tới dấu vết (" + canh_cua + ") và nhận thức được gánh nặng [" + ganh_nang + "]."
+      ],
+      hoi_2: [
+        "Gánh nặng [" + ganh_nang + "] đến kỳ phải đối mặt trực tiếp, buộc bạn phải lựa chọn giữa an toàn bản thân và mong mỏi [" + mong + "].",
+        "Một biến cố bất ngờ tại địa phương suýt làm lộ góc khuất [" + goc_khuat + "], mở ra cánh cửa chạm tới vận mệnh lớn của vùng (" + canh_cua + ")."
+      ],
+      hoi_3: [
+        "Khi mái đầu đã điểm bạc, những hệ quả từ cách bạn giải quyết [" + ganh_nang + "] năm xưa nay hiện rõ lên cuộc sống quanh mình.",
+        "Ngồi nhìn lại chặng đường đã qua với tâm niệm [" + mong + "], bạn chuẩn bị để lại di sản và ký ức cuối đời."
+      ]
+    };
+
+    return {
+      ma: ma,
+      ten_kieu: "[" + ma + "] " + ten_kieu,
+      ho_goi_y: hoPoolByThread[soi] || ["Ngô", "Lê"],
+      ten_goi_y: tenPool,
+      giai_cap: gcInfo.giai_cap,
+      than_phan: gcInfo.label + " · " + THREAD_NAME_MAP[soi],
+      vi_tri: vi_tri,
+      tuoi_min: tuoiMin,
+      tuoi_max: tuoiMax,
+      co_riu: coRiu,
+      biet_chu: bietChu,
+      hao_mon: haoMon,
+      mu: isMu,
+      is_kk: isKK,
+      canh_cua: canh_cua,
+      diem_ngat_6: soseiBeats,
+      boi_canh: "Kiểu đời " + ma + " (" + ten_kieu + " · " + THREAD_NAME_MAP[soi] + ").\n• Mong mỏi: " + mong + ".\n• Nỗi sợ: " + so + ".\n• Nợ / Lời hứa: " + ganh_nang + ".",
+      mong: mong,
+      so: so,
+      ganh_nang: ganh_nang,
+      goc_khuat: goc_khuat,
+      diem_ngat_hoi_2: soseiBeats.hoi_2[0] + " " + soseiBeats.hoi_2[1],
+      diem_ngat_hoi_3: soseiBeats.hoi_3[0] + " " + soseiBeats.hoi_3[1]
+    };
+  });
+
+  // Thay thế nội dung ARCHETYPES_POOL hiện có bằng trọn bộ 120 kiểu đời chuẩn xác
+  ARCHETYPES_POOL.length = 0;
+  full120.forEach(item => ARCHETYPES_POOL.push(item));
+  window.ARCHETYPES_120_DB = full120;
+})();
