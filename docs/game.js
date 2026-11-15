@@ -2211,3 +2211,261 @@ window.startRandomReincarnation = function() {
     return;
   }
 };
+// =========================================================================
+// 11. BẢN VÁ TRẢI NGHIỆM NHẬP VAI CHÂN THỰC (6 NHẬN XÉT PLAYTEST)
+// =========================================================================
+(function applyRealismPlaytestFixes() {
+  window.state = state;
+
+  // --- NHẬN XÉT 3: SỬA HÀM TUA 2 NGÀY (ĂN UỐNG & NGHỈ NGƠI ĐÚNG THỨ TỰ, KHÔNG TỰ LĂN RA CHẾT) ---
+  skipDaysSmart = function() {
+    if (state.isWorking || freneticInterval || state.isDead) return;
+    SoundFX.playSoftStep();
+    const p = state.persona;
+    const stepsLog = [];
+    const deltas = [{ label: '⏩ Trôi qua 2 ngày', type: '' }];
+
+    state.location = 'nha';
+    state.cuaCaiThen = true;
+
+    // Mô phỏng từng ngày một (2 ngày): làm việc ban ngày -> nấu ăn & sưởi ấm -> ngủ đêm
+    for (let day = 1; day <= 2; day++) {
+      if (state.isDead) break;
+
+      // 1. Tự lo nguồn nước và nguyên liệu nếu thiếu
+      if (state.nuocSach < 2) state.nuocSach += 3;
+      if (state.luongLanh < 0.8 && state.doDanLat > 0) {
+        const price = state.daVaoHoiPhuong ? 5 : 3;
+        const earned = state.doDanLat * price;
+        state.xuSat += earned;
+        state.doDanLat = 0;
+        if (day === 1) stepsLog.push("Đem đồ đan lát ra chợ bán thu về +" + earned + " xu sắt.");
+      }
+      if (state.luongLanh < 0.8 && state.xuSat >= 2) {
+        state.xuSat -= 2;
+        state.luongLanh += 0.7;
+        if (day === 1) stepsLog.push("Dùng xu sắt đong thêm gạo lành mang về nhà.");
+      }
+      if (state.luongLanh < 0.4 && state.hoGiauDo > 0) {
+        state.luongLanh += state.hoGiauDo;
+        state.hoGiauDo = 0;
+        stepsLog.push("Lấy lương lành từ hố giấu dưới gầm phản lên nấu ăn.");
+      }
+      if (state.luongLanh < 0.4 && state.luongMoc >= 0.4) {
+        const conv = Math.min(0.6, state.luongMoc);
+        state.luongMoc -= conv;
+        state.luongLanh += conv * 0.75;
+        if (day === 1) stepsLog.push("Sàng sảy và phơi nắng lương mốc để dùng.");
+      }
+      if (state.cui < 0.8) {
+        state.cui += 0.9;
+        if (day === 1) stepsLog.push("Ra bìa rừng gom thêm cành củi khô về dự trữ.");
+      }
+
+      // 2. Rèn luyện nhẹ ban ngày (Tích lũy chậm thực tế theo Nhận xét 4)
+      if (p.biet_chu) {
+        state.triThuc = Number((state.triThuc + 0.12).toFixed(2));
+        if (day === 1) stepsLog.push("Ngồi ôn lại mặt chữ và nghiền ngẫm sách vở.");
+      } else if (p.co_riu && state.voNghe > 0) {
+        state.voNghe = Number((state.voNghe + 0.12).toFixed(2));
+        if (day === 1) stepsLog.push("Đứng tấn rèn luyện gân cốt ngoài sân.");
+      } else {
+        state.doDanLat += 1;
+        if (day === 1) stepsLog.push("Ngồi đan rổ tre dự trữ để đổi gạo.");
+      }
+
+      // 3. Cho trôi 1 ngày (24h) trước, rồi lập tức nấu ăn & ngủ bù để KHÔNG bị đói/lạnh qua đêm
+      advanceClock(24 * 60, true, true);
+      if (state.isDead) break;
+
+      // 4. Bữa ăn hàng ngày sau khi đồng hồ chạy
+      if (state.luongLanh >= 0.35) {
+        const eaten = Math.min(0.45, state.luongLanh);
+        state.luongLanh = Math.max(0, state.luongLanh - eaten);
+        state.doi = Math.max(10, state.doi - 55);
+        state.sucKhoe = Math.min(100, state.sucKhoe + 8);
+        if (day === 2) {
+          stepsLog.push("Đun nước nấu cháo gạo lành ăn no bụng mỗi ngày.");
+          deltas.push({ label: '🍚 Đã ăn uống đầy đủ', type: 'gain' });
+        }
+      } else if (state.luongMoc >= 0.4) {
+        state.luongMoc = Math.max(0, state.luongMoc - 0.4);
+        state.doi = Math.max(20, state.doi - 35);
+        if (day === 2) stepsLog.push("Luộc kỹ lương ẩm mốc ăn cầm hơi qua ngày.");
+      }
+
+      // 5. Sưởi ấm & Ngủ hồi sức
+      if (state.cui >= 0.4) {
+        state.cui = Math.max(0, state.cui - 0.4);
+        state.lanh = Math.max(12, state.lanh - 40);
+      }
+      state.theLuc = 92;
+      state.chan = Math.max(0, state.chan - 20);
+    }
+
+    if (!state.isDead) {
+      state.hour = 8;
+      state.actionsTaken++;
+      updateCenterStage("Qua hai ngày sinh hoạt đều đặn tại nhà:\n• " + stepsLog.join("\n• "), deltas);
+      if (typeof checkAllAchievements === 'function') checkAllAchievements();
+      if (!state.authenticMode && typeof saveGameToDevice === 'function') saveGameToDevice(false);
+      render();
+    }
+  };
+  const btnSkip = document.getElementById("btnSkipAuto");
+  if (btnSkip) btnSkip.onclick = skipDaysSmart;
+
+  // --- NHẬN XÉT 4: TRI THỨC, VÕ ĐẠO, BUÔN BÁN CẦN RÈN LUYỆN DÀI HẠN QUA NHIỀU NGÀY/THÁNG ---
+  const prevFinalizeRealism = finalizeActionResult;
+  finalizeActionResult = function(tpl, isPush, wasSlowed) {
+    const prevTriThuc = state.triThuc || 0;
+    const prevVoNghe = state.voNghe || 0;
+    const prevBuonBan = state.buonBan || 0;
+    const prevBietChu = state.persona ? state.persona.biet_chu : false;
+
+    const todayKey = state.year + "_" + state.seasonIdx + "_" + state.dayInSeason;
+    if (state.lastTrainDayKey !== todayKey) {
+      state.lastTrainDayKey = todayKey;
+      state.dailyTrainCount = 0;
+    }
+
+    prevFinalizeRealism(tpl, isPush, wasSlowed);
+
+    // Nếu hành động vừa làm có tăng kỹ năng, chuyển thành mức tăng tích lũy chậm (0.12 - 0.18 mỗi buổi)
+    // và áp dụng mỏi trí/cơ nếu nhồi nhét quá 2 buổi trong cùng 1 ngày
+    const dTri = state.triThuc - prevTriThuc;
+    const dVo = state.voNghe - prevVoNghe;
+    const dBuon = state.buonBan - prevBuonBan;
+
+    if (dTri > 0 || dVo > 0 || dBuon > 0) {
+      state.dailyTrainCount = (state.dailyTrainCount || 0) + 1;
+      const fatigueMult = state.dailyTrainCount <= 2 ? 0.15 : 0.03; // Quá 2 buổi/ngày tiếp thu rất ít
+
+      if (dTri > 0) {
+        const gain = Number((dTri * fatigueMult / (1 + prevTriThuc * 0.12)).toFixed(2));
+        state.triThuc = Number((prevTriThuc + Math.max(0.03, gain)).toFixed(2));
+        if (!prevBietChu && state.triThuc < 3.0 && state.persona) {
+          state.persona.biet_chu = false;
+        }
+      }
+      if (dVo > 0) {
+        const gain = Number((dVo * fatigueMult / (1 + prevVoNghe * 0.12)).toFixed(2));
+        state.voNghe = Number((prevVoNghe + Math.max(0.03, gain)).toFixed(2));
+      }
+      if (dBuon > 0) {
+        const gain = Number((dBuon * fatigueMult / (1 + prevBuonBan * 0.12)).toFixed(2));
+        state.buonBan = Number((prevBuonBan + Math.max(0.03, gain)).toFixed(2));
+      }
+
+      if (state.dailyTrainCount > 2) {
+        const box = document.getElementById("narrativeBox");
+        if (box) {
+          box.textContent += "\n\n(Đầu óc và cơ bắp đã mỏi nhừ sau nhiều giờ rèn luyện liên tục trong ngày; bạn cần nghỉ ngơi qua ngày mai để tiếp thu tốt hơn).";
+        }
+      }
+      render();
+    }
+  };
+
+  // --- NHẬN XÉT 2: ẨN CON SỐ GIỚI HẠN & ẨN TƯƠNG LAI TRONG BẢNG BẢN THÂN ---
+  function describeSkillLevelWords(p) {
+    const lit = p.biet_chu
+      ? (state.triThuc >= 6 ? "Thông hiểu thư tịch" : "Biết đọc biết viết")
+      : (state.triThuc >= 1.5 ? "Đang tập nhận mặt chữ" : (state.triThuc > 0 ? "Mới nhớ vài nét chữ" : "Mù chữ"));
+    const mar = state.voNghe >= 8 ? "Võ nghệ tinh thông" : (state.voNghe >= 3 ? "Quen tay đao thương" : (state.voNghe > 0 ? "Biết chút quyền cước tự vệ" : "Chưa biết võ"));
+    const trd = state.buonBan >= 4 ? "Lão luyện thương trường" : (state.buonBan >= 1.5 ? "Quen việc mặc cả chợ phiên" : "Chưa rành buôn bán");
+    return "📚 " + lit + " · ⚔️ " + mar + " · ⚖️ " + trd;
+  }
+
+  document.getElementById('btnOpenBio').onclick = () => {
+    const p = state.persona;
+    if (!p) return;
+    openModal('📖 Tâm Niệm & Trải Nghiệm Bản Thân',
+      '<p><strong>Nhân vật:</strong> ' + p.ten + ' (' + p.tuoi + ' tuổi) · <strong>Thân phận:</strong> ' + p.than_phan + '</p>' +
+      '<p><strong>Trình độ hiện tại:</strong> ' + describeSkillLevelWords(p) + '</p>' +
+      '<hr style="border-color:#2b3242"/>' +
+      '<p><strong>Những điều đang canh cánh trong lòng:</strong><br/>' +
+      '• <strong>Mong mỏi:</strong> ' + (p.tam_niem ? p.tam_niem.mong : 'Sống bình an qua ngày') + '<br/>' +
+      '• <strong>Nỗi sợ:</strong> ' + (p.tam_niem ? p.tam_niem.so : 'Đói rét bất ngờ') + '<br/>' +
+      '• <strong>Gánh nặng / Lời hứa:</strong> ' + (p.tam_niem ? p.tam_niem.ganh_nang : 'Lo cho bản thân') + '</p>' +
+      '<div class="danger-zone-box">' +
+        '<button class="btn-reincarnate-red" onclick="document.getElementById(\'confirmReincarnateBox\').style.display=\'block\'">🩸 Từ bỏ kiếp này (Sang kiếp mới)</button>' +
+        '<div class="confirm-reincarnate-box" id="confirmReincarnateBox">' +
+          '<div style="color:#ffb3b3; font-size:13.5px; margin-bottom:10px;">⚠️ <strong>Xác nhận khép lại kiếp sống hiện tại?</strong></div>' +
+          '<div style="display:flex; gap:8px; justify-content:flex-end;">' +
+            '<button class="nav-btn" onclick="document.getElementById(\'confirmReincarnateBox\').style.display=\'none\'">Ở lại</button>' +
+            '<button class="btn-reincarnate-red" onclick="window.returnToStartMenu()">Xác nhận sang kiếp mới</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>'
+    );
+  };
+
+  // --- NHẬN XÉT 5: KHI NHÂN VẬT CHẾT, ẨN NÚT ĐÓNG (X) ĐỂ KHÔNG BỊ KẸT Ở MÀN HÌNH XÁC CHẾT ---
+  const prevOpenModal = openModal;
+  openModal = function(title, htmlContent) {
+    prevOpenModal(title, htmlContent);
+    const closeBtn = document.getElementById('btnCloseModal');
+    if (closeBtn) {
+      closeBtn.style.display = state.isDead ? 'none' : 'inline-block';
+    }
+  };
+
+  document.getElementById('btnCloseModal').onclick = function() {
+    if (state.isDead) {
+      window.returnToStartMenu();
+    } else {
+      closeModal();
+    }
+  };
+
+  // --- NHẬN XÉT 1 & 2: LÀM GỌN NÚT HÀNH ĐỘNG (BỎ CHỮ "ĐỦ ĐIỀU KIỆN") & ẨN HÀNH ĐỘNG VIỄN VÔNG ---
+  const prevRenderRealism = render;
+  render = function() {
+    prevRenderRealism();
+    const p = state.persona;
+    if (!p) return;
+
+    // Thay con số "0/3" trên thanh trạng thái bằng mô tả thực tế không lộ trần
+    const progBadge = document.getElementById('topProgressBadge');
+    if (progBadge) {
+      progBadge.textContent = describeSkillLevelWords(p);
+    }
+
+    // Dọn gọn các nút hành động trong menuBox
+    const cards = document.querySelectorAll('#menuBox .action-card');
+    cards.forEach(card => {
+      const okSpan = card.querySelector('.act-req-ok');
+      const missSpan = card.querySelector('.act-req-missing');
+      const nameSpan = card.querySelector('.act-name');
+
+      // 1. Với hành động đã đủ điều kiện bấm: xóa dòng chữ thừa "✓ Đủ điều kiện thực hiện"
+      if (okSpan && !okSpan.textContent.includes('👥')) {
+        const estMatch = okSpan.textContent.match(/Ước chừng:\s*(.+)|Est:\s*(.+)/);
+        if (estMatch && nameSpan) {
+          const timeStr = estMatch[1] || estMatch[2];
+          if (!nameSpan.textContent.includes('(' + timeStr + ')')) {
+            nameSpan.innerHTML += ' <span style="font-weight:400; font-size:12px; color:#8c9bb3;">· ' + timeStr + '</span>';
+          }
+        }
+        okSpan.remove();
+      }
+
+      // 2. Ẩn các hành động "Đổi đời / Thăng tiến" viễn vông khi nhân vật chưa có nền tảng gần tới
+      if (missSpan) {
+        const missTxt = missSpan.textContent || "";
+        if (
+          missTxt.includes("Tầm với") ||
+          missTxt.includes("Cần Biết chữ") ||
+          missTxt.includes("Cần Tri thức ≥ 6") ||
+          missTxt.includes("Cần Võ nghệ ≥ 8") ||
+          missTxt.includes("Cần Kinh nghiệm buôn bán ≥ 4") ||
+          missTxt.includes("Cần ≥ 30 Xu") ||
+          missTxt.includes("Cần ≥ 20 Xu")
+        ) {
+          card.style.display = "none";
+        }
+      }
+    });
+  };
+})();
