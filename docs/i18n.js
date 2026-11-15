@@ -387,3 +387,30 @@ window.toggleLanguage = function() {
     applyEnglishToDOM();
   }
 };
+// Bổ sung từ điển cho Ngân hàng Kiểu đời 5 sợi dây & 3 Hồi cuộc đời (GĐ 12)
+I18N_PHRASES.push(
+  ["Nông nô gắn ruộng Tam Giang", "Bound Serf of Three Rivers"],
+  ["Thợ làm muối Đồi Muối", "Salt Boiler of Salt Hill"],
+  ["Người gánh nước thuê khập khiễng (KK)", "Limping Water Carrier (Flawed)"],
+  ["Con Chủ Ấp nhỏ sa sút", "Scion of a Fallen Minor Lord"],
+  ["Người chép thuê mắt mờ dần (KK)", "Fading-Sight Copyist (Flawed)"],
+  ["Tu sĩ chép sách trẻ Hỏa Đường", "Young Fire-Shrine Scribe Monk"],
+  ["Người sống sót qua dịch Ho Sương, phổi yếu (KK)", "Frost-Cough Survivor with Weak Lungs (Flawed)"],
+  ["Thợ rèn học việc Biên Ngạn", "Frontier Apprentice Blacksmith"],
+  ["Thợ săn Rừng Đen điếc một tai (KK)", "One-Ear-Deaf Black Forest Hunter (Flawed)"],
+  ["Chủ tiệm cầm đồ nhỏ Hạ Giang", "Small Pawnshop Keeper of Lower River"],
+  ["Thiên mệnh chi tử · Hoàng tộc Hoài Dương", "Child of Destiny · Royal House of Hoai Duong"],
+  ["Thợ nấu muối · Đồi Muối (Hạ Giang)", "Salt Boiler · Salt Hill (Lower River)"],
+  ["Kẻ Không Tên (Chân tật nguyền) · Bến Sậy", "Nameless Outcast (Crippled Leg) · Reed Wharf"],
+  ["Hậu duệ Chủ Ấp sa sút · Kinh Hoài", "Fallen Noble Scion · Kinh Hoai Capital"],
+  ["Thợ chép chữ · Kinh Hoài", "Contract Copyist · Kinh Hoai Capital"],
+  ["Tu sĩ chép kinh · Hỏa Đường", "Scripture Monk · Fire Shrine"],
+  ["Dân tự do (Phổi yếu sau dịch) · Hạ Giang", "Free Peasant (Weak Lungs) · Lower River"],
+  ["Thợ rèn biên ải · Đồn Biên Ngạn", "Frontier Blacksmith · Border Outpost"],
+  ["Thợ săn miền sơn cước · Bìa Rừng Đen", "Highland Hunter · Black Forest Edge"],
+  ["Thương nhân nhỏ · Chợ Bến Sậy", "Petty Merchant · Reed Market"],
+  ["Thiên Mệnh Chi Tử (Hoàng tộc họ Lâm) · Kinh Hoài", "Child of Destiny (Royal Lam Clan) · Kinh Hoai"],
+  ["📖 [Bước sang Hồi II · Trưởng Thành]:", "📖 [Entering Act II · Adulthood]:"],
+  ["🍂 [Bước sang Hồi III · Xế Chiều]:", "🍂 [Entering Act III · Twilight Years]:"],
+  ["📖 Điểm ngắt cuộc đời", "📖 Life Formative Beat"]
+);
