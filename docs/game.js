@@ -270,7 +270,6 @@ function computeLieDetectionProb(npc) {
   return Math.max(0.05, Math.min(0.9, p));
 }
 
-// MỤC 36.1 & 43.5: TÍNH BẬC NĂNG LỰC 0-5 CÓ NHÂN HỆ SỐ SUY GIẢM DO BỆNH TẬT
 function calcTiers(p) {
   tiers = {};
   p.giai_doan = getLifeStageByAge(p.tuoi);
@@ -472,7 +471,7 @@ function scoreActionPriority(p, tpl) {
   const tags = tpl.tag || [];
   if (tags.includes('sinh_ton')) {
     if (state.doi >= 60 || state.lanh >= 60) score += 45;
-    if (state.amAnhDoi > 0) score += (state.amAnhDoi / 100) * 3.0 * 15; // Mục 29.3: he_so_keo tối đa 3.0
+    if (state.amAnhDoi > 0) score += (state.amAnhDoi / 100) * 3.0 * 15;
   }
   if (tags.includes('nghi_ngoi') && state.theLuc <= 35) score += 40 + (p.luoi || 30) * 0.3;
   if (tags.includes('muu_sinh') && state.amAnhDoi > 0) score += (state.amAnhDoi / 100) * 25;
@@ -951,7 +950,6 @@ function finalizeActionResult(tpl, isPush, wasSlowed) {
     if (state.recentHistory.length > 3) state.recentHistory.pop();
   }
 
-  // Điều chỉnh sản lượng mua gạo / đổi củi theo Giá chợ 4 mùa & Biến cố vĩ mô (GĐ7 & GĐ8)
   const spike = state.macroPriceSpike || 1.0;
   if (tpl.mau === 'mua_gao_bang_xu') {
     const baseRice = state.seasonIdx === 2 ? 0.95 : (state.seasonIdx === 3 ? 0.5 : 0.7);
@@ -991,7 +989,6 @@ function finalizeActionResult(tpl, isPush, wasSlowed) {
     state.chan = Math.max(0, Math.min(100, state.chan + tpl.chi_phi.chan));
     state.doi = Math.max(0, Math.min(100, state.doi + tpl.chi_phi.doi));
 
-    // Phản ứng phớt lờ Ám ảnh đói/lạnh (Mục 29.3)
     if (state.amAnhDoi > 0 && !(tpl.tag || []).includes('sinh_ton') && !(tpl.tag || []).includes('muu_sinh')) {
       state.chan = Math.min(100, state.chan + 1.5);
     }
@@ -1396,7 +1393,7 @@ function updateCenterStage(mainText, deltas) {
 
 function showEndOfLifeChronicle(deathReason) {
   const p = state.persona;
-  if (p.tuoi >= 60) state.lastFulfilledClass = p.giai_cap; // Mục 47.11: Đời viên mãn kích hoạt luân chuyển giai cấp
+  if (p.tuoi >= 60) state.lastFulfilledClass = p.giai_cap;
   openModal('📜 Khép Lại Một Kiếp Người (Mục 37)',
     '<p style="color:#ff9e9e; font-weight:600;">' + deathReason + '</p>' +
     '<p><strong>Người đã khuất:</strong> ' + p.ten + ' (Hưởng dương ' + p.tuoi + ' tuổi) · ' + p.than_phan + '</p>' +
@@ -1607,7 +1604,7 @@ window.startRandomReincarnation = function() {
   const weightedPool = PERSONAS.map(p => {
     let w = CLASS_RARITY_WEIGHTS[p.giai_cap] || 0.5;
     if (state.lastFulfilledClass && p.giai_cap !== state.lastFulfilledClass) {
-      w *= 2.0; // Mục 47.11: he_so_luan_chuyen = 2.0
+      w *= 2.0;
     }
     return { p, w };
   });
@@ -1752,254 +1749,6 @@ document.getElementById('btnToggleMute').onclick = function() {
 
 document.getElementById('btnCloseModal').onclick = closeModal;
 document.getElementById('btnSkipAuto').onclick = skipDaysSmart;
-
-// =========================================================================
-// 9. GIAI ĐOẠN 10 & 11: LƯU/NẠP OFFLINE, CHẾ ĐỘ CHÂN THỰC (D19), HỒ SƠ, THÀNH TỰU & SONG NGỮ
-// =========================================================================
-const SAVE_SLOT_KEY = "TMKB_ACTIVE_RUN_V1";
-const PROFILE_SLOT_KEY = "TMKB_META_PROFILE_V1";
-
-let appSettings = {
-  lang: "vi",
-  fontSizeScale: 1.0,       // 0.9 (Nhỏ), 1.0 (Vừa), 1.12 (Lớn) - Mục 46.4
-  disableFreneticTimer: false, // Trợ năng tắt đồng hồ cảnh gấp - Mục 20
-  doChe16Plus: "cao"        // Mức độ nói bóng gió nội dung 16+ - Mục 47.8
-};
-
-function loadMetaProfile() {
-  try {
-    const raw = localStorage.getItem(PROFILE_SLOT_KEY);
-    if (raw) return JSON.parse(raw);
-  } catch (e) {}
-  return { achievements: {}, pastLives: [] };
-}
-
-function saveMetaProfile(prof) {
-  try {
-    localStorage.setItem(PROFILE_SLOT_KEY, JSON.stringify(prof));
-  } catch (e) {}
-}
-
-function unlockAchievement(achId) {
-  const prof = loadMetaProfile();
-  const modeTag = state.authenticMode ? "authentic" : "normal";
-  if (!prof.achievements[achId] || (state.authenticMode && prof.achievements[achId] !== "authentic")) {
-    prof.achievements[achId] = modeTag;
-    saveMetaProfile(prof);
-  }
-}
-
-function checkAllAchievements() {
-  if (!state.persona) return;
-  if (state.totalDaysPlayed >= 5 && state.seasonIdx !== 3) unlockAchievement("ACH_SURVIVE_WINTER");
-  if (state.persona.biet_chu && state.triThuc >= 3) unlockAchievement("ACH_LITERATE");
-  if (state.persona.than_phan.includes("Thị dân Tự do")) unlockAchievement("ACH_FREE_CITIZEN");
-  if (state.persona.giai_cap === "ky_si_quan_nhan") unlockAchievement("ACH_MARTIAL_RANK");
-  if (state.persona.giai_cap === "quan_lai") unlockAchievement("ACH_SCHOLAR_OFFICIAL");
-  if (state.persona.than_phan.includes("Bang Hàng")) unlockAchievement("ACH_GUILD_MASTER");
-  if (state.daKetHon && state.soCon > 0) unlockAchievement("ACH_FAMILY_LINE");
-  if (state.deltasGhiNhan && state.deltasGhiNhan.length > 0) unlockAchievement("ACH_WORLD_DELTA");
-  if (state.persona.tuoi >= 60) unlockAchievement("ACH_FULL_LIFE");
-}
-
-function saveGameToDevice(isExitSave = false) {
-  if (!state.persona || state.isDead) return;
-  try {
-    const payload = {
-      savedAt: new Date().toLocaleString("vi-VN"),
-      isExitSave,
-      state
-    };
-    localStorage.setItem(SAVE_SLOT_KEY, JSON.stringify(payload));
-    refreshContinueButton();
-  } catch (e) {}
-}
-
-function clearSavedGameOnDevice() {
-  try {
-    localStorage.removeItem(SAVE_SLOT_KEY);
-    refreshContinueButton();
-  } catch (e) {}
-}
-
-function refreshContinueButton() {
-  const btn = document.getElementById("btnContinueSavedGame");
-  if (!btn) return;
-  try {
-    const raw = localStorage.getItem(SAVE_SLOT_KEY);
-    if (!raw) {
-      btn.style.display = "none";
-      return;
-    }
-    const data = JSON.parse(raw);
-    if (data && data.state && data.state.persona && !data.state.isDead) {
-      const p = data.state.persona;
-      const modeStr = data.state.authenticMode ? " [🩸 Chân thực - Xóa ngay khi nạp]" : " [🕯️ Thường]";
-      btn.style.display = "block";
-      btn.textContent = "▶️ Tiếp tục: " + p.ten + " (" + p.tuoi + " tuổi · Năm " + data.state.year + ")" + modeStr;
-    } else {
-      btn.style.display = "none";
-    }
-  } catch (e) {
-    btn.style.display = "none";
-  }
-}
-
-window.continueSavedGame = function() {
-  try {
-    const raw = localStorage.getItem(SAVE_SLOT_KEY);
-    if (!raw) return;
-    const data = JSON.parse(raw);
-    if (!data || !data.state || !data.state.persona) return;
-
-    state = data.state;
-    // Quy tắc D19 (Mục 47.6 & 47.11): Chế độ Chân thực xóa ngay file lưu tạm khi nạp để chống nạp lại
-    if (state.authenticMode) {
-      clearSavedGameOnDevice();
-    }
-
-    document.getElementById("startMenuOverlay").style.display = "none";
-    closeModal();
-    calcTiers(state.persona);
-    updateCenterStage(
-      "[TIẾP TỤC KIẾP SỐNG]: Bạn mở mắt tiếp tục hành trình của " + state.persona.ten + " tại " + PLACE_NAMES[state.location] + ".",
-      [{ label: state.authenticMode ? "🩸 Chế độ Chân thực (Đã xóa bản lưu tạm)" : "🕯️ Đã nạp bản lưu", type: "gain" }]
-    );
-    render();
-  } catch (e) {}
-};
-
-// XUẤT / NHẬP FILE SAVE JSON GIỮA ĐIỆN THOẠI VÀ MÁY TÍNH (MỤC 46.4)
-window.exportSaveToJsonFile = function() {
-  if (!state.persona) return;
-  saveGameToDevice(true);
-  const blob = new Blob([JSON.stringify({ state, meta: loadMetaProfile() }, null, 2)], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "ThienMenhKhaBien_Save_Nam" + state.year + ".json";
-  a.click();
-  URL.revokeObjectURL(url);
-  if (state.authenticMode) {
-    returnToStartMenu();
-  }
-};
-
-window.importSaveFromJsonFile = function(event) {
-  const file = event.target.files && event.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    try {
-      const parsed = JSON.parse(e.target.result);
-      if (parsed.meta) saveMetaProfile(parsed.meta);
-      if (parsed.state && parsed.state.persona) {
-        state = parsed.state;
-        saveGameToDevice(false);
-        closeModal();
-        document.getElementById("startMenuOverlay").style.display = "none";
-        calcTiers(state.persona);
-        updateCenterStage("Đã nhập file lưu thành công!", [{ label: "📂 Đã khôi phục kiếp sống", type: "gain" }]);
-        render();
-      }
-    } catch (err) {}
-  };
-  reader.readAsText(file);
-};
-
-// SONG NGỮ VIỆT - ANH & CỠ CHỮ (MỤC 46.4 & 47.7)
-window.toggleLanguage = function() {
-  appSettings.lang = appSettings.lang === "vi" ? "en" : "vi";
-  const dict = I18N_UI[appSettings.lang];
-  document.querySelector(".start-title").textContent = dict.start_title;
-  document.querySelector(".start-sub").textContent = dict.start_sub;
-  const btnStartLang = document.getElementById("btnStartLang");
-  if (btnStartLang) btnStartLang.textContent = dict.lang_label;
-  document.getElementById("btnOpenSocial").textContent = dict.btn_social;
-  document.getElementById("btnOpenBio").textContent = dict.btn_bio;
-  const btnSys = document.getElementById("btnOpenSystem");
-  if (btnSys) btnSys.textContent = dict.btn_sys;
-  document.getElementById("btnSkipAuto").textContent = dict.btn_skip;
-  render();
-};
-
-window.changeFontScale = function(scale) {
-  appSettings.fontSizeScale = scale;
-  document.querySelector(".beat-main-text").style.fontSize = Math.round(15.5 * scale) + "px";
-};
-
-window.toggleAccessibilityTimer = function() {
-  appSettings.disableFreneticTimer = !appSettings.disableFreneticTimer;
-  openSystemModal();
-};
-
-// GHI HỒ SƠ KIẾP SỐNG KHI QUA ĐỜI & XÓA SAVE HIỆN TẠI (MỤC 47.4 & 47.5)
-const origShowChronicleG10 = showEndOfLifeChronicle;
-showEndOfLifeChronicle = function(deathReason) {
-  checkAllAchievements();
-  clearSavedGameOnDevice();
-  if (state.persona) {
-    const prof = loadMetaProfile();
-    prof.pastLives.unshift({
-      ten: state.persona.ten,
-      tuoi: state.persona.tuoi,
-      than_phan: state.persona.than_phan,
-      nam_mat: state.year,
-      authentic: state.authenticMode,
-      deltas: state.deltasGhiNhan.length
-    });
-    if (prof.pastLives.length > 15) prof.pastLives.pop();
-    saveMetaProfile(prof);
-  }
-  origShowChronicleG10(deathReason);
-};
-
-// TỰ ĐỘNG LƯU Ở CHẾ ĐỘ THƯỜNG VÀ KIỂM TRA THÀNH TỰU SAU MỖI HÀNH ĐỘNG
-const origFinalizeG10 = finalizeActionResult;
-finalizeActionResult = function(tpl, isPush, wasSlowed) {
-  origFinalizeG10(tpl, isPush, wasSlowed);
-  checkAllAchievements();
-  if (!state.authenticMode && !state.isDead) {
-    saveGameToDevice(false);
-  }
-};
-
-// HỖ TRỢ TẮT ĐỒNG HỒ CẢNH GẤP (TRỢ NĂNG MỤC 20)
-const origShowSituationG10 = showSituationUI;
-showSituationUI = function(title, desc, choices) {
-  origShowSituationG10(title, desc, choices);
-  if (appSettings.disableFreneticTimer && freneticInterval) {
-    clearInterval(freneticInterval);
-    freneticInterval = null;
-    document.getElementById("freneticTimer").textContent = "Độ hoảng (Tắt đếm giờ)";
-  }
-};
-
-// CỬA SỔ HỒ SƠ KIẾP SỐNG & THÀNH TỰU (MỤC 47.5 & 47.6)
-window.openHallOfFameModal = function() {
-  const prof = loadMetaProfile();
-  const achHtml = ACHIEVEMENTS_DB.map(a => {
-    const unlockedMode = prof.achievements[a.id];
-    const badge = unlockedMode === "authentic"
-      ? '<span style="color:#ff9e9e; font-weight:bold;">[🩸 Đạt ở Chế độ Chân thực]</span>'
-      : (unlockedMode ? '<span style="color:#9ef0b6; font-weight:bold;">[✓ Đã đạt]</span>' : '<span style="color:#6c7587;">[🔒 Chưa mở]</span>');
-    return '<div style="background:#13161d; padding:8px 11px; border-radius:6px; margin-bottom:6px; border-left:3px solid ' + (unlockedMode ? '#d4a359' : '#2b3242') + ';">' +
-      '<strong>🏆 ' + a.ten_vi + ' (' + a.ten_en + ')</strong> ' + badge + '<br/>' +
-      '<span style="font-size:12.5px; color:#9ea8ba;">' + a.mo_ta + '</span></div>';
-  }).join("");
-
-  const livesHtml = prof.pastLives.length === 0
-    ? '<p style="color:#8490a6; font-size:13px;">Chưa có kiếp sống nào khép lại.</p>'
-    : prof.pastLives.map(l =>
-        '<div style="font-size:13px; padding:5px 0; border-bottom:1px dashed #262c38;">• <strong>' + l.ten + '</strong> (Hưởng dương ' + l.tuoi + ' tuổi · Năm ' + l.nam_mat + ') — ' + l.than_phan + ' · Delta: ' + l.deltas + (l.authentic ? ' <span style="color:#ff9e9e;">[Chân thực]</span>' : '') + '</div>'
-      ).join("");
-
-  openModal("🏆 Hồ Sơ Kiếp Sống & Thành Tựu (Xuyên Các Đời - Mục 47.4 & 47.5)",
-    "<p><strong>1. Bộ Thành Tựu Theo Hành Động Thật:</strong></p>" + achHtml +
-    "<hr style='border-color:#2b3242; margin:14px 0;'/>" +
-    "<p><strong>2. Biên Niên Sử Các Kiếp Đã Sống (Thế giới hồi quy sau mỗi đời):</strong></p>" + livesHtml
-  );
-};
 
 // =========================================================================
 // 9. GIAI ĐOẠN 10 & 11: LƯU/NẠP OFFLINE, CHẾ ĐỘ CHÂN THỰC (D19) & THÀNH TỰU
