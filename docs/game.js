@@ -2469,3 +2469,670 @@ window.startRandomReincarnation = function() {
     });
   };
 })();
+// =========================================================================
+// 12. ĐẠI TU ĐỘ CHÂN THỰC V2 (6 NHẬN XÉT PLAYTEST: HỘI THOẠI TIẾN TRIỂN, CĂNG CƠ,
+//     GIỚI HẠN KHO, 5 NHÁNH HỌC VẤN & TOÁN PHÁP, Y THUẬT HIẾM, PHẠT KIỆT SỨC ĐỘNG)
+// =========================================================================
+(function applyDeepRealismOverhaulV2() {
+  window.state = state;
+
+  function ensureRealismV2Fields() {
+    if (!state) return;
+    // 5 nhánh học vấn chuyên sâu + Y thuật (Nhận xét 4 & 5)
+    if (!state.hocVan) {
+      const initLit = state.persona && state.persona.biet_chu ? 1.2 : 0.0;
+      state.hocVan = {
+        nhan_chu: initLit,       // Nhận mặt chữ (cần >= 1.0 để đọc sách cơ bản)
+        toan_phap: initLit * 0.5,// Toán pháp & Tính nhẩm (BẮT BUỘC để buôn bán không bị lừa)
+        kinh_te: 0.0,            // Kinh tế & Giá cả thương trường
+        doi_nhan: 0.0,           // Đối nhân xử thế & Lễ nghi
+        luat_le: 0.0,            // Luật lệ & Điển chế Hoài Dương (cần để thi Chức Sự)
+        y_ly: 0.0                // Y lý dân gian (tăng xác suất tự sắc thuốc đúng bệnh)
+      };
+    }
+    if (state.cangCo === undefined) state.cangCo = 0;         // Căng cơ / Đau nhức gân cốt (0-100)
+    if (state.napCountToday === undefined) state.napCountToday = 0;
+    if (!state.npcTalkStage) state.npcTalkStage = {};         // Lưu tầng tiến triển hội thoại với từng NPC
+  }
+
+  // --- NHẬN XÉT 3: GIỚI HẠN VẬT LÝ CỦA CHUM NƯỚC, CỦI & PHÂN HỦY LƯƠNG MỐC ---
+  function enforceStorageAndEconomyCaps() {
+    if (!state) return;
+    // Chum nước ở nhà tranh chỉ chứa tối đa 6 gáo (Không thể tích 33 gáo)
+    if (state.nuocSach > 6) state.nuocSach = 6;
+    // Bó củi xếp hiên nhà tối đa 6.0 bó
+    if (state.cui > 6.0) state.cui = 6.0;
+    // Lương mốc để lâu tự thối rữa hoàn toàn thành bùn đất, không bao giờ chất đống > 2.5 phần
+    if (state.luongMoc > 2.5) {
+      state.luongMoc = 2.5;
+    }
+    state.luongLanh = Number(Math.max(0, state.luongLanh).toFixed(2));
+    state.luongMoc = Number(Math.max(0, state.luongMoc).toFixed(2));
+    state.cui = Number(Math.max(0, state.cui).toFixed(2));
+  }
+
+  // --- NHẬN XÉT 2 & 4: MÔ TẢ TRÌNH ĐỘ THỰC TẾ (5 NHÁNH HỌC VẤN & VÕ ĐẠO KHẮC NGHIỆT) ---
+  window.describeRealisticSkills = function(p) {
+    ensureRealismV2Fields();
+    const hv = state.hocVan;
+    let litDesc = "Mù chữ";
+    if (hv.nhan_chu >= 1.0 && hv.luat_le >= 1.5 && hv.doi_nhan >= 1.2 && hv.kinh_te >= 1.0) {
+      litDesc = "Bậc Kẻ Sĩ (Thông hiểu Luật · Kinh tế · Xử thế)";
+    } else if (hv.nhan_chu >= 1.0) {
+      const sub = [];
+      if (hv.toan_phap >= 0.8) sub.push("Biết tính toán");
+      if (hv.kinh_te >= 0.8) sub.push("Hiểu kinh tế");
+      if (hv.doi_nhan >= 0.8) sub.push("Hiểu lễ nghĩa");
+      if (hv.luat_le >= 0.8) sub.push("Biết luật lệ");
+      litDesc = "Biết chữ" + (sub.length > 0 ? " (" + sub.join(", ") + ")" : " vỡ lòng");
+    } else if (hv.nhan_chu >= 0.3) {
+      litDesc = "Đang tập đánh vần (" + Math.round(hv.nhan_chu * 100) + "%)";
+    } else if (hv.nhan_chu > 0) {
+      litDesc = "Mới nhớ vài nét gạch";
+    }
+
+    // Võ nghệ: Phải đạt >= 1.5 mới gọi là biết chút tự vệ
+    let marDesc = "Chưa biết võ";
+    if (state.voNghe >= 8.0) marDesc = "Võ nghệ tinh thông";
+    else if (state.voNghe >= 4.0) marDesc = "Vững đao pháp biên ải";
+    else if (state.voNghe >= 1.5) marDesc = "Biết chút quyền cước tự vệ";
+    else if (state.voNghe >= 0.4) marDesc = "Mới quen đứng tấn";
+    else if (state.voNghe > 0) marDesc = "Tay chân còn vụng, dễ căng cơ";
+
+    // Buôn bán: Phụ thuộc chặt vào Toán pháp (toan_phap)
+    let trdDesc = "Chưa biết tính nhẩm";
+    if (hv.toan_phap < 0.5) {
+      trdDesc = "Mù tính toán (Đi buôn dễ bị lừa)";
+    } else if (state.buonBan >= 4.0 && hv.kinh_te >= 1.2) {
+      trdDesc = "Lão luyện thương trường";
+    } else if (state.buonBan >= 1.2) {
+      trdDesc = "Biết tính sổ & mặc cả";
+    } else {
+      trdDesc = "Biết đếm xu cơ bản";
+    }
+
+    return "📚 " + litDesc + " · ⚔️ " + marDesc + " · ⚖️ " + trdDesc;
+  };
+
+  // --- BỔ SUNG CÁC HÀNH ĐỘNG HỌC TẬP CHUYÊN SÂU (TOÁN PHÁP, KINH TẾ, XỬ THẾ, LUẬT LỆ) ---
+  if (!ACTIONS.some(a => a.mau === "hoc_toan_phap_ban_tinh")) {
+    ACTIONS.push(
+      {
+        mau: "hoc_toan_phap_ban_tinh",
+        ten_vi: "🧮 Tập gẩy bàn tính & Học tính nhẩm sổ hàng (-1 Xu học phí · Cần thiết để không bị lừa khi buôn bán)",
+        nhom: "Mua bán & Hội Phường",
+        thoi_luong_mo: "36 phút", tai_noi: ["cho_ben_say", "kinh_hoai"], so_nhip: 5, sfx: "step",
+        giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
+        yeu_cau: { tri_nho: 1 }, req_check: { xu_sat: 1 }, tieu_hao: { xu_sat: 1 }, tag: ["tri_thuc"],
+        chi_phi: { the_luc: -2.0, chan: 1.5, doi: 0.9 }, ket_qua: { ren_toan_phap: true },
+        mo_ta: "Bạn ngồi cạnh quầy tính sổ, tập cộng trừ từng đồng xu sắt và cách quy đổi cân đong thóc gạo để không bị lái buôn qua mặt."
+      },
+      {
+        mau: "hoc_doi_nhan_xu_the",
+        ten_vi: "🍵 Quan sát cách ứng xử & Học lễ nghĩa giao tiếp tại bàn trà (-1 Xu trà nước)",
+        nhom: "Tại quán trọ",
+        thoi_luong_mo: "30 phút", tai_noi: ["quan_bon_nga", "kinh_hoai"], so_nhip: 5, sfx: "step",
+        giai_doan: ["thieu_nien", "truong_thanh", "trung_nien", "gia"],
+        yeu_cau: { noi: 1 }, req_check: { xu_sat: 1 }, tieu_hao: { xu_sat: 1 }, tag: ["xa_hoi", "tri_thuc"],
+        chi_phi: { the_luc: -1.5, chan: 0.5, doi: 0.8 }, ket_qua: { ren_doi_nhan: true },
+        mo_ta: "Bạn lắng nghe cách các bậc trưởng bối và khách thương hồ lựa lời thưa gửi, học cách nhìn sắc mặt người đối diện."
+      },
+      {
+        mau: "nghien_ngam_luat_le_kinh_te",
+        ten_vi: "⚖️ Đọc bảng yết thị & Nghiền ngẫm Luật lệ, Kinh tế thuế khóa (Yêu cầu đã Biết chữ)",
+        nhom: "Khoa cử & Tri thức",
+        thoi_luong_mo: "42 phút", tai_noi: ["kinh_hoai"], so_nhip: 6, sfx: "step",
+        giai_doan: ["thieu_nien", "truong_thanh", "trung_nien", "gia"],
+        yeu_cau: { thi_giac: 1, tri_nho: 1 }, req_check: { biet_chu: true }, tag: ["tri_thuc"],
+        chi_phi: { the_luc: -2.5, chan: 1.8, doi: 1.1 }, ket_qua: { ren_luat_va_kinh_te: true },
+        mo_ta: "Bạn đứng trước bảng niêm yết của nha môn Kinh Hoài và thư phòng, ghi nhớ từng điều luật hộ tịch, thuế Khế và quy tắc điều phối lương thảo."
+      },
+      {
+        mau: "kham_thay_lang_ton_tien",
+        ten_vi: "🩺 Tìm Y sư cao tay bắt mạch & Mua thang thuốc đặc trị (-5 Xu sắt · Tỷ lệ khỏi bệnh cao theo Y thuật)",
+        nhom: "Thương trường Kinh Đô",
+        thoi_luong_mo: "30 phút", tai_noi: ["cho_ben_say", "kinh_hoai"], so_nhip: 4, sfx: "fire",
+        giai_doan: ["thieu_nhi", "thieu_nien", "truong_thanh", "trung_nien", "gia"],
+        yeu_cau: {}, req_check: { xu_sat: 5 }, tieu_hao: { xu_sat: 5 }, tag: ["sinh_ton"],
+        chi_phi: { the_luc: -1.0, chan: 0, doi: 0.5 }, ket_qua: { kham_danh_y_xu_ly: true },
+        mo_ta: "Bạn tìm đến hiệu thuốc lớn, trả 5 đồng xu sắt để vị y sư lâu năm bắt mạch kê đúng vị thuốc quý hiếm."
+      }
+    );
+  }
+
+  // --- NHẬN XÉT 1: HỘI THOẠI NPC PHÁT TRIỂN THEO 4 TẦNG QUAN HỆ & TRẠNG THÁI THÙ GHÉT ---
+  openNpcDialogue = function(npc) {
+    if (state.isWorking || freneticInterval || state.isDead) return;
+    ensureRealismV2Fields();
+    SoundFX.playSoftStep();
+
+    const rel = state.npcRelations[npc.id] || (state.npcRelations[npc.id] = { than_thien: 5, feud_bac: 0, dong_loa: false });
+    const talkCount = state.npcTalkStage[npc.id] || 0;
+
+    const box = document.getElementById('freneticBox');
+    const titleEl = document.getElementById('freneticTitle');
+    const timerEl = document.getElementById('freneticTimer');
+    const descEl = document.getElementById('freneticDesc');
+    const choicesEl = document.getElementById('freneticChoices');
+
+    box.className = 'frenetic-overlay dialogue-mode';
+    titleEl.textContent = "💬 ĐỐI THOẠI: " + npc.ten.toUpperCase() + " (" + npc.vai + ")";
+    timerEl.textContent = rel.feud_bac > 0 ? ("⚡ Thù Bậc " + rel.feud_bac) : ("Mức quen: Bậc " + Math.min(4, Math.floor(talkCount / 2) + 1));
+
+    // Phát triển nội dung lời nói theo Mối thù và Số lần trò chuyện (Không lặp lại máy móc)
+    let dialogueText = "";
+    if (rel.feud_bac >= 2) {
+      dialogueText = "\"" + npc.ten + " vừa trông thấy bạn đã sa sầm nét mặt, tay nắm chặt cán công cụ quát lớn: 'Giữa ta và ngươi đã kết oán thù sâu nặng, còn vác mặt tới đây làm gì? Cút ngay trước khi ta gọi người tới!'\"";
+    } else if (rel.feud_bac === 1) {
+      dialogueText = "\"" + npc.ten + " khoanh tay nhìn bạn với ánh mắt lạnh lùng sau cuộc cãi vã trước đó: 'Chuyện lần trước ta chưa quên đâu. Nếu không có việc gì chuộc lỗi thì đừng làm phiền ta!'\"";
+    } else if (talkCount === 0) {
+      dialogueText = "[Lần đầu bắt chuyện]: " + npc.ten + " dừng tay nhìn bạn từ đầu đến chân vẻ dò xét:\n\"" + (npc.dang_noi_doi ? npc.loi_noi_doi : npc.loi_noi_that) + "\"";
+    } else if (talkCount === 1) {
+      dialogueText = "[Đã biết mặt]: " + npc.ten + " gật đầu chào bạn rồi thở dài tâm sự chuyện mưu sinh:\n\"Thời buổi này kiếm được bát cơm lành hay bó củi khô chẳng dễ dàng gì. Ngươi có rảnh tay thì phụ ta một chút, ta chỉ thêm mánh làm ăn trong vùng cho.\"";
+    } else if (talkCount === 2) {
+      dialogueText = "[Chỗ quen thân]: " + npc.ten + " kéo bạn lại gần hiên nhà, hạ giọng kể điều ít người biết:\n\"" + npc.loi_noi_that + "\"";
+    } else {
+      const rumorSample = (typeof window.sampleNpcRumorBeliefLazy === "function") ? window.sampleNpcRumorBeliefLazy(npc.id, state.location) : null;
+      const extraRumor = rumorSample ? ("\n\nNgoài ra, " + npc.ten + " còn ghé tai bạn dặn nhỏ: \"" + rumorSample.noi_dung + "\"") : "";
+      dialogueText = "[Tri kỷ tin cậy]: " + npc.ten + " vỗ vai bạn như người một nhà:\n\"" + (npc.belief || npc.loi_noi_that) + "\"" + extraRumor;
+    }
+
+    descEl.textContent = dialogueText;
+    choicesEl.innerHTML = '';
+    const options = [];
+
+    // Nếu đang có mối thù: Không cho bấm hỏi thăm thông thường, buộc phải Xin lỗi/Đền bù hoặc Rời đi
+    if (rel.feud_bac > 0) {
+      options.push({
+        label: "🙇 Cúi đầu nhận lỗi & Biếu 2 Xu sắt tiền trà nước để xoa dịu hiềm khích",
+        action: () => {
+          box.style.display = 'none';
+          if (state.xuSat < 2) {
+            updateCenterStage("Bạn định mở lời giảng hòa nhưng trong túi không đủ 2 đồng xu sắt làm lễ tạ lỗi.", [{ label: "🔒 Cần 2 Xu sắt", type: "warn" }]);
+          } else {
+            state.xuSat -= 2;
+            rel.feud_bac = Math.max(0, rel.feud_bac - 1);
+            rel.than_thien += 15;
+            advanceClock(15, false, false);
+            updateCenterStage("Bạn chân thành nhận lỗi và mời " + npc.ten + " chén trà nóng. Cơn giận của đối phương cũng nguôi ngoai đi một phần.", [{ label: "🕊️ Giảm 1 bậc Mối thù", type: "gain" }]);
+          }
+          render();
+        }
+      });
+    } else {
+      // Lựa chọn tiến triển theo tầng quen biết
+      if (talkCount === 0) {
+        options.push({
+          label: "🤝 Chào hỏi lễ phép & Tự giới thiệu bản thân (-4 Thể lực · Mở đầu quan hệ)",
+          action: () => {
+            box.style.display = 'none';
+            state.npcTalkStage[npc.id] = 1;
+            rel.than_thien += 8;
+            state.theLuc = Math.max(0, state.theLuc - 4);
+            advanceClock(12, false, false);
+            updateCenterStage("Bạn giữ lễ hỏi thăm " + npc.ten + ". Hai bên bắt đầu biết tên tuổi và hoàn cảnh của nhau.", [{ label: "🤝 Đã làm quen với " + npc.ten, type: "gain" }]);
+            render();
+          }
+        });
+      } else if (talkCount === 1) {
+        options.push({
+          label: "💪 Xắn tay áo phụ giúp việc vặt cho " + npc.ten + " (-10 Thể lực · Tăng độ tin cậy)",
+          action: () => {
+            box.style.display = 'none';
+            if (state.theLuc < 15) {
+              updateCenterStage("Chân tay bạn đang bủn rủn vì mệt, không đủ sức phụ việc cho " + npc.ten + ".", [{ label: "⚠️ Cần nghỉ ngơi trước", type: "warn" }]);
+            } else {
+              state.npcTalkStage[npc.id] = 2;
+              rel.than_thien += 12;
+              state.theLuc = Math.max(0, state.theLuc - 10);
+              state.hocVan.doi_nhan = Number((state.hocVan.doi_nhan + 0.08).toFixed(2));
+              advanceClock(24, false, false);
+              updateCenterStage("Bạn bỏ ra gần nửa giờ phụ giúp " + npc.ten + " thu dọn công việc. Đối phương rất cảm kích và bắt đầu coi bạn là chỗ thân tình (+Kinh nghiệm Đối nhân xử thế).", [{ label: "🤝 Quan hệ tiến lên Thân tình", type: "gain" }]);
+            }
+            render();
+          }
+        });
+      } else {
+        options.push({
+          label: "🍵 Cùng bàn chuyện thời cuộc & Học hỏi kinh nghiệm sống từ " + npc.ten + " (-6 Thể lực)",
+          action: () => {
+            box.style.display = 'none';
+            state.npcTalkStage[npc.id] = talkCount + 1;
+            rel.than_thien = Math.min(100, rel.than_thien + 6);
+            state.theLuc = Math.max(0, state.theLuc - 6);
+            state.hocVan.doi_nhan = Number((state.hocVan.doi_nhan + 0.10).toFixed(2));
+            if (npc.vai.includes("Y") || npc.vai.includes("Bà đỡ")) {
+              state.hocVan.y_ly = Number((state.hocVan.y_ly + 0.12).toFixed(2));
+            }
+            advanceClock(20, false, false);
+            updateCenterStage("Cuộc trò chuyện sâu sắc với " + npc.ten + " giúp bạn hiểu thêm nhiều lẽ đối nhân xử thế và gốc rễ của vùng đất này:\n\"" + npc.loi_noi_that + "\"", [{ label: "📖 Mở mang Đối nhân xử thế", type: "gain" }]);
+            render();
+          }
+        });
+      }
+    }
+
+    if (npc.co_the_hoa_giai_feud && rel.feud_bac === 0) {
+      options.push({
+        label: "🕊️ Nhờ đứng ra phân xử hóa giải các mối thù trong vùng (-2 Xu lễ trà)",
+        action: () => {
+          box.style.display = 'none';
+          if (state.xuSat < 2) {
+            updateCenterStage("Bạn cần có 2 đồng xu sắt làm lễ trà nước.", [{ label: "🔒 Cần 2 Xu sắt", type: "warn" }]);
+          } else {
+            state.xuSat -= 2;
+            Object.values(state.npcRelations).forEach(r => { if (r.feud_bac > 0) r.feud_bac = Math.max(0, r.feud_bac - 2); });
+            if (typeof unlockAchievement === 'function') unlockAchievement("ACH_PEACEMAKER");
+            updateCenterStage(npc.ten + " đứng ra dàn xếp ổn thỏa các mối bất hòa quanh vùng!", [{ label: "🕊️ Đã hóa giải Mối thù", type: "gain" }]);
+          }
+          render();
+        }
+      });
+    }
+
+    options.push({
+      label: "💢 Lời qua tiếng lại / Tranh chấp quyền lợi (Gây xích mích Mối thù)",
+      action: () => {
+        box.style.display = 'none';
+        rel.than_thien -= 25;
+        rel.feud_bac = Math.min(4, rel.feud_bac + 1);
+        const feudNames = ["Bình thường", "Xích mích lời nói", "Căm ghét ra mặt", "Phá hoại ngầm", "Xung đột bạo lực"];
+        updateCenterStage("Cuộc tranh cãi gay gắt khiến mối thù giữa bạn và " + npc.ten + " leo lên Bậc " + rel.feud_bac + " (" + feudNames[rel.feud_bac] + ")!", [{ label: "⚡ Mối thù Bậc " + rel.feud_bac, type: "warn" }]);
+        render();
+      }
+    });
+
+    options.push({
+      label: "👋 Khẽ gật đầu chào rồi quay lại công việc",
+      action: () => { box.style.display = 'none'; render(); }
+    });
+
+    options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'btn-main-action';
+      btn.innerHTML = '<span class="act-name">' + opt.label + '</span>';
+      btn.onclick = opt.action;
+      choicesEl.appendChild(btn);
+    });
+
+    box.style.display = 'block';
+  };
+
+  // --- NHẬN XÉT 2, 4, 6: CỔNG KIỂM TRA KHẮC NGHIỆT (KHÓA LAO ĐỘNG KHI KIỆT SỨC / CĂNG CƠ / THIẾU HỌC VẤN) ---
+  const prevCheckV2 = checkActionAvailability;
+  checkActionAvailability = function(p, tpl) {
+    ensureRealismV2Fields();
+    const res = prevCheckV2(p, tpl);
+    const hv = state.hocVan;
+
+    // 1. Nhận xét 6: Khi Đói hoa mắt (>= 88) hoặc Chân tay bủn rủn (theLuc < 15), khóa toàn bộ lao động nặng!
+    const isRestOrEat = tpl.is_sleep || tpl.mau === "chop_mat_nghi" || (tpl.tag && tpl.tag.includes("sinh_ton")) || (tpl.tag && tpl.tag.includes("ban_nang"));
+    if (!isRestOrEat) {
+      if (state.theLuc < 15) {
+        res.canRun = false;
+        res.missingText = "Chân tay đang bủn rủn kiệt sức (Thể lực quá thấp) — Buộc phải nằm nghỉ hoặc ngủ trước!";
+        return res;
+      }
+      if (state.doi >= 88) {
+        res.canRun = false;
+        res.missingText = "Đói hoa mắt chóng mặt không thể đứng vững — Hãy kiếm cái ăn trước!";
+        return res;
+      }
+    }
+
+    // 2. Nhận xét 2: Chợp mắt chỉ được 1 lần/ngày; Tập võ bị khóa khi đang Căng cơ nặng (>= 60)
+    if (tpl.mau === "chop_mat_nghi" && state.napCountToday >= 1) {
+      res.canRun = false;
+      res.missingText = "Hôm nay bạn đã chợp mắt nghỉ trưa rồi (Muốn hồi phục sâu phải đợi tối ngủ qua đêm)";
+      return res;
+    }
+    if (tpl.tag && tpl.tag.includes("vo_thuat") && state.cangCo >= 60) {
+      res.canRun = false;
+      res.missingText = "Bắp thịt và gân cốt đang căng cứng đau nhức vì tập luyện quá sức — Cần ngủ qua đêm để cơ bắp phục hồi!";
+      return res;
+    }
+
+    // 3. Nhận xét 3: Không cho kéo thêm nước nếu chum ở nhà đã đầy 6 gáo
+    if (tpl.mau === "ganh_nuoc_gieng" && state.nuocSach >= 6) {
+      res.canRun = false;
+      res.missingText = "Chum nước ở nhà đã đầy ắp (Tối đa 6 gáo)";
+      return res;
+    }
+
+    // 4. Nhận xét 4: Muốn buôn sỉ Kiện hàng hoặc mở hiệu Bang Hàng BẮT BUỘC phải biết Toán pháp
+    if (tpl.mau === "mua_kien_hang_buon" && hv.toan_phap < 0.6) {
+      res.canRun = false;
+      res.missingText = "Chưa rành Toán pháp & Tính nhẩm (Hãy học gẩy bàn tính ở Chợ trước kẻo bị buôn sỉ lừa sạch vốn)";
+      return res;
+    }
+    if (tpl.mau === "thi_tuyen_thu_lai") {
+      if (hv.nhan_chu < 1.0 || hv.toan_phap < 1.0 || hv.doi_nhan < 1.0 || hv.luat_le < 1.5) {
+        res.canRun = false;
+        res.missingText = "Khảo hạch Chức Sự đòi hỏi thông hiểu toàn diện: Chữ nghĩa, Toán pháp, Đối nhân xử thế và Luật lệ Điển chế!";
+        return res;
+      }
+    }
+
+    return res;
+  };
+
+  // --- NHẬN XÉT 6: TỐC ĐỘ LÀM VIỆC CHẬM DẦN THEO CẤP SỐ NHÂN KHI MỆT, ĐÓI VÀ CĂNG CƠ ---
+  runAction = function(tpl, isPush) {
+    if (state.isWorking || freneticInterval || state.isDead) return;
+    ensureRealismV2Fields();
+    if (tpl.is_npc_dialogue && tpl.npc_ref) {
+      openNpcDialogue(tpl.npc_ref);
+      return;
+    }
+
+    const check = checkActionAvailability(state.persona, tpl);
+    if (!check.canRun) return;
+
+    if (tpl.is_sleep) {
+      executeOvernightSleep(tpl);
+      return;
+    }
+
+    state.isWorking = true;
+    const fatigueFactor = Math.max(0, 75 - state.theLuc) * 4.5 + Math.max(0, state.doi - 45) * 3.5 + (state.cangCo || 0) * 3.0;
+    const stepDelayMs = Math.min(850, Math.round(130 + fatigueFactor));
+    const isStrained = stepDelayMs > 230;
+    const totalSteps = tpl.so_nhip || 3;
+
+    const progBox = document.getElementById('workProgressBox');
+    const progText = document.getElementById('workProgressText');
+    const progPace = document.getElementById('workProgressPace');
+    const progFill = document.getElementById('workProgressFill');
+
+    progBox.style.display = 'block';
+    progFill.style.width = '0%';
+    progFill.className = 'work-progress-fill' + (isStrained ? ' slow-strained' : '');
+    progPace.textContent = stepDelayMs >= 500
+      ? ('🥵 Kiệt quệ, lê từng nhịp nặng nhọc (' + (stepDelayMs / 1000).toFixed(2) + 's/nhịp)')
+      : (isStrained ? ('⚠️ Chậm chạp do mệt/căng cơ (' + (stepDelayMs / 1000).toFixed(2) + 's/nhịp)') : 'Nhịp độ bình thường');
+
+    render();
+
+    let currentStep = 0;
+    const stepTimer = setInterval(() => {
+      currentStep++;
+      const pct = Math.min(100, Math.round((currentStep / totalSteps) * 100));
+      progFill.style.width = pct + '%';
+      progText.textContent = tpl.ten_vi.split('(')[0] + ' (Nhịp ' + currentStep + '/' + totalSteps + ')';
+
+      if (tpl.sfx === 'chop') SoundFX.playChop();
+      else if (tpl.sfx === 'fire') SoundFX.playFire();
+      else SoundFX.playSoftStep();
+
+      if (currentStep >= totalSteps) {
+        clearInterval(stepTimer);
+        setTimeout(() => {
+          progBox.style.display = 'none';
+          state.isWorking = false;
+          finalizeActionResult(tpl, isPush, isStrained);
+        }, 90);
+      }
+    }, stepDelayMs);
+  };
+
+  // --- NHẬN XÉT 2, 4, 5, 6: XỬ LÝ HỆ QUẢ SAU HÀNH ĐỘNG (KIỆT SỨC MẤT TRẮNG, Y THUẬT, CĂNG CƠ, TOÁN PHÁP) ---
+  const baseFinalizeV2 = finalizeActionResult;
+  finalizeActionResult = function(tpl, isPush, wasSlowed) {
+    ensureRealismV2Fields();
+    const snapBefore = {
+      nuoc: state.nuocSach,
+      cui: state.cui,
+      go: state.goTho,
+      luongLanh: state.luongLanh,
+      luongMoc: state.luongMoc,
+      doDan: state.doDanLat,
+      thaoDuoc: state.thaoDuoc,
+      xu: state.xuSat,
+      theLuc: state.theLuc,
+      sucKhoe: state.sucKhoe,
+      benh: [...(state.benhTat || [])]
+    };
+
+    baseFinalizeV2(tpl, isPush, wasSlowed);
+
+    const extraNotes = [];
+    const hv = state.hocVan;
+
+    // 1. NHẬN XÉT 6: Nếu dừng vì KIỆT SỨC giữa chừng -> Đánh rơi công cụ, KHÔNG thu được thành phẩm!
+    if (state.theLuc <= 6 && !tpl.is_sleep && tpl.mau !== "chop_mat_nghi") {
+      if (state.nuocSach > snapBefore.nuoc) state.nuocSach = snapBefore.nuoc;
+      if (state.cui > snapBefore.cui) state.cui = snapBefore.cui;
+      if (state.goTho > snapBefore.go) state.goTho = snapBefore.go;
+      if (state.doDanLat > snapBefore.doDan) state.doDanLat = snapBefore.doDan;
+      extraNotes.push("🥵 [Gục ngã vì kiệt sức]: Tay chân bạn bủn rủn làm đổ tháo toàn bộ công sức đang làm dở! Bạn buộc phải nằm nghỉ hoặc ăn uống trước khi làm tiếp.");
+    }
+
+    // 2. NHẬN XÉT 2: Chợp mắt chỉ hồi +8 Thể lực (thay vì +28) và chỉ 1 lần/ngày; Tập võ gây Căng cơ mạnh
+    if (tpl.mau === "chop_mat_nghi") {
+      state.napCountToday = (state.napCountToday || 0) + 1;
+      state.theLuc = Math.min(100, snapBefore.theLuc + 8);
+      state.cangCo = Math.max(0, state.cangCo - 5);
+      extraNotes.push("💤 Chợp mắt ngắn ban ngày chỉ giúp bạn đỡ mỏi đôi chút (+8 Thể lực). Muốn hồi phục hoàn toàn phải ngủ qua đêm.");
+    }
+
+    if (tpl.tag && tpl.tag.includes("vo_thuat")) {
+      const strainAdd = state.voNghe < 1.5 ? 38 : 22;
+      state.cangCo = Math.min(100, (state.cangCo || 0) + strainAdd);
+      state.theLuc = Math.max(0, state.theLuc - 8); // Tốn thêm thể lực thực tế
+      if (state.voNghe < 1.0) {
+        extraNotes.push("💪 [Căng cơ lần đầu tập luyện]: Vì cơ thể chưa quen đứng tấn và vung đao, bắp đùi và bả vai bạn đau nhức dữ dội (Độ căng cơ: " + state.cangCo + "%).");
+      }
+    }
+
+    // 3. NHẬN XÉT 4: Xử lý 5 nhánh Học vấn & Phạt buôn bán khi mù Tính toán
+    if (tpl.mau === "hoc_chu_hoa_duong" || tpl.mau === "on_chu_doc_sach_nha") {
+      hv.nhan_chu = Number((hv.nhan_chu + 0.06).toFixed(2));
+      state.persona.biet_chu = hv.nhan_chu >= 1.0;
+      extraNotes.push("📚 Tiến độ nhận mặt chữ nhích lên từng chút một (" + Math.min(100, Math.round(hv.nhan_chu * 100)) + "%).");
+    }
+    if (tpl.ket_qua && tpl.ket_qua.ren_toan_phap) {
+      hv.toan_phap = Number((hv.toan_phap + 0.15).toFixed(2));
+      state.buonBan = Number((state.buonBan + 0.08).toFixed(2));
+      extraNotes.push("🧮 Bạn nắm vững thêm cách tính nhẩm tiền nong và cân đong hàng hóa.");
+    }
+    if (tpl.ket_qua && tpl.ket_qua.ren_doi_nhan) {
+      hv.doi_nhan = Number((hv.doi_nhan + 0.15).toFixed(2));
+      extraNotes.push("🍵 Bạn hiểu thêm cách lựa lời giao tiếp và nhìn người.");
+    }
+    if (tpl.ket_qua && tpl.ket_qua.ren_luat_va_kinh_te) {
+      hv.luat_le = Number((hv.luat_le + 0.15).toFixed(2));
+      hv.kinh_te = Number((hv.kinh_te + 0.15).toFixed(2));
+      extraNotes.push("⚖️ Bạn tích lũy thêm kiến thức về Luật lệ điển chế và Kinh tế quốc gia.");
+    }
+
+    // Nếu đi bán đồ hoặc mua gạo ở chợ mà MÙ TÍNH TOÁN (toan_phap < 0.4) -> Bị lái buôn lừa bớt xu!
+    if ((tpl.mau === "ban_do_dan_lat" || tpl.mau === "ban_thao_duoc_cho") && hv.toan_phap < 0.4) {
+      if (state.xuSat > snapBefore.xu) {
+        state.xuSat = Math.max(snapBefore.xu + 1, state.xuSat - 2);
+        extraNotes.push("⚠️ [Mù tính toán]: Vì bạn không biết tính nhẩm con số, gã lái buôn ở chợ đã lập lờ đếm thiếu của bạn mất 2 đồng xu sắt!");
+      }
+    }
+
+    // 4. NHẬN XÉT 5: THUỐC THANG KHAN HIẾM & PHỤ THUỘC Y THUẬT NGƯỜI BỐC THUỐC
+    if (tpl.mau === "hai_thao_duoc_nam" && state.thaoDuoc > snapBefore.thaoDuoc) {
+      // Thảo dược quý rất hiếm, 65% chỉ tìm được củ mài/rau rừng chứ không có thuốc
+      if (Math.random() < 0.65) {
+        state.thaoDuoc = snapBefore.thaoDuoc;
+        extraNotes.push("🌿 Bạn lội khắp sườn đồi nhưng thảo dược trị bệnh đã bị hái cạn, chỉ đào được ít củ mài ăn đỡ đói.");
+      }
+    }
+
+    if (tpl.mau === "xin_thuoc_hoa_duong") {
+      // Hiên từ thiện thuốc rất khan hiếm, chỉ phát nước lá loãng, xác suất trị dứt bệnh chỉ 25%
+      state.benhTat = [...snapBefore.benh];
+      state.sucKhoe = Math.min(100, snapBefore.sucKhoe + 2);
+      if (state.benhTat.length > 0) {
+        if (Math.random() < 0.25) {
+          const cured = state.benhTat.pop();
+          extraNotes.push("🌿 Nhà thuốc từ thiện đang cạn dược liệu, may sao bát nước lá loãng của nữ tu lại hợp cơ địa giúp bạn cắt được chứng (" + cured + ").");
+        } else {
+          extraNotes.push("🌿 [Thuốc thang khan hiếm]: Nữ tu y sĩ thở dài bảo kho thuốc từ thiện đã hết vị thuốc đặc trị, chỉ phát cho bạn bát nước gừng loãng uống cầm chừng chứ bệnh (" + state.benhTat.join(", ") + ") vẫn chưa thể dứt!");
+        }
+      }
+    }
+
+    if (tpl.mau === "dun_nuoc_sac_thuoc" && snapBefore.thaoDuoc > state.thaoDuoc && snapBefore.benh.length > 0) {
+      // Tự sắc thuốc ở nhà: Phụ thuộc vào Y lý (hv.y_ly) của bản thân
+      state.benhTat = [...snapBefore.benh];
+      const selfCureChance = Math.min(0.80, 0.25 + (hv.y_ly || 0) * 0.45);
+      if (Math.random() < selfCureChance) {
+        const cured = state.benhTat.pop();
+        hv.y_ly = Number((hv.y_ly + 0.10).toFixed(2));
+        extraNotes.push("🍵 Nhờ gia giảm đúng liều lượng lửa và lá thuốc, bát thuốc sắc giúp bạn trị khỏi chứng (" + cured + ").");
+      } else {
+        state.sucKhoe = Math.max(5, snapBefore.sucKhoe - 2);
+        extraNotes.push("⚠️ [Bốc thuốc sai vị]: Vì bạn chưa thông hiểu Y lý, nắm lá rừng sắc lên không trúng căn bệnh mà còn làm bụng cồn cào khó chịu! Hãy tìm Y sư có tay nghề cao để bắt mạch.");
+      }
+    }
+
+    if (tpl.ket_qua && tpl.ket_qua.kham_danh_y_xu_ly) {
+      if (state.benhTat && state.benhTat.length > 0) {
+        if (Math.random() < 0.85) {
+          const cured = state.benhTat.pop();
+          state.sucKhoe = Math.min(100, state.sucKhoe + 12);
+          extraNotes.push("🩺 Vị Y sư lâu năm bắt mạch chuẩn xác, châm cứu và bốc đúng thang thuốc quý giúp đẩy lùi chứng bệnh (" + cured + ")!");
+        } else {
+          state.sucKhoe = Math.min(100, state.sucKhoe + 4);
+          extraNotes.push("🩺 Bệnh tình đã ăn sâu vào khí huyết, thang thuốc của Y sư mới giúp giảm nhẹ triệu chứng, cần điều dưỡng thêm.");
+        }
+      } else {
+        state.sucKhoe = Math.min(100, state.sucKhoe + 6);
+        extraNotes.push("🩺 Y sư bắt mạch bảo cơ thể bạn không có trọng bệnh, bốc cho một thang thuốc bổ khí huyết.");
+      }
+    }
+
+    enforceStorageAndEconomyCaps();
+
+    // Xóa mọi dòng lộ con số "(Tri thức: x/3)" trên màn hình tường thuật
+    const box = document.getElementById("narrativeBox");
+    if (box) {
+      let cleanTxt = box.textContent.replace(/Học chữ tiến bộ \(Tri thức:[^)]+\)\./g, "Bạn kiên nhẫn tập viết từng nét chữ lên nền đất.");
+      if (extraNotes.length > 0) {
+        cleanTxt += "\n\n" + extraNotes.join("\n");
+      }
+      box.textContent = cleanTxt;
+    }
+
+    render();
+  };
+
+  // Khi ngủ qua đêm tới sáng -> Giảm căng cơ và đặt lại số lần chợp mắt
+  const baseOvernightSleep = executeOvernightSleep;
+  executeOvernightSleep = function(tpl) {
+    ensureRealismV2Fields();
+    state.cangCo = Math.max(0, (state.cangCo || 0) - 45);
+    state.napCountToday = 0;
+    baseOvernightSleep(tpl);
+  };
+
+  // --- NHẬN XÉT 3: SỬA TRIỆT ĐỂ NÚT TUA 2 NGÀY (KHÔNG TỰ IN TIỀN 600 XU, KHÔNG TRÀN LƯƠNG MỐC) ---
+  skipDaysSmart = function() {
+    if (state.isWorking || freneticInterval || state.isDead) return;
+    ensureRealismV2Fields();
+    SoundFX.playSoftStep();
+    const p = state.persona;
+    const stepsLog = [];
+    const deltas = [{ label: '⏩ Trôi qua 2 ngày sinh hoạt', type: '' }];
+
+    state.location = 'nha';
+    state.cuaCaiThen = true;
+
+    for (let day = 1; day <= 2; day++) {
+      if (state.isDead) break;
+
+      // Chỉ kéo nước vừa đủ trong giới hạn chum 6 gáo
+      if (state.nuocSach < 3) {
+        state.nuocSach = Math.min(6, state.nuocSach + 2);
+        if (day === 1) stepsLog.push("Ra giếng làng kéo 2 gáo nước sạch đổ vào chum.");
+      }
+
+      // Chỉ kiếm củi và mót lúa vừa đủ ăn trong ngày, tuyệt đối không tự sinh xu sắt!
+      if (state.cui < 1.0) {
+        state.cui = Math.min(6.0, state.cui + 0.8);
+        if (day === 1) stepsLog.push("Quanh vườn nhặt nhạnh cành củi khô về nhóm bếp.");
+      }
+      if (state.luongLanh < 0.7) {
+        if (state.xuSat >= 2) {
+          state.xuSat -= 2;
+          state.luongLanh += 0.65;
+          if (day === 1) stepsLog.push("Cầm 2 đồng xu sắt ra chợ đong gạo lành về nấu cháo.");
+        } else {
+          state.luongLanh += 0.45;
+          if (day === 1) stepsLog.push("Ra bờ mương mót rau dại và củ ấu về nấu ăn đắp đổi qua ngày.");
+        }
+      }
+
+      // Rèn luyện cực nhẹ (tăng 0.04 mỗi 2 ngày, không nhảy vọt)
+      if (p.biet_chu) {
+        state.hocVan.nhan_chu = Number((state.hocVan.nhan_chu + 0.04).toFixed(2));
+      } else if (state.voNghe >= 0.4 && state.cangCo < 40) {
+        state.voNghe = Number((state.voNghe + 0.04).toFixed(2));
+        state.cangCo = Math.min(100, state.cangCo + 10);
+      }
+
+      advanceClock(24 * 60, true, true);
+      if (state.isDead) break;
+
+      // Ăn uống thực tế sau mỗi ngày
+      if (state.luongLanh >= 0.4) {
+        state.luongLanh = Math.max(0, state.luongLanh - 0.4);
+        state.doi = Math.max(15, state.doi - 50);
+        state.sucKhoe = Math.min(100, state.sucKhoe + 5);
+      } else if (state.luongMoc >= 0.4) {
+        state.luongMoc = Math.max(0, state.luongMoc - 0.4);
+        state.doi = Math.max(25, state.doi - 35);
+      }
+
+      if (state.cui >= 0.5) {
+        state.cui = Math.max(0, state.cui - 0.5);
+        state.lanh = Math.max(15, state.lanh - 35);
+      }
+      state.theLuc = 88;
+      state.cangCo = Math.max(0, state.cangCo - 25);
+      state.napCountToday = 0;
+      enforceStorageAndEconomyCaps();
+    }
+
+    if (!state.isDead) {
+      state.hour = 8;
+      state.actionsTaken++;
+      stepsLog.push("Nấu ăn giữ ấm và nghỉ ngơi qua hai đêm tại gian nhà tranh.");
+      updateCenterStage("Hai ngày trôi qua trong nhịp sống bình dị:\n• " + stepsLog.join("\n• "), deltas);
+      if (typeof checkAllAchievements === 'function') checkAllAchievements();
+      if (!state.authenticMode && typeof saveGameToDevice === 'function') saveGameToDevice(false);
+      render();
+    }
+  };
+  const btnSkipV2 = document.getElementById("btnSkipAuto");
+  if (btnSkipV2) btnSkipV2.onclick = skipDaysSmart;
+
+  // --- CẬP NHẬT GIAO DIỆN HIỂN THỊ NHÃN CĂNG CƠ & 5 NHÁNH HỌC VẤN ---
+  const baseRenderV2 = render;
+  render = function() {
+    ensureRealismV2Fields();
+    enforceStorageAndEconomyCaps();
+    baseRenderV2();
+    const p = state.persona;
+    if (!p) return;
+
+    const progBadge = document.getElementById('topProgressBadge');
+    if (progBadge) {
+      progBadge.textContent = window.describeRealisticSkills(p);
+    }
+
+    const feelContainer = document.getElementById('feelTags');
+    if (feelContainer && state.cangCo >= 25) {
+      const strainTag = document.createElement('span');
+      strainTag.className = 'feel-tag ' + (state.cangCo >= 60 ? 'bad' : '');
+      strainTag.textContent = state.cangCo >= 60
+        ? ('💥 Căng cơ đau nhức (' + Math.round(state.cangCo) + '%)')
+        : ('🦵 Mỏi gân cốt (' + Math.round(state.cangCo) + '%)');
+      feelContainer.appendChild(strainTag);
+    }
+  };
+})();
