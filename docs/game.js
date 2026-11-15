@@ -1842,6 +1842,17 @@ function refreshContinueButton() {
   } catch (e) { btn.style.display = "none"; }
 }
 
+function ensureStateDefaults(st) {
+  if (!st) return;
+  st.kyVat = Array.isArray(st.kyVat) ? st.kyVat : [];
+  st.benhTat = Array.isArray(st.benhTat) ? st.benhTat : [];
+  st.deltasGhiNhan = Array.isArray(st.deltasGhiNhan) ? st.deltasGhiNhan : [];
+  st.recentHistory = Array.isArray(st.recentHistory) ? st.recentHistory : [];
+  st.rep = st.rep || { danh_du: 10, tin_nhiem_tm: 5, tin_nhiem_tg: 5, tieng_xau: 0, uy_quyen: 0 };
+  st.macroDeltaMod = st.macroDeltaMod || { no_khe: 0, do_rong_kho: 0, cang_thang_bach_linh: 0, to_chuc_tam_giang: 0 };
+  if (!st.npcRelations || Object.keys(st.npcRelations).length === 0) initNpcRelations();
+}
+
 window.continueSavedGame = function() {
   try {
     const raw = localStorage.getItem(SAVE_SLOT_KEY);
@@ -1849,6 +1860,7 @@ window.continueSavedGame = function() {
     const data = JSON.parse(raw);
     if (!data || !data.state || !data.state.persona) return;
     state = data.state;
+    ensureStateDefaults(state);
     if (state.authenticMode) clearSavedGameOnDevice();
     document.getElementById("startMenuOverlay").style.display = "none";
     closeModal();
