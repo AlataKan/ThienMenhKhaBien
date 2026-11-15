@@ -812,3 +812,158 @@ const I18N_UI = {
     lang_label: "🌐 Language: English"
   }
 };
+// =========================================================================
+// 6. NGÂN HÀNG KIỂU ĐỜI 5 SỢI DÂY (K001-K120), KHIẾM KHUYẾT (KK) & 4 KẾT CỤC (MỤC 49.6, 53, 54)
+// =========================================================================
+const ARCHETYPES_POOL = [
+  // --- SỢI LÚA (Tam Giang / Hạ Giang / Đông Cốc) ---
+  {
+    ma: "K002", ten_kieu: "Nông nô gắn ruộng Tam Giang", ho_goi_y: ["Ngô", "Lý", "Trần", "Đỗ"], ten_goi_y: ["Cần", "Thạch", "Lúa", "Cò", "Bùn"],
+    giai_cap: "nong_no_ruong_dat", than_phan: "Dân Gắn Ruộng · Tam Giang", vi_tri: "nha",
+    tuoi_min: 15, tuoi_max: 28, co_riu: true, biet_chu: false, hao_mon: 0, mu: false,
+    boi_canh: "Bạn sinh ra trên cánh đồng lúa Tam Giang nơi thuế Khế đè nặng. Căn nhà tranh vách nứa luôn thiếu củi mỗi độ mùa Giá về.",
+    mong: "Giữ được mảnh ruộng nhỏ và tích đủ lương qua mùa Giá", so: "Bị đổi chủ ấp hoặc bị bắt đi phu biên ải",
+    ganh_nang: "Lời thề với gia đình không bỏ trốn khỏi làng", goc_khuat: "Từng giấu ba đấu thóc dưới nền bếp để cứu em nhỏ",
+    diem_ngat_hoi_2: "Chủ Ấp đòi tăng ngày công lao dịch đúng lúc lúa trong bồ vừa cạn, buộc bạn phải chọn giữa nhẫn nhịn hoặc tìm đường chuộc thân.",
+    diem_ngat_hoi_3: "Tuổi già kéo đến bên hiên nhà tranh, đôi bàn tay chai sần nhìn lại những mùa lúa đã đi qua."
+  },
+  {
+    ma: "K010", ten_kieu: "Thợ làm muối Đồi Muối", ho_goi_y: ["Điền", "Phạm", "Vũ"], ten_goi_y: ["Hứa", "Mặn", "Cát", "Bình"],
+    giai_cap: "tho_thu_cong", than_phan: "Thợ nấu muối · Đồi Muối (Hạ Giang)", vi_tri: "cho_ben_say",
+    tuoi_min: 16, tuoi_max: 32, co_riu: false, biet_chu: false, hao_mon: 0.1, mu: false,
+    boi_canh: "Quanh năm phơi mình bên chảo muối nóng rát ở Hạ Giang, bạn kiếm từng đồng xu sắt giữa sự chèn ép của đám lái buôn thuyền biển.",
+    mong: "Tiền công nấu muối đủ đong gạo lành cho cả nhà", so: "Chủ ruộng muối phá sản vì khoản lãi ngầm của thương hội",
+    ganh_nang: "Nợ tiền ứng trước của chủ lò muối từ mùa mưa năm ngoái", goc_khuat: "Từng nhìn thấy cuốn sổ muối ghi hai mức lãi khác nhau",
+    diem_ngat_hoi_2: "Một thương nhân ngoài bến thuyền gạ mua lại phần muối lậu thuế với giá cao nhưng đầy rủi ro bị tuần đinh bắt giữ.",
+    diem_ngat_hoi_3: "Hơi muối mặn làm mắt mờ dần khi về già, bạn ngồi nghe tiếng sóng vỗ bên bến sông."
+  },
+  {
+    ma: "K016", ten_kieu: "Người gánh nước thuê khập khiễng (KK)", ho_goi_y: ["Lê", "Đinh", "Bùi"], ten_goi_y: ["ập", "Còi", "Nhẫn", "Thương"],
+    giai_cap: "ke_ngoai_le", than_phan: "Kẻ Không Tên (Chân tật nguyền) · Bến Sậy", vi_tri: "duong_lang",
+    tuoi_min: 18, tuoi_max: 35, co_riu: false, biet_chu: false, hao_mon: 0.35, mu: false,
+    boi_canh: "[Khiếm khuyết cơ thể]: Một bên chân bị tật từ nhỏ khiến bạn đi lại chậm chạp hơn người thường, mỗi ngày phải gánh nước giếng và đan rổ rá kiếm sống.",
+    mong: "Có đủ tiền thuê một góc nhà kín gió qua mùa đông", so: "Đôi chân đau nhức không còn gánh nổi thùng nước",
+    ganh_nang: "Món nợ ân tình với bà chủ quán trọ từng cho cháo lúc ốm", goc_khuat: "Giấu vết thương cũ từ một lần bị xe ngựa nhà giàu cán qua",
+    diem_ngat_hoi_2: "Cơn gió bấc đầu mùa làm vết thương cũ ở chân tái phát đau buốt, đúng lúc tiền xu trong túi đã vơi.",
+    diem_ngat_hoi_3: "Dù đôi chân khập khiễng suốt một đời, bạn vẫn tự hào vì chưa từng ngửa tay cướp bóc của ai."
+  },
+
+  // --- SỢI NGAI (Kinh Hoài / Rừng Đen) ---
+  {
+    ma: "K028", ten_kieu: "Con Chủ Ấp nhỏ sa sút", ho_goi_y: ["Hạ", "Tạ", "Lâm", "Quách"], ten_goi_y: ["Minh", "Trinh", "Nghi", "Lễ"],
+    giai_cap: "thuong_nhan_thi_dan", than_phan: "Hậu duệ Chủ Ấp sa sút · Kinh Hoài", vi_tri: "kinh_hoai",
+    tuoi_min: 18, tuoi_max: 25, co_riu: false, biet_chu: true, hao_mon: 0, mu: false,
+    boi_canh: "Gia đình từng có ấp điền nhưng đã phải cầm cố gần hết vì nợ thuế. Bạn biết đọc biết viết và đang tìm cách khôi phục gia cảnh tại Kinh Hoài.",
+    mong: "Ứng tuyển vào nha môn hoặc tự lập nghiệp để không bị ép gả trả nợ", so: "Mảnh đất tổ tiên cuối cùng bị chủ nợ tịch thu",
+    ganh_nang: "Tờ hôn ước sắp đặt từ nhỏ với một chủ nợ giàu có", goc_khuat: "Đọc lén được điều khoản bất thường trong tờ khế cầm đất của cha",
+    diem_ngat_hoi_2: "Người đại diện của chủ nợ tìm tới đòi tất toán tờ khế cũ hoặc phải thực hiện hôn ước ngay trong năm nay.",
+    diem_ngat_hoi_3: "Những thăng trầm chốn kinh thành khép lại, bạn ngồi chép lại gia phả bên ngọn đèn dầu."
+  },
+  {
+    ma: "K036", ten_kieu: "Người chép thuê mắt mờ dần (KK)", ho_goi_y: ["Lục", "Văn", "Trương"], ten_goi_y: ["Tạ", "Mặc", "Thư"],
+    giai_cap: "tho_thu_cong", than_phan: "Thợ chép chữ · Kinh Hoài", vi_tri: "kinh_hoai",
+    tuoi_min: 22, tuoi_max: 40, co_riu: false, biet_chu: true, hao_mon: 0.2, mu: false,
+    boi_canh: "[Khiếm khuyết thị lực]: Nhiều năm chép thuê sổ sách dưới ánh đèn dầu tù mù khiến mắt bạn kém dần, nhưng đầu óc lại nhớ từng con số cực kỳ chuẩn xác.",
+    mong: "Tích đủ vốn mở hiệu sách nhỏ trước khi mắt mờ hẳn", so: "Đôi mắt không còn nhìn rõ nét mực trên giấy",
+    ganh_nang: "Nợ tiền học chữ của người thầy già đã khuất", goc_khuat: "Từng chép hai bản một văn kiện mật và giấu lại một bản",
+    diem_ngat_hoi_2: "Một vị quan nhỏ đưa cho bạn một xấp hồ sơ kho lương yêu cầu sửa lại con số trước đợt thanh tra.",
+    diem_ngat_hoi_3: "Khi ánh mắt đã nhòa theo năm tháng, những chữ nghĩa bạn truyền dạy cho học trò vẫn còn mãi."
+  },
+
+  // --- SỢI HỎA (Tây Lĩnh / Đường làng Hỏa Đường) ---
+  {
+    ma: "K050", ten_kieu: "Tu sĩ chép sách trẻ Hỏa Đường", ho_goi_y: ["Triệu", "Nguyên", "Huyền"], ten_goi_y: ["Thành", "Hiệp", "Dung", "Tịnh"],
+    giai_cap: "giao_si", than_phan: "Tu sĩ chép kinh · Hỏa Đường", vi_tri: "duong_lang",
+    tuoi_min: 17, tuoi_max: 30, co_riu: false, biet_chu: true, hao_mon: 0, mu: false,
+    boi_canh: "Được gửi vào Hỏa Đường từ nhỏ để trừ nợ thập phân của cha mẹ, bạn hàng ngày vừa chép kinh sách vừa phụ phát cháo ở hiên Nhất Hỏa.",
+    mong: "Giữ cho các bản chép cổ và nhà thuốc từ thiện được yên bình", so: "Sự chia rẽ giữa hai phái Nhất Hỏa và Tam Hỏa dẫn tới lửa thiêu",
+    ganh_nang: "Lời hứa với vị sư phụ già giữ kín hốc đá sau thánh đường", goc_khuat: "Đã đọc được một trang chép tay nhắc tới hai tờ khế năm lập quốc",
+    diem_ngat_hoi_2: "Thẩm vấn viên Soi Lửa từ kinh đô về kiểm tra các bản chép tay trong vùng, buộc bạn phải cất giấu kỹ những trang giấy cũ.",
+    diem_ngat_hoi_3: "Tiếng chuông chiều ngân vang bên hiên thánh đường, bạn bình tâm nhìn lại một đời giữ lửa."
+  },
+  {
+    ma: "K064", ten_kieu: "Người sống sót qua dịch Ho Sương, phổi yếu (KK)", ho_goi_y: ["Cát", "Hoàng", "Mai"], ten_goi_y: ["Hiền", "Sương", "An"],
+    giai_cap: "nong_dan_tu_do", than_phan: "Dân tự do (Phổi yếu sau dịch) · Hạ Giang", vi_tri: "nha",
+    tuoi_min: 19, tuoi_max: 36, co_riu: false, biet_chu: false, hao_mon: 0.25, mu: false,
+    boi_canh: "[Di chứng sức khỏe]: Từng thập tử nhất sinh vượt qua trận dịch lớn nên phổi bạn rất nhạy cảm với gió lạnh mùa Giá, bù lại bạn biết cách nhận diện và sắc các loại thảo dược.",
+    mong: "Nhà luôn đủ củi ấm và lá thuốc mỗi khi mùa đông tới", so: "Cơn ho sương tái phát giữa đêm không còn củi đốt",
+    ganh_nang: "Mang ơn nữ tu y sĩ đã thức trắng đêm cứu mạng mình", goc_khuat: "Giữ lại dải vải trắng từng treo trước cửa nhà năm dịch bệnh",
+    diem_ngat_hoi_2: "Mùa Giá năm nay rét đậm bất thường, nhiều người trong xóm bắt đầu ho khan và tìm đến bạn hỏi xin lá thuốc.",
+    diem_ngat_hoi_3: "Vượt qua体 trạng suy nhược thuở ban đầu, bạn đã bền bỉ sống tới tuổi xế chiều."
+  },
+
+  // --- SỢI BIÊN (Đồn Biên Ngạn / Bìa Rừng Đen) ---
+  {
+    ma: "K074", ten_kieu: "Thợ rèn học việc Biên Ngạn", ho_goi_y: ["Khổng", "Phạm", "Quách"], ten_goi_y: ["Thảo", "Triệu", "Mịch", "Cương"],
+    giai_cap: "tho_thu_cong", than_phan: "Thợ rèn biên ải · Đồn Biên Ngạn", vi_tri: "don_bien_ngan",
+    tuoi_min: 15, tuoi_max: 26, co_riu: true, biet_chu: false, hao_mon: 0, mu: false,
+    boi_canh: "Lớn lên giữa tiếng búa đập sắt và gió cát Đồn Biên Ngạn, đôi tay bạn khỏe khoắn, quen việc rèn nông cụ lẫn đao kiếm cho lính thú.",
+    mong: "Rèn được thanh đao sắc bén nhất và tự mở lò rèn riêng", so: "Chiến tranh Bạch Lĩnh nổ ra cuốn phăng cả xóm thợ biên giới",
+    ganh_nang: "Ba năm học việc còn nợ người thầy rèn già", goc_khuat: "Được truyền lại cách khắc dấu ba chấm nhỏ lên chuôi đoản đao",
+    diem_ngat_hoi_2: "Đồn biên giới ráo riết đặt rèn hàng loạt mũi giáo sắt, báo hiệu một đợt xung đột lớn sắp nổ ra trên sườn núi.",
+    diem_ngat_hoi_3: "Ngọn lửa lò rèn vẫn đỏ rực suốt mấy mươi năm, truyền hơi ấm qua bao mùa tuyết biên thùy."
+  },
+  {
+    ma: "K092", ten_kieu: "Thợ săn Rừng Đen điếc một tai (KK)", ho_goi_y: ["Bạc", "Sơn", "Khuất"], ten_goi_y: ["Hổ", "Ưng", "Lâm"],
+    giai_cap: "nong_dan_tu_do", than_phan: "Thợ săn miền sơn cước · Bìa Rừng Đen", vi_tri: "bia_rung",
+    tuoi_min: 20, tuoi_max: 38, co_riu: true, biet_chu: false, hao_mon: 0.1, mu: false,
+    boi_canh: "[Khiếm khuyết thính giác]: Một bên tai bị điếc sau lần chạm trán thú dữ năm xưa, nhưng đôi mắt bạn lại tinh tường từng vết chân thỏ và nấm quý trong Rừng Đen.",
+    mong: "Săn bắt đủ ăn và thuộc hết mọi lối mòn trên núi", so: "Bị đội tuần rừng của Chủ Ấp bắt gặp khi đặt bẫy sâu trong rừng",
+    ganh_nang: "Phải nộp phần da thú tốt nhất cho Chủ Ấp mỗi đầu mùa Giá", goc_khuat: "Biết một lối mòn bí mật dẫn qua sườn núi Bạch Lĩnh của người Ô Khuyết",
+    diem_ngat_hoi_2: "Giữa rừng sâu, bạn bắt gặp một người dẫn đường miền núi bị thương đang giữ nửa mảnh ấn ngọc cũ.",
+    diem_ngat_hoi_3: "Cả đời gắn bó với đại ngàn, bạn trở thành người thuộc địa hình rừng núi nhất vùng."
+  },
+
+  // --- SỢI BẠC & THIÊN MỆNH CHI TỬ (Chợ Bến Sậy / Quán Bốn Ngả / Hoàng tộc) ---
+  {
+    ma: "K100", ten_kieu: "Chủ tiệm cầm đồ nhỏ Hạ Giang", ho_goi_y: ["Mộc", "Đoàn", "Mai"], ten_goi_y: ["Phát", "Tể", "Quang", "Lộc"],
+    giai_cap: "thuong_nhan_thi_dan", than_phan: "Thương nhân nhỏ · Chợ Bến Sậy", vi_tri: "cho_ben_say",
+    tuoi_min: 22, tuoi_max: 40, co_riu: false, biet_chu: true, hao_mon: 0, mu: false,
+    boi_canh: "Bạn trông coi một sạp cầm đồ và đổi chác nhỏ ở Bến Sậy. Qua tay bạn là đủ thứ nồi đồng, nông cụ và cả những kỷ vật không ai dám nhận tên.",
+    mong: "Tích đủ 30 xu sắt mở hiệu buôn lớn trong Bang Hàng Kinh Hoài", so: "Món đồ cầm cố nhạy cảm bị kẻ quyền thế đến đòi truy nguồn",
+    ganh_nang: "Khoản vốn vay đầu tay từ thương hội", goc_khuat: "Giữ riêng một ngăn tủ khóa kín chứa cuốn sổ ố muối chưa ai chuộc",
+    diem_ngat_hoi_2: "Một người lạ mặt áo choàng kín mít tìm đến tiệm vào lúc chập tối, hỏi mua lại mọi cuốn sổ cũ từng cầm cố ở bến sông.",
+    diem_ngat_hoi_3: "Sau bao thương vụ thăng trầm, bạn ngồi nhẩm lại cuốn sổ cuộc đời mình."
+  },
+  {
+    ma: "K039_A49", ten_kieu: "Thiên mệnh chi tử · Hoàng tộc Hoài Dương", ho_goi_y: ["Lâm"], ten_goi_y: ["Thụy Anh", "Trinh", "Diên", "Quyết"],
+    giai_cap: "thien_menh_chi_tu", than_phan: "Thiên Mệnh Chi Tử (Hoàng tộc họ Lâm) · Kinh Hoài", vi_tri: "kinh_hoai",
+    tuoi_min: 18, tuoi_max: 26, co_riu: false, biet_chu: true, hao_mon: 0, mu: false,
+    boi_canh: "[Tỷ lệ bốc cực hiếm 0.1]: Bạn mang dòng máu vương thất họ Lâm tại Kinh Hoài, bề ngoài đủ đầy gấm vóc nhưng trên vai là món nợ quốc gia hai trăm năm đang tiến dần tới kỳ tất toán!",
+    mong: "Tháo gỡ gánh nặng Khế Nợ và cải tổ kho lương trước khi vương quốc chia cắt", so: "Trở thành người đứng nhìn Quyền Thu Tam Giang rơi vào tay chủ nợ",
+    ganh_nang: "Món nợ gốc từ thời lập quốc của tổ phụ Lâm Khải", goc_khuat: "Từng nghe cung nữ già hát trọn vẹn khổ cuối Bài Ca Hai Vợ",
+    diem_ngat_hoi_2: "Phái viên của Đoàn Thuyền và Hỏa Đường cùng đệ trình văn thư nhắc kỳ tất toán, đòi tăng thuế Tam Giang hoặc nhượng quyền khai mỏ.",
+    diem_ngat_hoi_3: "Đứng trên bậc thềm cao của Kinh Hoài nhìn xuống muôn dân, mọi quyết sách của bạn đã in dấu vào lịch sử."
+  }
+];
+
+const WORLD_ENDINGS_DB = {
+  E_VO_NO: {
+    id: "KET_CUC_1",
+    ten_vi: "Kết cục 1: Vỡ Nợ & Chia Cắt (Số phận mặc định của lịch sử gốc)",
+    ten_en: "Ending 1: Default & Division (Default Historical Fate)",
+    mo_ta_vi: "Đến kỳ đáo hạn, nợ Khế phình to không thể trả nổi. Quyền thu thuế Tam Giang chuyển hẳn sang tay Đoàn Thuyền và Hỏa Đường; dân đồng bằng nổi dậy còn vùng mỏ Bạch Lĩnh rơi vào cảnh binh đao chia cắt.",
+    mo_ta_en: "At the reckoning year, the ancient debt defaulted. Tax rights over Three Rivers were seized by creditors, sparking peasant uprisings and fracturing the realm."
+  },
+  E_CAI_TO: {
+    id: "KET_CUC_2",
+    ten_vi: "Kết cục 2: Cải Tổ Bạch Lĩnh & Hòa Giải Biên Ải (Đã bẻ lái lịch sử!)",
+    ten_en: "Ending 2: White Ridge Reform & Frontier Peace (History Altered!)",
+    mo_ta_vi: "Nhờ kỷ vật lưu truyền được trao đúng lúc tại Biên Ngạn, cuộc xung đột với người Ô Khuyết được hóa giải. Hai bên cùng mở mỏ sắt bạc Bạch Lĩnh thanh toán sạch nợ cũ, giữ vẹn toàn vương quốc!",
+    mo_ta_en: "Thanks to the heirloom relic presented at the frontier, peace with O Khuyet was forged. Joint mining at White Ridge paid off the national debt and saved the kingdom!"
+  },
+  E_TU_TRI: {
+    id: "KET_CUC_3",
+    ten_vi: "Kết cục 3: Tam Giang Đùm Bọc & Xóa Nợ Dân Sinh (Đã bẻ lái lịch sử!)",
+    ten_en: "Ending 3: Three Rivers Solidarity & Debt Jubilee (History Altered!)",
+    mo_ta_vi: "Nhờ sự đùm bọc cứu trợ nhau giữa các làng xóm và phái Nhất Hỏa, dân Tam Giang liên kết vững vàng khiến các chủ nợ buộc phải xóa bỏ lãi chìm và nhượng quyền tự quản cho dân lành!",
+    mo_ta_en: "Bound together by mutual aid and First-Flame support, the villages of Three Rivers stood united, forcing creditors to cancel hidden interest and grant local autonomy!"
+  },
+  E_THOA_HIEP: {
+    id: "KET_CUC_4",
+    ten_vi: "Kết cục 4: Thanh Tra Kho Lương & Thỏa Hiệp Giữ Nước (Đã bẻ lái lịch sử!)",
+    ten_en: "Ending 4: Granary Audit & Realm Compromise (History Altered!)",
+    mo_ta_vi: "Nhờ bằng chứng gian lận sổ sách được đệ trình tại Kinh Hoài, các khoản lãi chìm bị cắt bỏ và Kho Thiên Lộc được chấn chỉnh, giúp vương quốc cầm cự qua kỳ đáo hạn trong hòa bình!",
+    mo_ta_en: "With ledger fraud exposed at the Capital, illegal compound interest was struck down and the Royal Granary reformed, allowing the realm to weather the reckoning in peace!"
+  }
+};
